@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 承租人银行卡通联支付签约 -->
+<mapper namespace="com.hc.lease.account.dao.LeaseAccountBankPaySinMapper">
+    <resultMap id="BaseResultMap" type="com.hc.lease.account.model.LeaseAccountBankPaySin">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="account_id" property="accountId" jdbcType="BIGINT"/>
+        <result column="account_name" property="accountName" jdbcType="VARCHAR"/>
+        <result column="bank_card_id" property="bankCardId" jdbcType="BIGINT"/>
+        <result column="tel" property="tel" jdbcType="VARCHAR"/>
+        <result column="id_card" property="idCard" jdbcType="VARCHAR"/>
+        <result column="bank_code" property="bankCode" jdbcType="VARCHAR"/>
+        <result column="bank_name" property="bankName" jdbcType="VARCHAR"/>
+        <result column="bank_card_number" property="bankCardNumber" jdbcType="VARCHAR"/>
+        <result column="bank_id" property="bankId" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="req_sn" property="reqSn" jdbcType="VARCHAR"/>
+        <result column="req_code" property="reqCode" jdbcType="VARCHAR"/>
+        <result column="req_msg" property="reqMsg" jdbcType="VARCHAR"/>
+        <result column="agrm_no" property="agrmNo" jdbcType="VARCHAR"/>
+        <result column="srcreq_sn" property="srcreqSn" jdbcType="VARCHAR"/>
+        <result column="rnpa_code" property="rnpaCode" jdbcType="VARCHAR"/>
+        <result column="rnpa_msg" property="rnpaMsg" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="source" property="source" jdbcType="INTEGER"/>
+        <result column="is_account" property="isAccount" jdbcType="INTEGER"/>
+        <result column="bank_phone" property="bankPhone" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, account_id, bank_card_id, account_name, tel, id_card, bank_code, bank_name, bank_card_number,
+    bank_id, create_time, update_time, create_by, update_by, status, req_sn, req_code, req_msg, agrm_no, srcreq_sn, rnpa_code, rnpa_msg, type, source, bank_phone
+  </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_account_bank_pay_sin
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="findPage" resultMap="BaseResultMap">
+
+        select
+
+        table_1.id, table_1.bankcardid "bankCardId", table_1.accountname "accountName", table_1.tel, table_1.idcard
+        "idCard", table_1.bankcode "bankCode", table_1.bankname "bankName"
+        , table_1.bankcardnumber "bankCardNumber", table_1.accountid "accountId"
+        , table_1.bankid "bankId"
+        , table_1.reqcode "reqCode", table_1.reqmsg "reqMsg", table_1.status, table_1.type, table_1.source
+        , table_1.createtime "createTime"
+        , table_1.isaccount "isAccount"
+        , table_1.bankphone "bankPhone"
+        , table_1.rnpamsg "rnpaMsg"
+
+        from
+        (
+        select
+        a.id, b.id "bankcardid", a.account_name "accountname", a.tel, a.id_card "idcard", a.bank_code "bankcode",
+        a.bank_name "bankname"
+        , a.bank_card_number "bankcardnumber", a.account_id "accountid"
+        , a.bank_id "bankid"
+        , a.req_code "reqcode", a.req_msg "reqmsg", a.status, a.type, a.source
+        , a.create_time "createtime"
+        , (case when a.account_id is null then 0 else 1 end) "isaccount"
+        , a.bank_phone "bankphone"
+        , a.rnpa_msg "rnpamsg"
+
+        from lease_account_bank_pay_sin a
+        LEFT JOIN lease_account_bank_card b on a.bank_card_id = b.id
+        where 1=1
+        and a.type = 1
+
+        UNION ALL
+
+        select
+        e.id, a.id "bankcardid", b.name "accountname", b.phone "tel", c.id_card "idcard", d.code "bankcode", d.name
+        "bankname"
+        , a.back_card_number "bankcardnumber", a.account_id "accountid"
+        , a.bank_id "bankid"
+        , e.req_code "reqcode", e.req_msg "reqmsg", (CASE WHEN e.status IS NULL THEN 0 ELSE e.status end) "status"
+        , (CASE WHEN e.type IS NULL THEN 0 ELSE e.type end) "type", e.source
+        , e.create_time "createtime"
+        , '1' "isaccount"
+        , a.bank_phone "bankphone"
+        , e.rnpa_msg "rnpamsg"
+
+        from lease_account_bank_card a
+        INNER JOIN lease_account b on a.account_id = b.id
+        INNER JOIN lease_account_credit c on c.account_id = b.id
+        INNER JOIN lease_bank d on a.bank_id = d.id
+        LEFT JOIN lease_account_bank_pay_sin e on e.bank_card_id = a.id
+        where 1=1
+        and (e.type = 0 or e.type is null)
+        ) table_1
+        where 1=1
+
+        <if test="keyParams != null and keyParams!=''">
+            and (table_1.tel like concat('%',#{keyParams},'%') or table_1.idCard like concat('%',#{keyParams},'%') or
+            table_1.accountName like concat('%',#{keyParams},'%'))
+        </if>
+        <if test="status != null">
+            and table_1.status = #{status}
+        </if>
+        <if test="accountName != null">
+            and table_1.accountName like concat('%',#{accountName},'%')
+        </if>
+        <if test="idCardOrTel != null">
+            and (table_1.tel like concat('%',#{idCardOrTel},'%') or table_1.idCard like concat('%',#{idCardOrTel},'%'))
+        </if>
+        <if test="bankCode != null">
+            and table_1.bankId = #{bankCode}
+        </if>
+        <if test="bankName != null">
+            and table_1.bankName like concat('%',#{bankName},'%')
+        </if>
+        <if test="bankId != null">
+            and table_1.bankId = #{bankId}
+        </if>
+        <if test="isAccount != null">
+            and table_1.isaccount = #{isAccount}
+        </if>
+        order by table_1.createtime asc
+
+    </select>
+
+    <select id="findAccountBankCardById" resultMap="BaseResultMap">
+
+        select
+        e.id, a.id "bankCardId", a.bank_phone "bankPhone", b.name "accountName", b.phone "tel", c.id_card "idCard", d.code "bankCode", d.name
+        "bankName"
+        , a.back_card_number "bankCardNumber", a.account_id "accountId"
+        , a.id "bankCardId", a.bank_id "bankId", a.bank_phone "bankPhone"
+        , (CASE WHEN e.status IS NULL THEN 0 ELSE e.status end) "status", e.type, e.source
+
+        from lease_account_bank_card a
+        INNER JOIN lease_account b on a.account_id = b.id
+        INNER JOIN lease_account_credit c on c.account_id = b.id
+        INNER JOIN lease_bank d on a.bank_id = d.id
+        LEFT JOIN lease_account_bank_pay_sin e on e.bank_card_id = a.id
+        where a.id = #{bankCardId,jdbcType=BIGINT}
+
+        <!--
+        <if test="type == 1">
+            select
+            a.id, b.id "bankCardId", b.bank_phone "bankPhone", a.account_name "accountName", a.tel, a.id_card "idCard", a.bank_code "bankCode",
+            a.bank_name "bankName"
+            , a.bank_card_number "bankCardNumber", a.account_id "accountId"
+            , a.id "bankCardId", a.bank_id "bankId"
+            , a.status "status", (CASE WHEN a.type IS NULL THEN 0 ELSE a.type end) "type", a.source
+
+            from lease_account_bank_pay_sin a
+            LEFT JOIN lease_account_bank_card b on a.bank_card_id = b.id
+            where a.id = #{bankCardId,jdbcType=BIGINT}
+        </if>
+
+        <if test="type == 0">
+            select
+            e.id, a.id "bankCardId", a.bank_phone "bankPhone", b.name "accountName", b.phone "tel", c.id_card "idCard", d.code "bankCode", d.name
+            "bankName"
+            , a.back_card_number "bankCardNumber", a.account_id "accountId"
+            , a.id "bankCardId", a.bank_id "bankId"
+            , (CASE WHEN e.status IS NULL THEN 0 ELSE e.status end) "status", e.type, e.source
+
+            from lease_account_bank_card a
+            INNER JOIN lease_account b on a.account_id = b.id
+            INNER JOIN lease_account_credit c on c.account_id = b.id
+            INNER JOIN lease_bank d on a.bank_id = d.id
+            LEFT JOIN lease_account_bank_pay_sin e on e.bank_card_id = a.id
+            where a.id = #{bankCardId,jdbcType=BIGINT}
+        </if>
+        -->
+
+    </select>
+
+    <select id="findByBankCardNumber" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_account_bank_pay_sin
+        where bank_card_number = #{bankCardNumber,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from lease_account_bank_pay_sin
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+    <delete id="deleteByAccountId" parameterType="java.lang.Long">
+        delete from lease_account_bank_pay_sin
+        where account_id = #{accountId,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="insert" parameterType="com.hc.lease.account.model.LeaseAccountBankPaySin">
+
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_account_bank_pay_sin_id_seq'::regclass) as id
+        </selectKey>
+
+        insert into lease_account_bank_pay_sin (id, account_id, account_name, bank_card_id,
+        tel, id_card, bank_code,
+        bank_name, bank_card_number, bank_id,
+        create_time, update_time, create_by,
+        update_by, status, req_sn, req_code, req_msg, agrm_no, srcreq_sn, rnpa_code, rnpa_msg, type, source, bank_phone)
+
+        values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, #{accountName,jdbcType=VARCHAR},
+        #{bankCardId,jdbcType=BIGINT},
+        #{tel,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, #{bankCode,jdbcType=VARCHAR},
+        #{bankName,jdbcType=VARCHAR}, #{bankCardNumber,jdbcType=VARCHAR}, #{bankId,jdbcType=BIGINT},
+        #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT},
+        #{updateBy,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, #{reqSn,jdbcType=VARCHAR},
+        #{reqCode,jdbcType=VARCHAR}, #{reqMsg,jdbcType=VARCHAR}, #{agrmNo,jdbcType=VARCHAR},
+        #{srcreqSn,jdbcType=VARCHAR},
+        #{rnpaCode,jdbcType=VARCHAR}, #{rnpaMsg,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{source,jdbcType=INTEGER}, #{bankPhone,jdbcType=VARCHAR})
+
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.hc.lease.account.model.LeaseAccountBankPaySin">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_account_bank_pay_sin_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_account_bank_pay_sin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="accountId != null">
+                account_id,
+            </if>
+            <if test="accountName != null">
+                account_name,
+            </if>
+            <if test="bankCardId != null">
+                bank_card_id,
+            </if>
+            <if test="tel != null">
+                tel,
+            </if>
+            <if test="idCard != null">
+                id_card,
+            </if>
+            <if test="bankCode != null">
+                bank_code,
+            </if>
+            <if test="bankName != null">
+                bank_name,
+            </if>
+            <if test="bankCardNumber != null">
+                bank_card_number,
+            </if>
+            <if test="bankId != null">
+                bank_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="reqSn != null">
+                req_sn,
+            </if>
+            <if test="reqCode != null">
+                req_code,
+            </if>
+            <if test="reqMsg != null">
+                req_msg,
+            </if>
+            <if test="agrmNo != null">
+                agrm_no,
+            </if>
+            <if test="srcreqSn != null">
+                srcreq_sn,
+            </if>
+            <if test="rnpaCode != null">
+                rnpa_code,
+            </if>
+            <if test="rnpaMsg != null">
+                rnpa_msg,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="source != null">
+                source,
+            </if>
+            <if test="bankPhone != null">
+                bank_phone
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="accountId != null">
+                #{accountId,jdbcType=BIGINT},
+            </if>
+            <if test="accountName != null">
+                #{accountName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankCardId != null">
+                #{bankCardId,jdbcType=BIGINT},
+            </if>
+            <if test="tel != null">
+                #{tel,jdbcType=VARCHAR},
+            </if>
+            <if test="idCard != null">
+                #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="bankCode != null">
+                #{bankCode,jdbcType=VARCHAR},
+            </if>
+            <if test="bankName != null">
+                #{bankName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankCardNumber != null">
+                #{bankCardNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="bankId != null">
+                #{bankId,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="reqSn != null">
+                #{reqSn,jdbcType=VARCHAR},
+            </if>
+            <if test="reqCode != null">
+                #{reqCode,jdbcType=VARCHAR},
+            </if>
+            <if test="reqMsg != null">
+                #{reqMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="agrmNo != null">
+                #{agrmNo,jdbcType=VARCHAR},
+            </if>
+            <if test="srcreqSn != null">
+                #{srcreqSn,jdbcType=VARCHAR},
+            </if>
+            <if test="rnpaCode != null">
+                #{rnpaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="rnpaMsg != null">
+                #{rnpaMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="source != null">
+                #{source,jdbcType=INTEGER},
+            </if>
+            <if test="bankPhone != null">
+                #{bankPhone,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.account.model.LeaseAccountBankPaySin">
+        update lease_account_bank_pay_sin
+        <set>
+            <if test="accountId != null">
+                account_id = #{accountId,jdbcType=BIGINT},
+            </if>
+            <if test="accountName != null">
+                account_name = #{accountName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankCardId != null">
+                bank_card_id = #{bankCardId,jdbcType=BIGINT},
+            </if>
+            <if test="tel != null">
+                tel = #{tel,jdbcType=VARCHAR},
+            </if>
+            <if test="idCard != null">
+                id_card = #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="bankCode != null">
+                bank_code = #{bankCode,jdbcType=VARCHAR},
+            </if>
+            <if test="bankName != null">
+                bank_name = #{bankName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankCardNumber != null">
+                bank_card_number = #{bankCardNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="bankId != null">
+                bank_id = #{bankId,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="reqSn != null">
+                req_sn = #{reqSn,jdbcType=VARCHAR},
+            </if>
+            <if test="reqCode != null">
+                req_code = #{reqCode,jdbcType=VARCHAR},
+            </if>
+            <if test="reqMsg != null">
+                req_msg = #{reqMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="agrmNo != null">
+                agrm_no = #{agrmNo,jdbcType=VARCHAR},
+            </if>
+            <if test="srcreqSn != null">
+                srcreq_sn = #{srcreqSn,jdbcType=VARCHAR},
+            </if>
+            <if test="rnpaCode != null">
+                rnpa_code = #{rnpaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="rnpaMsg != null">
+                rnpa_msg = #{rnpaMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="source != null">
+                source = #{source,jdbcType=INTEGER},
+            </if>
+            <if test="bankPhone != null">
+                bank_phone = #{bankPhone,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.hc.lease.account.model.LeaseAccountBankPaySin">
+    update lease_account_bank_pay_sin
+    set account_id = #{accountId,jdbcType=BIGINT},
+      account_name = #{accountName,jdbcType=VARCHAR},
+      bank_card_id = #{bankCardId,jdbcType=BIGINT},
+      tel = #{tel,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      bank_code = #{bankCode,jdbcType=VARCHAR},
+      bank_name = #{bankName,jdbcType=VARCHAR},
+      bank_card_number = #{bankCardNumber,jdbcType=VARCHAR},
+      bank_id = #{bankId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      status = #{status,jdbcType=INTEGER},
+      req_sn = #{reqSn,jdbcType=VARCHAR},
+      req_code = #{reqCode,jdbcType=VARCHAR},
+      req_msg = #{reqMsg,jdbcType=VARCHAR},
+      agrm_no = #{agrmNo,jdbcType=VARCHAR},
+      srcreq_sn = #{srcreqSn,jdbcType=VARCHAR},
+      rnpa_code = #{rnpaCode,jdbcType=VARCHAR},
+      rnpa_msg = #{rnpaMsg,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      source = #{source,jdbcType=INTEGER},
+      bank_phone = #{bankPhone,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+    <update id="updateByAccountId" parameterType="com.hc.lease.account.model.LeaseAccountBankPaySin">
+        update lease_account_bank_pay_sin
+        set
+        account_name = #{accountName,jdbcType=VARCHAR},
+        tel = #{tel,jdbcType=VARCHAR},
+        id_card = #{idCard,jdbcType=VARCHAR},
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where account_id = #{accountId,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateAccountNameByAccountId" parameterType="com.hc.lease.account.model.LeaseAccountBankPaySin">
+        update lease_account_bank_pay_sin
+        set
+        tel = #{tel,jdbcType=VARCHAR},
+        account_name = #{accountName,jdbcType=VARCHAR}
+        where account_id = #{accountId,jdbcType=BIGINT}
+    </update>
+
+
+</mapper>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.supplier.dao.LeaseSchemePackageMapper" >
+  <resultMap id="BaseResultMap" type="com.hc.lease.supplier.model.LeaseSchemePackage" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="scheme_id" property="schemeId" jdbcType="BIGINT" />
+    <result column="package_id" property="packageId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, scheme_id, package_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from lease_scheme_package
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectBySchemeId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select
+    <include refid="Base_Column_List" />
+    from lease_scheme_package
+    where scheme_id = #{schemeId,jdbcType=BIGINT}
+  </select>
+
+
+
+
+  <select id="findPage" resultType="java.util.Map">
+    select
+     id, scheme_id as "schemeId", package_id as "packageId"
+    from lease_scheme_package
+  </select>
+
+  <select id="findAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from lease_scheme_package
+  </select>
+
+  <select id="insertViewParames" resultType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from lease_scheme_package
+  </select>
+
+
+
+  <delete id="deleteBatchById" parameterType="long">
+    delete from lease_scheme_package where id in
+    <foreach item="item" collection="list" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lease_scheme_package
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hc.lease.supplier.model.LeaseSchemePackage" >
+    insert into lease_scheme_package (id, scheme_id, package_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{schemeId,jdbcType=BIGINT}, #{packageId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hc.lease.supplier.model.LeaseSchemePackage" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_scheme_package_id_seq'::regclass) as id
+    </selectKey>
+
+    insert into lease_scheme_package
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="schemeId != null" >
+        scheme_id,
+      </if>
+      <if test="packageId != null" >
+        package_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="schemeId != null" >
+        #{schemeId,jdbcType=BIGINT},
+      </if>
+      <if test="packageId != null" >
+        #{packageId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.supplier.model.LeaseSchemePackage" >
+    update lease_scheme_package
+    <set >
+      <if test="schemeId != null" >
+        scheme_id = #{schemeId,jdbcType=BIGINT},
+      </if>
+      <if test="packageId != null" >
+        package_id = #{packageId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hc.lease.supplier.model.LeaseSchemePackage" >
+    update lease_scheme_package
+    set scheme_id = #{schemeId,jdbcType=BIGINT},
+      package_id = #{packageId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.supplier.dao.LeaseAgentsSecondaryMapper" >
+  <resultMap id="BaseResultMap" type="com.hc.lease.supplier.model.LeaseAgentsSecondary" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="level_id" property="levelId" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+    <result column="is_enable" property="isEnable" jdbcType="BIT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="level_name" property="levelName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, level_id, name, type, create_time, update_time, create_by, update_by, is_enable,
+    sort
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from lease_agents_secondary
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectByLevelId" parameterType="java.lang.Long" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from lease_agents_secondary
+    where level_id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="findAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select s.id,s.level_id,s.name,s.type,s.is_enable,s.sort,l.name as "levelName"
+    from lease_agents_secondary s
+    join lease_agents_level l on s.level_id=l.id
+    order by s.sort asc
+  </select>
+
+  <select id="findPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select s.id,s.level_id,s.name,s.type,s.is_enable,s.sort,l.name as "levelName"
+    from lease_agents_secondary s
+    join lease_agents_level l on s.level_id=l.id
+    order by s.sort asc
+  </select>
+
+  <select id="findByName" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from lease_agents_secondary
+    where name = #{name,jdbcType=VARCHAR}
+    <if test="id != null">
+      and id != #{id,jdbcType=BIGINT}
+    </if>
+    <if test="levelId != null">
+      and level_id = #{levelId,jdbcType=BIGINT}
+    </if>
+    order by sort asc
+  </select>
+
+  <!--导入模板需要的数据-->
+  <select id="findExportExcelModel" resultType="java.lang.String">
+    select name from lease_agents_secondary
+    ORDER BY sort ASC
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lease_agents_secondary
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <update id="disableByPrimaryKey" parameterType="java.util.Map">
+    update lease_agents_secondary set is_enable = #{isEnable,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateSort" parameterType="java.util.Map">
+    update lease_agents_secondary set sort =#{mark}
+    where id=#{id}
+  </update>
+
+
+  <delete id="deleteByLevelId" parameterType="java.lang.Long">
+    delete from lease_agents_secondary
+    where level_id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.hc.lease.supplier.model.LeaseAgentsSecondary" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_agents_secondary_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_agents_secondary (id, level_id, name,
+    type, create_time, update_time,
+    create_by, update_by, is_enable,
+    sort)
+    values (#{id,jdbcType=BIGINT}, #{levelId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR},
+    #{type,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+    #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT}, #{isEnable,jdbcType=BIT},
+    #{sort,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hc.lease.supplier.model.LeaseAgentsSecondary" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_agents_secondary_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_agents_secondary
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="levelId != null" >
+        level_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="isEnable != null" >
+        is_enable,
+      </if>
+      <if test="id != null" >
+        sort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="levelId != null" >
+        #{levelId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.supplier.model.LeaseAgentsSecondary" >
+    update lease_agents_secondary
+    <set >
+      <if test="levelId != null" >
+        level_id = #{levelId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="isEnable != null" >
+        is_enable = #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hc.lease.supplier.model.LeaseAgentsSecondary" >
+    update lease_agents_secondary
+    set level_id = #{levelId,jdbcType=BIGINT},
+    name = #{name,jdbcType=VARCHAR},
+    type = #{type,jdbcType=INTEGER},
+    create_time = #{createTime,jdbcType=TIMESTAMP},
+    update_time = #{updateTime,jdbcType=TIMESTAMP},
+    create_by = #{createBy,jdbcType=BIGINT},
+    update_by = #{updateBy,jdbcType=BIGINT},
+    is_enable = #{isEnable,jdbcType=BIT},
+    sort = #{sort,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

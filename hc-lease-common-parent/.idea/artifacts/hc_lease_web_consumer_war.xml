@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="hc-lease-web-consumer:war">
+    <output-path>$PROJECT_DIR$/../hc-lease-web-consumer/target</output-path>
+    <root id="archive" name="hc-lease-web-consumer.war">
+      <element id="artifact" artifact-name="hc-lease-web-consumer:war exploded" />
+    </root>
+  </artifact>
+</component>

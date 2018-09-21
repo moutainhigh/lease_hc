@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.supplier.dao.LeaseCostCheckMapper" >
+
+    <!-- 表名 -->
+    <sql id="table_name">public.lease_cost_check</sql>
+
+    <!-- 表所有字段 -->
+    <sql id="select_all_fileds">
+        lease_cost_check_id,      car_id,           car_check_state, insurance_check_state,
+        purchase_tax_check_state, other_cost_state, operator_id,      create_time,
+        update_time
+    </sql>
+
+    <resultMap id="entityMap" type="com.hc.lease.supplier.model.LeaseCostCheck">
+        <id column="lease_cost_check_id"            jdbcType="BIGINT"       property="leaseCostCheckId" />
+        <result column="car_id"                     jdbcType="BIGINT"       property="carId" />
+        <result column="car_check_state"            jdbcType="VARCHAR"      property="carCheckState" />
+        <result column="insurance_check_state"      jdbcType="VARCHAR"      property="insuranceCheckState" />
+        <result column="purchase_tax_check_state"   jdbcType="VARCHAR"      property="purchaseTaxCheckState" />
+        <result column="other_cost_state"           jdbcType="VARCHAR"      property="otherCostState" />
+        <result column="operator_id"                jdbcType="BIGINT"       property="operatorId" />
+        <result column="create_time"                jdbcType="TIMESTAMP"    property="createTime" />
+        <result column="update_time"                jdbcType="TIMESTAMP"    property="updateTime" />
+    </resultMap>
+
+    <insert id="insertEntity" parameterType="com.hc.lease.supplier.model.LeaseCostCheck">
+        INSERT INTO <include refid="table_name" />
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="carId != null">
+                car_id,
+            </if>
+            <if test="carCheckState != null">
+                car_check_state,
+            </if>
+            <if test="insuranceCheckState != null">
+                insurance_check_state,
+            </if>
+            <if test="purchaseTaxCheckState != null">
+                purchase_tax_check_state,
+            </if>
+            <if test="otherCostState != null">
+                other_cost_state,
+            </if>
+            <if test="operatorId != null">
+                operator_id,
+            </if>
+                create_time
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="carId != null">
+                #{carId,jdbcType=BIGINT},
+            </if>
+            <if test="carCheckState != null">
+                #{carCheckState,jdbcType=VARCHAR},
+            </if>
+            <if test="insuranceCheckState != null">
+                #{insuranceCheckState,jdbcType=VARCHAR},
+            </if>
+            <if test="purchaseTaxCheckState != null">
+                #{purchaseTaxCheckState,jdbcType=VARCHAR},
+            </if>
+            <if test="otherCostState != null">
+                #{otherCostState,jdbcType=VARCHAR},
+            </if>
+            <if test="operatorId != null">
+                #{operatorId,jdbcType=BIGINT},
+            </if>
+            Now()
+        </trim>
+    </insert>
+
+    <update id="updateEntity" parameterType="com.hc.lease.supplier.model.LeaseCostCheck">
+        UPDATE <include refid="table_name" />
+        <set>
+            <if test="carCheckState != null">
+                car_check_state = #{carCheckState,jdbcType=VARCHAR},
+            </if>
+            <if test="insuranceCheckState != null">
+                insurance_check_state = #{insuranceCheckState,jdbcType=VARCHAR},
+            </if>
+            <if test="purchaseTaxCheckState != null">
+                purchase_tax_check_state = #{purchaseTaxCheckState,jdbcType=VARCHAR},
+            </if>
+            <if test="otherCostState != null">
+                other_cost_state = #{otherCostState,jdbcType=VARCHAR},
+            </if>
+            <if test="operatorId != null">
+                operator_id = #{operatorId,jdbcType=BIGINT},
+            </if>
+            update_time = now()
+        </set>
+        where lease_cost_check_id = #{leaseCostCheckId,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectEntity" resultMap="entityMap">
+        SELECT <include refid="select_all_fileds" />
+        FROM <include refid="table_name" />
+        WHERE 1=1
+        <if test="carId != null">
+            AND car_id = #{carId}
+        </if>
+    </select>
+
+</mapper>

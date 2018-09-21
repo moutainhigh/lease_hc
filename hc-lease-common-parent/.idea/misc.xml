@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="EntryPointsManager">
+    <entry_points version="2.0" />
+  </component>
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/../../../dfq" />
+    <file type="web" url="file://$PROJECT_DIR$/../hc-lease-web-consumer" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/../../../合创租赁融资系统/资料/通联支付/通联协议支付/quickpaydemo/pom.xml" />
+        <option value="E:/合创租赁融资系统/资料/通联支付/通联协议支付/quickpaydemo/pom.xml" />
+        <option value="$PROJECT_DIR$/../hc-lease-workflow-adapter-api/pom.xml" />
+        <option value="$PROJECT_DIR$/../hc-lease-workflow-adapter/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="SvnBranchConfigurationManager">
+    <option name="mySupportsUserInfoFilter" value="true" />
+  </component>
+</project>

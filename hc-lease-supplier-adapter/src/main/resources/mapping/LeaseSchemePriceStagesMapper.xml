@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.supplier.dao.LeaseSchemePriceStagesMapper" >
+  <resultMap id="BaseResultMap" type="com.hc.lease.supplier.model.LeaseSchemePriceStages" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="scheme_price_id" property="schemePriceId" jdbcType="BIGINT" />
+    <result column="fit_area" property="fitArea" jdbcType="VARCHAR" />
+    <result column="scheme_name" property="schemeName" jdbcType="VARCHAR" />
+    <result column="staging_number_id" property="stagingNumberId" jdbcType="BIGINT" />
+    <result column="down_payment" property="downPayment" jdbcType="NUMERIC" />
+    <result column="agent_settlement_price" property="agentSettlementPrice" jdbcType="NUMERIC" />
+    <result column="monthly_rent" property="monthlyRent" jdbcType="NUMERIC" />
+    <result column="balance_payment" property="balancePayment" jdbcType="NUMERIC" />
+    <result column="interest_gross_profit" property="interestGrossProfit" jdbcType="NUMERIC" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+    <result column="is_enable" property="isEnable" jdbcType="BIT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="agent_point" property="agentPoint" jdbcType="NUMERIC" />
+    <result column="is_used" property="isUsed" jdbcType="BIT" />
+    <result column="staging_number" property="stagingNumber" jdbcType="VARCHAR" />
+
+    <result column="staging_number_type" property="stagingNumberType" jdbcType="INTEGER" />
+    <result column="staging_number_name" property="stagingNumberName" jdbcType="VARCHAR" />
+
+    <result column="complete_model_name" property="completeModelName" jdbcType="VARCHAR" />
+    <result column="series_name" property="seriesName" jdbcType="VARCHAR" />
+    <result column="brands_name" property="brandsName" jdbcType="VARCHAR" />
+    <result column="market_price" property="marketPrice" jdbcType="NUMERIC" />
+    <result column="color_price_remarks" property="colorPriceRemarks" jdbcType="VARCHAR" />
+    <result column="execution_time" property="executionTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, scheme_price_id, fit_area, scheme_name, staging_number_id, down_payment, agent_settlement_price, 
+    monthly_rent, balance_payment, interest_gross_profit, create_time, update_time, create_by, 
+    update_by, is_enable, sort,agent_point,staging_number,staging_number_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from lease_scheme_price_stages
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectBySchemePriceId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select  s.id,  s.scheme_price_id,  s.fit_area,  s.scheme_name,  s.staging_number_id,  s.down_payment,  s.agent_settlement_price,
+     s.monthly_rent,  s.balance_payment,  s.interest_gross_profit,  s.create_time,  s.update_time,  s.create_by,
+     s.update_by,  s.is_enable,  s.sort, s.agent_point,s.staging_number,s.staging_number_type,
+     case when s.staging_number_type=1 then d.value else s.staging_number end "stagingNumberName"
+    from lease_scheme_price_stages s
+     left join lease_dict d on s.staging_number_id=d.id
+    where s.scheme_price_id=#{id}
+  </select>
+
+
+  <select id="findPage" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select  s.id,  s.scheme_price_id,  s.fit_area,  s.scheme_name,  s.staging_number_id,  s.down_payment,  s.agent_settlement_price,
+    s.monthly_rent,  s.balance_payment,  s.interest_gross_profit,  s.create_time,  s.update_time,  s.create_by,
+    s.update_by,  s.is_enable,  s.sort, s.agent_point,s.staging_number,s.staging_number_type,m.complete_model_name,c.name "seriesName",b.name "brandsName",p.market_price,p.color_price_remarks
+    ,p.execution_time,
+    case when s.staging_number_type=1 then d.value else s.staging_number end "stagingNumberName"
+    from lease_scheme_price_stages s
+    left join lease_scheme_price p on s.scheme_price_id=p.id
+    left join lease_car_model m on p.model_id=m.id
+    left join lease_car_series c on m.series_id=c.id
+    left join lease_car_brands b on c.brands_id=b.id
+    left join lease_dict d on s.staging_number_id=d.id
+    where 1=1
+    <if test="modelId != null and  modelId !='' ">
+      and p.model_id = #{modelId}
+    </if> <if test="seriesId != null and  seriesId !=''">
+    and m.series_id = #{seriesId}
+    </if>
+    <if test="brandsId != null and brandsId !='' ">
+      and c.brands_id = #{brandsId}
+    </if>
+    <if test="monthlyRentFrom != null and monthlyRentFrom!='' and monthlyRentTo != null and monthlyRentTo !=''">
+      and s.monthly_rent BETWEEN #{monthlyRentFrom} and #{monthlyRentTo}
+    </if>
+    <if test="executionTime!= null and executionTime!=''">
+      and p.execution_time = to_timestamp(#{executionTime},'YYYY-MM-DD')
+    </if>
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lease_scheme_price_stages
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <delete id="deleteBySchemePriceId"  parameterType="java.lang.Long">
+  delete from lease_scheme_price_stages
+    where scheme_price_id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.hc.lease.supplier.model.LeaseSchemePriceStages" >
+    insert into lease_scheme_price_stages (id, scheme_price_id, fit_area, 
+      scheme_name, staging_number_id, down_payment, 
+      agent_settlement_price, monthly_rent, balance_payment, 
+      interest_gross_profit, create_time, update_time, 
+      create_by, update_by, is_enable, 
+      sort,agent_point,staging_number,staging_number_type)
+    values (#{id,jdbcType=BIGINT}, #{schemePriceId,jdbcType=BIGINT}, #{fitArea,jdbcType=VARCHAR}, 
+      #{schemeName,jdbcType=VARCHAR}, #{stagingNumberId,jdbcType=BIGINT}, #{downPayment,jdbcType=NUMERIC}, 
+      #{agentSettlementPrice,jdbcType=NUMERIC}, #{monthlyRent,jdbcType=NUMERIC}, #{balancePayment,jdbcType=NUMERIC}, 
+      #{interestGrossProfit,jdbcType=NUMERIC}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT}, #{isEnable,jdbcType=BIT}, 
+      #{sort,jdbcType=INTEGER},#{agentPoint,jdbcType=NUMERIC},#{stagingNumber,jdbcType=VARCHAR},#{stagingNumberType,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hc.lease.supplier.model.LeaseSchemePriceStages" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_scheme_price_stages_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_scheme_price_stages
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="schemePriceId != null" >
+        scheme_price_id,
+      </if>
+      <if test="fitArea != null" >
+        fit_area,
+      </if>
+      <if test="schemeName != null" >
+        scheme_name,
+      </if>
+      <if test="stagingNumberId != null" >
+        staging_number_id,
+      </if>
+      <if test="downPayment != null" >
+        down_payment,
+      </if>
+      <if test="agentSettlementPrice != null" >
+        agent_settlement_price,
+      </if>
+      <if test="monthlyRent != null" >
+        monthly_rent,
+      </if>
+      <if test="balancePayment != null" >
+        balance_payment,
+      </if>
+      <if test="interestGrossProfit != null" >
+        interest_gross_profit,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="isEnable != null" >
+        is_enable,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="agentPoint != null" >
+        agent_point,
+      </if>
+      <if test="stagingNumber != null" >
+        staging_number,
+      </if>
+      <if test="stagingNumberType != null" >
+        staging_number_type
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="schemePriceId != null" >
+        #{schemePriceId,jdbcType=BIGINT},
+      </if>
+      <if test="fitArea != null" >
+        #{fitArea,jdbcType=VARCHAR},
+      </if>
+      <if test="schemeName != null" >
+        #{schemeName,jdbcType=VARCHAR},
+      </if>
+      <if test="stagingNumberId != null" >
+        #{stagingNumberId,jdbcType=BIGINT},
+      </if>
+      <if test="downPayment != null" >
+        #{downPayment,jdbcType=NUMERIC},
+      </if>
+      <if test="agentSettlementPrice != null" >
+        #{agentSettlementPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="monthlyRent != null" >
+        #{monthlyRent,jdbcType=NUMERIC},
+      </if>
+      <if test="balancePayment != null" >
+        #{balancePayment,jdbcType=NUMERIC},
+      </if>
+      <if test="interestGrossProfit != null" >
+        #{interestGrossProfit,jdbcType=NUMERIC},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="agentPoint != null" >
+        #{agentPoint,jdbcType=NUMERIC},
+      </if>
+      <if test="stagingNumber != null" >
+        #{stagingNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="stagingNumberType != null" >
+        #{stagingNumberType,jdbcType=INTEGER}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.supplier.model.LeaseSchemePriceStages" >
+    update lease_scheme_price_stages
+    <set >
+      <if test="schemePriceId != null" >
+        scheme_price_id = #{schemePriceId,jdbcType=BIGINT},
+      </if>
+      <if test="fitArea != null" >
+        fit_area = #{fitArea,jdbcType=VARCHAR},
+      </if>
+      <if test="schemeName != null" >
+        scheme_name = #{schemeName,jdbcType=VARCHAR},
+      </if>
+      <if test="stagingNumberId != null" >
+        staging_number_id = #{stagingNumberId,jdbcType=BIGINT},
+      </if>
+      <if test="downPayment != null" >
+        down_payment = #{downPayment,jdbcType=NUMERIC},
+      </if>
+      <if test="agentSettlementPrice != null" >
+        agent_settlement_price = #{agentSettlementPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="monthlyRent != null" >
+        monthly_rent = #{monthlyRent,jdbcType=NUMERIC},
+      </if>
+      <if test="balancePayment != null" >
+        balance_payment = #{balancePayment,jdbcType=NUMERIC},
+      </if>
+      <if test="interestGrossProfit != null" >
+        interest_gross_profit = #{interestGrossProfit,jdbcType=NUMERIC},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="isEnable != null" >
+        is_enable = #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="agentPoint != null" >
+        agent_point =#{agentPoint,jdbcType=NUMERIC},
+      </if>
+      <if test="stagingNumber != null" >
+        staging_number =#{stagingNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="stagingNumberType != null" >
+        staging_number_type =#{stagingNumberType,jdbcType=INTEGER}
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hc.lease.supplier.model.LeaseSchemePriceStages" >
+    update lease_scheme_price_stages
+    set scheme_price_id = #{schemePriceId,jdbcType=BIGINT},
+      fit_area = #{fitArea,jdbcType=VARCHAR},
+      scheme_name = #{schemeName,jdbcType=VARCHAR},
+      staging_number_id = #{stagingNumberId,jdbcType=BIGINT},
+      down_payment = #{downPayment,jdbcType=NUMERIC},
+      agent_settlement_price = #{agentSettlementPrice,jdbcType=NUMERIC},
+      monthly_rent = #{monthlyRent,jdbcType=NUMERIC},
+      balance_payment = #{balancePayment,jdbcType=NUMERIC},
+      interest_gross_profit = #{interestGrossProfit,jdbcType=NUMERIC},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      is_enable = #{isEnable,jdbcType=BIT},
+      sort = #{sort,jdbcType=INTEGER},
+      agent_point =#{agentPoint,jdbcType=NUMERIC},
+      staging_number =#{stagingNumber,jdbcType=VARCHAR},
+      staging_number_type =#{stagingNumberType,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

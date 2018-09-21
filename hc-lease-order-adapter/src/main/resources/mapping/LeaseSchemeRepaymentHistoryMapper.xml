@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.order.dao.LeaseSchemeRepaymentHistoryMapper" >
+  <resultMap id="BaseResultMap" type="com.hc.lease.order.model.LeaseSchemeRepaymentHistory" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="history_id" property="historyId" jdbcType="BIGINT" />
+    <result column="contract_id" property="contractId" jdbcType="BIGINT" />
+    <result column="lessee_id" property="lesseeId" jdbcType="BIGINT" />
+    <result column="period" property="period" jdbcType="INTEGER" />
+    <result column="return_principal" property="returnPrincipal" jdbcType="NUMERIC" />
+    <result column="return_interest" property="returnInterest" jdbcType="NUMERIC" />
+    <result column="total" property="total" jdbcType="NUMERIC" />
+    <result column="residual_principal" property="residualPrincipal" jdbcType="NUMERIC" />
+    <result column="repayment_date" property="repaymentDate" jdbcType="DATE" />
+    <result column="overdue" property="overdue" jdbcType="SMALLINT" />
+    <result column="overdue_day" property="overdueDay" jdbcType="INTEGER" />
+    <result column="loan_amount" property="loanAmount" jdbcType="NUMERIC" />
+    <result column="annual_interest" property="annualInterest" jdbcType="NUMERIC" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+    <result column="history_create_time" property="historyCreateTime" jdbcType="TIMESTAMP" />
+    <result column="history_update_time" property="historyUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="history_create_by" property="historyCreateBy" jdbcType="BIGINT" />
+    <result column="history_update_by" property="historyUpdateBy" jdbcType="BIGINT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="is_enable" property="isEnable" jdbcType="BIT" />
+    <result column="vsersion_number" property="vsersionNumber" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, history_id, contract_id, lessee_id, period, return_principal, return_interest, 
+    total, residual_principal, repayment_date, overdue, overdue_day, loan_amount, annual_interest, 
+    create_time, update_time, create_by, update_by, history_create_time, history_update_time, 
+    history_create_by, history_update_by, sort, is_enable, vsersion_number
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from lease_scheme_repayment_history
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lease_scheme_repayment_history
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hc.lease.order.model.LeaseSchemeRepaymentHistory" >
+    insert into lease_scheme_repayment_history (id, history_id, contract_id, 
+      lessee_id, period, return_principal, 
+      return_interest, total, residual_principal, 
+      repayment_date, overdue, overdue_day, 
+      loan_amount, annual_interest, create_time, 
+      update_time, create_by, update_by, 
+      history_create_time, history_update_time, 
+      history_create_by, history_update_by, sort, 
+      is_enable, vsersion_number)
+    values (#{id,jdbcType=BIGINT}, #{historyId,jdbcType=BIGINT}, #{contractId,jdbcType=BIGINT}, 
+      #{lesseeId,jdbcType=BIGINT}, #{period,jdbcType=INTEGER}, #{returnPrincipal,jdbcType=NUMERIC},
+      #{returnInterest,jdbcType=NUMERIC}, #{total,jdbcType=NUMERIC}, #{residualPrincipal,jdbcType=NUMERIC}, 
+      #{repaymentDate,jdbcType=DATE}, #{overdue,jdbcType=SMALLINT}, #{overdueDay,jdbcType=INTEGER}, 
+      #{loanAmount,jdbcType=NUMERIC}, #{annualInterest,jdbcType=NUMERIC}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT}, 
+      #{historyCreateTime,jdbcType=TIMESTAMP}, #{historyUpdateTime,jdbcType=TIMESTAMP}, 
+      #{historyCreateBy,jdbcType=BIGINT}, #{historyUpdateBy,jdbcType=BIGINT}, #{sort,jdbcType=INTEGER}, 
+      #{isEnable,jdbcType=BIT}, #{vsersionNumber,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hc.lease.order.model.LeaseSchemeRepaymentHistory" >
+    insert into lease_scheme_repayment_history
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="historyId != null" >
+        history_id,
+      </if>
+      <if test="contractId != null" >
+        contract_id,
+      </if>
+      <if test="lesseeId != null" >
+        lessee_id,
+      </if>
+      <if test="period != null" >
+        period,
+      </if>
+      <if test="returnPrincipal != null" >
+        return_principal,
+      </if>
+      <if test="returnInterest != null" >
+        return_interest,
+      </if>
+      <if test="total != null" >
+        total,
+      </if>
+      <if test="residualPrincipal != null" >
+        residual_principal,
+      </if>
+      <if test="repaymentDate != null" >
+        repayment_date,
+      </if>
+      <if test="overdue != null" >
+        overdue,
+      </if>
+      <if test="overdueDay != null" >
+        overdue_day,
+      </if>
+      <if test="loanAmount != null" >
+        loan_amount,
+      </if>
+      <if test="annualInterest != null" >
+        annual_interest,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="historyCreateTime != null" >
+        history_create_time,
+      </if>
+      <if test="historyUpdateTime != null" >
+        history_update_time,
+      </if>
+      <if test="historyCreateBy != null" >
+        history_create_by,
+      </if>
+      <if test="historyUpdateBy != null" >
+        history_update_by,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="isEnable != null" >
+        is_enable,
+      </if>
+      <if test="vsersionNumber != null" >
+        vsersion_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="historyId != null" >
+        #{historyId,jdbcType=BIGINT},
+      </if>
+      <if test="contractId != null" >
+        #{contractId,jdbcType=BIGINT},
+      </if>
+      <if test="lesseeId != null" >
+        #{lesseeId,jdbcType=BIGINT},
+      </if>
+      <if test="period != null" >
+        #{period,jdbcType=INTEGER},
+      </if>
+      <if test="returnPrincipal != null" >
+        #{returnPrincipal,jdbcType=NUMERIC},
+      </if>
+      <if test="returnInterest != null" >
+        #{returnInterest,jdbcType=NUMERIC},
+      </if>
+      <if test="total != null" >
+        #{total,jdbcType=NUMERIC},
+      </if>
+      <if test="residualPrincipal != null" >
+        #{residualPrincipal,jdbcType=NUMERIC},
+      </if>
+      <if test="repaymentDate != null" >
+        #{repaymentDate,jdbcType=DATE},
+      </if>
+      <if test="overdue != null" >
+        #{overdue,jdbcType=SMALLINT},
+      </if>
+      <if test="overdueDay != null" >
+        #{overdueDay,jdbcType=INTEGER},
+      </if>
+      <if test="loanAmount != null" >
+        #{loanAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="annualInterest != null" >
+        #{annualInterest,jdbcType=NUMERIC},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="historyCreateTime != null" >
+        #{historyCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="historyUpdateTime != null" >
+        #{historyUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="historyCreateBy != null" >
+        #{historyCreateBy,jdbcType=BIGINT},
+      </if>
+      <if test="historyUpdateBy != null" >
+        #{historyUpdateBy,jdbcType=BIGINT},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="vsersionNumber != null" >
+        #{vsersionNumber,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.order.model.LeaseSchemeRepaymentHistory" >
+    update lease_scheme_repayment_history
+    <set >
+      <if test="historyId != null" >
+        history_id = #{historyId,jdbcType=BIGINT},
+      </if>
+      <if test="contractId != null" >
+        contract_id = #{contractId,jdbcType=BIGINT},
+      </if>
+      <if test="lesseeId != null" >
+        lessee_id = #{lesseeId,jdbcType=BIGINT},
+      </if>
+      <if test="period != null" >
+        period = #{period,jdbcType=INTEGER},
+      </if>
+      <if test="returnPrincipal != null" >
+        return_principal = #{returnPrincipal,jdbcType=NUMERIC},
+      </if>
+      <if test="returnInterest != null" >
+        return_interest = #{returnInterest,jdbcType=NUMERIC},
+      </if>
+      <if test="total != null" >
+        total = #{total,jdbcType=NUMERIC},
+      </if>
+      <if test="residualPrincipal != null" >
+        residual_principal = #{residualPrincipal,jdbcType=NUMERIC},
+      </if>
+      <if test="repaymentDate != null" >
+        repayment_date = #{repaymentDate,jdbcType=DATE},
+      </if>
+      <if test="overdue != null" >
+        overdue = #{overdue,jdbcType=SMALLINT},
+      </if>
+      <if test="overdueDay != null" >
+        overdue_day = #{overdueDay,jdbcType=INTEGER},
+      </if>
+      <if test="loanAmount != null" >
+        loan_amount = #{loanAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="annualInterest != null" >
+        annual_interest = #{annualInterest,jdbcType=NUMERIC},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="historyCreateTime != null" >
+        history_create_time = #{historyCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="historyUpdateTime != null" >
+        history_update_time = #{historyUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="historyCreateBy != null" >
+        history_create_by = #{historyCreateBy,jdbcType=BIGINT},
+      </if>
+      <if test="historyUpdateBy != null" >
+        history_update_by = #{historyUpdateBy,jdbcType=BIGINT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="isEnable != null" >
+        is_enable = #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="vsersionNumber != null" >
+        vsersion_number = #{vsersionNumber,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hc.lease.order.model.LeaseSchemeRepaymentHistory" >
+    update lease_scheme_repayment_history
+    set history_id = #{historyId,jdbcType=BIGINT},
+      contract_id = #{contractId,jdbcType=BIGINT},
+      lessee_id = #{lesseeId,jdbcType=BIGINT},
+      period = #{period,jdbcType=INTEGER},
+      return_principal = #{returnPrincipal,jdbcType=NUMERIC},
+      return_interest = #{returnInterest,jdbcType=NUMERIC},
+      total = #{total,jdbcType=NUMERIC},
+      residual_principal = #{residualPrincipal,jdbcType=NUMERIC},
+      repayment_date = #{repaymentDate,jdbcType=DATE},
+      overdue = #{overdue,jdbcType=SMALLINT},
+      overdue_day = #{overdueDay,jdbcType=INTEGER},
+      loan_amount = #{loanAmount,jdbcType=NUMERIC},
+      annual_interest = #{annualInterest,jdbcType=NUMERIC},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      history_create_time = #{historyCreateTime,jdbcType=TIMESTAMP},
+      history_update_time = #{historyUpdateTime,jdbcType=TIMESTAMP},
+      history_create_by = #{historyCreateBy,jdbcType=BIGINT},
+      history_update_by = #{historyUpdateBy,jdbcType=BIGINT},
+      sort = #{sort,jdbcType=INTEGER},
+      is_enable = #{isEnable,jdbcType=BIT},
+      vsersion_number = #{vsersionNumber,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

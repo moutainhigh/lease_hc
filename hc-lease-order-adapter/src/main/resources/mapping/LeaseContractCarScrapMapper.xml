@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.order.dao.LeaseContractCarScrapMapper" >
+  <resultMap id="BaseResultMap" type="com.hc.lease.order.model.LeaseContractCarScrap" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="dual_number" property="dualNumber" jdbcType="INTEGER" />
+    <result column="contract_id" property="contractId" jdbcType="BIGINT" />
+    <result column="car_id" property="carId" jdbcType="BIGINT" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="deal_way" property="dealWay" jdbcType="BIGINT" />
+    <result column="deal_remarks" property="dealRemarks" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+    <result column="find_source" property="findSource" jdbcType="INTEGER"/>
+
+    <collection property="incomeExpeList" column="{contractId=contract_id,source=findSource,sourceId=id}" ofType="com.hc.lease.order.model.LeaseContractIncomeExpe" javaType="java.util.ArrayList" select="com.hc.lease.order.dao.LeaseContractIncomeExpeMapper.findByContractIdAndSource"/>
+
+  </resultMap>
+
+  <!-- 丢失 数据列表 -->
+  <resultMap id="ScrapFindPageMap" type="com.hc.lease.order.vo.ScrapFindPageVo">
+    <result column="id" property="id" jdbcType="BIGINT"/>
+    <result column="dual_number_name" property="dualNumberName" jdbcType="VARCHAR"/>
+    <result column="deal_way_name" property="dealWayName" jdbcType="VARCHAR"/>
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    <result column="complete_contract_number" property="completeContractNumber" jdbcType="VARCHAR"/>
+    <result column="account_name" property="accountName" jdbcType="VARCHAR"/>
+    <result column="account_phone" property="accountPhone" jdbcType="VARCHAR"/>
+    <result column="plate_number" property="plateNumber" jdbcType="VARCHAR"/>
+    <result column="model_name" property="modelName" jdbcType="VARCHAR"/>
+    <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+    <result column="car_id" property="carId" jdbcType="BIGINT"/>
+  </resultMap>
+
+  <!-- 丢失 查看 -->
+  <resultMap id="ScrapFindByPrimaryKeyMap" type="com.hc.lease.order.vo.ScrapFindByPrimaryKeyVo">
+    <result column="account_name" property="accountName" jdbcType="VARCHAR"/>
+    <result column="account_phone" property="accountPhone" jdbcType="VARCHAR"/>
+    <result column="complete_contract_number" property="completeContractNumber" jdbcType="VARCHAR"/>
+    <result column="plate_number" property="plateNumber" jdbcType="VARCHAR"/>
+    <result column="card_frame_number" property="cardFrameNumber" jdbcType="VARCHAR"/>
+    <result column="brands_name" property="brandsName" jdbcType="VARCHAR"/>
+    <result column="series_name" property="seriesName" jdbcType="VARCHAR"/>
+    <result column="id" property="id" jdbcType="BIGINT"/>
+    <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+    <result column="deal_way_name" property="dealWayName" jdbcType="VARCHAR"/>
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    <result column="deal_remarks" property="dealRemarks" jdbcType="VARCHAR"/>
+    <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+    <result column="car_id" property="carId" jdbcType="BIGINT"/>
+    <result column="find_source" property="findSource" jdbcType="INTEGER"/>
+
+    <collection property="incomeExpeList" column="{contractId=contract_id,source=findSource}" ofType="com.hc.lease.order.model.LeaseContractIncomeExpe" javaType="java.util.ArrayList" select="com.hc.lease.order.dao.LeaseContractIncomeExpeMapper.findByContractIdAndSource"/>
+
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, dual_number, contract_id, car_id, remarks, deal_way, deal_remarks, create_time, 
+    update_time, create_by, update_by
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    2 as "findSource",
+    <include refid="Base_Column_List" />
+    from lease_contract_car_scrap
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <!-- 查看 -->
+  <select id="findByPrimaryKey" resultMap="ScrapFindByPrimaryKeyMap" parameterType="java.lang.Long">
+    select
+    f.name "accountName", f.phone "accountPhone"
+    , b.id "contractId", b.complete_contract_number as "completeContractNumber", l.plate_number as "plateNumber"
+    , l.id "carId", l.card_frame_number as "cardFrameNumber", m.name as "brandsName", n.name as "seriesName"
+    , a.id, a.remarks
+    , (case when a.deal_way='1' then '登记为报废中' when a.deal_way='2' then '报废结束' when a.deal_way='3' then '取消报废登记' end) "dealWayName"
+    , a.update_time "updateTime"
+    , a.deal_remarks "dealRemarks"
+    , 2 as "findSource"
+    from lease_contract_car_scrap a
+    LEFT JOIN lease_contract b on b.id = a.contract_id
+    LEFT JOIN lease_scheme_order c on c.id = b.scheme_order_id
+    LEFT JOIN lease_scheme_order_account e on e.scheme_order_id = c.id and e.is_default_pay=1
+    left join lease_account_bank_card abc on e.bank_card_id=abc.id
+    LEFT JOIN lease_account f on f.id = e.account_id
+    LEFT JOIN lease_branch_company g on g.id = b.branch_company_id
+    LEFT JOIN lease_account_credit h on f.id = h.account_id
+    LEFT JOIN lease_bank i on i.id = abc.bank_id
+    LEFT JOIN lease_account_company j on f.id = j.account_id
+    LEFT JOIN lease_bank k on k.id = j.bank_id
+    LEFT JOIN lease_car l on l.id = c.card_id
+    left join lease_car_brands m on l.brands_id=m.id
+    left join lease_car_series n on l.series_id=n.id
+    left join lease_car_model o on l.series_id=o.id
+    where a.id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="findPage" resultMap="ScrapFindPageMap">
+    select
+    a.id, concat('资产部收',a.dual_number) "dualNumberName"
+    , (case when a.deal_way='0' then '登记为报废中' when a.deal_way='1' then '报废结束' when a.deal_way='2' then '取消报废登记' end) "dealWayName"
+    , to_char(a.create_time, 'yyyy-MM-dd') "createTime"
+    , b.id "contractId", b.complete_contract_number "completeContractNumber", f.name "accountName", f.phone "accountPhone"
+    , l.id "carId", l.plate_number "plateNumber", o.complete_model_name "modelName"
+    from lease_contract_car_scrap a
+    LEFT JOIN lease_contract b on b.id = a.contract_id
+    LEFT JOIN lease_scheme_order c on c.id = b.scheme_order_id
+    LEFT JOIN lease_scheme_order_account e on e.scheme_order_id = c.id and e.is_default_pay=1
+    left join lease_account_bank_card abc on e.bank_card_id=abc.id
+    LEFT JOIN lease_account f on f.id = e.account_id
+    LEFT JOIN lease_branch_company g on g.id = b.branch_company_id
+    LEFT JOIN lease_account_credit h on f.id = h.account_id
+    LEFT JOIN lease_bank i on i.id = abc.bank_id
+    LEFT JOIN lease_account_company j on f.id = j.account_id
+    LEFT JOIN lease_bank k on k.id = j.bank_id
+    LEFT JOIN lease_car l on l.id = c.card_id
+    left join lease_car_brands m on l.brands_id=m.id
+    left join lease_car_series n on l.series_id=n.id
+    left join lease_car_model o on l.model_id=o.id
+
+    where 1=1
+
+    <if test="keyParams != null">
+      and (
+      b.complete_contract_number like concat('%',#{keyParams},'%')
+      or f.name like concat('%',#{keyParams},'%')
+      or l.plate_number like concat('%',#{keyParams},'%')
+      )
+    </if>
+
+    <if test="dealWay != null and dealWay != '0'">
+      and a.deal_way = #{dealWay,jdbcType=INTEGER}
+    </if>
+
+    <if test="createTimeFrom != null and createTimeFrom!='' and createTimeTo != null and createTimeTo !=''">
+      and a.create_time BETWEEN to_timestamp(#{createTimeFrom},'YYYY-MM-DD HH24:MI:SS') and
+      to_timestamp(#{createTimeTo},'YYYY-MM-DD HH24:MI:SS')
+    </if>
+
+    <if test="dealTimeFrom != null and dealTimeFrom!='' and dealTimeTo != null and dealTimeTo !=''">
+      and a.update_time BETWEEN to_timestamp(#{dealTimeFrom},'YYYY-MM-DD HH24:MI:SS') and
+      to_timestamp(#{dealTimeTo},'YYYY-MM-DD HH24:MI:SS')
+    </if>
+
+  </select>
+
+  <select id="findMaxDualNumber" resultType="java.lang.Integer">
+    select COALESCE(max(dual_number), 999) "dealNumber" from lease_contract_car_scrap;
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lease_contract_car_scrap
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.hc.lease.order.model.LeaseContractCarScrap" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_contract_car_scrap_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_contract_car_scrap (id, dual_number, contract_id,
+      car_id, remarks, deal_way,
+      deal_remarks, create_time, update_time,
+      create_by, update_by)
+    values (#{id,jdbcType=BIGINT}, #{dualNumber,jdbcType=INTEGER}, #{contractId,jdbcType=BIGINT},
+      #{carId,jdbcType=BIGINT}, #{remarks,jdbcType=VARCHAR}, #{dealWay,jdbcType=BIGINT},
+      #{dealRemarks,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+      #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.hc.lease.order.model.LeaseContractCarScrap" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_contract_car_scrap_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_contract_car_scrap
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dualNumber != null" >
+        dual_number,
+      </if>
+      <if test="contractId != null" >
+        contract_id,
+      </if>
+      <if test="carId != null" >
+        car_id,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="dealWay != null" >
+        deal_way,
+      </if>
+      <if test="dealRemarks != null" >
+        deal_remarks,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="dualNumber != null" >
+        #{dualNumber,jdbcType=INTEGER},
+      </if>
+      <if test="contractId != null" >
+        #{contractId,jdbcType=BIGINT},
+      </if>
+      <if test="carId != null" >
+        #{carId,jdbcType=BIGINT},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="dealWay != null" >
+        #{dealWay,jdbcType=BIGINT},
+      </if>
+      <if test="dealRemarks != null" >
+        #{dealRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.order.model.LeaseContractCarScrap" >
+    update lease_contract_car_scrap
+    <set >
+      <if test="dualNumber != null" >
+        dual_number = #{dualNumber,jdbcType=INTEGER},
+      </if>
+      <if test="contractId != null" >
+        contract_id = #{contractId,jdbcType=BIGINT},
+      </if>
+      <if test="carId != null" >
+        car_id = #{carId,jdbcType=BIGINT},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="dealWay != null" >
+        deal_way = #{dealWay,jdbcType=BIGINT},
+      </if>
+      <if test="dealRemarks != null" >
+        deal_remarks = #{dealRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.hc.lease.order.model.LeaseContractCarScrap" >
+    update lease_contract_car_scrap
+    set dual_number = #{dualNumber,jdbcType=INTEGER},
+      contract_id = #{contractId,jdbcType=BIGINT},
+      car_id = #{carId,jdbcType=BIGINT},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      deal_way = #{dealWay,jdbcType=BIGINT},
+      deal_remarks = #{dealRemarks,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+</mapper>

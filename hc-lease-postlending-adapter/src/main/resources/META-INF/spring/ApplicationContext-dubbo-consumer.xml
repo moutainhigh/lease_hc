@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://code.alibabatech.com/schema/dubbo
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<dubbo:registry address="${dubbo.registry.zookeeper}"/>
+	<!-- 生成远程服务代理，可以像使用本地bean一样使用demoService -->
+
+	<dubbo:reference interface="com.hc.lease.baseInfo.service.api.LeaseDictService" id="leaseDictService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.baseInfo.service.api.LeaseBranchCompanyService" id="leaseBranchCompanyService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.order.service.api.LeaseSchemeRepaymentService" id="leaseSchemeRepaymentService" check="false" timeout="1200000" />
+
+	<dubbo:reference interface="com.hc.lease.order.service.api.LeaseContractService" id="leaseContractService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.order.service.api.LeaseContractLinkRepaymentService" id="leaseContractLinkRepaymentService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.order.service.api.LeaseContractAdvanceService" id="leaseContractAdvanceService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.order.service.api.LeaseSchemeRepaymentStatusService" id="leaseSchemeRepaymentStatusService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.order.service.api.LeaseContractRepaymentExceptService" id="leaseContractRepaymentExceptService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.order.adapter.api.LeaseSchemeRepaymentStatusAdapter" id="leaseSchemeRepaymentStatusAdapter" check="false" timeout="1200000" />
+
+	<dubbo:reference interface="com.hc.lease.baseInfo.service.api.LeaseSmsLogService" id="leaseSmsLogService" check="false" timeout="1200000" />
+
+	<dubbo:reference interface="com.hc.lease.account.service.api.LeaseAccountBankPaySinService" id="leaseAccountBankPaySinService" check="false" timeout="1200000" />
+
+</beans>

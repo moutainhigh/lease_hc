@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.postlending.dao.LeaseAllinpayQueryLogMapper">
+    <!--通联轮询流水-->
+    <resultMap id="BaseResultMap" type="com.hc.lease.postlending.model.LeaseAllinpayQueryLog">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="allinpay_log_id" property="allinpayLogId" jdbcType="BIGINT"/>
+        <result column="repayment_id" property="repaymentId" jdbcType="BIGINT"/>
+        <result column="repayment_status_id" property="repaymentStatusId" jdbcType="BIGINT"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="ret_code" property="retCode" jdbcType="VARCHAR"/>
+        <result column="err_msg" property="errMsg" jdbcType="VARCHAR"/>
+        <result column="back_time" property="backTime" jdbcType="TIMESTAMP"/>
+        <result column="req_sn" property="reqSn" jdbcType="VARCHAR"/>
+        <result column="sn" property="sn" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="FindSuccessNoSendSmsMap" type="com.hc.lease.postlending.vo.FindSuccessNoSendSmsVo">
+
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="allinpay_log_id" property="allinpayLogId" jdbcType="BIGINT"/>
+        <result column="repayment_id" property="repaymentId" jdbcType="BIGINT"/>
+        <result column="repayment_status_id" property="repaymentStatusId" jdbcType="BIGINT"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+
+        <result column="account_id" property="accountId" jdbcType="VARCHAR"/>
+        <result column="account_name" property="accountName" jdbcType="VARCHAR"/>
+        <result column="back_card_number" property="backCardNumber" jdbcType="VARCHAR"/>
+        <result column="bank_name" property="bankName" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+
+        <result column="pay_type" property="payType" jdbcType="INTEGER"/>
+        <result column="totle_price" property="totlePrice" jdbcType="NUMERIC"/>
+
+        <result column="repayment_date" property="repaymentDate" jdbcType="DATE"/>
+        <result column="pay_type_name" property="payTypeName" jdbcType="VARCHAR"/>
+        <result column="complete_contract_number" property="completeContractNumber" jdbcType="VARCHAR"/>
+        <result column="ret_code" property="retCode" jdbcType="VARCHAR"/>
+        <result column="err_msg" property="errMsg" jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, allinpay_log_id, repayment_id, repayment_status_id, contract_id, status, ret_code, 
+    err_msg, back_time, req_sn, sn
+  </sql>
+
+    <!---->
+    <select id="selectByAllinpayLogId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_allinpay_query_log
+        where allinpay_log_id = #{allinpayLogId,jdbcType=BIGINT}
+        and repayment_id = #{repaymentId,jdbcType=BIGINT}
+        and repayment_status_id = #{repaymentStatusId,jdbcType=BIGINT}
+        and contract_id = #{contractId,jdbcType=BIGINT}
+        and req_sn = #{reqSn,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_allinpay_query_log
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <!--未发送短信提醒的 通联轮询流水-->
+    <select id="findSuccessNoSendSms" resultMap="FindSuccessNoSendSmsMap">
+
+        select table_b.retcode "retCode", table_b.errmsg "errMsg", table_b.id, table_b.accountid "accountId", table_b.paytype "payType"
+        , (case when table_b.paytype=0 then '月供' when table_b.paytype=1 then '挂靠费' when table_b.paytype=2 then '逾期滞纳金' when table_b.paytype=3 then '提前还款/剩余本金' when table_b.paytype=4 then '还款到最后一期的尾付' when table_b.paytype=5 then '提前还款罚款' when table_b.paytype=6 then '提前还款的尾付' end ) "payTypeName"
+        , table_b.repaymentdate "repaymentDate", table_b.totleprice "totlePrice", table_b.completecontractnumber "completeContractNumber"
+        , f.name "accountName", f.phone, g.back_card_number "backCardNumber" , h.name "bankName"
+
+        from (
+        SELECT
+
+        table_a.retcode , table_a.errmsg , table_a.id , table_a.accountid, table_a.paytype, table_a.repaymentdate
+        , table_a.totleprice "totleprice", table_a.completecontractnumber "completecontractnumber"
+
+        FROM (
+        select
+        a.ret_code "retcode", a.err_msg "errmsg"
+        , a.id, c.pay_type "paytype", d.lessee_id "accountid", d.repayment_date "repaymentdate"
+        , c.totle_price "totleprice", e.complete_contract_number "completecontractnumber"
+        from lease_allinpay_query_log a
+        LEFT JOIN lease_allinpay_status_sms b ON b.query_log_id = a.id
+        INNER JOIN lease_allinpay_log c ON a.allinpay_log_id = c.id and (c.pay_type = 0 or c.pay_type = 2 or c.pay_type = 4)
+        INNER JOIN lease_scheme_repayment d ON a.repayment_id = d.id
+        INNER JOIN lease_contract e ON a.contract_id = e.id
+
+        WHERE b.id is null
+
+        UNION ALL
+
+        select
+        a.ret_code "retcode", a.err_msg "errmsg"
+        , a.id, c.pay_type "paytype", d.account_id "accountid", d.repayment_date "repaymentdate"
+        , c.totle_price "totleprice", e.complete_contract_number "completecontractnumber"
+        from lease_allinpay_query_log a
+        LEFT JOIN lease_allinpay_status_sms b ON b.query_log_id = a.id
+        INNER JOIN lease_allinpay_log c ON a.allinpay_log_id = c.id and c.pay_type = 1
+        INNER JOIN lease_contract_link_repayment d ON a.repayment_id = d.id
+        INNER JOIN lease_contract e ON a.contract_id = e.id
+
+        WHERE b.id is null
+
+        UNION ALL
+
+        select
+        a.ret_code "retcode", a.err_msg "errmsg"
+        , a.id, c.pay_type "paytype", e.lessee_id "accountid", e.repayment_date "repaymentdate"
+        , c.totle_price "totleprice", f.complete_contract_number "completecontractnumber"
+
+        from lease_allinpay_query_log a
+        LEFT JOIN lease_allinpay_status_sms b ON b.query_log_id = a.id
+        INNER JOIN lease_allinpay_log c ON a.allinpay_log_id = c.id and (c.pay_type = 3 or c.pay_type = 5 or c.pay_type = 6)
+        INNER JOIN lease_contract_advance d ON a.repayment_id = d.id
+        INNER JOIN lease_scheme_repayment e ON d.repayment_id = e.id
+        INNER JOIN lease_contract f ON a.contract_id = f.id
+
+        WHERE b.id is null
+        ) table_a
+        ) table_b
+        LEFT JOIN lease_account f on table_b.accountid=f.id
+        LEFT JOIN lease_account_credit g on g.account_id=f.id
+        LEFT JOIN lease_bank h on h.id = g.bank_id
+
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from lease_allinpay_query_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+    <insert id="insert" parameterType="com.hc.lease.postlending.model.LeaseAllinpayQueryLog">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_allinpay_query_log_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_allinpay_query_log (id, allinpay_log_id, repayment_id,
+        repayment_status_id, contract_id, status,
+        ret_code, err_msg, back_time,
+        req_sn, sn)
+        values (#{id,jdbcType=BIGINT}, #{allinpayLogId,jdbcType=BIGINT}, #{repaymentId,jdbcType=BIGINT},
+        #{repaymentStatusId,jdbcType=BIGINT}, #{contractId,jdbcType=BIGINT}, #{status,jdbcType=INTEGER},
+        #{retCode,jdbcType=VARCHAR}, #{errMsg,jdbcType=VARCHAR}, #{backTime,jdbcType=TIMESTAMP},
+        #{reqSn,jdbcType=VARCHAR}, #{sn,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.hc.lease.postlending.model.LeaseAllinpayQueryLog">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_allinpay_query_log_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_allinpay_query_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="allinpayLogId != null">
+                allinpay_log_id,
+            </if>
+            <if test="repaymentId != null">
+                repayment_id,
+            </if>
+            <if test="repaymentStatusId != null">
+                repayment_status_id,
+            </if>
+            <if test="contractId != null">
+                contract_id,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="retCode != null">
+                ret_code,
+            </if>
+            <if test="errMsg != null">
+                err_msg,
+            </if>
+            <if test="backTime != null">
+                back_time,
+            </if>
+            <if test="reqSn != null">
+                req_sn,
+            </if>
+            <if test="sn != null">
+                sn,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="allinpayLogId != null">
+                #{allinpayLogId,jdbcType=BIGINT},
+            </if>
+            <if test="repaymentId != null">
+                #{repaymentId,jdbcType=BIGINT},
+            </if>
+            <if test="repaymentStatusId != null">
+                #{repaymentStatusId,jdbcType=BIGINT},
+            </if>
+            <if test="contractId != null">
+                #{contractId,jdbcType=BIGINT},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="retCode != null">
+                #{retCode,jdbcType=VARCHAR},
+            </if>
+            <if test="errMsg != null">
+                #{errMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="backTime != null">
+                #{backTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="reqSn != null">
+                #{reqSn,jdbcType=VARCHAR},
+            </if>
+            <if test="sn != null">
+                #{sn,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.postlending.model.LeaseAllinpayQueryLog">
+        update lease_allinpay_query_log
+        <set>
+            <if test="allinpayLogId != null">
+                allinpay_log_id = #{allinpayLogId,jdbcType=BIGINT},
+            </if>
+            <if test="repaymentId != null">
+                repayment_id = #{repaymentId,jdbcType=BIGINT},
+            </if>
+            <if test="repaymentStatusId != null">
+                repayment_status_id = #{repaymentStatusId,jdbcType=BIGINT},
+            </if>
+            <if test="contractId != null">
+                contract_id = #{contractId,jdbcType=BIGINT},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="retCode != null">
+                ret_code = #{retCode,jdbcType=VARCHAR},
+            </if>
+            <if test="errMsg != null">
+                err_msg = #{errMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="backTime != null">
+                back_time = #{backTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="reqSn != null">
+                req_sn = #{reqSn,jdbcType=VARCHAR},
+            </if>
+            <if test="sn != null">
+                sn = #{sn,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.hc.lease.postlending.model.LeaseAllinpayQueryLog">
+        update lease_allinpay_query_log
+        set allinpay_log_id = #{allinpayLogId,jdbcType=BIGINT},
+        repayment_id = #{repaymentId,jdbcType=BIGINT},
+        repayment_status_id = #{repaymentStatusId,jdbcType=BIGINT},
+        contract_id = #{contractId,jdbcType=BIGINT},
+        status = #{status,jdbcType=INTEGER},
+        ret_code = #{retCode,jdbcType=VARCHAR},
+        err_msg = #{errMsg,jdbcType=VARCHAR},
+        back_time = #{backTime,jdbcType=TIMESTAMP},
+        req_sn = #{reqSn,jdbcType=VARCHAR},
+        sn = #{sn,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+</mapper>

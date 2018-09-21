@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!-- 公共 模块 -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>hc.lease.common</groupId>
+        <artifactId>hc-lease-common-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../hc-lease-common-parent</relativePath>
+    </parent>
+
+    <properties>
+        <hc.version>1.0.0-SNAPSHOT</hc.version>
+    </properties>
+
+    <groupId>hc.lease.common</groupId>
+    <artifactId>hc-lease-common-core</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>hc-lease-common-core</name>
+    <packaging>jar</packaging>
+    <url>http://maven.apache.org</url>
+
+    <dependencies>
+        <dependency>
+            <groupId>hc.lease.common</groupId>
+            <artifactId>hc-lease-common-util</artifactId>
+            <version>${hc.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>hc.lease.common</groupId>
+            <artifactId>hc-lease-common-config</artifactId>
+            <version>${hc.version}</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+
+        <finalName>hc-lease-common-core</finalName>
+
+        <resources>
+            <!-- 先指定 src/main/resources下所有文件及文件夹为资源文件 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <targetPath>${project.build.directory}/classes</targetPath>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+
+        <plugins>
+            <!-- 打包jar文件时，配置manifest文件，加入lib包的jar依赖 -->
+            <!--
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <classesDirectory>target/classes/</classesDirectory>
+                    <outputDirectory>E:\packget\common-core</outputDirectory>
+                </configuration>
+            </plugin>
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+
+
+    </build>
+
+
+</project>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.order.dao.LeaseContractDealEndMapper" >
+  <!-- 贷后合同管理-结束处置 -->
+  <resultMap id="BaseResultMap" type="com.hc.lease.order.model.LeaseContractDealEnd" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="contract_id" property="contractId" jdbcType="BIGINT" />
+    <result column="car_id" property="carId" jdbcType="BIGINT" />
+    <result column="deal_way" property="dealWay" jdbcType="BIGINT" />
+    <result column="deal_remarks" property="dealRemarks" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+    <result column="find_source" property="findSource" jdbcType="INTEGER"/>
+
+    <collection property="incomeExpeList" column="{contractId=contract_id,source=findSource,sourceId=id}" ofType="com.hc.lease.order.model.LeaseContractIncomeExpe" javaType="java.util.ArrayList" select="com.hc.lease.order.dao.LeaseContractIncomeExpeMapper.findByContractIdAndSource"/>
+
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, contract_id, car_id, deal_way, deal_remarks, create_time, update_time, create_by, 
+    update_by
+  </sql>
+
+  <select id="findByContractId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    3 as "findSource",
+    <include refid="Base_Column_List" />
+    from lease_contract_deal_end
+    where contract_id = #{contractId,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    3 as "findSource",
+    <include refid="Base_Column_List" />
+    from lease_contract_deal_end
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lease_contract_deal_end
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.hc.lease.order.model.LeaseContractDealEnd" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_contract_deal_end_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_contract_deal_end (id, contract_id, car_id, 
+      deal_way, deal_remarks, create_time, 
+      update_time, create_by, update_by
+      )
+    values (#{id,jdbcType=BIGINT}, #{contractId,jdbcType=BIGINT}, #{carId,jdbcType=BIGINT}, 
+      #{dealWay,jdbcType=BIGINT}, #{dealRemarks,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT}
+      )
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.hc.lease.order.model.LeaseContractDealEnd" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_contract_deal_end_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_contract_deal_end
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="contractId != null" >
+        contract_id,
+      </if>
+      <if test="carId != null" >
+        car_id,
+      </if>
+      <if test="dealWay != null" >
+        deal_way,
+      </if>
+      <if test="dealRemarks != null" >
+        deal_remarks,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="contractId != null" >
+        #{contractId,jdbcType=BIGINT},
+      </if>
+      <if test="carId != null" >
+        #{carId,jdbcType=BIGINT},
+      </if>
+      <if test="dealWay != null" >
+        #{dealWay,jdbcType=BIGINT},
+      </if>
+      <if test="dealRemarks != null" >
+        #{dealRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.order.model.LeaseContractDealEnd" >
+    update lease_contract_deal_end
+    <set >
+      <if test="contractId != null" >
+        contract_id = #{contractId,jdbcType=BIGINT},
+      </if>
+      <if test="carId != null" >
+        car_id = #{carId,jdbcType=BIGINT},
+      </if>
+      <if test="dealWay != null" >
+        deal_way = #{dealWay,jdbcType=BIGINT},
+      </if>
+      <if test="dealRemarks != null" >
+        deal_remarks = #{dealRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.hc.lease.order.model.LeaseContractDealEnd" >
+    update lease_contract_deal_end
+    set contract_id = #{contractId,jdbcType=BIGINT},
+      car_id = #{carId,jdbcType=BIGINT},
+      deal_way = #{dealWay,jdbcType=BIGINT},
+      deal_remarks = #{dealRemarks,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+</mapper>

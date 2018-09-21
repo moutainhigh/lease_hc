@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.baseInfo.dao.LeaseCarModelMapper">
+
+    <!--车辆车型-->
+
+    <resultMap id="BaseResultMap" type="com.hc.lease.baseInfo.model.LeaseCarModel">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="number" property="number" jdbcType="VARCHAR"/>
+        <result column="series_id" property="seriesId" jdbcType="BIGINT"/>
+        <result column="complete_model_name" property="completeModelName" jdbcType="VARCHAR"/>
+        <result column="item_type" property="itemType" jdbcType="VARCHAR"/>
+        <result column="particular_year" property="particularYear" jdbcType="VARCHAR"/>
+        <result column="business_model_name" property="businessModelName" jdbcType="VARCHAR"/>
+        <result column="model_code" property="modelCode" jdbcType="VARCHAR"/>
+        <result column="fuel_type" property="fuelType" jdbcType="BIGINT"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="is_enable" property="isEnable" jdbcType="BIT"/>
+        <result column="dict_id_output_volume" property="dictIdOutputVolume" jdbcType="BIGINT"/>
+        <result column="maintain_rule_id" property="maintainRuleId" jdbcType="BIGINT"/>
+
+        <result column="brands_name" property="brandsName" jdbcType="VARCHAR"/>
+        <result column="series_name" property="seriesName" jdbcType="VARCHAR"/>
+        <result column="fuel_type_name" property="fuelTypeName" jdbcType="VARCHAR"/>
+        <result column="output_volume_name" property="outputVolumeName" jdbcType="VARCHAR"/>
+        <result column="kilometre_number" property="kilometreNumber" jdbcType="INTEGER"/>
+        <result column="monthsNumber" property="monthsNumber" jdbcType="INTEGER"/>
+        <result column="kilometre_months_number" property="kilometreMonthsNumber" jdbcType="VARCHAR"/>
+        <collection property="leaseCarModelColorPriceVoList" column="id" ofType="com.hc.lease.baseInfo.vo.LeaseCarModelColorPriceVo" javaType="java.util.ArrayList" select="selectColorByModelId"/>
+
+    </resultMap>
+
+    <!--
+    <resultMap id="LeaseCarModelVoMap" type="com.hc.lease.baseInfo.vo.LeaseCarModelVo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="brands_name" property="brandsName" jdbcType="VARCHAR"/>
+        <result column="series_name" property="seriesName" jdbcType="VARCHAR"/>
+        <result column="complete_model_name" property="completeModelName" jdbcType="VARCHAR"/>
+        <result column="particular_year" property="particularYear" jdbcType="VARCHAR"/>
+        <result column="business_model_name" property="businessModelName" jdbcType="VARCHAR"/>
+        <result column="model_code" property="modelCode" jdbcType="VARCHAR"/>
+        <result column="fuel_type_name" property="fuelTypeName" jdbcType="VARCHAR"/>
+        <result column="output_volume_name" property="outputVolumeName" jdbcType="VARCHAR"/>
+        <result column="kilometre_number" property="kilometreNumber" jdbcType="INTEGER"/>
+        <result column="monthsNumber" property="monthsNumber" jdbcType="INTEGER"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="kilometre_months_number" property="kilometreMonthsNumber" jdbcType="VARCHAR"/>
+        <collection property="leaseCarModelColorPriceVoList" column="id" ofType="com.hc.lease.baseInfo.vo.LeaseCarModelColorPriceVo" javaType="java.util.ArrayList" select="selectColorByModelId"/>
+    </resultMap>
+    -->
+
+    <resultMap id="LeaseCarModelColorVoMap" type="com.hc.lease.baseInfo.vo.LeaseCarModelColorPriceVo">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="NUMERIC"/>
+        <result column="car_color_id" property="carColorId" jdbcType="BIGINT"/>
+        <result column="car_color_name" property="carColorName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, number, series_id, complete_model_name, item_type, particular_year, business_model_name,
+    model_code, fuel_type, remarks, create_time, update_time, create_by, update_by, sort,
+    is_enable, dict_id_output_volume, maintain_rule_id
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_car_model
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectById" resultType="java.util.Map" parameterType="java.lang.Long">
+        select
+        a.id, a.series_id "seriesId", a.complete_model_name "completeModelName", a.item_type "itemType", a.particular_year "particularYear", a.business_model_name "businessModelName",
+        a.model_code "modelCode", a.fuel_type "fuelType", a.remarks, a.is_enable "isEnable"
+        , a.dict_id_output_volume "dictIdOutputVolume", a.maintain_rule_id "maintainRuleId"
+        ,c.id "brandsId"
+        from lease_car_model a
+        LEFT JOIN lease_car_series b ON b.id = a.series_id
+        LEFT JOIN lease_car_brands c ON c.id = b.brands_id
+        where a.id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="findBySeriesId" resultMap="BaseResultMap">
+        select
+        id
+        from lease_car_model
+        where series_id in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="findPage" resultMap="BaseResultMap">
+        select
+        a.id, a.series_id "seriesId", b.brands_id "brandsId"
+        , c.name "brandsName"
+        , b.name "seriesName"
+        , a.complete_model_name "completeModelName"
+        , a.item_type "itemType"
+        , a.particular_year "particularYear"
+        , a.business_model_name "businessModelName"
+        , a.model_code "modelCode"
+        , a.fuel_type "fuelType"
+        , a.dict_id_output_volume "dictIdOutputVolume"
+        , (select value from lease_dict where id = a.fuel_type and type = 'FuelType') "fuelTypeName"
+        , (select value from lease_dict where id = a.dict_id_output_volume and type = 'OutputVolume') "outputVolumeName"
+        , concat('每',d.kilometre_number,'公里', d.months_number,'/个月') "kilometreMonthsNumber"
+        , d.id "maintainRuleId"
+        , a.remarks
+
+        from lease_car_model a
+        LEFT JOIN lease_car_series b ON b.id = a.series_id
+        LEFT JOIN lease_car_brands c ON c.id = b.brands_id
+        LEFT JOIN lease_car_maintain_rule d ON d.id = a.maintain_rule_id
+        WHERE 1=1
+        <if test="name != null">
+            and a.complete_model_name like concat('%',#{name,jdbcType=VARCHAR},'%')
+        </if>
+        ORDER BY a.create_time DESC
+    </select>
+
+    <select id="selectColorByModelId" resultMap="LeaseCarModelColorVoMap" parameterType="java.lang.Long">
+        select b.id "carColorId"
+        , b.name "carColorName", price
+        , a.branch_company_id "branchCompanyId"
+        , c.name "branchCompanyName"
+        from lease_car_model_color a
+        LEFT JOIN lease_car_color b ON b.id = a.car_color_id
+        LEFT JOIN lease_branch_company c ON a.branch_company_id = c.id
+        where a.car_model_id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_car_model ORDER BY create_time DESC
+    </select>
+
+    <select id="findByName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_car_model
+        WHERE complete_model_name = #{name,jdbcType=VARCHAR}
+        <if test="id != null">
+            and id != #{id,jdbcType=BIGINT}
+        </if>
+    </select>
+
+    <select id="insertViewParames" resultType="java.util.Map">
+        select
+        id, complete_model_name "completeModelName"
+        from lease_car_model ORDER BY create_time DESC
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from lease_car_model
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <!-- 批量删除 -->
+    <delete id="deleteBatchById" parameterType="long">
+        delete from lease_car_model where id in
+        <foreach item="idItem" collection="list" open="(" separator="," close=")">
+            #{idItem}
+        </foreach>
+    </delete>
+
+    <insert id="insert" parameterType="com.hc.lease.baseInfo.model.LeaseCarModel">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_car_model_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_car_model (id, number, series_id,
+        complete_model_name, item_type, particular_year, business_model_name,
+        model_code, fuel_type, remarks,
+        create_time, update_time, create_by,
+        update_by, sort, is_enable,
+        dict_id_output_volume, maintain_rule_id)
+        values (#{id,jdbcType=BIGINT}, #{number,jdbcType=VARCHAR}, #{seriesId,jdbcType=BIGINT},
+        #{completeModelName,jdbcType=VARCHAR}, #{itemType,jdbcType=VARCHAR}, #{particularYear,jdbcType=VARCHAR},
+        #{businessModelName,jdbcType=VARCHAR},
+        #{modelCode,jdbcType=VARCHAR}, #{fuelType,jdbcType=BIGINT}, #{remarks,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT},
+        #{updateBy,jdbcType=BIGINT}, #{sort,jdbcType=INTEGER}, #{isEnable,jdbcType=BIT},
+        #{dictIdOutputVolume,jdbcType=BIGINT}, #{maintainRuleId,jdbcType=BIGINT})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.hc.lease.baseInfo.model.LeaseCarModel">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_car_model_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_car_model
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="number != null">
+                number,
+            </if>
+            <if test="seriesId != null">
+                series_id,
+            </if>
+            <if test="completeModelName != null">
+                complete_model_name,
+            </if>
+            <if test="itemType != null">
+                item_type,
+            </if>
+            <if test="particularYear != null">
+                particular_year,
+            </if>
+            <if test="businessModelName != null">
+                business_model_name,
+            </if>
+            <if test="modelCode != null">
+                model_code,
+            </if>
+            <if test="fuelType != null">
+                fuel_type,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="isEnable != null">
+                is_enable,
+            </if>
+            <if test="dictIdOutputVolume != null">
+                dict_id_output_volume,
+            </if>
+            <if test="maintainRuleId != null">
+                maintain_rule_id
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="number != null">
+                #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="seriesId != null">
+                #{seriesId,jdbcType=BIGINT},
+            </if>
+            <if test="completeModelName != null">
+                #{completeModelName,jdbcType=VARCHAR},
+            </if>
+            <if test="itemType != null">
+                #{itemType,jdbcType=VARCHAR},
+            </if>
+            <if test="particularYear != null">
+                #{particularYear,jdbcType=VARCHAR},
+            </if>
+            <if test="businessModelName != null">
+                #{businessModelName,jdbcType=VARCHAR},
+            </if>
+            <if test="modelCode != null">
+                #{modelCode,jdbcType=VARCHAR},
+            </if>
+            <if test="fuelType != null">
+                #{fuelType,jdbcType=BIGINT},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="isEnable != null">
+                #{isEnable,jdbcType=BIT},
+            </if>
+            <if test="dictIdOutputVolume != null">
+                #{dictIdOutputVolume,jdbcType=BIGINT},
+            </if>
+            <if test="maintainRuleId != null">
+                #{maintainRuleId,jdbcType=BIGINT}
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.baseInfo.model.LeaseCarModel">
+        update lease_car_model
+        <set>
+            <if test="number != null">
+                number = #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="seriesId != null">
+                series_id = #{seriesId,jdbcType=BIGINT},
+            </if>
+            <if test="completeModelName != null">
+                complete_model_name = #{completeModelName,jdbcType=VARCHAR},
+            </if>
+            <if test="itemType != null">
+                item_type = #{itemType,jdbcType=VARCHAR},
+            </if>
+            <if test="particularYear != null">
+                particular_year = #{particularYear,jdbcType=VARCHAR},
+            </if>
+            <if test="businessModelName != null">
+                business_model_name = #{businessModelName,jdbcType=VARCHAR},
+            </if>
+            <if test="modelCode != null">
+                model_code = #{modelCode,jdbcType=VARCHAR},
+            </if>
+            <if test="fuelType != null">
+                fuel_type = #{fuelType,jdbcType=BIGINT},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="isEnable != null">
+                is_enable = #{isEnable,jdbcType=BIT},
+            </if>
+            <if test="dictIdOutputVolume != null">
+                dict_id_output_volume = #{dictIdOutputVolume,jdbcType=BIGINT},
+            </if>
+            <if test="maintainRuleId != null">
+                maintain_rule_id = #{maintainRuleId,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.hc.lease.baseInfo.model.LeaseCarModel">
+    update lease_car_model
+    set number = #{number,jdbcType=VARCHAR},
+      series_id = #{seriesId,jdbcType=BIGINT},
+      complete_model_name = #{completeModelName,jdbcType=VARCHAR},
+      item_type = #{itemType,jdbcType=VARCHAR},
+      particular_year = #{particularYear,jdbcType=VARCHAR},
+      business_model_name = #{businessModelName,jdbcType=VARCHAR},
+      model_code = #{modelCode,jdbcType=VARCHAR},
+      fuel_type = #{fuelType,jdbcType=BIGINT},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      sort = #{sort,jdbcType=INTEGER},
+      is_enable = #{isEnable,jdbcType=BIT},
+      dict_id_output_volume = #{dictIdOutputVolume,jdbcType=BIGINT},
+      maintain_rule_id = #{maintainRuleId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+</mapper>

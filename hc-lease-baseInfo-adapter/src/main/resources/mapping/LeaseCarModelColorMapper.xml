@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.baseInfo.dao.LeaseCarModelColorMapper">
+    <!--车辆车型-车辆颜色-->
+    <resultMap id="BaseResultMap" type="com.hc.lease.baseInfo.model.LeaseCarModelColor">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="car_model_id" property="carModelId" jdbcType="BIGINT"/>
+        <result column="car_color_id" property="carColorId" jdbcType="BIGINT"/>
+        <result column="price" property="price" jdbcType="NUMERIC"/>
+        <result column="branch_company_id" property="branchCompanyId" jdbcType="BIGINT"/>
+        <result column="branch_company_name" property="branchCompanyName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, car_model_id, car_color_id, price, branch_company_id
+  </sql>
+
+    <select id="selectCarModelAndColor" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_car_model_color
+        where 1=1
+        and car_model_id=#{modelId}
+        and car_color_id =#{colorId}
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_car_model_color
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByModelId" resultType="java.util.Map" parameterType="java.lang.Long">
+        select
+        a.car_color_id "carColorId", a.price, a.branch_company_id "branchCompanyId"
+        , b.name "branchCompanyName"
+        from lease_car_model_color a
+        LEFT JOIN lease_branch_company b ON a.branch_company_id = b.id
+        where car_model_id = #{modelId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectCarPrice" resultType="java.util.Map" parameterType="java.util.Map">
+    select price
+    from lease_car_model_color
+    where 1=1
+     <if test="ModelId != null">
+            and car_model_id=#{modelId,jdbcType=BIGINT}
+     </if>
+     <if test="ColorId != null">
+           and  car_color_id =#{colorId,jdbcType=BIGINT}
+     </if>
+    </select>
+
+    <select id="selectColor" resultType="java.util.Map">
+  select
+        a.car_model_id "modelId",a.car_color_id "id",a.branch_company_id "branchCompanyId",
+        cc.name "name",cc.is_enable "isEnable"
+        from lease_car_model_color a
+        left join lease_car_color cc on  a.car_color_id=cc.id
+    </select>
+
+    <select id="findByColorId" resultMap="BaseResultMap" >
+        select
+        id
+        from lease_car_model_color
+        where car_color_id in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="findPage" resultType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_car_model_color
+    </select>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_car_model_color
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from lease_car_model_color
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+    <!-- 批量删除 -->
+    <delete id="deleteBatchById" parameterType="long">
+        delete from lease_car_model_color where id in
+        <foreach item="idItem" collection="list" open="(" separator="," close=")">
+            #{idItem}
+        </foreach>
+    </delete>
+
+    <delete id="deleteByModelId" parameterType="java.lang.Long">
+        delete from lease_car_model_color
+        where car_model_id = #{modelId,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="insert" parameterType="com.hc.lease.baseInfo.model.LeaseCarModelColor">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_car_model_color_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_car_model_color (id, car_model_id, car_color_id, price, branch_company_id)
+        values (#{id,jdbcType=BIGINT}, #{carModelId,jdbcType=BIGINT}, #{carColorId,jdbcType=BIGINT},
+        #{price,jdbcType=NUMERIC}, #{branchCompanyId,jdbcType=BIGINT})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.hc.lease.baseInfo.model.LeaseCarModelColor">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_car_model_color_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_car_model_color
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="carModelId != null">
+                car_model_id,
+            </if>
+            <if test="carColorId != null">
+                car_color_id,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="branchCompanyId != null">
+                branch_company_id
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="carModelId != null">
+                #{carModelId,jdbcType=BIGINT},
+            </if>
+            <if test="carColorId != null">
+                #{carColorId,jdbcType=BIGINT},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=NUMERIC},
+            </if>
+            <if test="branchCompanyId != null">
+                #{branchCompanyId,jdbcType=BIGINT}
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="insertList">
+
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_car_model_color_id_seq'::regclass) as id
+        </selectKey>
+
+        insert into lease_car_model_color(id, car_model_id, car_color_id, price, branch_company_id)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{id},#{item.carModelId},#{item.carColorId},#{item.price},#{item.branchCompanyId})
+        </foreach>
+
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.baseInfo.model.LeaseCarModelColor">
+        update lease_car_model_color
+        <set>
+            <if test="carModelId != null">
+                car_model_id = #{carModelId,jdbcType=BIGINT},
+            </if>
+            <if test="carColorId != null">
+                car_color_id = #{carColorId,jdbcType=BIGINT},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=NUMERIC},
+            </if>
+            <if test="branchCompanyId != null">
+                branch_company_id = #{branchCompanyId,jdbcType=BIGINT}
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.hc.lease.baseInfo.model.LeaseCarModelColor">
+    update lease_car_model_color
+    set car_model_id = #{carModelId,jdbcType=BIGINT},
+      car_color_id = #{carColorId,jdbcType=BIGINT},
+      price = #{price,jdbcType=NUMERIC},
+      branch_company_id = #{branchCompanyId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+</mapper>

@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.postlending.dao.LeaseManualDeductionsStatistMapper">
+    <resultMap id="BaseResultMap" type="com.hc.lease.postlending.model.LeaseManualDeductionsStatist">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="number" property="number" jdbcType="VARCHAR"/>
+        <result column="total_sum" property="totalSum" jdbcType="INTEGER"/>
+        <result column="success_number" property="successNumber" jdbcType="INTEGER"/>
+        <result column="fail_number" property="failNumber" jdbcType="INTEGER"/>
+        <result column="total_price" property="totalPrice" jdbcType="NUMERIC"/>
+        <result column="receipts_price" property="receiptsPrice" jdbcType="NUMERIC"/>
+        <result column="un_price" property="unPrice" jdbcType="NUMERIC"/>
+        <result column="fail_price" property="failPrice" jdbcType="NUMERIC"/>
+        <result column="is_check" property="isCheck" jdbcType="INTEGER"/>
+        <result column="is_pay" property="isPay" jdbcType="INTEGER"/>
+        <result column="is_download_result" property="isDownloadResult" jdbcType="INTEGER"/>
+        <result column="is_import_again" property="isImportAgain" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, number, total_sum, success_number, fail_number, total_price, receipts_price, fail_price, is_check, is_pay, is_download_result, is_import_again, create_time, create_by, remarks
+    update_time, update_by
+  </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_manual_deductions_statist
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="findPage" resultMap="BaseResultMap">
+        select
+        id, total_sum "totalSum", success_number "successNumber", fail_number "failNumber"
+        , total_price "totalPrice", receipts_price "receiptsPrice"
+        , (total_price-receipts_price) "unPrice", fail_price "failPrice"
+        , 1 "isCheck"
+        , (case when (is_pay=0 and is_check=1) then 1 else 0 end) "isPay"
+        , (case when is_pay=1 then 1 else 0 end) "isDownloadResult"
+        , (case when is_pay=0 then 1 else 0 end) "isImportAgain"
+        , create_time "createTime", create_by "createBy", update_time "updateTime", update_by "updateBy"
+        from lease_manual_deductions_statist
+        where 1=1
+        <if test="createTimeStart != null and createTimeStart!='' and createTimeEnd != null and createTimeEnd !=''">
+            and create_time BETWEEN to_timestamp(#{createTimeStart},'YYYY-MM-DD HH24:MI:SS') and to_timestamp(#{createTimeEnd},'YYYY-MM-DD HH24:MI:SS')
+        </if>
+        order by create_time desc
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from lease_manual_deductions_statist
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+    <insert id="insert" parameterType="com.hc.lease.postlending.model.LeaseManualDeductionsStatist">
+
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_manual_deductions_statist_id_seq'::regclass) as id
+        </selectKey>
+
+        insert into lease_manual_deductions_statist
+        (
+        id, number, total_sum, success_number, fail_number, total_price,
+        receipts_price, fail_price
+        , is_check, is_pay, is_download_result, is_import_again
+        , create_time, create_by, update_time
+        , update_by, remarks
+        )
+        values (#{id,jdbcType=BIGINT}, #{number,jdbcType=VARCHAR}, #{totalSum,jdbcType=INTEGER},
+        #{successNumber,jdbcType=INTEGER}, #{failNumber,jdbcType=INTEGER}
+        , #{totalPrice,jdbcType=NUMERIC}, #{receiptsPrice,jdbcType=NUMERIC}, #{failPrice,jdbcType=NUMERIC}
+        , #{isCheck,jdbcType=INTEGER}, #{isPay,jdbcType=INTEGER}, #{isDownloadResult,jdbcType=INTEGER},
+        #{isImportAgain,jdbcType=INTEGER},
+        #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP},
+        #{updateBy,jdbcType=BIGINT}, #{remarks,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.hc.lease.postlending.model.LeaseManualDeductionsStatist">
+
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_manual_deductions_statist_id_seq'::regclass) as id
+        </selectKey>
+
+        insert into lease_manual_deductions_statist
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="number != null">
+                number,
+            </if>
+            <if test="totalSum != null">
+                total_sum,
+            </if>
+            <if test="successNumber != null">
+                success_number,
+            </if>
+            <if test="failNumber != null">
+                fail_number,
+            </if>
+            <if test="totalPrice != null">
+                total_price,
+            </if>
+            <if test="receiptsPrice != null">
+                receipts_price,
+            </if>
+            <if test="failPrice != null">
+                fail_price,
+            </if>
+            <if test="isCheck != null">
+                is_check,
+            </if>
+            <if test="isPay != null">
+                is_pay,
+            </if>
+            <if test="isDownloadResult != null">
+                is_download_result,
+            </if>
+            <if test="isImportAgain != null">
+                is_import_again,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="remarks != null">
+                remarks
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="number != null">
+                #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="totalSum != null">
+                #{totalSum,jdbcType=INTEGER},
+            </if>
+            <if test="successNumber != null">
+                #{successNumber,jdbcType=INTEGER},
+            </if>
+            <if test="failNumber != null">
+                #{failNumber,jdbcType=INTEGER},
+            </if>
+            <if test="totalPrice != null">
+                #{totalPrice,jdbcType=NUMERIC},
+            </if>
+            <if test="receiptsPrice != null">
+                #{receiptsPrice,jdbcType=NUMERIC},
+            </if>
+            <if test="failPrice != null">
+                #{failPrice,jdbcType=NUMERIC},
+            </if>
+            <if test="isCheck != null">
+                #{isCheck,jdbcType=INTEGER},
+            </if>
+            <if test="isPay != null">
+                #{isPay,jdbcType=INTEGER},
+            </if>
+            <if test="isDownloadResult != null">
+                #{isDownloadResult,jdbcType=INTEGER},
+            </if>
+            <if test="isImportAgain != null">
+                #{isImportAgain,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.hc.lease.postlending.model.LeaseManualDeductionsStatist">
+        update lease_manual_deductions_statist
+        <set>
+            <if test="number != null">
+                number = #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="totalSum != null">
+                total_sum = #{totalSum,jdbcType=INTEGER},
+            </if>
+            <if test="successNumber != null">
+                success_number = #{successNumber,jdbcType=INTEGER},
+            </if>
+            <if test="failNumber != null">
+                fail_number = #{failNumber,jdbcType=INTEGER},
+            </if>
+            <if test="totalPrice != null">
+                total_price = #{totalPrice,jdbcType=NUMERIC},
+            </if>
+            <if test="receiptsPrice != null">
+                receipts_price = #{receiptsPrice,jdbcType=NUMERIC},
+            </if>
+            <if test="failPrice != null">
+                fail_price = #{failPrice,jdbcType=NUMERIC},
+            </if>
+            <if test="isCheck != null">
+                is_check = #{isCheck,jdbcType=INTEGER},
+            </if>
+            <if test="isPay != null">
+                is_pay = #{isPay,jdbcType=INTEGER},
+            </if>
+            <if test="isDownloadResult != null">
+                is_download_result = #{isDownloadResult,jdbcType=INTEGER},
+            </if>
+            <if test="isImportAgain != null">
+                is_import_again = #{isImportAgain,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.hc.lease.postlending.model.LeaseManualDeductionsStatist">
+    update lease_manual_deductions_statist
+    set
+      number = #{number,jdbcType=VARCHAR},
+      total_sum = #{totalSum,jdbcType=INTEGER},
+      success_number = #{successNumber,jdbcType=INTEGER},
+      fail_number = #{failNumber,jdbcType=INTEGER},
+      total_price = #{totalPrice,jdbcType=NUMERIC},
+      receipts_price = #{receiptsPrice,jdbcType=NUMERIC},
+      fail_price = #{failPrice,jdbcType=NUMERIC},
+      is_check = #{isCheck,jdbcType=INTEGER},
+      is_pay = #{isPay,jdbcType=INTEGER},
+      is_download_result = #{isDownloadResult,jdbcType=INTEGER},
+      is_import_again = #{isImportAgain,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <!-- 提交支付更新 -->
+    <update id="updateOnpay" parameterType="com.hc.lease.postlending.model.LeaseManualDeductionsStatist">
+        update lease_manual_deductions_statist
+        set
+        <if test="successNumber != null">
+            success_number = success_number + #{successNumber,jdbcType=INTEGER},
+        </if>
+        <if test="failNumber != null">
+            fail_number = fail_number + #{failNumber,jdbcType=INTEGER},
+        </if>
+        <if test="receiptsPrice != null">
+            receipts_price = receipts_price + #{receiptsPrice,jdbcType=NUMERIC},
+        </if>
+        <if test="failPrice != null">
+            fail_price = fail_price + #{failPrice,jdbcType=NUMERIC},
+        </if>
+        <if test="failPrice != null">
+            is_pay = #{isPay,jdbcType=INTEGER}
+        </if>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+</mapper>

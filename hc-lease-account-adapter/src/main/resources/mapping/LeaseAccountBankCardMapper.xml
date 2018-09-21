@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.account.dao.LeaseAccountBankCardMapper">
+    <resultMap id="BaseResultMap" type="com.hc.lease.account.model.LeaseAccountBankCard">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="account_id" property="accountId" jdbcType="BIGINT"/>
+        <result column="bank_account_name" property="bankAccountName" jdbcType="VARCHAR"/>
+        <result column="bank_id" property="bankId" jdbcType="BIGINT"/>
+        <result column="bank_name" property="bankName" jdbcType="VARCHAR"/>
+        <result column="branch_bank" property="branchBank" jdbcType="VARCHAR"/>
+        <result column="back_card_number" property="backCardNumber" jdbcType="VARCHAR"/>
+        <result column="back_card_img" property="backCardImg" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <result column="is_enable" property="isEnable" jdbcType="BIT"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="is_used" property="isUsed" jdbcType="BIT"/>
+        <result column="bank_phone" property="bankPhone" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="AccountBankExcelResultMap" type="com.hc.lease.account.vo.LeaseAccountBankExcel">
+        <result column="bank_account_name" property="bankAccountName" jdbcType="VARCHAR"/>
+        <result column="bank_name" property="bankName" jdbcType="VARCHAR"/>
+        <result column="branch_bank" property="branchBank" jdbcType="VARCHAR"/>
+        <result column="back_card_number" property="backCardNumber" jdbcType="VARCHAR"/>
+        <result column="bank_phone" property="bankPhone" jdbcType="VARCHAR"/>
+        <result column="id_card" property="idCard" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, account_id, bank_account_name, bank_id, branch_bank, back_card_number, back_card_img,
+    create_time, update_time, create_by, update_by, is_enable, sort, bank_phone
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_account_bank_card
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByAccountId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select
+     bc.id, bc.account_id, bc.bank_account_name, bc.bank_id, bc.branch_bank, bc.back_card_number, bc.back_card_img,
+    bc.create_time, bc.update_time,c.name "bankName",bc.sort,bc.is_enable,bc.bank_phone "bankPhone"
+
+    ,case when (select COUNT(1) from lease_scheme_order_account oa where oa.bank_card_id=bc.id) &lt;= 0 then false else true end "isUsed"
+
+    from lease_account_bank_card bc
+    left join lease_bank c on bc.bank_id = c.id
+    where  bc.account_id= #{id,jdbcType=BIGINT}
+  </select>
+
+    <select id="selectBankNameByAccountId" resultType="java.lang.String" parameterType="java.lang.Long">
+        select c.name "bankName"
+        from lease_account_bank_card bc
+        left join lease_bank c on bc.bank_id = c.id
+        where  bc.account_id= #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectBankCodeByAccountId" resultType="java.lang.String" parameterType="java.lang.Long">
+        select c.code "bankCode"
+        from lease_account_bank_card bc
+        left join lease_bank c on bc.bank_id = c.id
+        where  bc.account_id= #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="findAllByExcel" resultMap="AccountBankExcelResultMap">
+select
+     bc.id, bc.account_id, bc.bank_account_name, bc.bank_id, bc.branch_bank, bc.back_card_number,
+    c.name "bankName", a.id_card "idCard", bc.bank_phone "bankPhone"
+    from lease_account_bank_card bc
+    left join lease_bank c on bc.bank_id = c.id
+    left join lease_account a on bc.account_id=a.id
+    order by a.create_time desc
+    </select>
+
+    <select id="findByAccountIdAndBackCardNumber" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_account_bank_card
+        where account_id=#{accountId} and back_card_number= #{backCardNumber}
+    </select>
+
+    <select id="findByAccountIdAndId" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_account_bank_card
+        where account_id=#{accountId} and id = #{id,jdbcType=BIGINT}
+    </select>
+
+
+
+
+    <select id="selectByBackCardNumberAndAccountId" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_account_bank_card
+        where account_id=#{accountId} and back_card_number=#{backCardNumber}
+    </select>
+
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_account_bank_card
+    </select>
+
+    <select id="findByAccountInfo" resultMap="BaseResultMap">
+        select a.id,a.account_id "accountId",a.bank_id "bankId",a.back_card_number "backCardNumber"
+        from lease_account_bank_card a
+        inner join lease_account b on a.account_id=b.id
+        inner join lease_account_credit c on b.id=c.account_id
+        where 1=1
+        and a.back_card_number = #{backCardNumber}
+        and a.bank_id = #{bankId}
+        and c.id_card = #{idCard}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from lease_account_bank_card
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+    <delete id="deleteByAccountId" parameterType="java.lang.Long">
+     delete from lease_account_bank_card
+    where account_id = #{id,jdbcType=BIGINT}
+  </delete>
+
+    <delete id="deleteBatchById" parameterType="java.util.List">
+        DELETE FROM lease_account_bank_card WHERE id in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <insert id="insert" parameterType="com.hc.lease.account.model.LeaseAccountBankCard">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_account_bank_card_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_account_bank_card (id, account_id, bank_account_name,
+        bank_id, branch_bank, back_card_number,
+        back_card_img, create_time, update_time,
+        create_by, update_by, is_enable,
+        sort, bank_phone)
+        values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, #{bankAccountName,jdbcType=VARCHAR},
+        #{bankId,jdbcType=BIGINT}, #{branchBank,jdbcType=VARCHAR}, #{backCardNumber,jdbcType=VARCHAR},
+        #{backCardImg,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+        #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT}, #{isEnable,jdbcType=BIT},
+        #{sort,jdbcType=INTEGER}, #{bankPhone,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.hc.lease.account.model.LeaseAccountBankCard">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_account_bank_card_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_account_bank_card
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="accountId != null">
+                account_id,
+            </if>
+            <if test="bankAccountName != null">
+                bank_account_name,
+            </if>
+            <if test="bankId != null">
+                bank_id,
+            </if>
+            <if test="branchBank != null">
+                branch_bank,
+            </if>
+            <if test="backCardNumber != null">
+                back_card_number,
+            </if>
+            <if test="backCardImg != null">
+                back_card_img,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="isEnable != null">
+                is_enable,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="bankPhone != null">
+                bank_phone
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="accountId != null">
+                #{accountId,jdbcType=BIGINT},
+            </if>
+            <if test="bankAccountName != null">
+                #{bankAccountName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankId != null">
+                #{bankId,jdbcType=BIGINT},
+            </if>
+            <if test="branchBank != null">
+                #{branchBank,jdbcType=VARCHAR},
+            </if>
+            <if test="backCardNumber != null">
+                #{backCardNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="backCardImg != null">
+                #{backCardImg,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="isEnable != null">
+                #{isEnable,jdbcType=BIT},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="bankPhone != null">
+                #{bankPhone,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.account.model.LeaseAccountBankCard">
+        update lease_account_bank_card
+        <set>
+            <if test="accountId != null">
+                account_id = #{accountId,jdbcType=BIGINT},
+            </if>
+            <if test="bankAccountName != null">
+                bank_account_name = #{bankAccountName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankId != null">
+                bank_id = #{bankId,jdbcType=BIGINT},
+            </if>
+            <if test="branchBank != null">
+                branch_bank = #{branchBank,jdbcType=VARCHAR},
+            </if>
+            <if test="backCardNumber != null">
+                back_card_number = #{backCardNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="backCardImg != null">
+                back_card_img = #{backCardImg,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="isEnable != null">
+                is_enable = #{isEnable,jdbcType=BIT},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="bankPhone != null">
+                bank_phone = #{bankPhone,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hc.lease.account.model.LeaseAccountBankCard">
+    update lease_account_bank_card
+    set account_id = #{accountId,jdbcType=BIGINT},
+      bank_account_name = #{bankAccountName,jdbcType=VARCHAR},
+      bank_id = #{bankId,jdbcType=BIGINT},
+      branch_bank = #{branchBank,jdbcType=VARCHAR},
+      back_card_number = #{backCardNumber,jdbcType=VARCHAR},
+      back_card_img = #{backCardImg,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      is_enable = #{isEnable,jdbcType=BIT},
+      sort = #{sort,jdbcType=INTEGER},
+      bank_phone = #{bankPhone,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <update id="updateAccountNameByAccountId" parameterType="com.hc.lease.account.model.LeaseAccountBankCard">
+        update lease_account_bank_card
+        set
+        bank_account_name = #{bankAccountName,jdbcType=VARCHAR}
+        where account_id = #{accountId,jdbcType=BIGINT}
+    </update>
+
+</mapper>

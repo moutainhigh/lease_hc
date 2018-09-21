@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="GBK"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://code.alibabatech.com/schema/dubbo
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<dubbo:registry address="${dubbo.registry.zookeeper}"/>
+
+	<!-- baseInfo模块-->
+	<dubbo:reference interface="com.hc.lease.baseInfo.service.api.LeaseOrganizationStructureService" id="leaseOrganizationStructureService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.baseInfo.adapter.api.LeaseOrganizationStructureAdapter" id="leaseOrganizationStructureAdapter" check="false" timeout="1200000" />
+
+</beans>

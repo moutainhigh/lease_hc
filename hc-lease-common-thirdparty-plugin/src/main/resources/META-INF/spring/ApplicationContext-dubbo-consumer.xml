@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://code.alibabatech.com/schema/dubbo
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<dubbo:registry address="${dubbo.registry.zookeeper}"/>
+
+	<dubbo:reference interface="com.hc.lease.postlending.adapter.api.MonthlyPaymentAdapter" id="monthlyPaymentAdapter" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.order.adapter.api.LeaseContractLinkRepaymentAdapter" id="leaseContractLinkRepaymentAdapter" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.order.adapter.api.LeaseSchemeRepaymentStatusAdapter" id="leaseSchemeRepaymentStatusAdapter" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.postlending.adapter.api.LeaseAllinpaySplitConnectAdapter" id="leaseAllinpaySplitConnectAdapter" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.postlending.adapter.api.LeaseAllinpaySplitAdapter" id="leaseAllinpaySplitAdapter" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.postlending.adapter.api.LeaseAllinpayBatchAdapter" id="leaseAllinpayBatchAdapter" timeout="1200000" />
+
+	<dubbo:reference interface="com.hc.lease.postlending.adapter.api.LeaseManualDeductionsStatistAdapter" id="leaseManualDeductionsStatistAdapter" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.postlending.adapter.api.LeaseManualDeductionsDataAdapter" id="leaseManualDeductionsDataAdapter" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.postlending.adapter.api.LeaseManualDeductionsPayLogAdapter" id="leaseManualDeductionsPayLogAdapter" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.postlending.adapter.api.LeaseManualDeductioQueryLogAdapter" id="leaseManualDeductioQueryLogAdapter" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.postlending.adapter.api.LeaseManualDeductiStatusLogAdapter" id="leaseManualDeductiStatusLogAdapter" timeout="1200000" />
+
+</beans>

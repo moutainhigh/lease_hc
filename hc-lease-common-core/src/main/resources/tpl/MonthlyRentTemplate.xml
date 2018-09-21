@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<excel name="融租合同核对">
+    <sheet name="融租合同核对">
+        <colgroup>
+            <col width="17em" />
+            <col width="17em" />
+            <col width="17em" />
+            <col width="17em" />
+            <col width="17em" />
+            <col width="17em" />
+            <col width="17em" />
+            <col width="17em" />
+            <col width="17em" />
+            <col width="17em" />
+            <col width="17em" />
+            <col width="17em" />
+        </colgroup>
+        <thead>
+            <tr height="16px">
+                <th value="合同编号" />
+                <th value="承租人" />
+                <th value="手机" />
+                <th value="扣款日" />
+                <th value="期数" />
+                <th value="月租/挂靠"/>
+                <th value="身份证号码"/>
+                <th value="银行代码"/>
+                <th value="承租人还款银行账号"/>
+                <th value="车牌"/>
+                <th value="租赁起始日期"/>
+                <th value="租赁结束日期"/>
+                <th value="导入结果(非填项)" />
+            </tr>
+        </thead>
+        <tbody>
+            <tr height="16px" repeat="0">
+                <td type="string" isnullable="false" /><!-- 合同编号 -->
+                <td type="string" format="" /><!-- 承租人 -->
+                <td type="string" format="" /><!-- 手机 -->
+                <td type="integer" /><!-- 扣款日 -->
+                <td type="integer" format="" /><!-- 期数 -->
+                <td type="string" format="" /><!-- 月租/挂靠 -->
+                <td type="string" format="" /><!-- 银行代码 -->
+                <td type="string" format="" /><!-- 身份证号码 -->
+                <td type="string" format="" /><!-- 承租人还款银行账号 -->
+                <td type="string" format="" /><!-- 车牌 -->
+                <td type="date" format="yyyy-MM-dd" /><!-- 租赁起始日期 -->
+                <td type="date" format="yyyy-MM-dd" /><!-- 租赁结束日期 -->
+                <td type="string" format="" /><!-- 导入结果 -->
+            </tr>
+        </tbody>
+    </sheet>
+</excel>

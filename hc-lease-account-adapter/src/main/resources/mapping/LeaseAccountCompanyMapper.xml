@@ -1,0 +1,738 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.account.dao.LeaseAccountCompanyMapper">
+    <!--注册公司类型用户/承租人-->
+    <resultMap id="BaseResultMap" type="com.hc.lease.account.model.LeaseAccountCompany">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="account_id" property="accountId" jdbcType="BIGINT"/>
+        <result column="company_name" property="companyName" jdbcType="VARCHAR"/>
+        <result column="business_license_number" property="businessLicenseNumber" jdbcType="VARCHAR"/>
+        <result column="business_license_img" property="businessLicenseImg" jdbcType="VARCHAR"/>
+        <result column="company_registration_address" property="companyRegistrationAddress" jdbcType="VARCHAR"/>
+        <result column="company_phone" property="companyPhone" jdbcType="VARCHAR"/>
+        <result column="legal_person_id_card" property="legalPersonIdCard" jdbcType="VARCHAR"/>
+        <result column="legal_person_name" property="legalPersonName" jdbcType="VARCHAR"/>
+        <result column="legal_person_address" property="legalPersonAddress" jdbcType="VARCHAR"/>
+        <result column="legal_person_phone" property="legalPersonPhone" jdbcType="VARCHAR"/>
+        <result column="contacts_name" property="contactsName" jdbcType="VARCHAR"/>
+        <result column="contacts_address" property="contactsAddress" jdbcType="VARCHAR"/>
+        <result column="contacts_phone" property="contactsPhone" jdbcType="VARCHAR"/>
+        <result column="bank_account_name" property="bankAccountName" jdbcType="VARCHAR"/>
+        <result column="bank_id" property="bankId" jdbcType="BIGINT"/>
+        <result column="branch_bank" property="branchBank" jdbcType="VARCHAR"/>
+        <result column="back_card_number" property="backCardNumber" jdbcType="VARCHAR"/>
+        <result column="back_card_img" property="backCardImg" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="emergency_contact" property="emergencyContact" jdbcType="VARCHAR" javaType="com.hc.lease.account.vo.EmergencyContactVo" typeHandler="com.hc.lease.common.core.mybatis.JsonTypeHandler" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+
+
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="sex" jdbcType="INTEGER" property="sex"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="id_card" jdbcType="VARCHAR" property="idCard"/>
+        <result column="marital_status" jdbcType="INTEGER" property="maritalStatus"/>
+        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
+        <result column="salt" jdbcType="VARCHAR" property="salt"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="icon" jdbcType="VARCHAR" property="icon"/>
+        <result column="province_id" jdbcType="BIGINT" property="provinceId"/>
+        <result column="province_name" jdbcType="VARCHAR" property="provinceName"/>
+        <result column="city_id" jdbcType="BIGINT" property="cityId"/>
+        <result column="city_name" jdbcType="VARCHAR" property="cityName"/>
+        <result column="area_id" jdbcType="BIGINT" property="areaId"/>
+        <result column="area_name" jdbcType="VARCHAR" property="areaName"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="contacts" jdbcType="VARCHAR" property="contacts"/>
+        <result column="contact_information" jdbcType="VARCHAR" property="contactInformation"/>
+        <result column="reg_way" jdbcType="INTEGER" property="regWay"/>
+        <result column="company_name" jdbcType="VARCHAR" property="companyName"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+
+    </resultMap>
+
+    <resultMap id="AccountCompanyBaseResultMap" type="com.hc.lease.account.model.LeaseAccount">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="account_id" property="accountId" jdbcType="BIGINT"/>
+        <result column="company_name" property="companyName" jdbcType="VARCHAR"/>
+        <result column="business_license_number" property="businessLicenseNumber" jdbcType="VARCHAR"/>
+        <result column="business_license_img" property="businessLicenseImg" jdbcType="VARCHAR"/>
+        <result column="company_registration_address" property="companyRegistrationAddress" jdbcType="VARCHAR"/>
+        <result column="company_phone" property="companyPhone" jdbcType="VARCHAR"/>
+        <result column="legal_person_id_card" property="legalPersonIdCard" jdbcType="VARCHAR"/>
+        <result column="legal_person_name" property="legalPersonName" jdbcType="VARCHAR"/>
+        <result column="legal_person_address" property="legalPersonAddress" jdbcType="VARCHAR"/>
+        <result column="legal_person_phone" property="legalPersonPhone" jdbcType="VARCHAR"/>
+        <result column="contacts_name" property="contactsName" jdbcType="VARCHAR"/>
+        <result column="contacts_address" property="contactsAddress" jdbcType="VARCHAR"/>
+        <result column="contacts_phone" property="contactsPhone" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="emergency_contact" property="emergencyContact" jdbcType="VARCHAR" javaType="com.hc.lease.account.vo.EmergencyContactVo" typeHandler="com.hc.lease.common.core.mybatis.JsonTypeHandler" />
+        <result column="bank_account_name" property="bankAccountName" jdbcType="VARCHAR"/>
+        <result column="bank_id" property="bankId" jdbcType="BIGINT"/>
+        <result column="branch_bank" property="branchBank" jdbcType="VARCHAR"/>
+        <result column="back_card_number" property="backCardNumber" jdbcType="VARCHAR"/>
+        <result column="back_card_img" property="backCardImg" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+
+
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="sex" jdbcType="INTEGER" property="sex"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="id_card" jdbcType="VARCHAR" property="idCard"/>
+        <result column="marital_status" jdbcType="INTEGER" property="maritalStatus"/>
+        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
+        <result column="salt" jdbcType="VARCHAR" property="salt"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="icon" jdbcType="VARCHAR" property="icon"/>
+        <result column="province_id" jdbcType="BIGINT" property="provinceId"/>
+        <result column="province_name" jdbcType="VARCHAR" property="provinceName"/>
+        <result column="city_id" jdbcType="BIGINT" property="cityId"/>
+        <result column="city_name" jdbcType="VARCHAR" property="cityName"/>
+        <result column="area_id" jdbcType="BIGINT" property="areaId"/>
+        <result column="area_name" jdbcType="VARCHAR" property="areaName"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="contacts" jdbcType="VARCHAR" property="contacts"/>
+        <result column="contact_information" jdbcType="VARCHAR" property="contactInformation"/>
+        <result column="reg_way" jdbcType="INTEGER" property="regWay"/>
+        <result column="company_name" jdbcType="VARCHAR" property="companyName"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+
+        <result column="bank_name" property="bankName" jdbcType="VARCHAR"/>
+        <collection property="leaseAccountBankCards" column="accountId" ofType="com.hc.lease.account.model.LeaseAccountBankCard" javaType="java.util.ArrayList" select="com.hc.lease.account.dao.LeaseAccountBankCardMapper.selectByAccountId"/>
+
+    </resultMap>
+
+    <resultMap id="CompanyExcelResultMap" type="com.hc.lease.account.vo.LeaseAccountCompanyExcel">
+        <result column="company_name" property="companyName" jdbcType="VARCHAR"/>
+        <result column="business_license_number" property="businessLicenseNumber" jdbcType="VARCHAR"/>
+        <result column="company_registration_address" property="companyRegistrationAddress" jdbcType="VARCHAR"/>
+        <result column="contacts_name" property="contactsName" jdbcType="VARCHAR"/>
+        <result column="contacts_address" property="contactsAddress" jdbcType="VARCHAR"/>
+        <result column="contacts_phone" property="contactsPhone" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="bank_account_name" property="bankAccountName" jdbcType="VARCHAR"/>
+        <result column="branch_bank" property="branchBank" jdbcType="VARCHAR"/>
+        <result column="back_card_number" property="backCardNumber" jdbcType="VARCHAR"/>
+        <result column="bank_name" property="bankName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+    id, account_id, company_name, business_license_number, business_license_img, company_registration_address,
+    company_phone, legal_person_id_card, legal_person_name, legal_person_address, legal_person_phone,
+    contacts_name, contacts_address, contacts_phone, remark, emergency_contact
+    bank_account_name, bank_id, branch_bank, back_card_number, back_card_img,
+    create_time, update_time,
+    create_by, update_by, sort
+  </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+
+    select
+
+    a.name, a.sex, a.phone, a.id_card "idCard", a.marital_status "maritalStatus", a.real_name "realName"
+    , a.salt, a.password, a.icon, a.province_id "provinceId"
+    , a.province_name "provinceName", a.city_id "cityId", a.city_name "cityName"
+    , a.area_id "areaId", a.area_name "areaName", a.address, a.status, a.contacts
+    , a.contact_information "contactInformation", a.reg_way "regWay", a.company_name "companyName"
+    , a.create_time "createTime", a.update_time "updateTime", a.create_by "createBy", a.update_by "updateBy"
+    , a.type
+
+    , b.id, b.account_id "accountId", b.company_name "companyName", b.business_license_number "businessLicenseNumber"
+    , b.business_license_img "businessLicenseImg", b.company_registration_address "companyRegistrationAddress"
+    , b.company_phone "companyPhone", b.legal_person_id_card "legalPersonIdCard", b.legal_person_name "legalPersonName"
+    , b.legal_person_address "legalPersonAddress"
+    , b.legal_person_phone "legalPersonPhone"
+    , b.contacts_name "contactsName"
+    , b.contacts_address "contactsAddress"
+    , b.contacts_phone "contactsPhone", b.remark "remark", b.emergency_contact "emergencyContact"
+    , bank_account_name "bankAccountName", bank_id "bankId", branch_bank "branchBank", back_card_number "backCardNumber", back_card_img "backCardImg"
+
+    from lease_account a
+    LEFT JOIN lease_account_company b on a.id = b.account_id
+    where 1=1 and a.type = 1
+    and a.id = #{id,jdbcType=BIGINT}
+
+  </select>
+
+    <select id="selectBy" resultMap="AccountCompanyBaseResultMap" parameterType="java.lang.Long">
+
+    select
+
+    a.name, a.sex, a.phone, a.id_card "idCard", a.marital_status "maritalStatus", a.real_name "realName"
+    , a.salt, a.password, a.icon, a.province_id "provinceId"
+    , a.province_name "provinceName", a.city_id "cityId", a.city_name "cityName"
+    , a.area_id "areaId", a.area_name "areaName", a.address, a.status, a.contacts
+    , a.contact_information "contactInformation", a.reg_way "regWay", a.company_name "companyName"
+    , a.create_time "createTime", a.update_time "updateTime", a.create_by "createBy", a.update_by "updateBy"
+    , a.type
+
+    , b.id, b.account_id "accountId", b.company_name "companyName", b.business_license_number "businessLicenseNumber"
+    , b.business_license_img "businessLicenseImg", b.company_registration_address "companyRegistrationAddress"
+    , b.company_phone "companyPhone", b.legal_person_id_card "legalPersonIdCard", b.legal_person_name "legalPersonName"
+    , b.legal_person_address "legalPersonAddress"
+    , b.legal_person_phone "legalPersonPhone"
+    , b.contacts_name "contactsName"
+    , b.contacts_address "contactsAddress"
+    , b.contacts_phone "contactsPhone", b.remark "remark", b.emergency_contact "emergencyContact"
+    , bank_account_name "bankAccountName", bank_id "bankId", branch_bank "branchBank", back_card_number "backCardNumber", back_card_img "backCardImg"
+
+    from lease_account a
+    LEFT JOIN lease_account_company b on a.id = b.account_id
+    where 1=1 and a.type = 1
+    and a.id = #{id,jdbcType=BIGINT}
+
+  </select>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+
+        a.id, a.name, a.sex, a.phone, a.id_card "idCard", a.marital_status "maritalStatus", a.real_name "realName"
+        , a.salt, a.password, a.icon, a.province_id "provinceId"
+        , a.province_name "provinceName", a.city_id "cityId", a.city_name "cityName"
+        , a.area_id "areaId", a.area_name "areaName", a.address, a.status, a.contacts
+        , a.contact_information "contactInformation", a.reg_way "regWay", a.company_name "companyName"
+        , a.create_time "createTime", a.update_time "updateTime", a.create_by "createBy", a.update_by "updateBy"
+        , a.type
+
+        , b.company_name "companyName", b.business_license_number "businessLicenseNumber"
+        , b.business_license_img "businessLicenseImg", b.company_registration_address "companyRegistrationAddress"
+        , b.company_phone "companyPhone", b.legal_person_id_card "legalPersonIdCard", b.legal_person_name
+        "legalPersonName"
+        , b.legal_person_address "legalPersonAddress"
+        , b.legal_person_phone "legalPersonPhone"
+        , b.contacts_name "contactsName"
+        , b.contacts_address "contactsAddress"
+        , b.contacts_phone "contactsPhone", b.remark "remark", b.emergency_contact "emergencyContact"
+        , bank_account_name "bankAccountName", bank_id "bankId", branch_bank "branchBank", back_card_number "backCardNumber", back_card_img "backCardImg"
+
+        ,c.name "bankName"
+
+        from lease_account a
+        LEFT JOIN lease_account_company b on a.id = b.account_id
+        LEFT JOIN lease_bank c on b.bank_id = c.id
+
+        where a.type = 1
+        <if test="keyParams != null and keyParams!=''">
+            and (a.phone like concat('%',#{keyParams},'%') or a.id_card like concat('%',#{keyParams},'%')or a.name like
+            concat('%',#{keyParams},'%'))
+        </if>
+
+        order by a.create_time DESC
+    </select>
+
+
+    <select id="findAllByCompanyExcel" resultMap="CompanyExcelResultMap">
+        select
+         b.company_name "companyName", b.business_license_number "businessLicenseNumber"
+        , b.company_registration_address "companyRegistrationAddress"
+        , b.contacts_name "contactsName"
+        , b.contacts_address "contactsAddress"
+        , b.contacts_phone "contactsPhone", b.remark "remark"
+        , bank_account_name "bankAccountName", bank_id "bankId", branch_bank "branchBank", back_card_number "backCardNumber"
+        ,c.name "bankName"
+
+        from lease_account a
+        LEFT JOIN lease_account_company b on a.id = b.account_id
+        LEFT JOIN lease_bank c on b.bank_id = c.id
+
+        where a.type = 1
+        order by a.create_time DESC
+
+
+    </select>
+
+
+
+    <select id="findPage" resultType="java.util.Map">
+        select
+
+        a.id, a.name, a.sex, a.phone, a.id_card "idCard", a.marital_status "maritalStatus", a.real_name "realName"
+        , a.salt, a.password, a.icon, a.province_id "provinceId"
+        , a.province_name "provinceName", a.city_id "cityId", a.city_name "cityName"
+        , a.area_id "areaId", a.area_name "areaName", a.address, a.status, a.contacts
+        , a.contact_information "contactInformation", a.reg_way "regWay", a.company_name "companyName"
+        , a.create_time "createTime", a.update_time "updateTime", a.create_by "createBy", a.update_by "updateBy"
+        , a.type
+
+        , b.company_name "companyName", b.business_license_number "businessLicenseNumber"
+        , b.business_license_img "businessLicenseImg", b.company_registration_address "companyRegistrationAddress"
+        , b.company_phone "companyPhone", b.legal_person_id_card "legalPersonIdCard", b.legal_person_name
+        "legalPersonName"
+        , b.legal_person_address "legalPersonAddress"
+        , b.legal_person_phone "legalPersonPhone"
+        , b.contacts_name "contactsName"
+        , b.contacts_address "contactsAddress"
+        , b.contacts_phone "contactsPhone", b.remark "remark", b.emergency_contact "emergencyContact"
+        , bank_account_name "bankAccountName", bank_id "bankId", branch_bank "branchBank", back_card_number "backCardNumber", back_card_img "backCardImg"
+
+        from lease_account a
+        LEFT JOIN lease_account_company b on a.id = b.account_id
+        where 1=1 and a.type = 1
+        <if test="keyParams != null and keyParams!=''">
+            and (a.phone like concat('%',#{keyParams},'%') or a.id_card like concat('%',#{keyParams},'%')or a.name like
+            concat('%',#{keyParams},'%'))
+        </if>
+        <if test="accountId !=null and accountId!=''">
+            and a.id=#{accountId}
+        </if>
+
+        ORDER BY a.create_time DESC
+
+    </select>
+
+    <select id="findByPage" resultMap="AccountCompanyBaseResultMap">
+        select
+
+        a.id, a.name, a.sex, a.phone, a.id_card "idCard", a.marital_status "maritalStatus", a.real_name "realName"
+        , a.salt, a.password, a.icon, a.province_id "provinceId"
+        , a.province_name "provinceName", a.city_id "cityId", a.city_name "cityName"
+        , a.area_id "areaId", a.area_name "areaName", a.address, a.status, a.contacts
+        , a.contact_information "contactInformation", a.reg_way "regWay", a.company_name "companyName"
+        , a.create_time "createTime", a.update_time "updateTime", a.create_by "createBy", a.update_by "updateBy"
+        , a.type
+
+        , b.company_name "companyName", b.business_license_number "businessLicenseNumber"
+        , b.business_license_img "businessLicenseImg", b.company_registration_address "companyRegistrationAddress"
+        , b.company_phone "companyPhone", b.legal_person_id_card "legalPersonIdCard", b.legal_person_name
+        "legalPersonName"
+        , b.legal_person_address "legalPersonAddress"
+        , b.legal_person_phone "legalPersonPhone"
+        , b.contacts_name "contactsName"
+        , b.contacts_address "contactsAddress"
+        , b.contacts_phone "contactsPhone", b.remark "remark", b.emergency_contact "emergencyContact"
+        , bank_account_name "bankAccountName", bank_id "bankId", branch_bank "branchBank", back_card_number "backCardNumber", back_card_img "backCardImg"
+
+        ,c.name "bankName"
+
+        from lease_account a
+        LEFT JOIN lease_account_company b on a.id = b.account_id
+        LEFT JOIN lease_bank c on b.bank_id = c.id
+
+        where 1=1 and a.type = 1
+        <if test="keyParams != null and keyParams!=''">
+            and (a.phone like concat('%',#{keyParams},'%') or a.id_card like concat('%',#{keyParams},'%') or
+            b.company_name like concat('%',#{keyParams},'%') or b.legal_person_name like concat('%',#{keyParams},'%'))
+        </if>
+        <if test="accountId !=null and accountId!=''">
+            and a.id=#{accountId}
+        </if>
+
+        ORDER BY a.create_time DESC
+
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from lease_account_company
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+    <insert id="insert" parameterType="com.hc.lease.account.model.LeaseAccountCompany">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_account_company_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_account_company (id, account_id, company_name,
+        business_license_number, business_license_img,
+        company_registration_address, company_phone,
+        legal_person_id_card, legal_person_name, legal_person_address,
+        legal_person_phone, contacts_name, contacts_address,
+        contacts_phone, remark, b.emergency_contact "emergencyContact"
+        bank_account_name, bank_id, branch_bank, back_card_number, back_card_img,
+        create_time,
+        update_time, create_by, update_by,
+        sort)
+        values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, #{companyName,jdbcType=VARCHAR},
+        #{businessLicenseNumber,jdbcType=VARCHAR}, #{businessLicenseImg,jdbcType=VARCHAR},
+        #{companyRegistrationAddress,jdbcType=VARCHAR}, #{companyPhone,jdbcType=VARCHAR},
+        #{legalPersonIdCard,jdbcType=VARCHAR}, #{legalPersonName,jdbcType=VARCHAR},
+        #{legalPersonAddress,jdbcType=VARCHAR},
+        #{legalPersonPhone,jdbcType=VARCHAR}, #{contactsName,jdbcType=VARCHAR}, #{contactsAddress,jdbcType=VARCHAR},
+        #{contactsPhone,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{emergencyContact,jdbcType=VARCHAR, typeHandler=com.hc.lease.common.core.mybatis.JsonTypeHandler},
+        #{bankAccountName,jdbcType=VARCHAR},#{bankId,jdbcType=BIGINT},#{branchBank,jdbcType=VARCHAR},#{backCardNumber,jdbcType=VARCHAR},#{backCardImg,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+        #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT}, #{sort,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.hc.lease.account.model.LeaseAccountCompany">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_account_company_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_account_company
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="accountId != null">
+                account_id,
+            </if>
+            <if test="companyName != null">
+                company_name,
+            </if>
+            <if test="businessLicenseNumber != null">
+                business_license_number,
+            </if>
+            <if test="businessLicenseImg != null">
+                business_license_img,
+            </if>
+            <if test="companyRegistrationAddress != null">
+                company_registration_address,
+            </if>
+            <if test="companyPhone != null">
+                company_phone,
+            </if>
+            <if test="legalPersonIdCard != null">
+                legal_person_id_card,
+            </if>
+            <if test="legalPersonName != null">
+                legal_person_name,
+            </if>
+            <if test="legalPersonAddress != null">
+                legal_person_address,
+            </if>
+            <if test="legalPersonPhone != null">
+                legal_person_phone,
+            </if>
+            <if test="contactsName != null">
+                contacts_name,
+            </if>
+            <if test="contactsAddress != null">
+                contacts_address,
+            </if>
+            <if test="contactsPhone != null">
+                contacts_phone,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="emergencyContact != null">
+                emergency_contact,
+            </if>
+
+            <if test="bankAccountName != null">
+                bank_account_name,
+            </if>
+            <if test="bankId != null">
+                bank_id,
+            </if>
+            <if test="branchBank != null">
+                branch_bank,
+            </if>
+            <if test="backCardNumber != null">
+                back_card_number,
+            </if>
+            <if test="backCardImg != null">
+                back_card_img,
+            </if>
+
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="accountId != null">
+                #{accountId,jdbcType=BIGINT},
+            </if>
+            <if test="companyName != null">
+                #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="businessLicenseNumber != null">
+                #{businessLicenseNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="businessLicenseImg != null">
+                #{businessLicenseImg,jdbcType=VARCHAR},
+            </if>
+            <if test="companyRegistrationAddress != null">
+                #{companyRegistrationAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="companyPhone != null">
+                #{companyPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="legalPersonIdCard != null">
+                #{legalPersonIdCard,jdbcType=VARCHAR},
+            </if>
+            <if test="legalPersonName != null">
+                #{legalPersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="legalPersonAddress != null">
+                #{legalPersonAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="legalPersonPhone != null">
+                #{legalPersonPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="contactsName != null">
+                #{contactsName,jdbcType=VARCHAR},
+            </if>
+            <if test="contactsAddress != null">
+                #{contactsAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="contactsPhone != null">
+                #{contactsPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="emergencyContact != null" >
+                #{emergencyContact,jdbcType=VARCHAR, typeHandler=com.hc.lease.common.core.mybatis.JsonTypeHandler},
+            </if>
+
+            <if test="bankAccountName != null">
+                #{bankAccountName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankId != null">
+                #{bankId,jdbcType=BIGINT},
+            </if>
+            <if test="branchBank != null">
+                #{branchBank,jdbcType=VARCHAR},
+            </if>
+            <if test="backCardNumber != null">
+                #{backCardNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="backCardImg != null">
+                #{backCardImg,jdbcType=VARCHAR},
+            </if>
+
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.account.model.LeaseAccountCompany">
+        update lease_account_company
+        <set>
+            <if test="accountId != null">
+                account_id = #{accountId,jdbcType=BIGINT},
+            </if>
+            <if test="companyName != null">
+                company_name = #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="businessLicenseNumber != null">
+                business_license_number = #{businessLicenseNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="businessLicenseImg != null">
+                business_license_img = #{businessLicenseImg,jdbcType=VARCHAR},
+            </if>
+            <if test="companyRegistrationAddress != null">
+                company_registration_address = #{companyRegistrationAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="companyPhone != null">
+                company_phone = #{companyPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="legalPersonIdCard != null">
+                legal_person_id_card = #{legalPersonIdCard,jdbcType=VARCHAR},
+            </if>
+            <if test="legalPersonName != null">
+                legal_person_name = #{legalPersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="legalPersonAddress != null">
+                legal_person_address = #{legalPersonAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="legalPersonPhone != null">
+                legal_person_phone = #{legalPersonPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="contactsName != null">
+                contacts_name = #{contactsName,jdbcType=VARCHAR},
+            </if>
+            <if test="contactsAddress != null">
+                contacts_address = #{contactsAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="contactsPhone != null">
+                contacts_phone = #{contactsPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="emergencyContact != null" >
+                emergency_contact = #{emergencyContact,jdbcType=VARCHAR, typeHandler=com.hc.lease.common.core.mybatis.JsonTypeHandler},
+            </if>
+
+            <if test="bankAccountName != null">
+                bank_account_name = #{bankAccountName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankId != null">
+                bank_id = #{bankId,jdbcType=BIGINT},
+            </if>
+            <if test="branchBank != null">
+                branch_bank = #{branchBank,jdbcType=VARCHAR},
+            </if>
+            <if test="backCardNumber != null">
+                back_card_number = #{backCardNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="backCardImg != null">
+                back_card_img = #{backCardImg,jdbcType=VARCHAR},
+            </if>
+
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.hc.lease.account.model.LeaseAccountCompany">
+    update lease_account_company
+    set account_id = #{accountId,jdbcType=BIGINT},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      business_license_number = #{businessLicenseNumber,jdbcType=VARCHAR},
+      business_license_img = #{businessLicenseImg,jdbcType=VARCHAR},
+      company_registration_address = #{companyRegistrationAddress,jdbcType=VARCHAR},
+      company_phone = #{companyPhone,jdbcType=VARCHAR},
+      legal_person_id_card = #{legalPersonIdCard,jdbcType=VARCHAR},
+      legal_person_name = #{legalPersonName,jdbcType=VARCHAR},
+      legal_person_address = #{legalPersonAddress,jdbcType=VARCHAR},
+      legal_person_phone = #{legalPersonPhone,jdbcType=VARCHAR},
+      contacts_name = #{contactsName,jdbcType=VARCHAR},
+      contacts_address = #{contactsAddress,jdbcType=VARCHAR},
+      contacts_phone = #{contactsPhone,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      emergency_contact = #{emergencyContact,jdbcType=VARCHAR, typeHandler=com.hc.lease.common.core.mybatis.JsonTypeHandler},
+      bank_account_name = #{bankAccountName,jdbcType=VARCHAR},
+      bank_id = #{bankId,jdbcType=BIGINT},
+      branch_bank = #{branchBank,jdbcType=VARCHAR},
+      back_card_number = #{backCardNumber,jdbcType=VARCHAR},
+      back_card_img = #{backCardImg,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      sort = #{sort,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <delete id="deleteByAccountId" parameterType="java.lang.Long">
+    delete from lease_account_company
+    where account_id = #{accountId,jdbcType=BIGINT}
+  </delete>
+
+    <update id="updateByAccountId" parameterType="com.hc.lease.account.model.LeaseAccountCompany">
+        update lease_account_company
+        <set>
+            <if test="companyName != null">
+                company_name = #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="businessLicenseNumber != null">
+                business_license_number = #{businessLicenseNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="businessLicenseImg != null">
+                business_license_img = #{businessLicenseImg,jdbcType=VARCHAR},
+            </if>
+            <if test="companyRegistrationAddress != null">
+                company_registration_address = #{companyRegistrationAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="companyPhone != null">
+                company_phone = #{companyPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="legalPersonIdCard != null">
+                legal_person_id_card = #{legalPersonIdCard,jdbcType=VARCHAR},
+            </if>
+            <if test="legalPersonName != null">
+                legal_person_name = #{legalPersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="legalPersonAddress != null">
+                legal_person_address = #{legalPersonAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="legalPersonPhone != null">
+                legal_person_phone = #{legalPersonPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="contactsName != null">
+                contacts_name = #{contactsName,jdbcType=VARCHAR},
+            </if>
+            <if test="contactsAddress != null">
+                contacts_address = #{contactsAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="contactsPhone != null">
+                contacts_phone = #{contactsPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="emergencyContact != null" >
+                emergency_contact = #{emergencyContact,jdbcType=VARCHAR, typeHandler=com.hc.lease.common.core.mybatis.JsonTypeHandler},
+            </if>
+
+            <if test="bankAccountName != null">
+                bank_account_name = #{bankAccountName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankId != null">
+                bank_id = #{bankId,jdbcType=BIGINT},
+            </if>
+            <if test="branchBank != null">
+                branch_bank = #{branchBank,jdbcType=VARCHAR},
+            </if>
+            <if test="backCardNumber != null">
+                back_card_number = #{backCardNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="backCardImg != null">
+                back_card_img = #{backCardImg,jdbcType=VARCHAR},
+            </if>
+
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+        </set>
+        where account_id = #{accountId,jdbcType=BIGINT}
+    </update>
+
+</mapper>

@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.order.dao.LeaseContractAdvanceMapper">
+    <!--融租合同 提前还款-->
+    <resultMap id="BaseResultMap" type="com.hc.lease.order.model.LeaseContractAdvance">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="repayment_id" property="repaymentId" jdbcType="BIGINT"/>
+        <result column="period" property="period" jdbcType="INTEGER"/>
+        <result column="repayment_date" property="repaymentDate" jdbcType="TIMESTAMP"/>
+        <result column="residual_principal" property="residualPrincipal" jdbcType="NUMERIC"/>
+        <result column="default_interest" property="defaultInterest" jdbcType="NUMERIC"/>
+        <result column="payment_result" property="paymentResult" jdbcType="INTEGER"/>
+        <result column="payment_result_msg" property="paymentResultMsg" jdbcType="VARCHAR"/>
+        <result column="req_sn" property="reqSn" jdbcType="VARCHAR"/>
+        <result column="sn" property="sn" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <result column="receipts_price" property="receiptsPrice" jdbcType="NUMERIC"/>
+
+        <result column="total_period" property="totalPeriod" jdbcType="VARCHAR"/>
+        <result column="balance_payment" property="balancePayment" jdbcType="NUMERIC"/>
+    </resultMap>
+
+    <resultMap id="findAdvanceMap" type="com.hc.lease.order.vo.FindAdvanceVo">
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="repayment_id" property="repaymentId" jdbcType="BIGINT"/>
+        <result column="residual_principal" property="residualPrincipal" jdbcType="NUMERIC"/>
+        <result column="default_interest" property="defaultInterest" jdbcType="NUMERIC"/>
+        <result column="total_period" property="totalPeriod" jdbcType="VARCHAR"/>
+        <result column="balance_payment" property="balancePayment" jdbcType="NUMERIC"/>
+        <result column="account_id" property="accountId" jdbcType="VARCHAR"/>
+        <result column="account_name" property="accountName" jdbcType="VARCHAR"/>
+        <result column="back_card_number" property="backCardNumber" jdbcType="VARCHAR"/>
+        <result column="bank_name" property="bankName" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, contract_id, repayment_id, period, repayment_date, residual_principal, default_interest, 
+    payment_result, payment_result_msg, req_sn, sn, create_time, update_time, create_by, 
+    update_by, receipts_price
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_contract_advance
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <!--融租合同的提前还款-->
+    <select id="findAdvance" resultMap="findAdvanceMap">
+        select
+        a.id
+        ,b.id "repaymentId", c.id "contractId"
+        ,a.residual_principal "residualPrincipal", a.default_interest "defaultInterest"
+        , (
+        (case when d.period_count is null or d.period_count=0 then (select count(1) from lease_scheme_repayment dd where dd.contract_id = c.id) else d.period_count end)
+        || '-' || b.period
+        ) "totalPeriod"
+        , e.balance_payment "balancePayment"
+        , g.id "accountId", g.name "accountName", g.phone, h.back_card_number "backCardNumber" , i.name "bankName"
+        from lease_contract_advance a
+        INNER JOIN lease_scheme_repayment b on a.contract_id = b.contract_id
+        INNER JOIN lease_contract c on b.contract_id=c.id
+        INNER JOIN lease_scheme_order d on c.scheme_order_id=d.id
+        INNER JOIN lease_package_balance_payment e on d.scheme_id=e.id
+        LEFT JOIN lease_account g on b.lessee_id=g.id
+        LEFT JOIN lease_account_credit h on h.account_id=g.id
+        LEFT JOIN lease_bank i on i.id = h.bank_id
+        where 1=1
+        <!--暂只开放个人类型的承租人的合同-->
+        and g.type=0
+        and a.contract_id = #{contractId,jdbcType=BIGINT}
+        and a.repayment_id = b.id
+        and (a.payment_result = 0 or a.payment_result = 3)
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from lease_contract_advance
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.hc.lease.order.model.LeaseContractAdvance">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_contract_advance_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_contract_advance (id, contract_id, repayment_id,
+        period, repayment_date, residual_principal,
+        default_interest, payment_result, payment_result_msg,
+        req_sn, sn, create_time,
+        update_time, create_by, update_by, receipts_price
+        )
+        values (#{id,jdbcType=BIGINT}, #{contractId,jdbcType=BIGINT}, #{repaymentId,jdbcType=BIGINT},
+        #{period,jdbcType=INTEGER}, #{repaymentDate,jdbcType=TIMESTAMP}, #{residualPrincipal,jdbcType=NUMERIC},
+        #{defaultInterest,jdbcType=NUMERIC}, #{paymentResult,jdbcType=INTEGER}, #{paymentResultMsg,jdbcType=VARCHAR},
+        #{reqSn,jdbcType=VARCHAR}, #{sn,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT}, #{receiptsPrice,jdbcType=NUMERIC}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.hc.lease.order.model.LeaseContractAdvance">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_contract_advance_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_contract_advance
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="contractId != null">
+                contract_id,
+            </if>
+            <if test="repaymentId != null">
+                repayment_id,
+            </if>
+            <if test="period != null">
+                period,
+            </if>
+            <if test="repaymentDate != null">
+                repayment_date,
+            </if>
+            <if test="residualPrincipal != null">
+                residual_principal,
+            </if>
+            <if test="defaultInterest != null">
+                default_interest,
+            </if>
+            <if test="paymentResult != null">
+                payment_result,
+            </if>
+            <if test="paymentResultMsg != null">
+                payment_result_msg,
+            </if>
+            <if test="reqSn != null">
+                req_sn,
+            </if>
+            <if test="sn != null">
+                sn,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="receiptsPrice != null">
+                receipts_price
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="contractId != null">
+                #{contractId,jdbcType=BIGINT},
+            </if>
+            <if test="repaymentId != null">
+                #{repaymentId,jdbcType=BIGINT},
+            </if>
+            <if test="period != null">
+                #{period,jdbcType=INTEGER},
+            </if>
+            <if test="repaymentDate != null">
+                #{repaymentDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="residualPrincipal != null">
+                #{residualPrincipal,jdbcType=NUMERIC},
+            </if>
+            <if test="defaultInterest != null">
+                #{defaultInterest,jdbcType=NUMERIC},
+            </if>
+            <if test="paymentResult != null">
+                #{paymentResult,jdbcType=INTEGER},
+            </if>
+            <if test="paymentResultMsg != null">
+                #{paymentResultMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="reqSn != null">
+                #{reqSn,jdbcType=VARCHAR},
+            </if>
+            <if test="sn != null">
+                #{sn,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="receiptsPrice != null">
+                #{receiptsPrice,jdbcType=NUMERIC}
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.order.model.LeaseContractAdvance">
+        update lease_contract_advance
+        <set>
+            <if test="contractId != null">
+                contract_id = #{contractId,jdbcType=BIGINT},
+            </if>
+            <if test="repaymentId != null">
+                repayment_id = #{repaymentId,jdbcType=BIGINT},
+            </if>
+            <if test="period != null">
+                period = #{period,jdbcType=INTEGER},
+            </if>
+            <if test="repaymentDate != null">
+                repayment_date = #{repaymentDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="residualPrincipal != null">
+                residual_principal = #{residualPrincipal,jdbcType=NUMERIC},
+            </if>
+            <if test="defaultInterest != null">
+                default_interest = #{defaultInterest,jdbcType=NUMERIC},
+            </if>
+            <if test="paymentResult != null">
+                payment_result = #{paymentResult,jdbcType=INTEGER},
+            </if>
+            <if test="paymentResultMsg != null">
+                payment_result_msg = #{paymentResultMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="reqSn != null">
+                req_sn = #{reqSn,jdbcType=VARCHAR},
+            </if>
+            <if test="sn != null">
+                sn = #{sn,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="receiptsPrice != null">
+                receipts_price = #{receiptsPrice,jdbcType=NUMERIC}
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hc.lease.order.model.LeaseContractAdvance">
+    update lease_contract_advance
+    set contract_id = #{contractId,jdbcType=BIGINT},
+      repayment_id = #{repaymentId,jdbcType=BIGINT},
+      period = #{period,jdbcType=INTEGER},
+      repayment_date = #{repaymentDate,jdbcType=TIMESTAMP},
+      residual_principal = #{residualPrincipal,jdbcType=NUMERIC},
+      default_interest = #{defaultInterest,jdbcType=NUMERIC},
+      payment_result = #{paymentResult,jdbcType=INTEGER},
+      payment_result_msg = #{paymentResultMsg,jdbcType=VARCHAR},
+      req_sn = #{reqSn,jdbcType=VARCHAR},
+      sn = #{sn,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      receipts_price = #{receiptsPrice,jdbcType=NUMERIC}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <update id="batchUpdate"  parameterType="java.util.List">
+
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update lease_contract_advance
+            <set>
+                payment_result = #{item.paymentResult,jdbcType=INTEGER},
+                payment_result_msg = #{item.paymentResultMsg},
+                <if test="item.reqSn != null">
+                    req_sn = #{item.reqSn,jdbcType=VARCHAR},
+                </if>
+                <if test="item.sn != null">
+                    sn = #{item.sn,jdbcType=VARCHAR},
+                </if>
+                <if test="item.receiptsPrice != null">
+                    receipts_price = #{item.receiptsPrice,jdbcType=NUMERIC},
+                </if>
+                update_time = #{item.updateTime,jdbcType=TIMESTAMP}
+            </set>
+            where id = ${item.id}
+        </foreach>
+
+    </update>
+
+</mapper>

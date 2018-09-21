@@ -1,0 +1,1271 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.order.dao.LeaseSchemeRepaymentMapper">
+    <!--根据融租合同数据生成月租还款计划明细-->
+    <resultMap id="BaseResultMap" type="com.hc.lease.order.model.LeaseSchemeRepayment">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="lessee_id" property="lesseeId" jdbcType="BIGINT"/>
+        <result column="period" property="period" jdbcType="BIGINT"/>
+        <result column="return_principal" property="returnPrincipal" jdbcType="NUMERIC"/>
+        <result column="return_interest" property="returnInterest" jdbcType="NUMERIC"/>
+        <result column="total" property="total" jdbcType="NUMERIC"/>
+        <result column="residual_principal" property="residualPrincipal" jdbcType="NUMERIC"/>
+        <result column="repayment_date" property="repaymentDate" jdbcType="DATE"/>
+        <result column="overdue" property="overdue" jdbcType="SMALLINT"/>
+        <result column="overdue_day" property="overdueDay" jdbcType="INTEGER"/>
+        <result column="loan_amount" property="loanAmount" jdbcType="NUMERIC"/>
+        <result column="annual_interest" property="annualInterest" jdbcType="NUMERIC"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+
+        <result column="staging_number" property="stagingNumber" jdbcType="INTEGER"/>
+
+        <result column="contract_number" property="contractNumber" jdbcType="VARCHAR"/>
+        <result column="account_real_name" property="accountRealName" jdbcType="VARCHAR"/>
+        <result column="back_card_number" property="backCardNumber" jdbcType="VARCHAR"/>
+        <result column="id_card" property="idCard" jdbcType="VARCHAR"/>
+        <result column="bank_name" property="bankName" jdbcType="VARCHAR"/>
+        <result column="company_name" property="companyName" jdbcType="VARCHAR"/>
+        <result column="province_id" property="provinceId" jdbcType="BIGINT"/>
+        <result column="city_id" property="cityId" jdbcType="BIGINT"/>
+        <result column="province_name" property="provinceName" jdbcType="VARCHAR"/>
+        <result column="city_name" property="cityName" jdbcType="VARCHAR"/>
+        <result column="total_count" property="totalCount" jdbcType="NUMERIC"/>
+        <result column="item_count" property="itemCount" jdbcType="INTEGER"/>
+
+        <result column="total_period" property="totalPeriod" jdbcType="VARCHAR"/>
+
+        <result column="overdue_rate" property="overdueRate" jdbcType="NUMERIC"/>
+        <result column="balance_payment" property="balancePayment" jdbcType="NUMERIC"/>
+        <result column="account_name" property="accountName" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+    <resultMap id="BatchPostlendingPaymentMap" type="com.hc.lease.order.vo.BatchPostlendingPaymentVo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="branch_company_id" property="branchCompanyId" jdbcType="BIGINT"/>
+        <result column="repayment_status_id" property="repaymentStatusId" jdbcType="BIGINT"/>
+        <result column="repayment_id" property="repaymentId" jdbcType="BIGINT"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="company_name" property="companyName" jdbcType="VARCHAR"/>
+        <result column="account_id" property="accountId" jdbcType="BIGINT"/>
+        <result column="id_card" property="idCard" jdbcType="VARCHAR"/>
+        <result column="account_name" property="accountName" jdbcType="VARCHAR"/>
+        <result column="bank_account_name" property="bankAccountName" jdbcType="VARCHAR"/>
+        <result column="account_real_name" property="accountRealName" jdbcType="VARCHAR"/>
+        <result column="bank_code" property="bankCode" jdbcType="VARCHAR"/>
+        <result column="total" property="total" jdbcType="NUMERIC"/>
+        <result column="month_price" property="monthPrice" jdbcType="NUMERIC"/>
+        <result column="back_card_number" property="backCardNumber" jdbcType="VARCHAR"/>
+        <result column="bank_name" property="bankName" jdbcType="VARCHAR"/>
+        <result column="bank_code" property="bankCode" jdbcType="VARCHAR"/>
+        <result column="payment_result" property="paymentResult" jdbcType="INTEGER"/>
+        <result column="province_name" property="provinceName" jdbcType="VARCHAR"/>
+        <result column="city_name" property="cityName" jdbcType="VARCHAR"/>
+        <result column="sn" property="sn" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="complete_contract_number" property="completeContractNumber" jdbcType="VARCHAR"/>
+        <result column="total_period" property="totalPeriod" jdbcType="VARCHAR"/>
+        <result column="account_type" property="accountType" jdbcType="INTEGER"/>
+        <result column="overdue_day" property="overdueDay" jdbcType="INTEGER"/>
+        <result column="overdue_price" property="overduePrice" jdbcType="NUMERIC"/>
+        <result column="total_price" property="totalPrice" jdbcType="NUMERIC"/>
+        <result column="payment_result_msg" property="paymentResultMsg" jdbcType="VARCHAR"/>
+        <result column="overdue_rate" property="overdueRate" jdbcType="NUMERIC"/>
+
+        <result column="account_phone" property="accountPhone" jdbcType="VARCHAR"/>
+        <result column="repayment_date" property="repaymentDate" jdbcType="VARCHAR"/>
+        <result column="plate_number" property="plateNumber" jdbcType="VARCHAR"/>
+        <result column="lease_start_time" property="leaseStartTime" jdbcType="VARCHAR"/>
+        <result column="lease_end_time" property="leaseEndTime" jdbcType="VARCHAR"/>
+
+        <result column="pay_date" property="payDate" jdbcType="INTEGER"/>
+
+        <result column="pay_way_name" property="payWayName" jdbcType="VARCHAR"/>
+        <result column="price_limit" property="priceLimit" jdbcType="NUMERIC"/>
+        <result column="allinpay_price_limit" property="allinpayPriceLimit" jdbcType="NUMERIC"/>
+        <result column="allinpay_day_price_limit" property="allinpayDayPriceLimit" jdbcType="NUMERIC"/>
+        <result column="day_sum_limit" property="daySumLimit" jdbcType="INTEGER"/>
+        <result column="is_sign" property="isSign" jdbcType="INTEGER"/>
+        <result column="agrm_no" property="agrmNo" jdbcType="VARCHAR"/>
+        <result column="pay_way" property="payWay" jdbcType="INTEGER"/>
+        <result column="is_over_limit" property="isOverLimit" jdbcType="INTEGER"/>
+        <result column="bank_phone" property="bankPhone" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="findMonthMap" type="com.hc.lease.order.vo.FindMonthVo">
+        <result column="repayment_id" property="repaymentId" jdbcType="BIGINT"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="total" property="total" jdbcType="NUMERIC"/>
+        <result column="repayment_date" property="repaymentDate" jdbcType="DATE"/>
+        <result column="total_period" property="totalPeriod" jdbcType="VARCHAR"/>
+        <result column="account_id" property="accountId" jdbcType="VARCHAR"/>
+        <result column="account_name" property="accountName" jdbcType="VARCHAR"/>
+        <result column="back_card_number" property="backCardNumber" jdbcType="VARCHAR"/>
+        <result column="bank_name" property="bankName" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="overdue_day" property="overdueDay" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap id="findOverdueMap" type="com.hc.lease.order.vo.FindOverdueVo">
+        <result column="repayment_id" property="repaymentId" jdbcType="BIGINT"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="total" property="total" jdbcType="NUMERIC"/>
+        <result column="price" property="price" jdbcType="NUMERIC"/>
+        <result column="real_price" property="realPrice" jdbcType="NUMERIC"/>
+        <result column="repayment_time" property="repaymentTime" jdbcType="TIMESTAMP"/>
+        <result column="now_time" property="nowTime" jdbcType="TIMESTAMP"/>
+        <result column="overdue_day" property="overdueDay" jdbcType="INTEGER"/>
+        <result column="real_overdue_day" property="realOverdueDay" jdbcType="INTEGER"/>
+        <result column="overdue_rate" property="overdueRate" jdbcType="NUMERIC"/>
+        <result column="account_id" property="accountId" jdbcType="VARCHAR"/>
+        <result column="account_name" property="accountName" jdbcType="VARCHAR"/>
+        <result column="back_card_number" property="backCardNumber" jdbcType="VARCHAR"/>
+        <result column="bank_name" property="bankName" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap id="selectByContractIdMap" type="com.hc.lease.order.vo.SelectByContractIdVo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="period" property="period" jdbcType="BIGINT"/>
+        <result column="return_principal" property="returnPrincipal" jdbcType="NUMERIC"/>
+        <result column="return_interest" property="returnInterest" jdbcType="NUMERIC"/>
+        <result column="total" property="total" jdbcType="NUMERIC"/>
+        <result column="residual_principal" property="residualPrincipal" jdbcType="NUMERIC"/>
+        <result column="repayment_date" property="repaymentDate" jdbcType="DATE"/>
+        <result column="overdue" property="overdue" jdbcType="SMALLINT"/>
+        <result column="overdue_day" property="overdueDay" jdbcType="INTEGER"/>
+        <result column="loan_amount" property="loanAmount" jdbcType="NUMERIC"/>
+        <result column="annual_interest" property="annualInterest" jdbcType="NUMERIC"/>
+        <result column="balance_payment" property="balancePayment" jdbcType="NUMERIC"/>
+        <result column="receivable_total" property="receivableTotal" jdbcType="NUMERIC"/>
+    </resultMap>
+
+    <resultMap id="findByRepaymentDateMap" type="com.hc.lease.order.vo.FindByRepaymentDateVo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="total" property="total" jdbcType="NUMERIC"/>
+        <result column="lessee_id" property="lesseeId" jdbcType="BIGINT"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="overdue" property="overdue" jdbcType="SMALLINT"/>
+        <result column="overdue_day" property="overdueDay" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap id="findAllMonthStatisticsByCityMap" type="com.hc.lease.order.vo.FindAllMonthStaticsticsByCityVo">
+        <result column="branch_company_name" property="branchCompanyName" jdbcType="VARCHAR"/>
+        <result column="branch_company_id" property="branchCompanyId" jdbcType="BIGINT"/>
+        <result column="total_sum" property="totalSum" jdbcType="NUMERIC"/>
+        <result column="collected_sum" property="collectedSum" jdbcType="NUMERIC"/>
+        <result column="un_collected_sum" property="unCollectedSum" jdbcType="NUMERIC"/>
+        <result column="total_count" property="totalCount" jdbcType="INTEGER"/>
+        <result column="collected_count" property="collectedCount" jdbcType="INTEGER"/>
+        <result column="un_collected_count" property="unCollectedCount" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, contract_id, lessee_id, period, return_principal, return_interest, total, residual_principal,
+        repayment_date, overdue, overdue_day, loan_amount, annual_interest, create_time,
+        update_time, create_by, update_by
+    </sql>
+
+    <!---->
+    <select id="selectContract" resultMap="BaseResultMap">
+        select
+        a.contract_id "contractId"
+        ,g.value "stagingNumber", a.period
+        from lease_scheme_repayment a
+        INNER JOIN lease_contract b on a.contract_id = b.id
+        INNER JOIN lease_scheme_order c on b.scheme_order_id = c.id
+        INNER JOIN lease_scheme d on c.scheme_id = d.id
+        INNER JOIN lease_scheme_package e on e.scheme_id = d.id
+        INNER JOIN lease_package f on e.package_id = f.id
+        INNER JOIN lease_dict g on f.staging_number_id = g.id and g.type='StagingNumber'
+        where a.id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <!---->
+    <select id="selectByContractId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        a.id, a.period, a.return_principal "returnPrincipal", a.return_interest "returnInterest", a.total, a.residual_principal "residualPrincipal"
+        ,a.repayment_date "repaymentDate", a.overdue, a.overdue_day "overdueDay", a.loan_amount "loanAmount", a.annual_interest "annualInterest"
+        ,(case when to_number(f.value, '99999') = a.period then e.balance_payment END) "balancePayment"
+        from lease_scheme_repayment a
+
+        INNER JOIN lease_contract b on a.contract_id=b.id
+        INNER JOIN lease_scheme_order c on b.scheme_order_id=c.id
+        INNER JOIN lease_scheme_package d on d.scheme_id=c.scheme_id
+        INNER JOIN lease_package e on e.id=d.package_id
+        INNER JOIN lease_dict f on e.staging_number_id=f.id
+        where a.contract_id = #{contractId}
+        order by a.repayment_date asc
+    </select>
+
+    <select id="findByContractIdAndPeriod" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_scheme_repayment
+        where contract_id = #{contractId,jdbcType=BIGINT} and period = #{period}
+    </select>
+
+
+    <!--租金支付表 / 融租合同-月租还款计划明细-->
+    <select id="findByContractId" resultMap="selectByContractIdMap" parameterType="java.lang.Long">
+        select
+        a.id, a.period, a.return_principal "returnPrincipal", a.return_interest "returnInterest", a.total, a.residual_principal "residualPrincipal"
+        ,a.repayment_date "repaymentDate", a.overdue, a.overdue_day "overdueDay", a.loan_amount "loanAmount", a.annual_interest "annualInterest"
+
+        ,round(COALESCE(( round(COALESCE((select balance_payment from lease_package_balance_payment aa where c.scheme_id = aa.scheme_id and aa.balance_payment_number = a.period),0.00), 2)+a.total ),0.00), 2) "receivableTotal"
+
+        , round(COALESCE((select balance_payment from lease_package_balance_payment aa where c.scheme_id = aa.scheme_id and aa.balance_payment_number = a.period),0.00), 2) "balancePayment"
+
+        from lease_scheme_repayment a
+
+        INNER JOIN lease_contract b on a.contract_id=b.id
+        INNER JOIN lease_scheme_order c on b.scheme_order_id=c.id
+        INNER JOIN lease_scheme_package d on d.scheme_id=c.scheme_id
+
+        where a.contract_id = #{contractId}
+        order by a.period asc
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_scheme_repayment
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <!--融租合同的 当月月供-->
+    <select id="findCurrentMonth" resultMap="findMonthMap">
+
+        select a.id "repaymentId", a.contract_id "contractId", round(a.total, 2) "total", a.repayment_date "repaymentDate"
+
+        ,(
+        case when ((select ee.period_count from lease_contract dd INNER JOIN lease_scheme_order ee on dd.scheme_order_id=ee.id where a.contract_id=dd.id) is null or (select ee.period_count from lease_contract dd INNER JOIN lease_scheme_order ee on dd.scheme_order_id=ee.id where a.contract_id=dd.id)=0) then (select count(1) from lease_scheme_repayment dd where dd.contract_id = a.contract_id) ELSE (select ee.period_count from lease_contract dd INNER JOIN lease_scheme_order ee on dd.scheme_order_id=ee.id where a.contract_id=dd.id) end
+        ) || '期之' || a.period "totalPeriod"
+
+        , c.id "accountId", c.name "accountName", c.phone, d.back_card_number "backCardNumber" , e.name "bankName"
+
+        from lease_scheme_repayment a
+        INNER JOIN lease_scheme_repayment_status b on a.id = b.repayment_id and type = 0
+
+        INNER JOIN lease_contract aa on a.contract_id=aa.id
+        INNER JOIN lease_scheme_order bb on bb.id = aa.scheme_order_id
+        LEFT JOIN lease_scheme_order_account dd on dd.scheme_order_id = bb.id and dd.is_default_pay=1
+        LEFT JOIN lease_account_bank_card abc on dd.bank_card_id = abc.id
+
+        LEFT JOIN lease_account c on c.id=abc.account_id
+        LEFT JOIN lease_account_credit d on d.account_id=c.id
+        LEFT JOIN lease_bank e on e.id = d.bank_id
+
+        where 1=1
+        and a.contract_id = #{contractId,jdbcType=BIGINT}
+        and a.id = #{repaymentId,jdbcType=BIGINT}
+        and (b.payment_result = 0 or b.payment_result = 3)
+
+    </select>
+
+    <!--融租合同的 当月月供、过期未付款的月供-->
+    <select id="findMonth" resultMap="findMonthMap">
+
+        select a.id "repaymentId", a.contract_id "contractId", round(a.total, 2) "total", a.repayment_date
+        "repaymentDate"
+
+        ,(
+        case when ((select ee.period_count from lease_contract dd INNER JOIN lease_scheme_order ee on
+        dd.scheme_order_id=ee.id where a.contract_id=dd.id) is null or (select ee.period_count from lease_contract dd
+        INNER JOIN lease_scheme_order ee on dd.scheme_order_id=ee.id where a.contract_id=dd.id)=0) then (select count(1)
+        from lease_scheme_repayment dd where dd.contract_id = a.contract_id) ELSE (select ee.period_count from
+        lease_contract dd INNER JOIN lease_scheme_order ee on dd.scheme_order_id=ee.id where a.contract_id=dd.id) end
+        ) || '期之' || a.period "totalPeriod"
+
+        , a.overdue_day "overdueDay"
+
+        , c.id "accountId", c.name "accountName", c.phone, d.back_card_number "backCardNumber" , e.name "bankName"
+
+        from lease_scheme_repayment a
+        INNER JOIN lease_scheme_repayment_status b on a.id = b.repayment_id and type = 0
+
+        INNER JOIN lease_contract aa on a.contract_id=aa.id
+        INNER JOIN lease_scheme_order bb on bb.id = aa.scheme_order_id
+        LEFT JOIN lease_scheme_order_account dd on dd.scheme_order_id = bb.id and dd.is_default_pay=1
+        LEFT JOIN lease_account_bank_card abc on dd.bank_card_id = abc.id
+
+        LEFT JOIN lease_account c on c.id=abc.account_id
+        LEFT JOIN lease_account_credit d on d.account_id=c.id
+        LEFT JOIN lease_bank e on e.id = d.bank_id
+
+        where 1=1
+
+        <!--暂只开放个人类型的承租人的合同-->
+        and c.type=0
+
+        and (aa.status=0 or aa.status=3)
+
+        and a.contract_id = #{contractId,jdbcType=BIGINT} and b.contract_id = #{contractId,jdbcType=BIGINT}
+        and a.id = #{repaymentId,jdbcType=BIGINT}
+        and a.overdue = 1
+        and (b.payment_result = 0 or b.payment_result = 3)
+
+        UNION ALL
+
+        select a.id, a.contract_id "contractId", round(a.total, 2) "total", a.repayment_date "repaymentDate"
+
+        ,(
+        case when ((select ee.period_count from lease_contract dd INNER JOIN lease_scheme_order ee on
+        dd.scheme_order_id=ee.id where a.contract_id=dd.id) is null or (select ee.period_count from lease_contract dd
+        INNER JOIN lease_scheme_order ee on dd.scheme_order_id=ee.id where a.contract_id=dd.id)=0) then (select count(1)
+        from lease_scheme_repayment dd where dd.contract_id = a.contract_id) ELSE (select ee.period_count from
+        lease_contract dd INNER JOIN lease_scheme_order ee on dd.scheme_order_id=ee.id where a.contract_id=dd.id) end
+        ) || '期之' || a.period "totalPeriod"
+
+        , a.overdue_day "overdueDay"
+
+        , c.id "accountId", c.name "accountName", c.phone, d.back_card_number "backCardNumber" , e.name "bankName"
+
+        from lease_scheme_repayment a
+        INNER JOIN lease_scheme_repayment_status b on a.id = b.repayment_id and b.type = 0
+
+        INNER JOIN lease_contract aa on a.contract_id=aa.id
+        INNER JOIN lease_scheme_order bb on bb.id = aa.scheme_order_id
+        LEFT JOIN lease_scheme_order_account dd on dd.scheme_order_id = bb.id and dd.is_default_pay=1
+        LEFT JOIN lease_account_bank_card abc on dd.bank_card_id = abc.id
+
+        LEFT JOIN lease_account c on c.id=abc.account_id
+        LEFT JOIN lease_account_credit d on d.account_id=c.id
+        LEFT JOIN lease_bank e on e.id = d.bank_id
+
+        where 1=1
+        and a.overdue = 0
+        and (aa.status=0 or aa.status=3)
+        and a.contract_id = #{contractId,jdbcType=BIGINT} and b.contract_id = #{contractId,jdbcType=BIGINT}
+        and (b.payment_result = 0 or b.payment_result = 3)
+
+    </select>
+
+    <!--融租合同的 当月已逾期的月租还款记录-->
+    <select id="findCurrentOverdue" resultMap="findOverdueMap">
+
+        select
+
+        a.id "repaymentId", a.contract_id "contractId", round(a.total, 2) "total", c.repayment_time "repaymentTime", c.now_time "nowTime"
+        , c.price , c.overdue_day "overdueDay"
+        , c.price "realPrice" , c.overdue_day "realOverdueDay"
+        , (SELECT value from lease_dict WHERE type='OverdueRate') "overdueRate"
+        , d.id "accountId", d.name "accountName", d.phone, e.back_card_number "backCardNumber" , f.name "bankName"
+
+        from lease_scheme_repayment a
+        INNER JOIN lease_scheme_repayment_status b on a.id = b.repayment_id and b.type = 2
+        INNER JOIN lease_overdue_log c on a.contract_id=c.contract_id and c.repayment_id = a.id and c.type = 0
+
+        INNER JOIN lease_contract aa on a.contract_id=aa.id
+        INNER JOIN lease_scheme_order bb on bb.id = aa.scheme_order_id
+        LEFT JOIN lease_scheme_order_account dd on dd.scheme_order_id = bb.id and dd.is_default_pay=1
+        LEFT JOIN lease_account_bank_card abc on dd.bank_card_id = abc.id
+
+        LEFT JOIN lease_account d on d.id=abc.account_id
+        LEFT JOIN lease_account_credit e on e.account_id=d.id
+        LEFT JOIN lease_bank f on f.id = e.bank_id
+
+        where 1=1
+        and a.overdue = 0
+        and a.contract_id = #{contractId,jdbcType=BIGINT}
+        and a.id = #{repaymentId,jdbcType=BIGINT}
+        and (b.payment_result = 0 or b.payment_result = 3)
+
+    </select>
+
+    <!--融租合同的 已逾期的月租还款记录-->
+    <select id="findOverdue" resultMap="findOverdueMap">
+
+        select
+
+        a.id "repaymentId", a.contract_id "contractId", round(a.total, 2) "total", a.repayment_date "repaymentTime",
+        c.now_time "nowTime"
+        , c.price , c.overdue_day "overdueDay"
+        , c.price "realPrice" , c.overdue_day "realOverdueDay"
+        , c.type
+        , (SELECT value from lease_dict WHERE type='OverdueRate') "overdueRate"
+        , d.id "accountId", d.name "accountName", d.phone, e.back_card_number "backCardNumber" , f.name "bankName"
+
+        from lease_scheme_repayment a
+        INNER JOIN lease_scheme_repayment_status b on a.id = b.repayment_id and b.type = 2
+        INNER JOIN lease_overdue_log c on a.contract_id=c.contract_id and c.repayment_id = a.id and c.type = 0
+
+        INNER JOIN lease_contract aa on a.contract_id=aa.id
+        INNER JOIN lease_scheme_order bb on bb.id = aa.scheme_order_id
+        LEFT JOIN lease_scheme_order_account dd on dd.scheme_order_id = bb.id and dd.is_default_pay=1
+        LEFT JOIN lease_account_bank_card abc on dd.bank_card_id = abc.id
+
+        LEFT JOIN lease_account d on d.id=abc.account_id
+        LEFT JOIN lease_account_credit e on e.account_id=d.id
+        LEFT JOIN lease_bank f on f.id = e.bank_id
+
+        where 1=1
+
+        <!--暂只开放个人类型的承租人的合同-->
+        and d.type=0
+        and (aa.status=0 or aa.status=3)
+        and a.overdue = 0
+        and a.contract_id = #{contractId,jdbcType=BIGINT}
+        and (b.payment_result = 0 or b.payment_result = 3)
+
+    </select>
+
+    <!--检测 融租合同的 已逾期，未扣款的月租-->
+    <select id="checkOverdue" resultMap="BaseResultMap">
+
+        select DISTINCT
+        table_1.id, table_1.contract_id "contractId", table_1.lessee_id "lesseeId", round(table_1.total, 2) "total"
+        , table_1.repayment_date "repaymentDate", table_1.overdue_day "overdueDay", table_1.period
+        , (SELECT value from lease_dict WHERE type='OverdueRate') "overdueRate"
+        , table_1.complete_contract_number "completeContractNumber"
+        , table_1.phone, table_1.name "accountName"
+
+        from
+        (
+        select
+        a.id, a.contract_id, a.lessee_id, round(a.total, 2) "total"
+        , a.repayment_date, a.overdue_day, a.period
+        , b.complete_contract_number
+        , c.phone, c.name
+        from lease_scheme_repayment a
+        INNER JOIN lease_contract b on a.contract_id=b.id
+
+        INNER JOIN lease_scheme_order bb on bb.id = b.scheme_order_id
+        LEFT JOIN lease_scheme_order_account dd on dd.scheme_order_id = bb.id and dd.is_default_pay=1
+        LEFT JOIN lease_account_bank_card abc on dd.bank_card_id = abc.id
+
+        LEFT JOIN lease_account c on c.id=abc.account_id
+        LEFT JOIN lease_account_credit d on d.account_id=c.id
+        where 1=1
+        and (a.overdue = 1 and a.repayment_date &lt; now())
+
+        UNION ALL
+
+        select
+        a.id, a.contract_id, a.lessee_id, round(a.total, 2) "total"
+        , a.repayment_date, a.overdue_day, a.period
+        , b.complete_contract_number
+        , c.phone, c.name
+        from lease_scheme_repayment a
+        INNER JOIN lease_contract b on a.contract_id=b.id
+
+        INNER JOIN lease_scheme_order bb on bb.id = b.scheme_order_id
+        LEFT JOIN lease_scheme_order_account dd on dd.scheme_order_id = bb.id and dd.is_default_pay=1
+        LEFT JOIN lease_account_bank_card abc on dd.bank_card_id = abc.id
+
+        LEFT JOIN lease_account c on c.id=abc.account_id
+        LEFT JOIN lease_account_credit d on d.account_id=c.id
+        INNER JOIN lease_scheme_repayment_status e on e.repayment_id=a.id
+        where 1=1
+        and (a.overdue = 0)
+        and e.type=2 and (e.payment_result = 0 or e.payment_result = 3)
+        )table_1
+
+    </select>
+
+    <!--根据分公司统计所有月供 批量扣款-->
+    <select id="findAllMonthStatisticsByCity" resultMap="findAllMonthStatisticsByCityMap">
+
+        select table_b.branchcompanyname "branchCompanyName", table_b.branchcompanyid "branchCompanyId"
+
+        , table_b.totalsum as "totalSum"
+
+        , table_b.collectedsum as "collectedSum"
+
+        , table_b.uncollectedsum as "unCollectedSum"
+
+        ,table_b.totalcount as "totalCount"
+
+        ,table_b.collectedcount as "collectedCount"
+
+        ,table_b.uncollectedcount as "unCollectedCount"
+
+        from(
+
+        select table_a.branchcompanyname "branchcompanyname", table_a.branchcompanyid "branchcompanyid"
+
+        , round(sum(table_a.total), 2) as "totalsum"
+
+        , COALESCE(
+        round(sum(CASE WHEN table_a.paymentresult = '1' or table_a.paymentresult = '2' THEN table_a.total end), 2)
+        ,0) as "collectedsum"
+
+        , COALESCE(
+        round(sum(CASE WHEN table_a.paymentresult = '0' or table_a.paymentresult = '3' THEN table_a.total end), 2)
+        ,0) as "uncollectedsum"
+
+        ,count(table_a.total) as "totalcount"
+
+        ,count(
+        CASE WHEN table_a.paymentresult = '1' or table_a.paymentresult = '2' THEN table_a.total end
+        ) as "collectedcount"
+
+        ,count(
+        CASE WHEN table_a.paymentresult = '0' or table_a.paymentresult = '3' THEN table_a.total end
+        ) as "uncollectedcount"
+
+        from (
+
+        select e.name
+        "branchcompanyname"
+        , a.branch_company_id "branchcompanyid"
+        , round(c.totle_price + COALESCE(lol.price,0), 2) "total"
+        , c.payment_result "paymentresult"
+
+        from lease_contract a
+
+        INNER JOIN lease_scheme_repayment b on b.contract_id = a.id and b.repayment_date = #{repaymentDate,jdbcType=TIMESTAMP}
+        LEFT JOIN lease_scheme_repayment_status c on c.repayment_id = b.id and (c.type = 0 or c.type = 2)
+        INNER JOIN lease_scheme_order d on d.id = a.scheme_order_id
+        LEFT JOIN lease_scheme_order_account aa on aa.scheme_order_id = d.id and aa.is_default_pay=1
+        LEFT JOIN lease_account_bank_card abc on aa.bank_card_id = abc.id
+        LEFT JOIN lease_account f on f.id =abc.account_id
+        LEFT JOIN lease_branch_company e on e.id = a.branch_company_id
+        LEFT JOIN lease_overdue_log lol on lol.contract_id = a.id and lol.repayment_id = b.id
+        WHERE a.status != 2
+        and c.type = 0
+        <!--暂只开放个人类型的承租人的合同-->
+        and f.type=0
+        and (c.payment_result = 0 or c.payment_result = 3)
+        ) table_a
+        group by table_a.branchcompanyname, table_a.branchcompanyid
+        ) table_b
+        WHERE table_b.uncollectedcount>0
+
+    </select>
+
+    <!--查询所有月供 批量扣款 统计-->
+    <select id="findAllMonthStatistics" resultType="java.util.Map">
+
+        select
+
+        sum(table_c.totalsum) as "totalSum"
+
+        , sum(table_c.collectedsum) as "collectedSum"
+
+        , sum(table_c.uncollectedsum) as "unCollectedSum"
+
+        , sum(table_c.totalcount) as "totalCount"
+
+        , sum(table_c.collectedcount) as "collectedCount"
+
+        , sum(table_c.uncollectedcount) as "unCollectedCount"
+
+        from(
+
+        select table_b.branchcompanyname
+
+        , table_b.totalsum
+
+        , table_b.collectedsum
+
+        , table_b.uncollectedsum
+
+        ,table_b.totalcount
+
+        ,table_b.collectedcount
+
+        ,table_b.uncollectedcount
+
+        from(
+
+        select table_a.branchcompanyname "branchcompanyname"
+
+        , round(sum(table_a.total), 2) as "totalsum"
+
+        , COALESCE(
+        round(sum(CASE WHEN table_a.paymentresult = '1' or table_a.paymentresult = '2' THEN table_a.total end), 2)
+        ,0) as "collectedsum"
+
+        , COALESCE(
+        round(sum(CASE WHEN table_a.paymentresult = '0' or table_a.paymentresult = '3' THEN table_a.total end), 2)
+        ,0) as "uncollectedsum"
+
+        ,count(table_a.total) as "totalcount"
+
+        ,count(
+        CASE WHEN table_a.paymentresult = '1' or table_a.paymentresult = '2' THEN table_a.total end
+        ) as "collectedcount"
+
+        ,count(
+        CASE WHEN table_a.paymentresult = '0' or table_a.paymentresult = '3' THEN table_a.total end
+        ) as "uncollectedcount"
+
+        from (
+
+        select e.name "branchcompanyname"
+        , round(c.totle_price + COALESCE(lol.price,0), 2) "total"
+        , c.payment_result "paymentresult"
+        from lease_contract a
+
+        INNER JOIN lease_scheme_repayment b on b.contract_id = a.id and b.repayment_date =
+        #{repaymentDate,jdbcType=TIMESTAMP}
+        LEFT JOIN lease_scheme_repayment_status c on c.repayment_id = b.id and (c.type = 0 or c.type = 2)
+        INNER JOIN lease_scheme_order d on d.id = a.scheme_order_id
+        LEFT JOIN lease_scheme_order_account aa on aa.scheme_order_id = d.id and aa.is_default_pay=1
+        LEFT JOIN lease_account_bank_card abc on aa.bank_card_id = abc.id
+        LEFT JOIN lease_account f on f.id=abc.account_id
+
+        LEFT JOIN lease_branch_company e on e.id = a.branch_company_id
+        LEFT JOIN lease_overdue_log lol on lol.contract_id = a.id and lol.repayment_id = b.id
+
+        WHERE a.status != 2
+
+        and c.type = 0
+
+        <!--暂只开放个人类型的承租人的合同-->
+        and f.type=0
+        and (c.payment_result = 0 or c.payment_result = 3)
+
+        ) table_a
+        group by table_a.branchcompanyname
+
+        ) table_b
+
+        WHERE table_b.uncollectedcount>0
+
+        ) table_c
+
+    </select>
+
+
+    <!--通联批扣 提交批扣 查询所有月供/滞纳金/挂靠-->
+    <select id="findBatchPostlendingPayment" resultMap="BatchPostlendingPaymentMap">
+
+
+        select
+
+        table_1.completecontractnumber "completeContractNumber"
+        , table_1.branchcompanyid "branchCompanyId"
+        ,table_1.leaseendtime "leaseEndTime"
+        , table_1.totalperiod "totalPeriod"
+        , table_1.contractid "contractId", table_1.status
+        , table_1.repaymentid "repaymentId"
+        , table_1.companyname "companyName"
+        , table_1.accountid "accountId"
+        , table_1.accounttype "accountType"
+        , table_1.accountname "accountName"
+        , table_1.accountrealname "accountRealName"
+        , table_1.accountphone "accountPhone"
+        , table_1.repaymentdate "repaymentDate"
+        , table_1.bankaccountname "bankAccountName"
+        , table_1.backcardnumber "backCardNumber"
+        , table_1.idcard "idCard"
+        , table_1.bankname "bankName"
+        , table_1.bankcode "bankCode"
+        , table_1.paymentresult "paymentResult"
+        , table_1.type
+        , table_1.provincename "provinceName"
+        , table_1.cityname "cityName"
+        , table_1.repaymentstatusid "repaymentStatusId"
+        , table_1.overdueday "overdueDay"
+        , COALESCE(lol.price,0) "overduePrice"
+        , table_1.total
+        , round(table_1.total + (case when lol.price is null then 0 else lol.price end) ,2) "totalPrice"
+        , table_1.paymentresultmsg "paymentResultMsg"
+        , table_1.overduerate "overdueRate"
+        , table_1.platenumber "plateNumber"
+        , table_1.paydate "payDate"
+        , table_1.payway "payWay"
+        , table_1.paywayname "payWayName"
+        , table_1.pricelimit "priceLimit"
+        , table_1.issign "isSign"
+        , (case when (round(table_1.total + COALESCE(lol.price,0), 2)) > table_1.pricelimit then 1 else 0 end) "isOverLimit"
+        , table_1.bankphone "bankPhone"
+
+        from
+        (
+        select
+        a.complete_contract_number "completecontractnumber"
+        , a.branch_company_id "branchcompanyid"
+        , to_char(a.lease_start_time,'yyyy-mm-dd') "leasestarttime", to_char(a.lease_end_time,'yyyy-mm-dd') "leaseendtime"
+        , ((case when c.period_count is null or c.period_count=0 then (select count(1) from lease_scheme_repayment dd where dd.contract_id = a.id) else c.period_count end) || '期之' || b.period) "totalperiod"
+        , a.id "contractid", a.status
+        , b.id "repaymentid"
+        , h.name "companyname"
+        , e.id "accountid"
+        , e.type "accounttype"
+        , e.name "accountname"
+        , e.real_name "accountrealname"
+        , e.phone "accountphone"
+        , b.repayment_date "repaymentdate"
+        , (case when e.type=1 then aa.bank_account_name else e.name end) "bankaccountname"
+        , abc.back_card_number "backcardnumber"
+        , (case when e.type=1 then aa.legal_person_id_card else f.id_card end) "idcard"
+        , g.name "bankname"
+        , g.code "bankcode"
+        , k.payment_result "paymentresult"
+        , k.type
+        , i.name "provincename"
+        , j.name "cityname"
+        , k.id "repaymentstatusid"
+        , b.overdue_day "overdueday"
+        , round(k.totle_price, 2) total
+        , k.payment_result_msg "paymentresultmsg"
+        , (select value from lease_dict where type='overduerate') "overduerate"
+        , cc.plate_number "platenumber"
+        , c.pay_date "paydate"
+        , (case when dd.pay_way=9 then 9 else (case when l.agrm_no is null then 4 else 9 end) end) "payway"
+        , (case when dd.pay_way=9 then '通联协议支付' else (case when l.agrm_no is null then '通联代扣' else '通联协议支付' end) end) "paywayname"
+        , dd.price_limit "pricelimit"
+        , (case when l.agrm_no is null then 0 else 1 end ) "issign"
+        , abc.bank_phone "bankphone"
+        from lease_contract a
+        INNER JOIN lease_scheme_repayment b on b.contract_id = a.id and b.repayment_date = '2018-9-15'
+        INNER JOIN lease_scheme_repayment_status k on k.repayment_id = b.id and (k.type = 0 or k.type = 2)
+        INNER JOIN lease_scheme_order c on c.id = a.scheme_order_id
+        LEFT JOIN lease_scheme_order_account d on d.scheme_order_id = c.id and d.is_default_pay=1
+        LEFT JOIN lease_account_bank_card abc on d.bank_card_id = abc.id
+        LEFT JOIN lease_account e on e.id = abc.account_id
+        LEFT JOIN lease_account_credit f on e.id = f.account_id
+        LEFT JOIN lease_bank g on g.id = abc.bank_id
+        LEFT JOIN lease_branch_company h on h.id = a.branch_company_id
+        LEFT JOIN lease_area i on i.id = h.province_id
+        LEFT JOIN lease_area j on j.id = h.city_id
+        LEFT JOIN lease_account_company aa on e.id = aa.account_id
+        LEFT JOIN lease_car cc on cc.id = c.card_id
+        LEFT JOIN lease_bank_allinpay_price_limit dd on g.id = dd.bank_id
+        LEFT JOIN lease_account_bank_pay_sin l on abc.id = l.bank_card_id and e.id = l.account_id
+        where 1=1
+        and k.type = 0
+        <!--暂只开放个人类型的承租人的合同-->
+        and e.type=0
+        and (k.payment_result = 0 or k.payment_result = 3)
+        and a.status != 2
+        <if test="contractIds != null">
+            and a.id in
+            <foreach item="item" collection="contractIds" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="bankCode != null">
+            and g.code like CONCAT('%',#{bankCode},'%')
+        </if>
+        <if test="paymentResultMsg != null">
+            and k.payment_result_msg like CONCAT('%',#{paymentResultMsg},'%')
+        </if>
+        ) table_1
+        LEFT JOIN lease_overdue_log lol on lol.contract_id = table_1.contractid and lol.repayment_id = table_1.repaymentid
+
+    </select>
+
+    <!--提交批扣查询需要处理的月供、滞纳金，查询扣款方式支持通联支付的数据-->
+    <select id="findBatchPostlendingPaymentDual" resultMap="BatchPostlendingPaymentMap">
+
+        select
+        table_1.completecontractnumber "completeContractNumber"
+        , table_1.totalperiod "totalPeriod"
+        , table_1.contractid "contractId", table_1.status
+        , table_1.repaymentid "repaymentId"
+        , table_1.companyname "companyName"
+        , table_1.accountid "accountId"
+        , table_1.accountname "accountName"
+        , table_1.accountrealname "accountRealName"
+        , table_1.accounttype "accountType"
+        , table_1.accountphone "accountPhone"
+        , table_1.bankaccountname "bankAccountName"
+        , table_1.backcardnumber "backCardNumber"
+        , table_1.idcard "idCard"
+        , table_1.bankname "bankName"
+        , table_1.bankcode "bankCode"
+        , table_1.paymentresult "paymentResult"
+        , table_1.type
+        , table_1.provincename "provinceName"
+        , table_1.cityname "cityName"
+        , table_1.repaymentstatusid "repaymentStatusId"
+        , table_1.overdueday "overdueDay"
+        , table_1.overdueprice "overduePrice"
+        , table_1.total
+        , table_1.monthprice "monthPrice"
+        , table_1.overduerate "overdueRate"
+        , table_1.pricelimit "priceLimit"
+        , table_1.allinpaypricelimit "allinpayPriceLimit"
+        , table_1.allinpaydaypricelimit "allinpayDayPriceLimit"
+        , table_1.daysumlimit "daySumLimit"
+        , table_1.payway "payWay"
+        , table_1.agrmno "agrmNo"
+
+        from (
+        select
+        a.complete_contract_number "completecontractnumber"
+        , (
+        (case when c.period_count is null or c.period_count=0 then (select count(1) from lease_scheme_repayment dd where
+        dd.contract_id = a.id) else c.period_count end)
+        || '期之' || b.period
+        ) "totalperiod"
+        , a.id "contractid", a.status
+        , b.id "repaymentid"
+        , h.name "companyname"
+        , e.id "accountid"
+        , e.name "accountname"
+        , e.real_name "accountrealname"
+        , e.type "accounttype"
+        , e.phone "accountphone"
+        ,(case when e.type=1 then aa.bank_account_name else e.name end) "bankaccountname"
+        ,abc.back_card_number "backcardnumber"
+        ,(case when e.type=1 then aa.legal_person_id_card else f.id_card end) "idcard"
+        ,g.name "bankname"
+        ,g.code "bankcode"
+        , k.payment_result "paymentresult"
+        , k.type
+        , i.name "provincename"
+        , j.name "cityname"
+        , k.id "repaymentstatusid"
+        , b.overdue_day "overdueday"
+        , (select DISTINCT price from lease_overdue_log aa where aa.contract_id = a.id and aa.repayment_id = b.id) "overdueprice"
+        , round(k.totle_price, 2) "total"
+        , round(b.total, 2) "monthprice"
+        , (SELECT value from lease_dict WHERE type='OverdueRate') "overduerate"
+        , l.price_limit "pricelimit"
+        , l.price_limit "allinpaypricelimit"
+        , l.day_price_limit "allinpaydaypricelimit"
+        , l.day_sum_limit "daysumlimit"
+        , (case when l.pay_way=9 then 9 else (case when m.agrm_no is null then 4 else 9 end) end) "payway"
+        , m.agrm_no "agrmno"
+        from lease_contract a
+        INNER JOIN lease_scheme_repayment b on b.contract_id = a.id
+        INNER JOIN lease_scheme_repayment_status k on k.repayment_id = b.id and (k.type = 0 or k.type = 2) and
+        k.contract_id = a.id
+        INNER JOIN lease_scheme_order c on c.id = a.scheme_order_id
+        LEFT JOIN lease_scheme_order_account d on d.scheme_order_id = c.id and d.is_default_pay=1
+        LEFT JOIN lease_account_bank_card abc on d.bank_card_id = abc.id
+        LEFT JOIN lease_account e on e.id = abc.account_id
+        LEFT JOIN lease_account_credit f on e.id = f.account_id
+        LEFT JOIN lease_bank g on g.id = abc.bank_id
+        LEFT JOIN lease_branch_company h on h.id = a.branch_company_id
+        LEFT JOIN lease_area i on i.id = h.province_id
+        LEFT JOIN lease_area j on j.id = h.city_id
+        LEFT JOIN lease_account_company aa on e.id = aa.account_id
+        LEFT JOIN lease_bank_allinpay_price_limit l on g.id = l.bank_id
+        LEFT JOIN lease_account_bank_pay_sin m on abc.id = m.bank_card_id
+        where 1=1
+        and (k.type = 0 or k.type = 2)
+        <!--暂只开放个人类型的承租人的合同-->
+        and e.type=0
+        and (k.payment_result = 0 or k.payment_result = 3)
+        and a.status != 2
+        <if test="repaymentIds != null">
+            and b.id in
+            <foreach item="item" collection="repaymentIds" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+
+        <if test="contractIds != null">
+            and a.id in
+            <foreach item="item" collection="contractIds" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+
+        ) table_1 where 1=1
+        <if test="payWay != null and payWay != ''">
+            and table_1.payway = #{payWay}
+        </if>
+
+    </select>
+
+    <!--批量补录的数据-->
+    <select id="findRepaymentExcept" resultType="java.util.Map">
+
+        select table_b.repaymentdate "repaymentDate", COALESCE(table_b.total,0) "total",
+        COALESCE(table_b.collectedsum,0) "collectedSum",COALESCE(table_b.uncollectedsum,0) "unCollectedSum"
+        from (
+        select table_a.repaymentdate
+        , sum(table_a.total) "total"
+        , round(
+        sum(
+        CASE WHEN table_a.paymentresult = '1' or table_a.paymentresult = '2' THEN table_a.total end
+        ),2) as "collectedsum"
+
+        , round(
+        sum(
+        CASE WHEN table_a.paymentresult = '0' or table_a.paymentresult = '3' THEN table_a.total end
+        ),2) as "uncollectedsum"
+
+        from (
+
+        select a.repayment_date "repaymentdate",b.totle_price "total", b.payment_result "paymentresult"
+
+        from lease_scheme_repayment a
+        INNER JOIN lease_scheme_repayment_status b on b.repayment_id = a.id
+        LEFT JOIN lease_contract_repayment_except c on c.repayment_id = a.id
+
+        INNER JOIN lease_contract aa on a.contract_id=aa.id
+        INNER JOIN lease_scheme_order bb on bb.id = aa.scheme_order_id
+        LEFT JOIN lease_scheme_order_account dd on dd.scheme_order_id = bb.id and dd.is_default_pay=1
+        LEFT JOIN lease_account_bank_card abc on dd.bank_card_id = abc.id
+
+        left join lease_account d on d.id = abc.account_id
+
+        where 1=1
+
+        <!--暂只开放个人类型的承租人的合同-->
+        and d.type=0
+
+        and (b.type = '0' or b.type = '2')
+        and (b.payment_result='0' or b.payment_result='3')
+
+        and a.repayment_date is not null
+
+        ) table_a
+        group by table_a.repaymentdate
+        order by table_a.repaymentdate asc
+        )table_b
+        WHERE table_b.uncollectedsum>0
+
+    </select>
+
+    <!--查询某个扣款日的合同还款明细数据/月租、滞纳金、尾款-->
+    <select id="findByRepaymentDate" resultMap="findByRepaymentDateMap">
+        select a.id, a.contract_id "contractId", a.lessee_id "lesseeId", a.overdue, a.overdue_day "overdueDay", b.type,
+        b.totle_price "total"
+        from lease_scheme_repayment a
+        INNER JOIN lease_scheme_repayment_status b on b.repayment_id = a.id
+
+        INNER JOIN lease_contract aa on a.contract_id=aa.id
+        INNER JOIN lease_scheme_order bb on bb.id = aa.scheme_order_id
+        LEFT JOIN lease_scheme_order_account dd on dd.scheme_order_id = bb.id and dd.is_default_pay=1
+        LEFT JOIN lease_account_bank_card abc on dd.bank_card_id = abc.id
+
+        left join lease_account d on d.id = abc.account_id
+
+        where 1=1
+
+        <!--暂只开放个人类型的承租人的合同-->
+        and d.type=0
+
+        and (b.type = '0' or b.type = '2')
+        and (b.payment_result='0' or b.payment_result='3')
+        and a.repayment_date
+        in(
+        <foreach collection="list" item="item" index="index" separator=",">
+            to_timestamp(#{item},'YYYY-MM-DD')
+        </foreach>
+        )
+    </select>
+
+    <!--查询还款明细数据/月租、滞纳金、挂靠费-->
+    <select id="findByRepaymentId" resultMap="findByRepaymentDateMap">
+        select a.id, a.contract_id "contractId", a.lessee_id "lesseeId", a.overdue, a.overdue_day "overdueDay", b.type,
+        b.totle_price "total"
+        from lease_scheme_repayment a
+        INNER JOIN lease_scheme_repayment_status b on b.repayment_id = a.id
+
+        INNER JOIN lease_contract aa on a.contract_id=aa.id
+        INNER JOIN lease_scheme_order bb on bb.id = aa.scheme_order_id
+        LEFT JOIN lease_scheme_order_account dd on dd.scheme_order_id = bb.id and dd.is_default_pay=1
+        LEFT JOIN lease_account_bank_card abc on dd.bank_card_id = abc.id
+
+        left join lease_account d on d.id = abc.account_id
+
+        where 1=1
+
+        and (b.type = '0' or b.type = '1' or b.type = '2')
+        and (b.payment_result='0' or b.payment_result='3')
+        and b.repayment_id
+        in(
+        <foreach collection="list" item="item" index="index" separator=",">
+            ${item}
+        </foreach>
+        )
+    </select>
+
+    <!--提前扣款短信提醒,还款日7天前、3天前-->
+    <select id="advanceSendRepaymentSms" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        a.id, a.contract_id "contractId", a.lessee_id "lesseeId", round(a.total, 2) "total"
+        , a.repayment_date "repaymentDate", a.overdue_day "overdueDay"
+        , b.complete_contract_number "completeContractNumber"
+        , c.phone, c.name "accountName"
+        from lease_scheme_repayment a
+        INNER JOIN lease_contract b on a.contract_id=b.id
+
+        INNER JOIN lease_scheme_order bb on b.id = b.scheme_order_id
+        LEFT JOIN lease_scheme_order_account dd on dd.scheme_order_id = bb.id and dd.is_default_pay=1
+        LEFT JOIN lease_account_bank_card abc on dd.bank_card_id = abc.id
+
+        LEFT JOIN lease_account c on c.id=abc.account_id
+        LEFT JOIN lease_account_credit d on d.account_id=c.id
+        INNER JOIN lease_scheme_repayment_status e on e.repayment_id=a.id
+        LEFT JOIN lease_allinpay_status_sms f ON f.used_id = a.id and f.type = ${type}
+        where 1=1
+
+        and f.id is null
+
+        and e.type=0 and (e.payment_result = 0 or e.payment_result = 3)
+        and a.repayment_date = date ${repaymentDate} + integer ${item}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from lease_scheme_repayment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+    <delete id="deleteByContractId" parameterType="java.lang.Long">
+    delete from lease_scheme_repayment
+    where contract_id = #{id,jdbcType=BIGINT}
+
+  </delete>
+
+    <insert id="insert" parameterType="com.hc.lease.order.model.LeaseSchemeRepayment">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_scheme_repayment_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_scheme_repayment (id, contract_id, lessee_id,
+        period, return_principal, return_interest,
+        total, residual_principal, repayment_date,
+        overdue, overdue_day,
+        loan_amount, annual_interest, create_time,
+        update_time, create_by, update_by)
+        values (#{id,jdbcType=BIGINT}, #{contractId,jdbcType=BIGINT}, #{lesseeId,jdbcType=BIGINT},
+        #{period,jdbcType=BIGINT}, #{returnPrincipal,jdbcType=NUMERIC}, #{returnInterest,jdbcType=NUMERIC},
+        #{total,jdbcType=NUMERIC}, #{residualPrincipal,jdbcType=NUMERIC}, #{repaymentDate,jdbcType=DATE},
+        #{overdue,jdbcType=SMALLINT}, #{overdueDay,jdbcType=INTEGER},
+        #{loanAmount,jdbcType=NUMERIC}, #{annualInterest,jdbcType=NUMERIC}, #{createTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT}
+        )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.hc.lease.order.model.LeaseSchemeRepayment">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_scheme_repayment_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_scheme_repayment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="contractId != null">
+                contract_id,
+            </if>
+            <if test="lesseeId != null">
+                lessee_id,
+            </if>
+            <if test="period != null">
+                period,
+            </if>
+            <if test="returnPrincipal != null">
+                return_principal,
+            </if>
+            <if test="returnInterest != null">
+                return_interest,
+            </if>
+            <if test="total != null">
+                total,
+            </if>
+            <if test="residualPrincipal != null">
+                residual_principal,
+            </if>
+            <if test="repaymentDate != null">
+                repayment_date,
+            </if>
+            <if test="overdue != null">
+                overdue,
+            </if>
+            <if test="overdueDay != null">
+                overdue_day,
+            </if>
+            <if test="loanAmount != null">
+                loan_amount,
+            </if>
+            <if test="annualInterest != null">
+                annual_interest,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateBy != null">
+                update_by
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="contractId != null">
+                #{contractId,jdbcType=BIGINT},
+            </if>
+            <if test="lesseeId != null">
+                #{lesseeId,jdbcType=BIGINT},
+            </if>
+            <if test="period != null">
+                #{period,jdbcType=BIGINT},
+            </if>
+            <if test="returnPrincipal != null">
+                #{returnPrincipal,jdbcType=NUMERIC},
+            </if>
+            <if test="returnInterest != null">
+                #{returnInterest,jdbcType=NUMERIC},
+            </if>
+            <if test="total != null">
+                #{total,jdbcType=NUMERIC},
+            </if>
+            <if test="residualPrincipal != null">
+                #{residualPrincipal,jdbcType=NUMERIC},
+            </if>
+            <if test="repaymentDate != null">
+                #{repaymentDate,jdbcType=DATE},
+            </if>
+            <if test="overdue != null">
+                #{overdue,jdbcType=SMALLINT},
+            </if>
+            <if test="overdueDay != null">
+                #{overdueDay,jdbcType=INTEGER},
+            </if>
+            <if test="loanAmount != null">
+                #{loanAmount,jdbcType=NUMERIC},
+            </if>
+            <if test="annualInterest != null">
+                #{annualInterest,jdbcType=NUMERIC},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=BIGINT}
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.order.model.LeaseSchemeRepayment">
+        update lease_scheme_repayment
+        <set>
+            <if test="contractId != null">
+                contract_id = #{contractId,jdbcType=BIGINT},
+            </if>
+            <if test="lesseeId != null">
+                lessee_id = #{lesseeId,jdbcType=BIGINT},
+            </if>
+            <if test="period != null">
+                period = #{period,jdbcType=BIGINT},
+            </if>
+            <if test="returnPrincipal != null">
+                return_principal = #{returnPrincipal,jdbcType=NUMERIC},
+            </if>
+            <if test="returnInterest != null">
+                return_interest = #{returnInterest,jdbcType=NUMERIC},
+            </if>
+            <if test="total != null">
+                total = #{total,jdbcType=NUMERIC},
+            </if>
+            <if test="residualPrincipal != null">
+                residual_principal = #{residualPrincipal,jdbcType=NUMERIC},
+            </if>
+            <if test="repaymentDate != null">
+                repayment_date = #{repaymentDate,jdbcType=DATE},
+            </if>
+            <if test="overdue != null">
+                overdue = #{overdue,jdbcType=SMALLINT},
+            </if>
+            <if test="overdueDay != null">
+                overdue_day = #{overdueDay,jdbcType=INTEGER},
+            </if>
+            <if test="loanAmount != null">
+                loan_amount = #{loanAmount,jdbcType=NUMERIC},
+            </if>
+            <if test="annualInterest != null">
+                annual_interest = #{annualInterest,jdbcType=NUMERIC},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT}
+            </if>
+
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.hc.lease.order.model.LeaseSchemeRepayment">
+        update lease_scheme_repayment
+        set contract_id = #{contractId,jdbcType=BIGINT},
+        lessee_id = #{lesseeId,jdbcType=BIGINT},
+        period = #{period,jdbcType=BIGINT},
+        return_principal = #{returnPrincipal,jdbcType=NUMERIC},
+        return_interest = #{returnInterest,jdbcType=NUMERIC},
+        total = #{total,jdbcType=NUMERIC},
+        residual_principal = #{residualPrincipal,jdbcType=NUMERIC},
+        repayment_date = #{repaymentDate,jdbcType=DATE},
+        overdue = #{overdue,jdbcType=SMALLINT},
+        overdue_day = #{overdueDay,jdbcType=INTEGER},
+        loan_amount = #{loanAmount,jdbcType=NUMERIC},
+        annual_interest = #{annualInterest,jdbcType=NUMERIC},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        create_by = #{createBy,jdbcType=BIGINT},
+        update_by = #{updateBy,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateTotalByContractId" parameterType="java.util.Map">
+      update lease_scheme_repayment
+       set  total = #{total,jdbcType=NUMERIC}
+      where contract_id = #{contractId,jdbcType=BIGINT}
+    </update>
+
+
+    <!--批量更新-->
+    <update id="batchUpdate" parameterType="java.util.List">
+
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update lease_scheme_repayment
+            <set>
+                overdue = ${item.overdue},
+                overdue_day = ${item.overdueDay}
+            </set>
+            where id = ${item.id}
+        </foreach>
+
+    </update>
+
+    <!-- 备份数据 -->
+    <insert id="backData">
+
+        insert into lease_scheme_repayment_history
+        (
+        history_id, contract_id, lessee_id, period, return_principal, return_interest, total, residual_principal
+        ,repayment_date, overdue, overdue_day, loan_amount, annual_interest
+        ,history_create_time, history_update_time, history_create_by, history_update_by
+        , create_time, update_time, create_by, update_by
+        , vsersion_number
+        )
+        select
+        id, contract_id, lessee_id, period, return_principal, return_interest, total, residual_principal
+        ,repayment_date, overdue, overdue_day, loan_amount, annual_interest
+        ,create_time,update_time, create_by, update_by
+        ,now(), now(), #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT}
+        ,#{vsersionNumber,jdbcType=INTEGER}
+        from lease_scheme_repayment where contract_id = #{contractId,jdbcType=BIGINT}
+
+    </insert>
+
+</mapper>

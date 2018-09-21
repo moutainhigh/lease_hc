@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.supplier.dao.LeaseSchemeMapper" >
+  <resultMap id="BaseResultMap" type="com.hc.lease.supplier.model.LeaseScheme" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="scheme_name" property="schemeName" jdbcType="VARCHAR" />
+    <result column="scheme_type" property="schemeType" jdbcType="INTEGER" />
+    <result column="is_type" property="isType" jdbcType="INTEGER" />
+    <result column="total_amount" property="totalAmount" jdbcType="NUMERIC" />
+    <result column="annual_interest" property="annualInterest" jdbcType="NUMERIC" />
+    <result column="late_interest_rate" property="lateInterestRate" jdbcType="NUMERIC" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+    <result column="is_enable" property="isEnable" jdbcType="BIT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="car_all" property="carAll" jdbcType="VARCHAR" />
+    <result column="area_all" property="areaAll" jdbcType="VARCHAR" />
+    <result column="down_payment" property="downPayment" jdbcType="NUMERIC" />
+    <result column="balance_payment" property="balancePayment" jdbcType="NUMERIC" />
+    <result column="monthly_rent" property="monthlyRent" jdbcType="NUMERIC" />
+    <result column="client_manager_remarks" property="clientManagerRemarks" jdbcType="VARCHAR" />
+    <result column="brands_id" property="brandsId" jdbcType="BIGINT" />
+    <result column="series_id" property="seriesId" jdbcType="BIGINT" />
+    <result column="model_id" property="modelId" jdbcType="BIGINT" />
+
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="staging_contain_monthly_rent" property="stagingContainMonthlyRent" jdbcType="INTEGER" />
+    <result column="staging_contain_monthly_rent_name" property="stagingContainMonthlyRentName" jdbcType="VARCHAR" />
+    <result column="staging_number_name" property="stagingNumberName" jdbcType="VARCHAR" />
+    <result column="staging_number_id" property="stagingNumberId" jdbcType="INTEGER" />
+    <result column="scheme_type_name" property="schemeTypeName" jdbcType="VARCHAR" />
+    <result column="branch_company_name" property="branchCompanyName" jdbcType="VARCHAR" />
+    <result column="branch_company_id" property="branchCompanyId" jdbcType="BIGINT" />
+    <result column="brands_name" property="brandsName" jdbcType="VARCHAR"/>
+    <result column="series_name" property="seriesName" jdbcType="VARCHAR"/>
+    <result column="complete_model_name" property="completeModelName" jdbcType="VARCHAR"/>
+    <result column="business_model_name" property="businessModelName" jdbcType="VARCHAR"/>
+
+    <result column="used" property="used" jdbcType="BIT" />
+    <collection property="leaseSchemeAreas" column="id" ofType="com.hc.lease.supplier.model.LeaseSchemeArea" javaType="java.util.ArrayList" select="com.hc.lease.supplier.dao.LeaseSchemeAreaMapper.selectBySchemeId"/>
+    <collection property="leaseSchemeVehicles" column="id" ofType="com.hc.lease.supplier.model.LeaseSchemeVehicle" javaType="java.util.ArrayList" select="selectBySchemeId"/>
+    <collection property="leasePackageBalancePayments" column="id" ofType="com.hc.lease.supplier.model.LeasePackageBalancePayment" javaType="java.util.ArrayList" select="com.hc.lease.supplier.dao.LeasePackageBalancePaymentMapper.selectBySchemeId"/>
+  </resultMap>
+
+  <resultMap id="LeaseSchemeVehicleMap" type="com.hc.lease.supplier.model.LeaseSchemeVehicle" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="scheme_id" property="schemeId" jdbcType="BIGINT" />
+    <result column="brands_id" property="brandsId" jdbcType="BIGINT" />
+    <result column="series_id" property="seriesId" jdbcType="BIGINT" />
+    <result column="model_id" property="modelId" jdbcType="BIGINT" />
+    <result column="brands_name" property="brandsName" jdbcType="VARCHAR"/>
+    <result column="series_name" property="seriesName" jdbcType="VARCHAR"/>
+    <result column="complete_model_name" property="completeModelName" jdbcType="VARCHAR"/>
+    <result column="business_model_name" property="businessModelName" jdbcType="VARCHAR"/>
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, brands_id, series_id, model_id, scheme_name, total_amount,annual_interest, create_time,
+    update_time, create_by, update_by, is_enable, sort, province_id,
+    province_name, city_id, city_name, area_id, area_name,scheme_type,car_all,area_all,branch_company_id,late_interest_rate,is_type,brands_id, series_id, model_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from lease_scheme
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectBySchemeId" resultMap="LeaseSchemeVehicleMap" parameterType="java.lang.Long">
+    select
+    sv.brands_id as "brandsId",sv.series_id as "seriesId",sv.model_id as "modelId",cb.name as "brandsName",css.name as "seriesName",
+    cm.complete_model_name as "completeModelName",cm.business_model_name as "businessModelName"
+    from lease_scheme_vehicle sv
+    left join lease_car_brands cb on sv.brands_id=cb.id
+    left join lease_car_series css on sv.series_id=css.id
+    left join lease_car_model cm on sv.model_id=cm.id
+    where sv.scheme_id = #{id,jdbcType=BIGINT}
+  </select>
+
+
+  <select id="findPage" resultMap="BaseResultMap">
+    select
+    table_1.id,  table_1.totalamount as "totalAmount",table_1.annualinterest as "annualInterest", table_1.createtime as "createTime"
+    , table_1.updatetime as "updateTime", table_1.createby as "createBy", table_1.updateby as "updateBy"
+    , table_1.isenable as "isEnable", table_1.sort,table_1.carall as "carAll",table_1.areaall as "areaAll"
+    , table_1.schemetype as "schemeType",table_1.schemename as "schemeName",table_1.lateinterestrate as "lateInterestRate"
+    , table_1.downpayment as "downPayment",table_1.balancepayment as "balancePayment", table_1.stagingnumberid as "stagingNumberId"
+    , table_1.monthlyrent as "monthlyRent", table_1.clientmanagerremarks as "clientManagerRemarks"
+    , table_1.type,table_1.stagingnumbername as "stagingNumberName",table_1.schemetypename as "schemeTypeName",table_1.stagingcontainmonthlyrent as "stagingContainMonthlyRent"
+    , branchcompanyid as "branchCompanyId",table_1.branchcompanyname as "branchCompanyName",table_1.istype as "isType"
+    , table_1.brandsid as "brandsId", table_1.seriesid as "seriesId", table_1.modelid as "modelId",table_1.brandsname as "brandsName",table_1.seriesname as "seriesName"
+    , table_1.completemodelname as "completeModelName",table_1.businessmodelname as "businessModelName"
+    , table_1.stagingcontainmonthlyrentname "stagingContainMonthlyRentName"
+    , (case when table_2.id is not null then true else false end) as "used"
+    from
+    (
+    select
+    s.id,  s.total_amount as "totalamount",s.annual_interest as "annualinterest", s.create_time as "createtime",
+    s.update_time as "updatetime", s.create_by as "createby", s.update_by as "updateby", s.is_enable as "isenable", s.sort,s.car_all as "carall",s.area_all as "areaall",
+    s.scheme_type as "schemetype",s.scheme_name as "schemename",s.late_interest_rate as "lateinterestrate",
+    p.down_payment as "downpayment",p.balance_payment as "balancepayment", p.staging_number_id as "stagingnumberid", p.monthly_rent as "monthlyrent"
+    , p.client_manager_remarks as "clientmanagerremarks",
+    p.type,d.value as "stagingnumbername",ld.value as "schemetypename",p.staging_contain_monthly_rent as "stagingcontainmonthlyrent"
+    ,branch_company_id as "branchcompanyid",bc.name as "branchcompanyname",s.is_type as "istype",
+    s.brands_id as "brandsid", s.series_id as "seriesid", s.model_id as "modelid",cb.name as "brandsname",css.name as "seriesname"
+    , cm.complete_model_name as "completemodelname",cm.business_model_name as "businessmodelname"
+    , case when p.staging_contain_monthly_rent =0  then '是' else '否' end as "stagingcontainmonthlyrentname"
+    from lease_scheme s
+    left join lease_scheme_package sp on s.id=sp.scheme_id
+    left join lease_package p on sp.package_id=p.id
+    left join lease_dict d on p.staging_number_id=d.id
+    left  join lease_dict ld on s.scheme_type=ld.id
+    left join lease_branch_company bc on s.branch_company_id =bc.id
+    left join lease_car_brands cb on s.brands_id=cb.id
+    left join lease_car_series css on s.series_id=css.id
+    left join lease_car_model cm on s.model_id=cm.id
+    where p.type=0
+    <if test="name != null" >
+      and  s.scheme_name like CONCAT('%',#{name},'%')
+    </if>
+    <if test="isType != null" >
+      and  s.is_type = #{isType}
+    </if>
+    ) table_1
+    left join (select uu.id,uu.used_id from lease_use_used uu where uu.used_type='leaseScheme') table_2 on table_1.id = table_2.used_id
+    ORDER BY table_1.createtime DESC
+  </select>
+
+  <select id="findAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from lease_scheme
+  </select>
+
+  <select id="findByName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from lease_scheme
+    WHERE scheme_name = #{name,jdbcType=VARCHAR}
+    <if test="id != null">
+      and id != #{id,jdbcType=BIGINT}
+    </if>
+  </select>
+
+
+  <select id="insertViewParames" resultType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from lease_scheme
+  </select>
+
+  <delete id="deleteBatchById" parameterType="long">
+    delete from lease_scheme where id in
+    <foreach item="item" collection="list" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lease_scheme
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hc.lease.supplier.model.LeaseScheme" >
+    insert into lease_scheme (id, brands_id, series_id, 
+      model_id, scheme_name,
+      total_amount,annual_interest, create_time, update_time,
+      create_by, update_by, is_enable, 
+      sort, province_id,province_name, city_id, city_name, area_id, area_name,scheme_type,car_all,area_all,branch_company_id,late_interest_rate,is_type,brands_id, series_id,model_id)
+    values (#{id,jdbcType=BIGINT}, #{brandsId,jdbcType=BIGINT}, #{seriesId,jdbcType=BIGINT}, 
+      #{modelId,jdbcType=BIGINT}, #{schemeName,jdbcType=VARCHAR},
+      #{totalAmount,jdbcType=NUMERIC},#{annualInterest,jdbcType=NUMERIC},#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+      #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT}, #{isEnable,jdbcType=BIT}, 
+      #{sort,jdbcType=INTEGER},#{provinceId,jdbcType=BIGINT},#{provinceName,jdbcType=VARCHAR},#{cityId,jdbcType=BIGINT},#{cityName,jdbcType=VARCHAR},#{areaId,jdbcType=BIGINT},#{areaName,jdbcType=VARCHAR},#{schemeType,jdbcType=INTEGER},#{carAll,jdbcType=VARCHAR},#{areaAll,jdbcType=VARCHAR},#{branchCompany_id,jdbcType=BIGINT},#{lateInterestRate,jdbcType=NUMERIC},#{isType,jdbcType=INTEGER},#{brandsId,jdbcType=BIGINT}, #{seriesId,jdbcType=BIGINT}, #{modelId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hc.lease.supplier.model.LeaseScheme" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_scheme_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_scheme
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="schemeName != null" >
+        scheme_name,
+      </if>
+      <if test="schemeType != null" >
+        scheme_type,
+      </if>
+      <if test="totalAmount != null" >
+        total_amount,
+      </if>
+      <if test="annualInterest != null" >
+        annual_interest,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="isEnable != null" >
+        is_enable,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="carAll != null" >
+        car_all,
+      </if>
+      <if test="areaAll != null" >
+        area_all,
+      </if>
+      <if test="branchCompanyId != null" >
+        branch_company_id,
+      </if>
+      <if test="lateInterestRate != null" >
+        late_interest_rate,
+      </if>
+      <if test="isType != null" >
+        is_type,
+      </if>
+      <if test="brandsId != null" >
+        brands_id,
+      </if>
+      <if test="seriesId != null" >
+        series_id,
+      </if>
+      <if test="modelId != null" >
+        model_id
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="schemeName != null" >
+        #{schemeName,jdbcType=VARCHAR},
+      </if>
+      <if test="schemeType != null" >
+        #{schemeType,jdbcType=INTEGER},
+      </if>
+      <if test="totalAmount != null" >
+        #{totalAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="annualInterest != null" >
+        #{annualInterest,jdbcType=NUMERIC},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="carAll != null" >
+        #{carAll,jdbcType=VARCHAR},
+      </if>
+      <if test="areaAll != null" >
+        #{areaAll,jdbcType=VARCHAR},
+      </if>
+      <if test="branchCompanyId != null" >
+        #{branchCompanyId,jdbcType=BIGINT},
+      </if>
+      <if test="lateInterestRate != null" >
+        #{lateInterestRate,jdbcType=NUMERIC},
+      </if>
+      <if test="isType != null" >
+        #{isType,jdbcType=INTEGER},
+      </if>
+      <if test="brandsId != null" >
+        #{brandsId,jdbcType=BIGINT},
+      </if>
+      <if test="seriesId != null" >
+        #{seriesId,jdbcType=BIGINT},
+      </if>
+      <if test="modelId != null" >
+        #{modelId,jdbcType=BIGINT}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.supplier.model.LeaseScheme" >
+    update lease_scheme
+    <set >
+      <if test="schemeName != null" >
+        scheme_name = #{schemeName,jdbcType=VARCHAR},
+      </if>
+      <if test="schemeType != null" >
+        scheme_type = #{schemeType,jdbcType=INTEGER},
+      </if>
+      <if test="totalAmount != null" >
+        total_amount = #{totalAmount,jdbcType=NUMERIC},
+      </if>
+
+      <if test="annualInterest != null" >
+        annual_interest = #{annualInterest,jdbcType=NUMERIC},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="isEnable != null" >
+        is_enable = #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="carAll != null" >
+       car_all= #{carAll,jdbcType=VARCHAR},
+      </if>
+      <if test="areaAll != null" >
+       area_all=#{areaAll,jdbcType=VARCHAR},
+      </if>
+      <if test="branchCompanyId != null" >
+        branch_company_id= #{branchCompanyId,jdbcType=BIGINT},
+      </if>
+      <if test="lateInterestRate != null" >
+        late_interest_rate = #{lateInterestRate,jdbcType=NUMERIC},
+      </if>
+      <if test="isType != null" >
+        is_type = #{isType,jdbcType=INTEGER},
+      </if>
+      <if test="brandsId != null" >
+        brands_id = #{brandsId,jdbcType=BIGINT},
+      </if>
+      <if test="seriesId != null" >
+        series_id = #{seriesId,jdbcType=BIGINT},
+      </if>
+      <if test="modelId != null" >
+        model_id = #{modelId,jdbcType=BIGINT}
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hc.lease.supplier.model.LeaseScheme" >
+    update lease_scheme
+    set
+      scheme_name = #{schemeName,jdbcType=VARCHAR},
+       scheme_type = #{schemeType,jdbcType=INTEGER},
+      total_amount = #{totalAmount,jdbcType=NUMERIC},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      is_enable = #{isEnable,jdbcType=BIT},
+      sort = #{sort,jdbcType=INTEGER},
+      car_all= #{carAll,jdbcType=VARCHAR},
+      area_all=#{areaAll,jdbcType=VARCHAR},
+      branch_company_id= #{branchCompanyId,jdbcType=BIGINT},
+      annual_interest = #{annualInterest,jdbcType=NUMERIC},
+      late_interest_rate = #{lateInterestRate,jdbcType=NUMERIC},
+      is_type = #{isType,jdbcType=INTEGER},
+      brands_id = #{brandsId,jdbcType=BIGINT},
+      series_id = #{seriesId,jdbcType=BIGINT},
+      model_id = #{modelId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+
+  </update>
+</mapper>

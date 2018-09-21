@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <resourceExtensions />
+    <wildcardResourcePatterns>
+      <entry name="!?*.java" />
+      <entry name="!?*.form" />
+      <entry name="!?*.class" />
+      <entry name="!?*.groovy" />
+      <entry name="!?*.scala" />
+      <entry name="!?*.flex" />
+      <entry name="!?*.kt" />
+      <entry name="!?*.clj" />
+      <entry name="!?*.aj" />
+    </wildcardResourcePatterns>
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true">
+        <processorPath useClasspath="true" />
+      </profile>
+      <profile default="false" name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="hc-lease-account-adapter" />
+        <module name="hc-lease-account-adapter-api" />
+        <module name="hc-lease-activity-adapter" />
+        <module name="hc-lease-activity-adapter-api" />
+        <module name="hc-lease-allinpayquick" />
+        <module name="hc-lease-allinpayxmlentity" />
+        <module name="hc-lease-allinpayxsigntool" />
+        <module name="hc-lease-baseInfo-adapter" />
+        <module name="hc-lease-baseInfo-adapter-api" />
+        <module name="hc-lease-common-allinpay" />
+        <module name="hc-lease-common-config" />
+        <module name="hc-lease-common-core" />
+        <module name="hc-lease-common-thirdparty-plugin" />
+        <module name="hc-lease-common-util" />
+        <module name="hc-lease-order-adapter" />
+        <module name="hc-lease-order-adapter-api" />
+        <module name="hc-lease-postlending-adapter" />
+        <module name="hc-lease-postlending-adapter-api" />
+        <module name="hc-lease-supplier-adapter" />
+        <module name="hc-lease-supplier-adapter-api" />
+        <module name="hc-lease-user-adapter" />
+        <module name="hc-lease-user-adapter-api" />
+        <module name="hc-lease-web-consumer" />
+        <module name="hc-lease-workflow-adapter" />
+        <module name="hc-lease-workflow-adapter-api" />
+        <module name="hc-lease-wx-adapter" />
+        <module name="hc-lease-wx-adapter-api" />
+        <module name="quickpaydemo" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="dfq" target="1.6" />
+      <module name="hc-lease-account-adapter" target="1.7" />
+      <module name="hc-lease-account-adapter-api" target="1.7" />
+      <module name="hc-lease-activity-adapter" target="1.7" />
+      <module name="hc-lease-activity-adapter-api" target="1.7" />
+      <module name="hc-lease-allinpayquick" target="1.5" />
+      <module name="hc-lease-allinpayxmlentity" target="1.7" />
+      <module name="hc-lease-allinpayxsigntool" target="1.7" />
+      <module name="hc-lease-baseInfo-adapter" target="1.7" />
+      <module name="hc-lease-baseInfo-adapter-api" target="1.7" />
+      <module name="hc-lease-common-allinpay" target="1.7" />
+      <module name="hc-lease-common-config" target="1.7" />
+      <module name="hc-lease-common-core" target="1.7" />
+      <module name="hc-lease-common-parent" target="1.7" />
+      <module name="hc-lease-common-thirdparty-plugin" target="1.7" />
+      <module name="hc-lease-common-util" target="1.7" />
+      <module name="hc-lease-order-adapter" target="1.7" />
+      <module name="hc-lease-order-adapter-api" target="1.7" />
+      <module name="hc-lease-postlending-adapter" target="1.7" />
+      <module name="hc-lease-postlending-adapter-api" target="1.7" />
+      <module name="hc-lease-supplier-adapter" target="1.7" />
+      <module name="hc-lease-supplier-adapter-api" target="1.7" />
+      <module name="hc-lease-user-adapter" target="1.7" />
+      <module name="hc-lease-user-adapter-api" target="1.7" />
+      <module name="hc-lease-web-consumer" target="1.7" />
+      <module name="hc-lease-workflow-adapter" target="1.7" />
+      <module name="hc-lease-workflow-adapter-api" target="1.7" />
+      <module name="hc-lease-wx-adapter" target="1.7" />
+      <module name="hc-lease-wx-adapter-api" target="1.7" />
+      <module name="quickpaydemo" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

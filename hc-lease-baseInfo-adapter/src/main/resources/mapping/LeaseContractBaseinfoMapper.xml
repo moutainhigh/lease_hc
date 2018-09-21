@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.baseInfo.dao.LeaseContractBaseinfoMapper" >
+  <!--融租合同模板-->
+  <resultMap id="BaseResultMap" type="com.hc.lease.baseInfo.model.LeaseContractBaseinfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="contract_party_name" property="contractPartyName" jdbcType="VARCHAR" />
+    <result column="contract_branch_company" property="contractBranchCompany" jdbcType="VARCHAR" />
+    <result column="contract_party_adress" property="contractPartyAdress" jdbcType="VARCHAR" />
+    <result column="legal_person" property="legalPerson" jdbcType="VARCHAR" />
+    <result column="down_payment_time_limit" property="downPaymentTimeLimit" jdbcType="VARCHAR" />
+    <result column="loan_deposit" property="loanDeposit" jdbcType="NUMERIC" />
+    <result column="important_event_price" property="importantEventPrice" jdbcType="NUMERIC" />
+    <result column="check_time" property="checkTime" jdbcType="VARCHAR" />
+    <result column="appoint_area" property="appointArea" jdbcType="VARCHAR" />
+    <result column="rent_overdue_time_limit" property="rentOverdueTimeLimit" jdbcType="VARCHAR" />
+    <result column="car_lessee_city" property="carLesseeCity" jdbcType="VARCHAR" />
+    <result column="city_inside_recovery_cost" property="cityInsideRecoveryCost" jdbcType="NUMERIC" />
+    <result column="city_outside_recovery_cost" property="cityOutsideRecoveryCost" jdbcType="NUMERIC" />
+    <result column="province_inside_recovery_cost" property="provinceInsideRecoveryCost" jdbcType="NUMERIC" />
+    <result column="province_outside_recovery_cost" property="provinceOutsideRecoveryCost" jdbcType="NUMERIC" />
+    <result column="day_custodian_cost" property="dayCustodianCost" jdbcType="NUMERIC" />
+    <result column="continuity_overdue" property="continuityOverdue" jdbcType="VARCHAR" />
+    <result column="cumulative_overdue" property="cumulativeOverdue" jdbcType="VARCHAR" />
+    <result column="default_interest" property="defaultInterest" jdbcType="NUMERIC" />
+    <result column="license_monthly_rent" property="licenseMonthlyRent" jdbcType="NUMERIC" />
+    <result column="contract_party_contact_address" property="contractPartyContactAddress" jdbcType="VARCHAR"/>
+    <result column="account_name" property="accountName" jdbcType="VARCHAR" />
+    <result column="bank_id" property="bankId" jdbcType="BIGINT" />
+    <result column="branch_bank" property="branchBank" jdbcType="VARCHAR" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="is_enable" property="isEnable" jdbcType="BIT" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="branch_company_id" property="branchCompanyId" jdbcType="BIGINT"/>
+    <result column="branch_company_name" property="branchCompanyName" jdbcType="VARCHAR"/>
+
+    <result column="authorized_person" property="authorizedPerson" jdbcType="VARCHAR"/>
+    <result column="party_a" property="partyA" jdbcType="VARCHAR"/>
+    <result column="party_b" property="partyB" jdbcType="VARCHAR"/>
+    <result column="party_c" property="partyC" jdbcType="VARCHAR"/>
+    <result column="loan_guarantor" property="loanGuarantor" jdbcType="VARCHAR"/>
+    <result column="guarantor" property="guarantor" jdbcType="VARCHAR"/>
+    <result column="province_name" property="provinceName" jdbcType="VARCHAR"/>
+    <result column="city_name" property="cityName" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, contract_party_name, contract_branch_company, contract_party_adress, down_payment_time_limit,
+    loan_deposit, appoint_area, rent_overdue_time_limit, car_lessee_city, city_inside_recovery_cost,
+    city_outside_recovery_cost, province_inside_recovery_cost,province_outside_recovery_cost, day_custodian_cost, continuity_overdue, cumulative_overdue,
+    default_interest, license_monthly_rent, contract_party_contact_address, account_name,
+    bank_id, branch_bank, account, create_time, update_time, create_by, update_by, sort, is_enable,
+    remarks, branch_company_id, legal_person, important_event_price, check_time,authorized_person,party_a,party_b,party_c,loan_guarantor,guarantor
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    a.id, a.name, a.contract_party_name "contractPartyName", a.contract_branch_company "contractBranchCompany", a.contract_party_adress "contractPartyAdress", a.down_payment_time_limit "downPaymentTimeLimit"
+    , a.loan_deposit "loanDeposit", a.appoint_area "appointArea", a.rent_overdue_time_limit "rentOverdueTimeLimit" , a.car_lessee_city "carLesseeCity", a.city_inside_recovery_cost "cityInsideRecoveryCost"
+    , a.city_outside_recovery_cost "cityOutsideRecoveryCost", a.province_inside_recovery_cost "provinceInsideRecoveryCost",a.province_outside_recovery_cost "provinceOutsideRecoveryCost", a.day_custodian_cost "dayCustodianCost", a.continuity_overdue "continuityOverdue", a.cumulative_overdue "cumulativeOverdue"
+    , a.default_interest "defaultInterest", a.license_monthly_rent "licenseMonthlyRent", a.contract_party_contact_address "contractPartyContactAddress", a.account_name "accountName"
+    , a.bank_id "bankId", branch_bank "branchBank", a.account, a.create_time "createTime"
+    , a.update_time "updateTime", a.create_by "createBy", a.update_by "updateBy", a.sort, a.is_enable "isEnable"
+    , a.remarks, a.branch_company_id "branchCompanyId"
+    , a.legal_person "legalPerson", a.important_event_price "importantEventPrice", a.check_time "checkTime"
+    , b.name "defaultInterestName"
+    , c.name "bankName"
+    , d.name "branchCompanyName",
+    a.authorized_person,a.party_a,a.party_b,a.party_c,a.loan_guarantor,a.guarantor
+    ,ar.name "provinceName",ci.short_name "cityName"
+
+    from lease_contract_baseinfo a
+    LEFT JOIN lease_rule b on a.default_interest = b.id and b.rule_type='DefaultInterest'
+    LEFT JOIN lease_bank c on a.bank_id = c.id
+    LEFT JOIN lease_branch_company d ON a.branch_company_id = d.id
+    LEFT JOIN lease_area ar on d.province_id =ar.id
+    LEFT JOIN lease_area ci on d.city_id =ci.id
+    where a.id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="findPage" resultType="java.util.Map">
+    select
+    a.id, a.name, a.contract_party_name "contractPartyName", a.contract_branch_company "contractBranchCompany", a.contract_party_adress "contractPartyAdress", a.down_payment_time_limit "downPaymentTimeLimit"
+    , a.loan_deposit "loanDeposit", a.appoint_area "appointArea", a.rent_overdue_time_limit "rentOverdueTimeLimit" , a.car_lessee_city "carLesseeCity", a.city_inside_recovery_cost "cityInsideRecoveryCost"
+    , a.city_outside_recovery_cost "cityOutsideRecoveryCost", a.province_inside_recovery_cost "provinceInsideRecoveryCost",a.province_outside_recovery_cost "provinceOutsideRecoveryCost", a.day_custodian_cost "dayCustodianCost", a.continuity_overdue "continuityOverdue", a.cumulative_overdue "cumulativeOverdue"
+    , a.default_interest "defaultInterest", a.license_monthly_rent "licenseMonthlyRent", a.contract_party_contact_address "contractPartyContactAddress", a.account_name "accountName"
+    , a.bank_id "bankId", branch_bank "branchBank", a.account, a.create_time "createTime"
+    , a.update_time "updateTime", a.create_by "createBy", a.update_by "updateBy", a.sort, a.is_enable "isEnable"
+    , a.remarks, a.branch_company_id "branchCompanyId"
+    , a.legal_person "legalPerson", a.important_event_price "importantEventPrice", a.check_time "checkTime"
+    , b.name "defaultInterestName"
+    , c.name "bankName"
+    , d.name "branchCompanyName", a.authorized_person "authorizedPerson",a.party_a "partyA" ,a.party_b "partyB",a.party_c "partyC",a.loan_guarantor "loanGuarantor",a.guarantor
+    from lease_contract_baseinfo a
+    LEFT JOIN lease_rule b on a.default_interest = b.id and b.rule_type='DefaultInterest'
+    LEFT JOIN lease_bank c on a.bank_id = c.id
+    LEFT JOIN lease_branch_company d ON a.branch_company_id = d.id
+    where 1=1
+    <if test="name != null" >
+      and  a.name like CONCAT('%',#{name},'%')
+    </if>
+    ORDER BY a.create_time DESC
+  </select>
+
+  <select id="findAllNoPage" resultType="java.util.Map">
+    select
+    a.id, a.name, a.contract_party_name "contractPartyName", a.contract_branch_company "contractBranchCompany", a.contract_party_adress "contractPartyAdress", a.down_payment_time_limit "downPaymentTimeLimit"
+    , a.loan_deposit "loanDeposit", a.appoint_area "appointArea", a.rent_overdue_time_limit "rentOverdueTimeLimit" , a.car_lessee_city "carLesseeCity", a.city_inside_recovery_cost "cityInsideRecoveryCost"
+    , a.city_outside_recovery_cost "cityOutsideRecoveryCost", a.province_inside_recovery_cost "provinceInsideRecoveryCost",a.province_outside_recovery_cost "provinceOutsideRecoveryCost", a.day_custodian_cost "dayCustodianCost", a.continuity_overdue "continuityOverdue", a.cumulative_overdue "cumulativeOverdue"
+    , a.default_interest "defaultInterest", a.license_monthly_rent "licenseMonthlyRent", a.contract_party_contact_address "contractPartyContactAddress", a.account_name "accountName"
+    , a.bank_id "bankId", branch_bank "branchBank", a.account, a.create_time "createTime"
+    , a.update_time "updateTime", a.create_by "createBy", a.update_by "updateBy", a.sort, a.is_enable "isEnable"
+    , a.remarks, a.branch_company_id "branchCompanyId"
+    , a.legal_person "legalPerson", a.important_event_price "importantEventPrice", a.check_time "checkTime"
+    , b.name "defaultInterestName"
+    , c.name "bankName"
+    , d.name "branchCompanyName", a.authorized_person "authorizedPerson",a.party_a "partyA" ,a.party_b "partyB",a.party_c "partyC",a.loan_guarantor "loanGuarantor",a.guarantor
+    from lease_contract_baseinfo a
+    LEFT JOIN lease_rule b on a.default_interest = b.id and b.rule_type='DefaultInterest'
+    LEFT JOIN lease_bank c on a.bank_id = c.id
+    LEFT JOIN lease_branch_company d ON a.branch_company_id = d.id
+    where a.is_enable=TRUE
+    <if test="name != null" >
+      and  a.name like CONCAT('%',#{name},'%')
+    </if>
+    ORDER BY a.create_time DESC
+  </select>
+
+
+
+  <select id="findAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from lease_contract_baseinfo where is_enable=TRUE ORDER BY create_time DESC
+  </select>
+
+  <select id="findByName" resultType="java.util.Map">
+    select
+    id
+    from lease_contract_baseinfo
+    WHERE name = #{name,jdbcType=VARCHAR}
+    <if test="id != null">
+      and id != #{id,jdbcType=BIGINT}
+    </if>
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lease_contract_baseinfo
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+
+  <update id="disableByPrimaryKey" parameterType="java.util.Map">
+    update lease_contract_baseinfo set is_enable = #{isEnable,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <!-- 批量删除 -->
+  <delete id="deleteBatchById" parameterType="long">
+    delete from lease_contract_baseinfo where id in
+    <foreach item="idItem" collection="list" open="(" separator="," close=")">
+      #{idItem}
+    </foreach>
+  </delete>
+
+  <insert id="insert" parameterType="com.hc.lease.baseInfo.model.LeaseContractBaseinfo" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_contract_baseinfo_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_contract_baseinfo (id, name, contract_party_name, contract_branch_company,
+    contract_party_adress, down_payment_time_limit,
+    loan_deposit, appoint_area, rent_overdue_time_limit,
+    car_lessee_city, city_inside_recovery_cost,
+    city_outside_recovery_cost, province_inside_recovery_cost, province_outside_recovery_cost,
+    day_custodian_cost, continuity_overdue, cumulative_overdue, default_interest,
+    license_monthly_rent, contract_party_contact_address,
+    account_name, bank_id, branch_bank, account,
+    create_time, update_time, create_by,
+    update_by, sort, is_enable,
+    remarks, branch_company_id
+    , legal_person, important_event_price, check_time,authorized_person,party_a,party_b,party_c,loan_guarantor,guarantor
+    )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{contractPartyName,jdbcType=VARCHAR}, #{contractBranchCompany,jdbcType=VARCHAR},
+    #{contractPartyAdress,jdbcType=VARCHAR}, #{downPaymentTimeLimit,jdbcType=VARCHAR},
+    #{loanDeposit,jdbcType=NUMERIC}, #{appointArea,jdbcType=VARCHAR}, #{rentOverdueTimeLimit,jdbcType=VARCHAR},
+    #{carLesseeCity,jdbcType=VARCHAR}, #{cityInsideRecoveryCost,jdbcType=NUMERIC},
+    #{cityOutsideRecoveryCost,jdbcType=NUMERIC}, #{provinceInsideRecoveryCost,jdbcType=NUMERIC}, #{provinceOutsideRecoveryCost,jdbcType=NUMERIC},
+    #{dayCustodianCost,jdbcType=NUMERIC}, #{continuityOverdue,jdbcType=VARCHAR},
+    #{cumulativeOverdue,jdbcType=VARCHAR}, #{defaultInterest,jdbcType=NUMERIC},
+    #{licenseMonthlyRent,jdbcType=NUMERIC}, #{contractPartyContactAddress,jdbcType=VARCHAR, typeHandler=com.hc.lease.common.core.mybatis.JsonTypeHandler},
+    #{accountName,jdbcType=VARCHAR}, #{bankId,jdbcType=BIGINT}, #{branchBank,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR},
+    #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT},
+    #{updateBy,jdbcType=BIGINT}, #{sort,jdbcType=INTEGER}, #{isEnable,jdbcType=BIT},
+    #{remarks,jdbcType=VARCHAR}, #{branchCompanyId,jdbcType=BIGINT}
+    ,#{legalPerson,jdbcType=VARCHAR}, #{importantEventPrice,jdbcType=NUMERIC}, #{checkTime,jdbcType=VARCHAR},
+    #{authorizedPerson,jdbcType=VARCHAR},#{partyA,jdbcType=VARCHAR},#{partyB,jdbcType=VARCHAR},#{partyC,jdbcType=VARCHAR},#{loanGuarantor,jdbcType=VARCHAR},#{guarantor,jdbcType=VARCHAR}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hc.lease.baseInfo.model.LeaseContractBaseinfo" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_contract_baseinfo_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_contract_baseinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="contractPartyName != null" >
+        contract_party_name,
+      </if>
+      <if test="contractBranchCompany != null" >
+        contract_branch_company,
+      </if>
+      <if test="contractPartyAdress != null" >
+        contract_party_adress,
+      </if>
+      <if test="downPaymentTimeLimit != null" >
+        down_payment_time_limit,
+      </if>
+      <if test="loanDeposit != null" >
+        loan_deposit,
+      </if>
+      <if test="appointArea != null" >
+        appoint_area,
+      </if>
+      <if test="rentOverdueTimeLimit != null" >
+        rent_overdue_time_limit,
+      </if>
+      <if test="carLesseeCity != null" >
+        car_lessee_city,
+      </if>
+      <if test="cityInsideRecoveryCost != null" >
+        city_inside_recovery_cost,
+      </if>
+      <if test="cityOutsideRecoveryCost != null" >
+        city_outside_recovery_cost,
+      </if>
+      <if test="provinceInsideRecoveryCost != null" >
+        province_inside_recovery_cost,
+      </if>
+      <if test="provinceOutsideRecoveryCost != null" >
+        province_outside_recovery_cost,
+      </if>
+      <if test="dayCustodianCost != null" >
+        day_custodian_cost,
+      </if>
+      <if test="continuityOverdue != null" >
+        continuity_overdue,
+      </if>
+      <if test="cumulativeOverdue != null" >
+        cumulative_overdue,
+      </if>
+      <if test="defaultInterest != null" >
+        default_interest,
+      </if>
+      <if test="licenseMonthlyRent != null" >
+        license_monthly_rent,
+      </if>
+      <if test="contractPartyContactAddress != null" >
+        contract_party_contact_address,
+      </if>
+      <if test="accountName != null" >
+        account_name,
+      </if>
+      <if test="bankId != null" >
+        bank_id,
+      </if>
+      <if test="branchBank != null" >
+        branch_bank,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="isEnable != null" >
+        is_enable,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="branchCompanyId != null" >
+        branch_company_id,
+      </if>
+      <if test="legalPerson != null" >
+        legal_person,
+      </if>
+      <if test="importantEventPrice != null" >
+        important_event_price,
+      </if>
+      <if test="checkTime != null" >
+        check_time,
+      </if>
+      <if test="authorizedPerson != null" >
+        authorized_person,
+      </if>
+      <if test="partyA != null" >
+        party_a,
+      </if>
+      <if test="partyB != null" >
+        party_b,
+      </if>
+      <if test="partyC != null" >
+        party_c,
+      </if>
+      <if test="loanGuarantor != null" >
+        loan_guarantor,
+      </if>
+      <if test="guarantor != null" >
+        guarantor
+      </if>
+
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="contractPartyName != null" >
+        #{contractPartyName,jdbcType=VARCHAR},
+      </if>
+      <if test="contractBranchCompany != null" >
+        #{contractBranchCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="contractPartyAdress != null" >
+        #{contractPartyAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="downPaymentTimeLimit != null" >
+        #{downPaymentTimeLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="loanDeposit != null" >
+        #{loanDeposit,jdbcType=NUMERIC},
+      </if>
+      <if test="appointArea != null" >
+        #{appointArea,jdbcType=VARCHAR},
+      </if>
+      <if test="rentOverdueTimeLimit != null" >
+        #{rentOverdueTimeLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="carLesseeCity != null" >
+        #{carLesseeCity,jdbcType=VARCHAR},
+      </if>
+      <if test="cityInsideRecoveryCost != null" >
+        #{cityInsideRecoveryCost,jdbcType=NUMERIC},
+      </if>
+      <if test="cityOutsideRecoveryCost != null" >
+        #{cityOutsideRecoveryCost,jdbcType=NUMERIC},
+      </if>
+      <if test="provinceInsideRecoveryCost != null" >
+        #{provinceInsideRecoveryCost,jdbcType=NUMERIC},
+      </if>
+      <if test="provinceOutsideRecoveryCost != null" >
+        #{provinceOutsideRecoveryCost,jdbcType=NUMERIC},
+      </if>
+      <if test="dayCustodianCost != null" >
+        #{dayCustodianCost,jdbcType=NUMERIC},
+      </if>
+      <if test="continuityOverdue != null" >
+        #{continuityOverdue,jdbcType=VARCHAR},
+      </if>
+      <if test="cumulativeOverdue != null" >
+        #{cumulativeOverdue,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultInterest != null" >
+        #{defaultInterest,jdbcType=NUMERIC},
+      </if>
+      <if test="licenseMonthlyRent != null" >
+        #{licenseMonthlyRent,jdbcType=NUMERIC},
+      </if>
+      <if test="contractPartyContactAddress != null" >
+        #{contractPartyContactAddress,jdbcType=VARCHAR, typeHandler=com.hc.lease.common.core.mybatis.JsonTypeHandler},
+      </if>
+      <if test="accountName != null" >
+        #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankId != null" >
+        #{bankId,jdbcType=BIGINT},
+      </if>
+      <if test="branchBank != null" >
+        #{branchBank,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="branchCompanyId != null" >
+        #{branchCompanyId,jdbcType=BIGINT},
+      </if>
+
+      <if test="legalPerson != null" >
+        #{legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="importantEventPrice != null" >
+        #{importantEventPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="checkTime != null" >
+        #{checkTime,jdbcType=VARCHAR},
+      </if>
+      <if test="authorizedPerson != null" >
+        #{authorizedPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="partyA != null" >
+        #{partyA,jdbcType=VARCHAR},
+      </if>
+      <if test="partyB != null" >
+        #{partyB,jdbcType=VARCHAR},
+      </if>
+      <if test="partyC != null" >
+        #{partyC,jdbcType=VARCHAR},
+      </if>
+      <if test="loanGuarantor != null" >
+        #{loanGuarantor,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantor != null" >
+        #{guarantor,jdbcType=VARCHAR}
+      </if>
+
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.baseInfo.model.LeaseContractBaseinfo" >
+    update lease_contract_baseinfo
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="contractPartyName != null" >
+        contract_party_name = #{contractPartyName,jdbcType=VARCHAR},
+      </if>
+      <if test="contractBranchCompany != null" >
+        contract_branch_company = #{contractBranchCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="contractPartyAdress != null" >
+        contract_party_adress = #{contractPartyAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="downPaymentTimeLimit != null" >
+        down_payment_time_limit = #{downPaymentTimeLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="loanDeposit != null" >
+        loan_deposit = #{loanDeposit,jdbcType=NUMERIC},
+      </if>
+      <if test="appointArea != null" >
+        appoint_area = #{appointArea,jdbcType=VARCHAR},
+      </if>
+      <if test="rentOverdueTimeLimit != null" >
+        rent_overdue_time_limit = #{rentOverdueTimeLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="carLesseeCity != null" >
+        car_lessee_city = #{carLesseeCity,jdbcType=VARCHAR},
+      </if>
+      <if test="cityInsideRecoveryCost != null" >
+        city_inside_recovery_cost = #{cityInsideRecoveryCost,jdbcType=NUMERIC},
+      </if>
+      <if test="cityOutsideRecoveryCost != null" >
+        city_outside_recovery_cost = #{cityOutsideRecoveryCost,jdbcType=NUMERIC},
+      </if>
+      <if test="provinceInsideRecoveryCost != null" >
+        province_inside_recovery_cost = #{provinceInsideRecoveryCost,jdbcType=NUMERIC},
+      </if>
+      <if test="provinceOutsideRecoveryCost != null" >
+        province_outside_recovery_cost = #{provinceOutsideRecoveryCost,jdbcType=NUMERIC},
+      </if>
+      <if test="dayCustodianCost != null" >
+        day_custodian_cost = #{dayCustodianCost,jdbcType=NUMERIC},
+      </if>
+      <if test="continuityOverdue != null" >
+        continuity_overdue = #{continuityOverdue,jdbcType=VARCHAR},
+      </if>
+      <if test="cumulativeOverdue != null" >
+        cumulative_overdue = #{cumulativeOverdue,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultInterest != null" >
+        default_interest = #{defaultInterest,jdbcType=NUMERIC},
+      </if>
+      <if test="licenseMonthlyRent != null" >
+        license_monthly_rent = #{licenseMonthlyRent,jdbcType=NUMERIC},
+      </if>
+      <if test="contractPartyContactAddress != null" >
+        contract_party_contact_address = #{contractPartyContactAddress,jdbcType=VARCHAR, typeHandler=com.hc.lease.common.core.mybatis.JsonTypeHandler},
+      </if>
+      <if test="accountName != null" >
+        account_name = #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankId != null" >
+        bank_id = #{bankId,jdbcType=BIGINT},
+      </if>
+      <if test="branchBank != null" >
+        branch_bank = #{branchBank,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="isEnable != null" >
+        is_enable = #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="branchCompanyId != null" >
+        branch_company_id = #{branchCompanyId,jdbcType=BIGINT},
+      </if>
+      <if test="legalPerson != null" >
+        legal_person = #{legalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="importantEventPrice != null" >
+        important_event_price = #{importantEventPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="checkTime != null" >
+        check_time = #{checkTime,jdbcType=VARCHAR},
+      </if>
+      <if test="authorizedPerson != null" >
+        authorized_person = #{authorizedPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="partyA != null" >
+        party_a = #{partyA,jdbcType=VARCHAR},
+      </if>
+      <if test="partyB != null" >
+        party_b = #{partyB,jdbcType=VARCHAR},
+      </if>
+      <if test="partyC != null" >
+        party_c = #{partyC,jdbcType=VARCHAR},
+      </if>
+      <if test="loanGuarantor != null" >
+        loan_guarantor = #{loanGuarantor,jdbcType=VARCHAR},
+      </if>
+      <if test="guarantor != null" >
+        guarantor = #{guarantor,jdbcType=VARCHAR}
+      </if>
+
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hc.lease.baseInfo.model.LeaseContractBaseinfo" >
+    update lease_contract_baseinfo
+    set name = #{name,jdbcType=VARCHAR},
+      contract_party_name = #{contractPartyName,jdbcType=VARCHAR},
+      contract_branch_company = #{contractBranchCompany,jdbcType=VARCHAR},
+      contract_party_adress = #{contractPartyAdress,jdbcType=VARCHAR},
+      down_payment_time_limit = #{downPaymentTimeLimit,jdbcType=VARCHAR},
+      loan_deposit = #{loanDeposit,jdbcType=NUMERIC},
+      appoint_area = #{appointArea,jdbcType=VARCHAR},
+      rent_overdue_time_limit = #{rentOverdueTimeLimit,jdbcType=VARCHAR},
+      car_lessee_city = #{carLesseeCity,jdbcType=VARCHAR},
+      city_inside_recovery_cost = #{cityInsideRecoveryCost,jdbcType=NUMERIC},
+      city_outside_recovery_cost = #{cityOutsideRecoveryCost,jdbcType=NUMERIC},
+      province_inside_recovery_cost = #{provinceInsideRecoveryCost,jdbcType=NUMERIC},
+      province_outside_recovery_cost = #{provinceOutsideRecoveryCost,jdbcType=NUMERIC},
+      day_custodian_cost = #{dayCustodianCost,jdbcType=NUMERIC},
+      continuity_overdue = #{continuityOverdue,jdbcType=VARCHAR},
+      cumulative_overdue = #{cumulativeOverdue,jdbcType=VARCHAR},
+      default_interest = #{defaultInterest,jdbcType=NUMERIC},
+      license_monthly_rent = #{licenseMonthlyRent,jdbcType=NUMERIC},
+      contract_party_contact_address = #{contractPartyContactAddress,jdbcType=VARCHAR, typeHandler=com.hc.lease.common.core.mybatis.JsonTypeHandler},
+      account_name = #{accountName,jdbcType=VARCHAR},
+      bank_id = #{bankId,jdbcType=BIGINT},
+      branch_bank = #{branchBank,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      sort = #{sort,jdbcType=INTEGER},
+      is_enable = #{isEnable,jdbcType=BIT},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      branch_company_id = #{branchCompanyId,jdbcType=BIGINT},
+      legal_person = #{legalPerson,jdbcType=VARCHAR},
+      important_event_price = #{importantEventPrice,jdbcType=NUMERIC},
+      check_time = #{checkTime,jdbcType=VARCHAR},
+      authorized_person = #{authorizedPerson,jdbcType=VARCHAR},
+      party_a = #{partyA,jdbcType=VARCHAR},
+      party_b = #{partyB,jdbcType=VARCHAR},
+      party_c = #{partyC,jdbcType=VARCHAR},
+      loan_guarantor = #{loanGuarantor,jdbcType=VARCHAR},
+      guarantor = #{guarantor,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

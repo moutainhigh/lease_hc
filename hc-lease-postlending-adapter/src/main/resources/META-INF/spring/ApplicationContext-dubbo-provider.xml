@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://code.alibabatech.com/schema/dubbo
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 提供方应用信息，用于计算依赖关系 -->
+	<dubbo:application name="postlending_adapter" />
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<dubbo:registry address="${dubbo.registry.zookeeper}"/>
+	<!-- <dubbo:registry address="multicast://224.5.6.7:1234" /> -->
+	<!-- 用dubbo协议在20883端口暴露服务 -->
+	<dubbo:protocol name="dubbo" port="${dubbo.protocol.postlendingAdapter}"/>
+	<!-- 监控中心配置，protocol="registry"，表示从注册中心发现监控中心地址 -->
+	<dubbo:monitor protocol="registry"/>
+	<!-- 当ProtocolConfig和ServiceConfig某属性没有配置时,采用此缺省值 -->
+	<dubbo:provider filter="dubboTraceFilter" timeout="10000" threadpool="fixed" threads="100" accepts="1000" token="true"/>
+
+	<!-- 声明需要暴露的服务接口 -->
+	<dubbo:service interface="com.hc.lease.postlending.adapter.api.LeaseOverdueLogAdapter" ref="leaseOverdueLogAdapter" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.postlending.adapter.api.LeaseAllinpayLogAdapter" ref="leaseAllinpayLogAdapter" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.postlending.adapter.api.LeaseAllinpayStatusLogAdapter" ref="leaseAllinpayStatusLogAdapter" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.postlending.adapter.api.LeaseAllinpayBatchAdapter" ref="leaseAllinpayBatchAdapter" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.postlending.adapter.api.MonthlyPaymentAdapter" ref="monthlyPaymentAdapter" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.postlending.adapter.api.LeaseAllinpayStatusSmsAdapter" ref="leaseAllinpayStatusSmsAdapter" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.postlending.adapter.api.LeaseAllinpaySplitBatchAdapter" ref="leaseAllinpaySplitBatchAdapter" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.postlending.adapter.api.LeaseAllinpaySplitLogAdapter" ref="leaseAllinpaySplitLogAdapter" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.postlending.adapter.api.LeaseAllinpaySplitQueryLogAdapter" ref="leaseAllinpaySplitQueryLogAdapter" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.postlending.adapter.api.LeaseAllinpaySplitAdapter" ref="leaseAllinpaySplitAdapter" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.postlending.adapter.api.LeaseAllinpaySplitStatusLogAdapter" ref="leaseAllinpaySplitStatusLogAdapter" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.postlending.adapter.api.LeaseAllinpaySplitConnectAdapter" ref="leaseAllinpaySplitConnectAdapter" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.postlending.adapter.api.LeaseManualDeductionsDataAdapter" ref="leaseManualDeductionsDataAdapter" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.postlending.adapter.api.LeaseManualDeductionsPayLogAdapter" ref="leaseManualDeductionsPayLogAdapter" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.postlending.adapter.api.LeaseManualDeductionsStatistAdapter" ref="leaseManualDeductionsStatistAdapter" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.postlending.adapter.api.LeaseManualDeductioQueryLogAdapter" ref="leaseManualDeductioQueryLogAdapter" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.postlending.adapter.api.LeaseManualDeductiStatusLogAdapter" ref="leaseManualDeductiStatusLogAdapter" timeout="1200000" accesslog="true" />
+
+	<!-- 声明需要暴露的服务接口 -->
+	<dubbo:service interface="com.hc.lease.postlending.service.api.LeaseAllinpayLogService" ref="leaseAllinpayLogService" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.postlending.service.api.LeaseAllinpayStatusLogService" ref="leaseAllinpayStatusLogService" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.postlending.service.api.LeaseOverdueLogService" ref="leaseOverdueLogService" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.postlending.service.api.LeaseAllinpayBatchService" ref="leaseAllinpayBatchService" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.postlending.service.api.LeaseAllinpayQueryLogService" ref="leaseAllinpayQueryLogService" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.postlending.service.api.LeaseAllinpayStatusSmsService" ref="leaseAllinpayStatusSmsService" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.postlending.service.api.LeaseAllinpaySplitBatchService" ref="leaseAllinpaySplitBatchService" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.postlending.service.api.LeaseAllinpaySplitLogService" ref="leaseAllinpaySplitLogService" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.postlending.service.api.LeaseAllinpaySplitQueryLogService" ref="leaseAllinpaySplitQueryLogService" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.postlending.service.api.LeaseAllinpaySplitService" ref="leaseAllinpaySplitService" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.postlending.service.api.LeaseAllinpaySplitStatusLogService" ref="leaseAllinpaySplitStatusLogService" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.postlending.service.api.LeaseAllinpaySplitConnectService" ref="leaseAllinpaySplitConnectService" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.postlending.service.api.LeaseManualDeductionsDataService" ref="leaseManualDeductionsDataService" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.postlending.service.api.LeaseManualDeductionsPayLogService" ref="leaseManualDeductionsPayLogService" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.postlending.service.api.LeaseManualDeductionsStatistService" ref="leaseManualDeductionsStatistService" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.postlending.service.api.LeaseManualDeductioQueryLogService" ref="leaseManualDeductioQueryLogService" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.postlending.service.api.LeaseManualDeductiStatusLogService" ref="leaseManualDeductiStatusLogService" timeout="1200000" accesslog="true" />
+
+</beans>

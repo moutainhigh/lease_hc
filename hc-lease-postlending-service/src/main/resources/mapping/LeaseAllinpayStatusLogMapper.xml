@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.postlending.dao.LeaseAllinpayStatusLogMapper" >
+  <!--代收状态流水-->
+  <resultMap id="BaseResultMap" type="com.hc.lease.postlending.model.LeaseAllinpayStatusLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="allinpay_log_id" property="allinpayLogId" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="ret_code" property="retCode" jdbcType="VARCHAR" />
+    <result column="err_msg" property="errMsg" jdbcType="VARCHAR" />
+    <result column="back_time" property="backTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, allinpay_log_id, create_time, create_by, ret_code, err_msg, back_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from lease_allinpay_status_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lease_allinpay_status_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hc.lease.postlending.model.LeaseAllinpayStatusLog" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_allinpay_status_log_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_allinpay_status_log (id, allinpay_log_id, create_time, 
+      create_by, ret_code, err_msg, 
+      back_time)
+    values (#{id,jdbcType=BIGINT}, #{allinpayLogId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=BIGINT}, #{retCode,jdbcType=VARCHAR}, #{errMsg,jdbcType=VARCHAR}, 
+      #{backTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hc.lease.postlending.model.LeaseAllinpayStatusLog" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_allinpay_status_log_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_allinpay_status_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="allinpayLogId != null" >
+        allinpay_log_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="retCode != null" >
+        ret_code,
+      </if>
+      <if test="errMsg != null" >
+        err_msg,
+      </if>
+      <if test="backTime != null" >
+        back_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="allinpayLogId != null" >
+        #{allinpayLogId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="retCode != null" >
+        #{retCode,jdbcType=VARCHAR},
+      </if>
+      <if test="errMsg != null" >
+        #{errMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="backTime != null" >
+        #{backTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.postlending.model.LeaseAllinpayStatusLog" >
+    update lease_allinpay_status_log
+    <set >
+      <if test="allinpayLogId != null" >
+        allinpay_log_id = #{allinpayLogId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="retCode != null" >
+        ret_code = #{retCode,jdbcType=VARCHAR},
+      </if>
+      <if test="errMsg != null" >
+        err_msg = #{errMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="backTime != null" >
+        back_time = #{backTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hc.lease.postlending.model.LeaseAllinpayStatusLog" >
+    update lease_allinpay_status_log
+    set allinpay_log_id = #{allinpayLogId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      ret_code = #{retCode,jdbcType=VARCHAR},
+      err_msg = #{errMsg,jdbcType=VARCHAR},
+      back_time = #{backTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

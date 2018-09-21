@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!-- 接口 模块 -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>hc.lease.common</groupId>
+        <artifactId>hc-lease-common-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../hc-lease-common-parent</relativePath>
+    </parent>
+
+    <groupId>hc.lease.web</groupId>
+    <artifactId>hc-lease-web-consumer</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>hc-lease-web-consumer</name>
+    <packaging>war</packaging>
+
+    <properties>
+        <project.war.path>dubbo-consumer/hc-lease-web-consumer</project.war.path>
+    </properties>
+
+    <dependencies>
+
+        <!-- 项目依赖 -->
+        <dependency>
+            <groupId>hc.lease.adapter</groupId>
+            <artifactId>hc-lease-order-adapter-api</artifactId>
+            <version>${hc.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>hc.lease.adapter</groupId>
+            <artifactId>hc-lease-supplier-adapter-api</artifactId>
+            <version>${hc.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>hc.lease.adapter</groupId>
+            <artifactId>hc-lease-account-adapter-api</artifactId>
+            <version>${hc.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>hc.lease.common</groupId>
+            <artifactId>hc-lease-common-core</artifactId>
+            <version>${hc.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>hc.lease.adapter</groupId>
+            <artifactId>hc-lease-baseInfo-adapter-api</artifactId>
+            <version>${hc.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>hc.lease.common</groupId>
+            <artifactId>hc-lease-common-allinpay</artifactId>
+            <version>${hc.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>hc.lease.adapter</groupId>
+            <artifactId>hc-lease-postlending-adapter-api</artifactId>
+            <version>${hc.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>hc.lease.adapter</groupId>
+            <artifactId>hc-lease-user-adapter-api</artifactId>
+            <version>${hc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>hc.lease.adapter</groupId>
+            <artifactId>hc-lease-wx-adapter-api</artifactId>
+            <version>${hc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>hc.lease.adapter</groupId>
+            <artifactId>hc-lease-wx-adapter-api</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>hc.lease.adapter</groupId>
+            <artifactId>hc-lease-activity-adapter-api</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>hc.lease.adapter</groupId>
+            <artifactId>hc-lease-workflow-adapter-api</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+
+
+
+
+    </dependencies>
+
+    <build>
+
+        <finalName>hc-lease-web-consumer</finalName>
+
+        <resources>
+            <!-- 先指定 src/main/resources下所有文件及文件夹为资源文件 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <targetPath>${project.build.directory}/classes</targetPath>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <plugins>
+            <!-- 打包war文件 -->
+            <plugin>
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <artifactId>maven-war-plugin</artifactId>
+                <!--<version>2.4</version>-->
+                <configuration>
+                    <outputDirectory>${user.home}/${project.war.path}</outputDirectory>
+                </configuration>
+            </plugin>
+
+        </plugins>
+
+    </build>
+
+</project>

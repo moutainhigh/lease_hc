@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.postlending.dao.LeaseManualDeductioQueryLogMapper" >
+  <resultMap id="BaseResultMap" type="com.hc.lease.postlending.model.LeaseManualDeductioQueryLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="data_id" property="dataId" jdbcType="BIGINT" />
+    <result column="pay_log_id" property="payLogId" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="ret_code" property="retCode" jdbcType="VARCHAR" />
+    <result column="err_msg" property="errMsg" jdbcType="VARCHAR" />
+    <result column="back_time" property="backTime" jdbcType="TIMESTAMP" />
+    <result column="req_sn" property="reqSn" jdbcType="VARCHAR" />
+    <result column="sn" property="sn" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, data_id, pay_log_id, status, ret_code, err_msg, back_time, req_sn, sn
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from lease_manual_deductio_query_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lease_manual_deductio_query_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hc.lease.postlending.model.LeaseManualDeductioQueryLog" >
+
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_manual_deductio_query_log_id_seq'::regclass) as id
+    </selectKey>
+
+    insert into lease_manual_deductio_query_log (id, data_id, pay_log_id, 
+      status, ret_code, err_msg, 
+      back_time, req_sn, sn
+      )
+    values (#{id,jdbcType=BIGINT}, #{dataId,jdbcType=BIGINT}, #{payLogId,jdbcType=BIGINT}, 
+      #{status,jdbcType=INTEGER}, #{retCode,jdbcType=VARCHAR}, #{errMsg,jdbcType=VARCHAR}, 
+      #{backTime,jdbcType=TIMESTAMP}, #{reqSn,jdbcType=VARCHAR}, #{sn,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hc.lease.postlending.model.LeaseManualDeductioQueryLog" >
+
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_manual_deductio_query_log_id_seq'::regclass) as id
+    </selectKey>
+
+    insert into lease_manual_deductio_query_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dataId != null" >
+        data_id,
+      </if>
+      <if test="payLogId != null" >
+        pay_log_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="retCode != null" >
+        ret_code,
+      </if>
+      <if test="errMsg != null" >
+        err_msg,
+      </if>
+      <if test="backTime != null" >
+        back_time,
+      </if>
+      <if test="reqSn != null" >
+        req_sn,
+      </if>
+      <if test="sn != null" >
+        sn,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="dataId != null" >
+        #{dataId,jdbcType=BIGINT},
+      </if>
+      <if test="payLogId != null" >
+        #{payLogId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="retCode != null" >
+        #{retCode,jdbcType=VARCHAR},
+      </if>
+      <if test="errMsg != null" >
+        #{errMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="backTime != null" >
+        #{backTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reqSn != null" >
+        #{reqSn,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.postlending.model.LeaseManualDeductioQueryLog" >
+    update lease_manual_deductio_query_log
+    <set >
+      <if test="dataId != null" >
+        data_id = #{dataId,jdbcType=BIGINT},
+      </if>
+      <if test="payLogId != null" >
+        pay_log_id = #{payLogId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="retCode != null" >
+        ret_code = #{retCode,jdbcType=VARCHAR},
+      </if>
+      <if test="errMsg != null" >
+        err_msg = #{errMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="backTime != null" >
+        back_time = #{backTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reqSn != null" >
+        req_sn = #{reqSn,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        sn = #{sn,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hc.lease.postlending.model.LeaseManualDeductioQueryLog" >
+    update lease_manual_deductio_query_log
+    set data_id = #{dataId,jdbcType=BIGINT},
+      pay_log_id = #{payLogId,jdbcType=BIGINT},
+      status = #{status,jdbcType=INTEGER},
+      ret_code = #{retCode,jdbcType=VARCHAR},
+      err_msg = #{errMsg,jdbcType=VARCHAR},
+      back_time = #{backTime,jdbcType=TIMESTAMP},
+      req_sn = #{reqSn,jdbcType=VARCHAR},
+      sn = #{sn,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

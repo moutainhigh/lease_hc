@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.supplier.dao.LeaseCarInsuranceMapper" >
+  <resultMap id="BaseResultMap" type="com.hc.lease.supplier.model.LeaseCarInsurance" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="car_id" property="carId" jdbcType="BIGINT" />
+    <result column="insurance_company_id" property="insuranceCompanyId" jdbcType="BIGINT" />
+    <result column="insurance_type_id" property="insuranceTypeId" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="insurance_number" property="insuranceNumber" jdbcType="VARCHAR" />
+    <result column="premium" property="premium" jdbcType="NUMERIC" />
+    <result column="sum_insured" property="sumInsured" jdbcType="NUMERIC" />
+    <result column="tax_allowances" property="taxAllowances" jdbcType="NUMERIC" />
+    <result column="policy_scanner_img" property="policyScannerImg" jdbcType="VARCHAR" />
+    <result column="effective_time" property="effectiveTime" jdbcType="TIMESTAMP" />
+    <result column="insurance_company_name" property="insuranceCompanyName" jdbcType="VARCHAR" />
+    <result column="insurance_type_name" property="insuranceTypeName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, car_id, insurance_company_id, insurance_type_id, type, insurance_number, premium, 
+    sum_insured, policy_scanner_img, effective_timem,year,tax_allowances
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+     id, car_id as "carId", insurance_company_id as "insuranceCompanyId", insurance_type_id as "insuranceTypeId", type, insurance_number as "insuranceNumber", premium,
+    sum_insured as "sumInsured", policy_scanner_img as "policyScannerImg" , effective_time as "effectiveTime",year,tax_allowances as "taxAllowances"
+    from lease_car_insurance
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectByCarId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    ci.car_id as "carId", ci.insurance_company_id as "insuranceCompanyId", ic.name as "insuranceCompanyName",ci.insurance_type_id as "insuranceTypeId", it.name as "insuranceTypeName",ci.type, ci.insurance_number as "insuranceNumber", ci.premium,
+    ci.sum_insured as "sumInsured", ci.policy_scanner_img as "policyScannerImg" , ci.effective_time as "effectiveTime",ci.year,ci.tax_allowances as "taxAllowances"
+    from lease_car_insurance ci
+    left join lease_insurance_company ic on ci.insurance_company_id=ic.id
+    left join lease_insurance_type it on ci.insurance_type_id=it.id
+    where ci.car_id = #{id,jdbcType=BIGINT}
+  </select>
+
+
+
+  <select id="findPage" resultType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from lease_car_insurance
+  </select>
+
+  <select id="findAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from lease_car_insurance
+  </select>
+
+  <select id="insertViewParames" resultType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from lease_car_insurance
+  </select>
+
+
+
+  <delete id="deleteBatchById" parameterType="long">
+    delete from lease_car_insurance where id in
+    <foreach item="item" collection="list" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+
+<delete id="deleteByCarId"  parameterType="java.lang.Long">
+  delete from lease_car_insurance
+    where car_id = #{id,jdbcType=BIGINT}
+</delete>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lease_car_insurance
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hc.lease.supplier.model.LeaseCarInsurance" >
+    insert into lease_car_insurance (id, car_id, insurance_company_id, 
+      insurance_type_id, type, insurance_number, 
+      premium, sum_insured, policy_scanner_img, 
+      effective_time,year,tax_allowances)
+    values (#{id,jdbcType=BIGINT}, #{carId,jdbcType=BIGINT}, #{insuranceCompanyId,jdbcType=BIGINT}, 
+      #{insuranceTypeId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, #{insuranceNumber,jdbcType=VARCHAR}, 
+      #{premium,jdbcType=NUMERIC}, #{sumInsured,jdbcType=NUMERIC}, #{policyScannerImg,jdbcType=VARCHAR}, 
+      #{effectiveTime,jdbcType=TIMESTAMP},#{year,jdbcType=INTEGER},#{taxAllowances,jdbcType=NUMERIC})
+  </insert>
+
+  <insert id="insertList" parameterType="java.util.List">
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_car_insurance_id_seq'::regclass) as id
+    </selectKey>
+      insert into lease_car_insurance (id, car_id, insurance_company_id,
+      insurance_type_id, type, insurance_number,
+      premium, sum_insured, policy_scanner_img,
+      effective_time,year,tax_allowances)
+      values
+    <foreach collection="list" item="item" index="index" separator="," >
+      (#{item.id},#{item.carId},#{item.activityId},#{item.insuranceCompanyId},#{item.insuranceTypeId},
+      #{item.type},#{item.insuranceNumber},#{item.premium},#{item.sumInsured},#{item.policyScannerImg},#{item.effectiveTime},#{item.year},#{item.taxAllowances,jdbcType=NUMERIC})
+    </foreach>
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.hc.lease.supplier.model.LeaseCarInsurance" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_car_insurance_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_car_insurance
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="carId != null" >
+        car_id,
+      </if>
+      <if test="insuranceCompanyId != null" >
+        insurance_company_id,
+      </if>
+      <if test="insuranceTypeId != null" >
+        insurance_type_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="insuranceNumber != null" >
+        insurance_number,
+      </if>
+      <if test="premium != null" >
+        premium,
+      </if>
+      <if test="sumInsured != null" >
+        sum_insured,
+      </if>
+      <if test="policyScannerImg != null" >
+        policy_scanner_img,
+      </if>
+      <if test="effectiveTime != null" >
+        effective_time,
+      </if>
+      <if test="taxAllowances != null" >
+        tax_allowances
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="carId != null" >
+        #{carId,jdbcType=BIGINT},
+      </if>
+      <if test="insuranceCompanyId != null" >
+        #{insuranceCompanyId,jdbcType=BIGINT},
+      </if>
+      <if test="insuranceTypeId != null" >
+        #{insuranceTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="insuranceNumber != null" >
+        #{insuranceNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="premium != null" >
+        #{premium,jdbcType=NUMERIC},
+      </if>
+      <if test="sumInsured != null" >
+        #{sumInsured,jdbcType=NUMERIC},
+      </if>
+      <if test="policyScannerImg != null" >
+        #{policyScannerImg,jdbcType=VARCHAR},
+      </if>
+      <if test="effectiveTime != null" >
+        #{effectiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taxAllowances != null" >
+        #{taxAllowances,jdbcType=NUMERIC}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.supplier.model.LeaseCarInsurance" >
+    update lease_car_insurance
+    <set >
+      <if test="carId != null" >
+        car_id = #{carId,jdbcType=BIGINT},
+      </if>
+      <if test="insuranceCompanyId != null" >
+        insurance_company_id = #{insuranceCompanyId,jdbcType=BIGINT},
+      </if>
+      <if test="insuranceTypeId != null" >
+        insurance_type_id = #{insuranceTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="year != null" >
+        year = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="insuranceNumber != null" >
+        insurance_number = #{insuranceNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="premium != null" >
+        premium = #{premium,jdbcType=NUMERIC},
+      </if>
+      <if test="sumInsured != null" >
+        sum_insured = #{sumInsured,jdbcType=NUMERIC},
+      </if>
+      <if test="policyScannerImg != null" >
+        policy_scanner_img = #{policyScannerImg,jdbcType=VARCHAR},
+      </if>
+      <if test="effectiveTime != null" >
+        effective_time = #{effectiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taxAllowances != null" >
+        tax_allowances =#{taxAllowances,jdbcType=NUMERIC}
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <update id="updateByCarId" parameterType="com.hc.lease.supplier.model.LeaseCarInsurance" >
+    update lease_car_insurance
+    <set >
+      <if test="insuranceCompanyId != null" >
+        insurance_company_id = #{insuranceCompanyId,jdbcType=BIGINT},
+      </if>
+      <if test="insuranceTypeId != null" >
+        insurance_type_id = #{insuranceTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="insuranceNumber != null" >
+        insurance_number = #{insuranceNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="premium != null" >
+        premium = #{premium,jdbcType=NUMERIC},
+      </if>
+      <if test="sumInsured != null" >
+        sum_insured = #{sumInsured,jdbcType=NUMERIC},
+      </if>
+      <if test="policyScannerImg != null" >
+        policy_scanner_img = #{policyScannerImg,jdbcType=VARCHAR},
+      </if>
+      <if test="effectiveTime != null" >
+        effective_time = #{effectiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taxAllowances != null" >
+        tax_allowances =#{taxAllowances,jdbcType=NUMERIC}
+      </if>
+
+    </set>
+    where car_id = #{carId,jdbcType=BIGINT} and type=#{type,jdbcType=INTEGER} and year = #{year,jdbcType=INTEGER}
+  </update>
+
+
+  <update id="updateByPrimaryKey" parameterType="com.hc.lease.supplier.model.LeaseCarInsurance" >
+    update lease_car_insurance
+    set car_id = #{carId,jdbcType=BIGINT},
+      insurance_company_id = #{insuranceCompanyId,jdbcType=BIGINT},
+      insurance_type_id = #{insuranceTypeId,jdbcType=BIGINT},
+      type = #{type,jdbcType=INTEGER},
+      year = #{year,jdbcType=INTEGER},
+      insurance_number = #{insuranceNumber,jdbcType=VARCHAR},
+      premium = #{premium,jdbcType=NUMERIC},
+      sum_insured = #{sumInsured,jdbcType=NUMERIC},
+      policy_scanner_img = #{policyScannerImg,jdbcType=VARCHAR},
+      effective_time = #{effectiveTime,jdbcType=TIMESTAMP},
+      tax_allowances =#{taxAllowances,jdbcType=NUMERIC}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

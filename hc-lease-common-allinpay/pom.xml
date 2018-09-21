@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!-- 通联公共 模块 -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>hc.lease.common</groupId>
+    <artifactId>hc-lease-common-allinpay</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>hc-lease-common-allinpay</name>
+    <packaging>jar</packaging>
+
+    <properties>
+        <hc.version>1.0.0-SNAPSHOT</hc.version>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>hc.lease.common</groupId>
+            <artifactId>hc-lease-common-util</artifactId>
+            <version>${hc.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>hc.lease.common</groupId>
+            <artifactId>hc-lease-common-core</artifactId>
+            <version>${hc.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>hc.lease.allinpay</groupId>
+            <artifactId>hc-lease-allinpayxsigntool</artifactId>
+            <version>${hc.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>hc.lease.allinpay</groupId>
+            <artifactId>hc-lease-allinpayxmlentity</artifactId>
+            <version>${hc.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>hc.lease.allinpay</groupId>
+            <artifactId>hc-lease-allinpayquick</artifactId>
+            <version>${hc.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>hc.lease.adapter</groupId>
+            <artifactId>hc-lease-postlending-adapter-api</artifactId>
+            <version>${hc.version}</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+
+        <finalName>hc-lease-common-allinpay</finalName>
+
+        <plugins>
+            <!-- 打包jar文件时，配置manifest文件，加入lib包的jar依赖 -->
+            <!--
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <classesDirectory>target/classes/</classesDirectory>
+                    <outputDirectory>E:\packget\allinpay</outputDirectory>
+                </configuration>
+            </plugin>
+-->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
+
+</project>

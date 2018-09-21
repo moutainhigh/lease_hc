@@ -1,0 +1,2621 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.order.dao.LeaseContractMapper">
+    <resultMap id="BaseResultMap" type="com.hc.lease.order.model.LeaseContract">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="repayment_id" property="repaymentId" jdbcType="BIGINT"/>
+        <result column="scheme_order_id" property="schemeOrderId" jdbcType="BIGINT"/>
+        <result column="sale_channel_type" property="saleChannelType" jdbcType="INTEGER"/>
+        <result column="sale_channel_id" property="saleChannelId" jdbcType="BIGINT"/>
+        <result column="contract_number_year" property="contractNumberYear" jdbcType="VARCHAR"/>
+        <result column="contract_number" property="contractNumber" jdbcType="VARCHAR"/>
+        <result column="complete_contract_number" property="completeContractNumber" jdbcType="VARCHAR"/>
+        <result column="contract_key" property="contractKey" jdbcType="VARCHAR"/>
+        <!--<result column="pay_staging_time" property="payStagingTime" jdbcType="TIMESTAMP" />-->
+        <result column="lease_start_time" property="leaseStartTime" jdbcType="TIMESTAMP"/>
+        <result column="lease_end_time" property="leaseEndTime" jdbcType="TIMESTAMP"/>
+        <!-- <result column="staging_contain_monthly_rent" property="stagingContainMonthlyRent" jdbcType="BIT" />
+         <result column="company_header_id" property="companyHeaderId" jdbcType="BIGINT" />-->
+        <result column="account_contact_adress" property="accountContactAdress" jdbcType="VARCHAR"/>
+        <result column="guarantee_name" property="guaranteeName" jdbcType="VARCHAR"/>
+        <result column="guarantee_id_card" property="guaranteeIdCard" jdbcType="VARCHAR"/>
+        <result column="guarantee_contact_address" property="guaranteeContactAddress" jdbcType="VARCHAR"/>
+        <result column="third_party_liability_insurance" property="thirdPartyLiabilityInsurance" jdbcType="NUMERIC"/>
+        <result column="card_check_accept_img" property="cardCheckAcceptImg" jdbcType="VARCHAR"/>
+        <result column="guarantee_contact" property="guaranteeContact" jdbcType="VARCHAR"/>
+        <result column="guarantee_contact_name" property="guaranteeContactName" jdbcType="VARCHAR"/>
+        <result column="guarantee_contact_phone" property="guaranteeContactPhone" jdbcType="VARCHAR"/>
+        <result column="guarantee_zip_code" property="guaranteeZipCode" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="branch_company_id" property="branchCompanyId" jdbcType="BIGINT"/>
+        <result column="contract_baseinfo_id" property="contractBaseinfoId" jdbcType="BIGINT"/>
+
+
+        <result column="branch_company_name" property="branchCompanyName" jdbcType="VARCHAR"/>
+        <result column="contract_party_name" property="contractPartyName" jdbcType="VARCHAR"/>
+        <result column="dealer_name" property="dealerName" jdbcType="VARCHAR"/>
+        <result column="comprehensive_quote" property="comprehensiveQuote" jdbcType="NUMERIC"/>
+        <result column="brands_name" property="brandsName" jdbcType="VARCHAR"/>
+        <result column="series_name" property="seriesName" jdbcType="VARCHAR"/>
+        <result column="business_model_name" property="businessModelName" jdbcType="VARCHAR"/>
+        <result column="color_name" property="colorName" jdbcType="VARCHAR"/>
+        <result column="scheme_name" property="schemeName" jdbcType="VARCHAR"/>
+        <result column="plate_number" property="plateNumber" jdbcType="VARCHAR"/>
+        <result column="scheme_id" property="schemeId" jdbcType="BIGINT"/>
+        <result column="card_id" property="cardId" jdbcType="BIGINT"/>
+        <result column="sn" property="sn" jdbcType="VARCHAR"/>
+        <result column="car_price" property="carPrice" jdbcType="NUMERIC"/>
+        <result column="totle_car_price" property="totleCarPrice" jdbcType="NUMERIC"/>
+        <result column="lease_price" property="leasePrice" jdbcType="NUMERIC"/>
+        <result column="contract_party_id" property="contractPartyId" jdbcType="BIGINT"/>
+        <result column="annual_interest" property="annualInterest" jdbcType="NUMERIC"/>
+        <result column="down_payment" property="downPayment" jdbcType="NUMERIC"/>
+        <result column="balance_payment" property="balancePayment" jdbcType="NUMERIC"/>
+        <result column="staging_number_id" property="stagingNumberId" jdbcType="BIGINT"/>
+        <result column="staging_number_name" property="stagingNumberName" jdbcType="VARCHAR"/>
+        <result column="commission" property="commission" jdbcType="NUMERIC"/>
+        <result column="receive_margin" property="receiveMargin" jdbcType="NUMERIC"/>
+        <result column="id_card_img" property="idCardImg" jdbcType="VARCHAR"/>
+        <result column="car_accept_img" property="carAcceptImg" jdbcType="VARCHAR"/>
+        <result column="engine_number" property="engineNumber" jdbcType="VARCHAR"/>
+        <result column="card_frame_number" property="cardFrameNumber" jdbcType="VARCHAR"/>
+        <result column="car_condition" property="carCondition" jdbcType="INTEGER"/>
+        <result column="complete_model_name" property="completeModelName" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="contract_type" property="contractType" jdbcType="INTEGER"/>
+        <result column="vsersion_number" property="vsersionNumber" jdbcType="INTEGER"/>
+        <result column="deal_status" property="dealStatus" jdbcType="VARCHAR"/>
+        <result column="back_status" property="backStatus" jdbcType="INTEGER"/>
+        <result column="parent_id" property="parentId" jdbcType="BIGINT"/>
+        <result column="source_type" property="sourceType" jdbcType="INTEGER"/>
+        <result column="price_difference" property="priceDifference" jdbcType="NUMERIC"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+
+        <result column="is_type" property="isType" jdbcType="INTEGER"/>
+        <result column="contract_brands_id" property="contractBrandsId" jdbcType="BIGINT"/>
+        <result column="contract_series_id" property="contractSeriesId" jdbcType="BIGINT"/>
+        <result column="contract_model_id" property="contractModelId" jdbcType="BIGINT"/>
+        <result column="contract_brands_name" property="contractBrandsName" jdbcType="VARCHAR"/>
+        <result column="contract_series_name" property="contractSeriesName" jdbcType="VARCHAR"/>
+        <result column="contract_business_model_name" property="contractBusinessModelName" jdbcType="VARCHAR"/>
+        <result column="contract_complete_model_name" property="contractCompleteModelName" jdbcType="VARCHAR"/>
+        <result column="total_amount" property="totalAmount" jdbcType="NUMERIC"/>
+        <result column="monthly_rent" property="monthlyRent" jdbcType="NUMERIC"/>
+        <result column="bank_code" property="bankCode" jdbcType="VARCHAR"/>
+        <result column="pay_date" property="payDate" jdbcType="INTEGER"/>
+        <result column="total_price" property="totalPrice" jdbcType="NUMERIC"/>
+        <result column="is_paying" property="isPaying" jdbcType="INTEGER"/>
+
+        <!-- 融租合同模板-->
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="baseinfo_contract_party_name" property="baseInfoContractPartyName" jdbcType="VARCHAR"/>
+        <result column="contract_branch_company" property="contractBranchCompany" jdbcType="VARCHAR"/>
+        <result column="contract_party_adress" property="contractPartyAdress" jdbcType="VARCHAR"/>
+        <result column="legal_person" property="legalPerson" jdbcType="VARCHAR"/>
+        <result column="down_payment_time_limit" property="downPaymentTimeLimit" jdbcType="VARCHAR"/>
+        <result column="loan_deposit" property="loanDeposit" jdbcType="NUMERIC"/>
+        <result column="important_event_price" property="importantEventPrice" jdbcType="NUMERIC"/>
+        <result column="check_time" property="checkTime" jdbcType="VARCHAR"/>
+        <result column="appoint_area" property="appointArea" jdbcType="VARCHAR"/>
+        <result column="rent_overdue_time_limit" property="rentOverdueTimeLimit" jdbcType="VARCHAR"/>
+        <result column="car_lessee_city" property="carLesseeCity" jdbcType="VARCHAR"/>
+        <result column="city_inside_recovery_cost" property="cityInsideRecoveryCost" jdbcType="NUMERIC"/>
+        <result column="city_outside_recovery_cost" property="cityOutsideRecoveryCost" jdbcType="NUMERIC"/>
+        <result column="province_inside_recovery_cost" property="provinceInsideRecoveryCost" jdbcType="NUMERIC"/>
+        <result column="province_outside_recovery_cost" property="provinceOutsideRecoveryCost" jdbcType="NUMERIC"/>
+        <result column="day_custodian_cost" property="dayCustodianCost" jdbcType="NUMERIC"/>
+        <result column="continuity_overdue" property="continuityOverdue" jdbcType="VARCHAR"/>
+        <result column="cumulative_overdue" property="cumulativeOverdue" jdbcType="VARCHAR"/>
+        <result column="default_interest" property="defaultInterest" jdbcType="NUMERIC"/>
+        <result column="default_interest_name" property="defaultInterestName" jdbcType="VARCHAR"/>
+        <result column="license_monthly_rent" property="licenseMonthlyRent" jdbcType="NUMERIC"/>
+        <result column="contract_party_contact_address" property="contractPartyContactAddress" jdbcType="VARCHAR"/>
+        <result column="account_name" property="accountName" jdbcType="VARCHAR"/>
+        <result column="bank_id" property="bankId" jdbcType="BIGINT"/>
+        <result column="branch_bank" property="branchBank" jdbcType="VARCHAR"/>
+        <result column="account" property="account" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="is_enable" property="isEnable" jdbcType="BIT"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="baseinfo_branch_company_id" property="baseInfoBranchCompanyId" jdbcType="BIGINT"/>
+        <result column="baseinfo_branch_company_name" property="baseInfoBranchCompanyName" jdbcType="VARCHAR"/>
+
+        <result column="authorized_person" property="authorizedPerson" jdbcType="VARCHAR"/>
+        <result column="party_a" property="partyA" jdbcType="VARCHAR"/>
+        <result column="party_b" property="partyB" jdbcType="VARCHAR"/>
+        <result column="party_c" property="partyC" jdbcType="VARCHAR"/>
+        <result column="loan_guarantor" property="loanGuarantor" jdbcType="VARCHAR"/>
+        <result column="guarantor" property="guarantor" jdbcType="VARCHAR"/>
+
+        <collection property="leaseSchemeOrderAccounts" column="schemeOrderId"
+                    ofType="com.hc.lease.order.model.LeaseSchemeOrderAccount" javaType="java.util.ArrayList"
+                    select="selectBySchemeOrderId"/>
+        <collection property="leaseContractArchiveLocationList" column="id"
+                    ofType="com.hc.lease.order.model.LeaseContractArchiveLocation" javaType="java.util.ArrayList"
+                    select="com.hc.lease.order.dao.LeaseContractArchiveLocationMapper.selectByContractId"/>
+
+        <collection property="leaseSchemeRepaymentList" column="id"
+                    ofType="com.hc.lease.order.model.LeaseSchemeRepayment" javaType="java.util.ArrayList"
+                    select="com.hc.lease.order.dao.LeaseSchemeRepaymentMapper.selectByContractId"/>
+
+        <collection property="leasePackageBalancePayments" column="schemeId"
+                    ofType="com.hc.lease.supplier.model.LeasePackageBalancePayment" javaType="java.util.ArrayList"
+                    select="selectBySchemeId"/>
+    </resultMap>
+
+
+    <resultMap id="LeaseSchemeOrderAccountMap" type="com.hc.lease.order.model.LeaseSchemeOrderAccount">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="scheme_order_id" jdbcType="BIGINT" property="schemeOrderId"/>
+        <result column="account_id" jdbcType="BIGINT" property="accountId"/>
+        <result column="account_name" jdbcType="VARCHAR" property="accountName"/>
+        <result column="account_contact" jdbcType="VARCHAR" property="accountContact"/>
+        <result column="is_default_pay" jdbcType="INTEGER" property="isDefaultPay"/>
+        <result column="id_card" jdbcType="VARCHAR" property="idCard"/>
+        <result column="live_address" jdbcType="VARCHAR" property="liveAddress"/>
+        <result column="emergency_contact" jdbcType="VARCHAR" property="emergencyContact"/>
+        <result column="branch_bank" jdbcType="VARCHAR" property="branchBank"/>
+        <result column="back_card_number" jdbcType="VARCHAR" property="backCardNumber"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="bank_name" jdbcType="VARCHAR" property="bankName"/>
+        <result column="id_card_address" jdbcType="VARCHAR" property="idCardAddress"/>
+        <result column="business_license_number" jdbcType="VARCHAR" property="businessLicenseNumber"/>
+        <result column="contacts_name" jdbcType="VARCHAR" property="contactsName"/>
+        <result column="contacts_address" jdbcType="VARCHAR" property="contactsAddress"/>
+        <result column="company_registration_address" jdbcType="VARCHAR" property="companyRegistrationAddress"/>
+        <result column="account_type" jdbcType="INTEGER" property="accountType"/>
+        <result column="bank_code" jdbcType="VARCHAR" property="bankCode"/>
+        <result column="bank_card_id" jdbcType="BIGINT" property="bankCardId"/>
+    </resultMap>
+
+    <resultMap id="BalancePaymentMap" type="com.hc.lease.supplier.model.LeasePackageBalancePayment">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="scheme_id" property="schemeId" jdbcType="BIGINT"/>
+        <result column="package_id" property="packageId" jdbcType="BIGINT"/>
+        <result column="balance_payment" property="balancePayment" jdbcType="NUMERIC"/>
+        <result column="balance_payment_number" property="balancePaymentNumber" jdbcType="INTEGER"/>
+        <result column="is_type" property="isType" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <result column="is_enable" property="isEnable" jdbcType="BIT"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+    </resultMap>
+
+
+    <resultMap id="ContractMap" type="com.hc.lease.order.model.LeaseContract">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="repayment_id" property="repaymentId" jdbcType="BIGINT"/>
+        <result column="scheme_order_id" property="schemeOrderId" jdbcType="BIGINT"/>
+        <result column="sale_channel_type" property="saleChannelType" jdbcType="INTEGER"/>
+        <result column="sale_channel_id" property="saleChannelId" jdbcType="BIGINT"/>
+        <result column="contract_number_year" property="contractNumberYear" jdbcType="VARCHAR"/>
+        <result column="contract_number" property="contractNumber" jdbcType="VARCHAR"/>
+        <result column="complete_contract_number" property="completeContractNumber" jdbcType="VARCHAR"/>
+        <result column="contract_key" property="contractKey" jdbcType="VARCHAR"/>
+        <!--<result column="pay_staging_time" property="payStagingTime" jdbcType="TIMESTAMP" />-->
+        <result column="lease_start_time" property="leaseStartTime" jdbcType="TIMESTAMP"/>
+        <result column="lease_end_time" property="leaseEndTime" jdbcType="TIMESTAMP"/>
+        <!-- <result column="staging_contain_monthly_rent" property="stagingContainMonthlyRent" jdbcType="BIT" />
+         <result column="company_header_id" property="companyHeaderId" jdbcType="BIGINT" />-->
+        <result column="account_contact_adress" property="accountContactAdress" jdbcType="VARCHAR"/>
+        <result column="guarantee_name" property="guaranteeName" jdbcType="VARCHAR"/>
+        <result column="guarantee_id_card" property="guaranteeIdCard" jdbcType="VARCHAR"/>
+        <result column="guarantee_contact_address" property="guaranteeContactAddress" jdbcType="VARCHAR"/>
+        <result column="third_party_liability_insurance" property="thirdPartyLiabilityInsurance" jdbcType="NUMERIC"/>
+        <result column="card_check_accept_img" property="cardCheckAcceptImg" jdbcType="VARCHAR"/>
+        <result column="guarantee_contact" property="guaranteeContact" jdbcType="VARCHAR"/>
+        <result column="guarantee_contact_name" property="guaranteeContactName" jdbcType="VARCHAR"/>
+        <result column="guarantee_contact_phone" property="guaranteeContactPhone" jdbcType="VARCHAR"/>
+        <result column="guarantee_zip_code" property="guaranteeZipCode" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="branch_company_id" property="branchCompanyId" jdbcType="BIGINT"/>
+        <result column="contract_baseinfo_id" property="contractBaseinfoId" jdbcType="BIGINT"/>
+
+
+        <result column="branch_company_name" property="branchCompanyName" jdbcType="VARCHAR"/>
+        <result column="contract_party_name" property="contractPartyName" jdbcType="VARCHAR"/>
+        <result column="dealer_name" property="dealerName" jdbcType="VARCHAR"/>
+        <result column="comprehensive_quote" property="comprehensiveQuote" jdbcType="NUMERIC"/>
+        <result column="brands_name" property="brandsName" jdbcType="VARCHAR"/>
+        <result column="series_name" property="seriesName" jdbcType="VARCHAR"/>
+        <result column="business_model_name" property="businessModelName" jdbcType="VARCHAR"/>
+        <result column="color_name" property="colorName" jdbcType="VARCHAR"/>
+        <result column="scheme_name" property="schemeName" jdbcType="VARCHAR"/>
+        <result column="plate_number" property="plateNumber" jdbcType="VARCHAR"/>
+        <result column="scheme_id" property="schemeId" jdbcType="BIGINT"/>
+        <result column="card_id" property="cardId" jdbcType="BIGINT"/>
+        <result column="sn" property="sn" jdbcType="VARCHAR"/>
+        <result column="car_price" property="carPrice" jdbcType="NUMERIC"/>
+        <result column="totle_car_price" property="totleCarPrice" jdbcType="NUMERIC"/>
+        <result column="lease_price" property="leasePrice" jdbcType="NUMERIC"/>
+        <result column="contract_party_id" property="contractPartyId" jdbcType="BIGINT"/>
+        <result column="annual_interest" property="annualInterest" jdbcType="NUMERIC"/>
+        <result column="down_payment" property="downPayment" jdbcType="NUMERIC"/>
+        <result column="balance_payment" property="balancePayment" jdbcType="NUMERIC"/>
+        <result column="staging_number_id" property="stagingNumberId" jdbcType="BIGINT"/>
+        <result column="commission" property="commission" jdbcType="NUMERIC"/>
+        <result column="receive_margin" property="receiveMargin" jdbcType="NUMERIC"/>
+        <result column="id_card_img" property="idCardImg" jdbcType="VARCHAR"/>
+        <result column="car_accept_img" property="carAcceptImg" jdbcType="VARCHAR"/>
+        <result column="card_frame_number" property="cardFrameNumber" jdbcType="VARCHAR"/>
+        <result column="engine_number" property="engineNumber" jdbcType="VARCHAR"/>
+        <result column="purchase_tax" property="purchaseTax" jdbcType="NUMERIC"/>
+        <result column="on_plate_cost" property="onPlateCost" jdbcType="NUMERIC"/>
+        <result column="vehicle_vessel_tax" property="vehicleVesselTax" jdbcType="NUMERIC"/>
+        <result column="item_type" property="itemType" jdbcType="VARCHAR"/>
+        <result column="complete_model_name" property="completeModelName" jdbcType="VARCHAR"/>
+        <result column="staging_number_name" property="stagingNumberName" jdbcType="VARCHAR"/>
+
+        <result column="contract_type" property="contractType" jdbcType="INTEGER"/>
+        <result column="is_type" property="isType" jdbcType="INTEGER"/>
+        <result column="contract_brands_id" property="contractBrandsId" jdbcType="BIGINT"/>
+        <result column="contract_series_id" property="contractSeriesId" jdbcType="BIGINT"/>
+        <result column="contract_model_id" property="contractModelId" jdbcType="BIGINT"/>
+        <result column="contract_brands_name" property="contractBrandsName" jdbcType="VARCHAR"/>
+        <result column="contract_series_name" property="contractSeriesName" jdbcType="VARCHAR"/>
+        <result column="contract_business_model_name" property="contractBusinessModelName" jdbcType="VARCHAR"/>
+        <result column="contract_complete_model_name" property="contractCompleteModelName" jdbcType="VARCHAR"/>
+        <result column="total_amount" property="totalAmount" jdbcType="NUMERIC"/>
+        <result column="monthly_rent" property="monthlyRent" jdbcType="NUMERIC"/>
+        <result column="pay_date" property="payDate" jdbcType="INTEGER"/>
+
+        <collection property="leaseSchemeOrderAccounts" column="schemeOrderId"
+                    ofType="com.hc.lease.order.model.LeaseSchemeOrderAccount" javaType="java.util.ArrayList"
+                    select="selectBySchemeOrderId"/>
+        <collection property="leaseContractArchiveLocationList" column="id"
+                    ofType="com.hc.lease.order.model.LeaseContractArchiveLocation" javaType="java.util.ArrayList"
+                    select="com.hc.lease.order.dao.LeaseContractArchiveLocationMapper.selectByContractId"/>
+
+        <collection property="leaseSchemeRepaymentList" column="id"
+                    ofType="com.hc.lease.order.model.LeaseSchemeRepayment" javaType="java.util.ArrayList"
+                    select="com.hc.lease.order.dao.LeaseSchemeRepaymentMapper.selectByContractId"/>
+
+        <collection property="leasePackageBalancePayments" column="schemeId"
+                    ofType="com.hc.lease.supplier.model.LeasePackageBalancePayment" javaType="java.util.ArrayList"
+                    select="selectBySchemeId"/>
+    </resultMap>
+
+    <!--月供管理列表 / 租金支付计划表 / 还款历史-->
+    <resultMap id="PostLendingMap" type="com.hc.lease.order.vo.LeasePostLendingVo">
+        <result column="con_id" property="conId" jdbcType="BIGINT"/>
+        <result column="rep_id" property="repId" jdbcType="BIGINT"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="repayment_id" property="repaymentId" jdbcType="BIGINT"/>
+        <result column="complete_contract_number" property="completeContractNumber" jdbcType="VARCHAR"/>
+        <result column="branch_company_name" property="branchCompanyName" jdbcType="VARCHAR"/>
+        <result column="account_name" property="accountName" jdbcType="VARCHAR"/>
+        <result column="account_phone" property="accountPhone" jdbcType="VARCHAR"/>
+        <result column="repayment_date" property="repaymentDate" jdbcType="VARCHAR"/>
+        <result column="total_period" property="totalPeriod" jdbcType="VARCHAR"/>
+        <result column="overdue_day" property="overdueDay" jdbcType="INTEGER"/>
+        <result column="total_overdue_day" property="totalOverdueDay" jdbcType="INTEGER"/>
+        <result column="totle_price" property="totlePrice" jdbcType="NUMERIC"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="total_fail" property="totalFail" jdbcType="INTEGER"/>
+        <result column="account_type" property="accountType" jdbcType="INTEGER"/>
+        <result column="id_card" property="idCard" jdbcType="VARCHAR"/>
+        <result column="bank_code" property="bankCode" jdbcType="VARCHAR"/>
+        <result column="bank_name" jdbcType="VARCHAR" property="bankName"/>
+        <result column="back_card_number" property="backCardNumber" jdbcType="VARCHAR"/>
+        <result column="plate_number" property="plateNumber" jdbcType="VARCHAR"/>
+        <result column="lease_start_time" property="leaseStartTime" jdbcType="VARCHAR"/>
+        <result column="lease_end_time" property="leaseEndTime" jdbcType="VARCHAR"/>
+        <result column="pay_date" property="payDate" jdbcType="INTEGER"/>
+        <result column="is_sign" property="isSign" jdbcType="INTEGER"/>
+        <result column="bank_phone" property="bankPhone" jdbcType="VARCHAR"/>
+
+        <collection property="statusTypeDetails" fetchType="eager" column="{contractId=conId,repaymentId=repId}"
+                    ofType="com.hc.lease.order.vo.StatusTypeDetailsVo" javaType="java.util.ArrayList"
+                    select="selectStatusDetails"/>
+
+        <collection property="repaymentDetails" fetchType="eager" column="{contractId=conId,repaymentId=repId}"
+                    ofType="com.hc.lease.order.vo.RepaymentDetailsVo" javaType="java.util.ArrayList"
+                    select="selectByContractIdRepaymentId"/>
+
+    </resultMap>
+
+    <!--合同的 款项 对应的 支付结果 状态-->
+    <resultMap id="StatusTypeDetailsMap" type="com.hc.lease.order.vo.StatusTypeDetailsVo">
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="dual_count" property="dualCount" jdbcType="INTEGER"/>
+        <result column="dualing_count" property="dualingCount" jdbcType="INTEGER"/>
+        <result column="success_count" property="successCount" jdbcType="INTEGER"/>
+        <result column="fail_count" property="failCount" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--合同的 款项 对应的 支付结果 状态-->
+    <resultMap id="RepaymentDetailsMap" type="com.hc.lease.order.vo.RepaymentDetailsVo">
+        <result column="paymentResult" property="paymentResult" jdbcType="INTEGER"/>
+        <result column="paymentResultMsg" property="paymentResultMsg" jdbcType="VARCHAR"/>
+        <result column="totlePrice" property="totlePrice" jdbcType="NUMERIC"/>
+        <result column="payWay" property="payWay" jdbcType="INTEGER"/>
+
+        <result column="dualing_count" property="dualingCount" jdbcType="INTEGER"/>
+        <result column="success_count" property="successCount" jdbcType="INTEGER"/>
+        <result column="fail_count" property="failCount" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--合同的 款项 对应的 支付结果 状态-->
+    <resultMap id="FindBalancePaymentMap" type="com.hc.lease.order.vo.FindBalanceVo">
+        <result column="balance_payment" property="balancePayment" jdbcType="NUMERIC"/>
+        <result column="isBalance_payment" property="isBalancePayment" jdbcType="INTEGER"/>
+        <result column="type" property="type" jdbcType="NUMERIC"/>
+        <result column="repayment_id" property="repaymentId" jdbcType="BIGINT"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <!--合同所有数据-->
+    <resultMap id="findAllMap" type="com.hc.lease.order.vo.FindAllContractVo">
+        <result column="account_name" property="accountName" jdbcType="VARCHAR"/>
+        <result column="account_phone" property="accountPhone" jdbcType="VARCHAR"/>
+        <result column="pay_date" property="payDate" jdbcType="INTEGER"/>
+        <result column="monthly_rent" property="monthlyRent" jdbcType="NUMERIC"/>
+        <result column="period" property="period" jdbcType="INTEGER"/>
+        <result column="id_card" property="idCard" jdbcType="VARCHAR"/>
+        <result column="bank_code" property="bankCode" jdbcType="VARCHAR"/>
+        <result column="back_card_number" property="backCardNumber" jdbcType="VARCHAR"/>
+        <result column="plate_number" property="plateNumber" jdbcType="VARCHAR"/>
+        <result column="lease_start_time" property="leaseStartTime" jdbcType="VARCHAR"/>
+        <result column="lease_end_time" property="leaseEndTime" jdbcType="VARCHAR"/>
+        <result column="complete_contract_number" property="completeContractNumber" jdbcType="VARCHAR"/>
+        <result column="branch_company_name" property="branchCompanyName" jdbcType="VARCHAR"/>
+        <result column="business_license_number" property="businessLicenseNumber" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- 贷后车辆管理 新增 搜索合同 -->
+    <resultMap id="CarManagerFindContractMap" type="com.hc.lease.order.vo.CarManagerFindContractVo">
+        <result column="account_name" property="accountName" jdbcType="VARCHAR"/>
+        <result column="account_phone" property="accountPhone" jdbcType="VARCHAR"/>
+        <result column="complete_contract_number" property="completeContractNumber" jdbcType="VARCHAR"/>
+        <result column="plate_number" property="plateNumber" jdbcType="VARCHAR"/>
+        <result column="card_frame_number" property="cardFrameNumber" jdbcType="VARCHAR"/>
+        <result column="brands_name" property="brandsName" jdbcType="VARCHAR"/>
+        <result column="series_name" property="seriesName" jdbcType="VARCHAR"/>
+        <result column="color_name" property="colorName" jdbcType="VARCHAR"/>
+        <result column="total_price" property="totalPrice" jdbcType="NUMERIC"/>
+        <result column="complete_model_name" property="contractCompleteModelName" jdbcType="VARCHAR"/>
+        <result column="staging_number_name" property="stagingNumberName" jdbcType="INTEGER"/>
+        <result column="pay_period" property="payPeriod" jdbcType="INTEGER"/>
+        <result column="no_pay_period" property="noPayPeriod" jdbcType="INTEGER"/>
+        <result column="repayment_date" property="repaymentDate" jdbcType="TIMESTAMP"/>
+        <result column="market_price" property="marketPrice" jdbcType="NUMERIC"/>
+        <result column="residual_principal" property="residualPrincipal" jdbcType="NUMERIC"/>
+        <result column="strong_risk_expire_time" property="strongRiskExpireTime" jdbcType="TIMESTAMP"/>
+        <result column="commercial_insurance_expire_time1" property="commercialInsuranceExpireTime1"
+                jdbcType="TIMESTAMP"/>
+        <result column="commercial_insurance_expire_time2" property="commercialInsuranceExpireTime12"
+                jdbcType="TIMESTAMP"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="car_id" property="carId" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <!-- 贷后合同管理 -->
+    <resultMap id="ContractManagerFindContractMap" type="com.hc.lease.order.vo.ContractManagerDealFindContractVo">
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="account_name" property="accountName" jdbcType="VARCHAR"/>
+        <result column="account_phone" property="accountPhone" jdbcType="VARCHAR"/>
+        <result column="pay_date" property="payDate" jdbcType="INTEGER"/>
+        <result column="total_period" property="totalPeriod" jdbcType="VARCHAR"/>
+        <result column="monthly_rent" property="monthlyRent" jdbcType="NUMERIC"/>
+        <result column="agents_name" property="agentsName" jdbcType="VARCHAR"/>
+        <result column="id_card" property="idCard" jdbcType="VARCHAR"/>
+        <result column="bank_code" property="bankCode" jdbcType="VARCHAR"/>
+        <result column="back_card_number" property="backCardNumber" jdbcType="VARCHAR"/>
+        <result column="plate_number" property="plateNumber" jdbcType="VARCHAR"/>
+        <result column="car_id" property="carId" jdbcType="BIGINT"/>
+        <result column="lease_start_time" property="leaseStartTime" jdbcType="TIMESTAMP"/>
+        <result column="lease_end_time" property="leaseEndTime" jdbcType="TIMESTAMP"/>
+        <result column="pay_start_time" property="payStartTime" jdbcType="TIMESTAMP"/>
+        <result column="pay_end_time" property="payEndTime" jdbcType="TIMESTAMP"/>
+
+    </resultMap>
+
+    <!-- 贷前直租合同-次新车处置 合同数据列表 续期、转租 -->
+    <resultMap id="ContractDQZZManagerFindContractMap" type="com.hc.lease.order.vo.ContractDQZZManagerFindContractVo">
+        <result column="account_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="account_name" property="accountName" jdbcType="VARCHAR"/>
+        <result column="complete_contract_number" property="completeContractNumber" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="old_complete_contract_number" property="oldCompleteContractNumber" jdbcType="VARCHAR"/>
+        <result column="deal_status_name" property="dealStatusName" jdbcType="VARCHAR"/>
+        <result column="contract_stop_time" property="contractStopTime" jdbcType="TIMESTAMP"/>
+        <result column="account_phone" property="accountPhone" jdbcType="VARCHAR"/>
+        <result column="repayment_date" property="repaymentDate" jdbcType="TIMESTAMP"/>
+        <result column="pay_date" property="payDate" jdbcType="INTEGER"/>
+        <result column="total_period" property="totalPeriod" jdbcType="VARCHAR"/>
+        <result column="monthly_rent" property="monthlyRent" jdbcType="NUMERIC"/>
+        <result column="agents_name" property="agentsName" jdbcType="VARCHAR"/>
+        <result column="id_card" property="idCard" jdbcType="VARCHAR"/>
+        <result column="bank_code" property="bankCode" jdbcType="VARCHAR"/>
+        <result column="back_card_number" property="backCardNumber" jdbcType="VARCHAR"/>
+        <result column="plate_number" property="plateNumber" jdbcType="VARCHAR"/>
+        <result column="lease_start_time" property="leaseStartTime" jdbcType="TIMESTAMP"/>
+        <result column="lease_end_time" property="leaseEndTime" jdbcType="TIMESTAMP"/>
+        <result column="pay_start_time" property="payStartTime" jdbcType="TIMESTAMP"/>
+        <result column="pay_end_time" property="payEndTime" jdbcType="TIMESTAMP"/>
+        <result column="car_condition" property="carCondition" jdbcType="INTEGER"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="is_continue" property="isContinue" jdbcType="INTEGER"/>
+        <result column="is_transfer" property="isTransfer" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!-- 贷后车辆管理-跟进/处理 合同数据 -->
+    <resultMap id="CarManagerDealFindContractMap" type="com.hc.lease.order.vo.CarManagerDealFindContractVo">
+        <result column="account_name" property="accountName" jdbcType="VARCHAR"/>
+        <result column="account_phone" property="accountPhone" jdbcType="VARCHAR"/>
+        <result column="complete_contract_number" property="completeContractNumber" jdbcType="VARCHAR"/>
+        <result column="plate_number" property="plateNumber" jdbcType="VARCHAR"/>
+        <result column="card_frame_number" property="cardFrameNumber" jdbcType="VARCHAR"/>
+        <result column="brands_name" property="brandsName" jdbcType="VARCHAR"/>
+        <result column="series_name" property="seriesName" jdbcType="VARCHAR"/>
+        <result column="color_name" property="colorName" jdbcType="VARCHAR"/>
+        <result column="total_price" property="totalPrice" jdbcType="NUMERIC"/>
+        <result column="complete_model_name" property="contractCompleteModelName" jdbcType="VARCHAR"/>
+        <result column="staging_number_name" property="stagingNumberName" jdbcType="INTEGER"/>
+        <result column="pay_period" property="payPeriod" jdbcType="INTEGER"/>
+        <result column="no_pay_period" property="noPayPeriod" jdbcType="INTEGER"/>
+        <result column="repayment_date" property="repaymentDate" jdbcType="TIMESTAMP"/>
+        <result column="market_price" property="marketPrice" jdbcType="NUMERIC"/>
+        <result column="residual_principal" property="residualPrincipal" jdbcType="NUMERIC"/>
+        <result column="strong_risk_expire_time" property="strongRiskExpireTime" jdbcType="TIMESTAMP"/>
+        <result column="commercial_insurance_expire_time1" property="commercialInsuranceExpireTime1"
+                jdbcType="TIMESTAMP"/>
+        <result column="commercial_insurance_expire_time2" property="commercialInsuranceExpireTime12"
+                jdbcType="TIMESTAMP"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="car_id" property="carId" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <!--合同的 款项 对应的 支付结果 状态-->
+    <resultMap id="FindAllinpayLogStatisticsMap" type="com.hc.lease.order.vo.FindAllinpayLogStatisticsVo">
+        <result column="complete_contract_number" property="completeContractNumber" jdbcType="VARCHAR"/>
+        <result column="branch_company_name" property="branchCompanyName" jdbcType="VARCHAR"/>
+        <result column="account_name" property="accountName" jdbcType="VARCHAR"/>
+        <result column="account_phone" property="accountPhone" jdbcType="VARCHAR"/>
+        <result column="total_overdue_day" property="totalOverdueDay" jdbcType="INTEGER"/>
+        <result column="total_fail" property="totalFail" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, scheme_order_id, sale_channel_type, sale_channel_id, contract_number_year, contract_number, complete_contract_number,
+        contract_key, pay_staging_time, lease_start_time, lease_end_time, staging_contain_monthly_rent,
+        company_header_id, account_contact_adress, guarantee_name, guarantee_id_card, guarantee_contact_address,
+        third_party_liability_insurance, card_check_accept_img, guarantee_contact, guarantee_contact_name,
+        guarantee_contact_phone, guarantee_zip_code, create_time, update_time, create_by,
+        update_by, sort, status,branch_company_id,contract_baseinfo_id,id_card_img,car_accept_img,contract_type,vsersion_number, deal_status, back_status
+        , parent_id, source_type, price_difference, remarks
+    </sql>
+
+    <select id="selectBySchemeOrderId" resultMap="LeaseSchemeOrderAccountMap" parameterType="java.lang.Long">
+        select
+        soa.scheme_order_id,soa.account_id,soa.account_contact,soa.is_default_pay,a.id_card "idCard",soa.bank_card_id
+        ,ac.id_card_address,ac.live_address,a.phone
+        ,acc.business_license_number as "businessLicenseNumber",acc.contacts_name as "contactsName",acc.contacts_address as "contactsAddress",
+        acc.company_registration_address as "companyRegistrationAddress",a.type as "accountType",
+        case  when a.type=1 then a.company_name else a.name end as "accountName",
+        case  when a.type=1 then bc.name else b.name end as "bankName",
+        case  when a.type=1 then bc.code else b.code end as "bankCode",
+        case  when a.type=1 then acc.branch_bank else abc.branch_bank end as "branchBank",
+        case  when a.type=1 then acc.back_card_number else abc.back_card_number end as "backCardNumber",
+        case  when a.type=1 then acc.emergency_contact else ac.emergency_contact end as "emergencyContact"
+        from lease_scheme_order_account soa
+        left join lease_account_bank_card abc on soa.bank_card_id=abc.id
+        left join lease_account a on soa.account_id=a.id
+        left join lease_account_credit ac on soa.account_id=ac.account_id
+        left join lease_bank b on abc.bank_id=b.id
+        left join  lease_account_company acc on a.id=acc.account_id
+        left join lease_bank bc on acc.bank_id=bc.id
+        where soa.scheme_order_id = #{schemeOrderId}
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_contract
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="findByCompleteContractNumber" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_contract
+        where complete_contract_number = #{contractNumber,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getBySchemeOrderId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_contract
+        where scheme_order_id = #{schemeOrderId,jdbcType=BIGINT}
+    </select>
+
+    <select id="findByParams" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select k.numbers,k.id from(
+        SELECT concat(contract_number_year,contract_number)as numbers ,id FROM lease_contract) k
+        where 1=1
+        <if test="contractNumber != null">
+            and k.numbers = #{contractNumber,jdbcType=VARCHAR}
+        </if>
+        <if test="id != null">
+            and k.id != #{id,jdbcType=BIGINT}
+        </if>
+    </select>
+
+    <select id="selectBySchemeId" resultMap="BalancePaymentMap" parameterType="java.lang.Long">
+        select
+      id, scheme_id, package_id, balance_payment, balance_payment_number, is_type, create_time,
+    update_time, create_by, update_by, is_enable, sort
+        from lease_package_balance_payment
+        where scheme_id = #{id,jdbcType=BIGINT}
+    </select>
+
+
+    <!--初始化单笔扣款页面的参数/合同信息-->
+    <select id="payViewParamesContractInfo" resultType="java.util.Map" parameterType="java.util.Map">
+        select
+        c.complete_contract_number "completeContractNumber"
+        , c.lease_start_time "leaseStartTime", c.lease_end_time "leaseEndTime"
+        , pc.plate_number "plateNumber"
+        , so.pay_date "payDate"
+
+        from lease_contract c
+
+        left join lease_scheme_order so on c.scheme_order_id=so.id
+        left join lease_car pc on so.card_id=pc.id
+        where  c.id=#{contractId}
+    </select>
+
+
+    <select id="selectOrderInfo" resultMap="ContractMap" parameterType="java.util.Map">
+        select
+        c.id, c.scheme_order_id as "schemeOrderId", c.sale_channel_type as "saleChannelType", c.sale_channel_id as
+        "saleChannelId" , c.contract_number_year as "contractNumberYear", c.contract_number as "contractNumber",
+        c.contract_key as "contractKey", c.pay_staging_time as "payStagingTime", c.lease_start_time as "leaseStartTime",
+        c.lease_end_time as "leaseEndTime", c.staging_contain_monthly_rent as "stagingContainMonthlyRent",
+        c.company_header_id, c.account_contact_adress, c.guarantee_name, c.guarantee_id_card,
+        c.guarantee_contact_address,
+        c.third_party_liability_insurance as "thirdPartyLiabilityInsurance" ,c.card_check_accept_img as
+        "cardCheckAcceptImg", c.guarantee_contact as "guaranteeContact", c.guarantee_contact_name as
+        "guaranteeContactName",
+        c.guarantee_contact_phone as "guaranteeContactPhone", c.guarantee_zip_code as "guaranteeZipCode",
+        c.status,c.branch_company_id as "branchCompanyId",bc.name as "branchCompanyName",ch.name as "contractPartyName",
+        la.name as "dealerName",so.comprehensive_quote as "comprehensiveQuote",cb.name as "brandsName",css.name as
+        "seriesName",cm.business_model_name as "businessModelName",cm.complete_model_name as "completeModelName",cm.item_type as "itemType",cc.name as "colorName",s.scheme_name as
+        "schemeName",pc.plate_number as "plateNumber",
+        so.scheme_id as "schemeId",so.card_id as "cardId",so.sn as "sn",so.car_price as "carPrice",so.totle_car_price as
+        "totleCarPrice",so.lease_price as "leasePrice",so.contract_party_id as "contractPartyId",c.contract_baseinfo_id
+        as "contractBaseinfoId",
+        s.annual_interest as "annualInterest",p.down_payment as "downPayment",p.balance_payment as
+        "balancePayment",p.staging_number_id as "stagingNumberId",cd.value as "stagingNumberName"
+        ,so.commission,so.receive_margin as "receiveMargin"
+        ,pc.card_frame_number,pc.engine_number,pc.purchase_tax,pc.on_plate_cost,pc.vehicle_vessel_tax,
+        c.id_card_img,c.car_accept_img,c.contract_type,
+        so.contract_brands_id,so.contract_series_id,so.contract_model_id,
+        ccb.name as "contractBrandsName",ccss.name as"contractSeriesName",ccm.business_model_name as "contractBusinessModelName",ccm.complete_model_name as "contractCompleteModelName",
+        s.is_type as "isType",p.type,s.total_amount as "totalAmount",p.monthly_rent as "monthlyRent",so.pay_date as "payDate"
+        from lease_contract c
+        left join lease_scheme_order so on c.scheme_order_id=so.id
+        left join lease_branch_company bc on c.branch_company_id =bc.id
+        left join lease_company_header ch on so.contract_party_id=ch.id
+        left join lease_agents  la on c.sale_channel_id=la.id
+        left join lease_scheme s on so.scheme_id =s.id
+        left join lease_car pc on so.card_id=pc.id
+        left join lease_car_brands cb on pc.brands_id=cb.id
+        left join lease_car_series css on pc.series_id=css.id
+        left join lease_car_model cm on pc.model_id=cm.id
+        left join lease_car_color cc on pc.color_id=cc.id
+        left join lease_scheme_package sp on so.scheme_id=sp.scheme_id
+        left join lease_package p on sp.package_id=p.id
+        left join lease_car_brands ccb on so.contract_brands_id=ccb.id
+        left join lease_car_series ccss on so.contract_series_id=ccss.id
+        left join lease_car_model ccm on so.contract_model_id=ccm.id
+        left join lease_dict cd on p.staging_number_id=cd.id
+        where  c.id=#{contractId}
+    </select>
+
+    <select id="findPage" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        c.id, c.scheme_order_id as "schemeOrderId", c.sale_channel_type as "saleChannelType", c.sale_channel_id as
+        "saleChannelId" , c.contract_number_year as "contractNumberYear", c.contract_number as "contractNumber",
+        c.complete_contract_number as "completeContractNumber",
+        c.contract_key as "contractKey", c.pay_staging_time as "payStagingTime", c.lease_start_time as "leaseStartTime",
+        c.lease_end_time as "leaseEndTime", c.staging_contain_monthly_rent as "stagingContainMonthlyRent",
+        c.company_header_id, c.account_contact_adress, c.guarantee_name, c.guarantee_id_card,
+        c.guarantee_contact_address,
+        c.third_party_liability_insurance as "thirdPartyLiabilityInsurance" ,c.card_check_accept_img as
+        "cardCheckAcceptImg", c.guarantee_contact as "guaranteeContact", c.guarantee_contact_name as
+        "guaranteeContactName",
+        c.guarantee_contact_phone as "guaranteeContactPhone", c.guarantee_zip_code as "guaranteeZipCode",
+        c.status,c.branch_company_id as "branchCompanyId",bc.name as "branchCompanyName",ch.name as "contractPartyName",
+        la.name as "dealerName",so.comprehensive_quote as "comprehensiveQuote",cb.name as "brandsName",css.name as
+        "seriesName",cm.business_model_name as "businessModelName",cm.complete_model_name as "completeModelName",cc.name
+        as "colorName",s.scheme_name as
+        "schemeName",pc.plate_number as "plateNumber",pc.engine_number as "engineNumber",pc.card_frame_number as
+        "cardFrameNumber"
+        , pc.car_condition "carCondition"
+        , so.scheme_id as "schemeId",so.card_id as "cardId",so.sn as "sn",so.car_price as "carPrice",so.totle_car_price
+        as
+        "totleCarPrice",so.lease_price as "leasePrice",so.contract_party_id as "contractPartyId",c.contract_baseinfo_id
+        as "contractBaseinfoId",
+        s.annual_interest as "annualInterest",p.down_payment as "downPayment",p.balance_payment as
+        "balancePayment",p.staging_number_id as "stagingNumberId"
+
+        , (case when so.period_count is null or so.period_count=0 then (select count(1) from lease_scheme_repayment dd
+        where dd.contract_id = c.id) else so.period_count end) "stagingNumberName"
+
+        ,so.commission
+        ,so.receive_margin as "receiveMargin", c.id_card_img as "idCardImg",c.car_accept_img as "carAcceptImg",
+        a.name, a.contract_party_name "baseInfoContractPartyName", a.contract_branch_company "contractBranchCompany",
+        a.contract_party_adress "contractPartyAdress", a.down_payment_time_limit "downPaymentTimeLimit"
+        , a.loan_deposit "loanDeposit", a.appoint_area "appointArea", a.rent_overdue_time_limit "rentOverdueTimeLimit" ,
+        a.car_lessee_city "carLesseeCity", a.city_inside_recovery_cost "cityInsideRecoveryCost"
+        , a.city_outside_recovery_cost "cityOutsideRecoveryCost", a.province_inside_recovery_cost
+        "provinceInsideRecoveryCost",a.province_outside_recovery_cost "provinceOutsideRecoveryCost",
+        a.day_custodian_cost "dayCustodianCost", a.continuity_overdue "continuityOverdue", a.cumulative_overdue
+        "cumulativeOverdue"
+        , a.default_interest "defaultInterest", a.license_monthly_rent "licenseMonthlyRent",
+        a.contract_party_contact_address "contractPartyContactAddress", a.account_name "accountName"
+        , a.bank_id "bankId", a.branch_bank "branchBank", a.account, a.create_time "createTime"
+        , a.update_time "updateTime", a.create_by "createBy", a.update_by "updateBy", a.sort, a.is_enable "isEnable"
+        , a.remarks, a.branch_company_id "baseInfoBranchCompanyId"
+        , a.legal_person "legalPerson", a.important_event_price "importantEventPrice", a.check_time "checkTime"
+        , b.name "defaultInterestName"
+        , bfc.name "baseInfoBranchCompanyName",
+        a.authorized_person,a.party_a,a.party_b,a.party_c,a.loan_guarantor,a.guarantor,c.contract_type,
+        so.contract_brands_id,so.contract_series_id,so.contract_model_id,
+        ccb.name as "contractBrandsName",ccss.name as"contractSeriesName",ccm.business_model_name as
+        "contractBusinessModelName",ccm.complete_model_name as "contractCompleteModelName",
+        s.is_type as "isType",p.type,s.total_amount as "totalAmount",p.monthly_rent as "monthlyRent"
+
+        , bk.name "bankName"
+        , bk.code as "bankCode"
+
+        , so.pay_date as "payDate"
+        , so.monthly_rent "totalPrice"
+
+        , (select (case when count(1) >0 then 1 else 0 end ) from lease_scheme_repayment_status srs where
+        srs.contract_id = c.id and srs.payment_result = 1) isPaying
+
+        from lease_contract c
+        left join lease_scheme_order so on c.scheme_order_id=so.id
+        left join lease_branch_company bc on c.branch_company_id =bc.id
+        left join lease_company_header ch on so.contract_party_id=ch.id
+        left join lease_scheme s on so.scheme_id =s.id
+        left join lease_car pc on so.card_id=pc.id
+        left join lease_car_brands cb on pc.brands_id=cb.id
+        left join lease_car_series css on pc.series_id=css.id
+        left join lease_car_model cm on pc.model_id=cm.id
+        left join lease_car_color cc on pc.color_id=cc.id
+        left join lease_scheme_package sp on so.scheme_id=sp.scheme_id
+        left join lease_package p on sp.package_id=p.id
+        LEFT JOIN lease_contract_baseinfo_use a on c.contract_baseinfo_id=a.id
+        LEFT JOIN lease_rule b on a.default_interest = b.id and b.rule_type='DefaultInterest'
+        LEFT JOIN lease_branch_company bfc ON a.branch_company_id = bfc.id
+        left join lease_car_brands ccb on so.contract_brands_id=ccb.id
+        left join lease_car_series ccss on so.contract_series_id=ccss.id
+        left join lease_car_model ccm on so.contract_model_id=ccm.id
+        left join lease_dict cd on p.staging_number_id=cd.id
+        left join lease_scheme_order_account soa on soa.scheme_order_id=so.id and soa.is_default_pay=1
+        left join lease_account_bank_card abc on soa.bank_card_id=abc.id
+        left join lease_account aa on soa.account_id=aa.id
+        LEFT JOIN lease_bank bk on abc.bank_id = bk.id
+        left join lease_agents la on c.sale_channel_id=la.id
+
+        where 1=1
+        <if test="completeContractNumber != null and completeContractNumber!=''">
+            and c.complete_contract_number like concat('%',#{completeContractNumber},'%')
+        </if>
+        <if test="plateNumber != null and plateNumber!=''">
+            and pc.plate_number like concat('%',#{plateNumber},'%')
+        </if>
+        <if test="accountName != null and accountName!=''">
+            and aa.name like concat('%',#{accountName},'%')
+        </if>
+        <if test="contractType != null and contractType!=''">
+            and c.contract_type = #{contractType}
+        </if>
+        <if test="brandsId != null and brandsId !='' ">
+            and pc.brands_id = #{brandsId}
+        </if>
+        <if test="seriesId != null and  seriesId !=''">
+            and pc.series_id = #{seriesId}
+        </if>
+        <if test="modelId != null and  modelId !='' ">
+            and pc.model_id = #{modelId}
+        </if>
+        <if test="branchCompanyId != null and  branchCompanyId !='' ">
+            and c.branch_company_id = #{branchCompanyId}
+        </if>
+        <if test="contractBrandsId != null and contractBrandsId !='' ">
+            and so.contract_brands_id = #{contractBrandsId}
+        </if>
+        <if test="contractSeriesId != null and  contractSeriesId !=''">
+            and so.contract_series_id = #{contractSeriesId}
+        </if>
+        <if test="contractModelId != null and  contractModelId !='' ">
+            and so.contract_model_id = #{contractModelId}
+        </if>
+        <if test="effectiveTimeFrom != null and effectiveTimeFrom!='' and effectiveTimeTo != null and effectiveTimeTo !=''">
+            and c.lease_start_time BETWEEN to_timestamp(#{effectiveTimeFrom},'YYYY-MM-DD HH24:MI:SS') and
+            to_timestamp(#{effectiveTimeTo},'YYYY-MM-DD HH24:MI:SS')
+        </if>
+
+        order by c.update_time DESC
+    </select>
+
+    <!--合同所有数据-->
+    <select id="selectAll" resultMap="findAllMap">
+
+        select
+        e.name "accountName", e.phone "accountPhone"
+
+        , b.pay_date "payDate", b.monthly_rent "monthlyRent"
+        , (select cc.value from lease_scheme_package aa INNER JOIN lease_package bb on aa.package_id=bb.id INNER JOIN lease_dict cc on bb.staging_number_id=cc.id where aa.scheme_id=b.scheme_id) "period"
+
+        , (case when e.type=0 then i.id_card when e.type=1 then k.legal_person_id_card end) "idCard"
+        , (case when e.type=0 then j.code when e.type=1 then l.code end) "bankCode"
+        , (case when e.type=0 then abc.back_card_number when e.type=1 then k.back_card_number end) "backCardNumber"
+
+        , m.plate_number "plateNumber"
+
+        , to_char(a.lease_start_time,'yyyy-mm-dd') "leaseStartTime", to_char(a.lease_end_time,'yyyy-mm-dd') "leaseEndTime"
+
+        , a.complete_contract_number "completeContractNumber"
+        , g.name "branchCompanyName"
+        , k.business_license_number "businessLicenseNumber",la.name "agentsName"
+
+        from lease_contract a
+        INNER JOIN lease_scheme_order b on b.id = a.scheme_order_id
+
+        LEFT JOIN lease_scheme_order_account d on d.scheme_order_id = b.id and d.is_default_pay=1
+        left join lease_account_bank_card abc on d.bank_card_id=abc.id
+        LEFT JOIN lease_account e on e.id = d.account_id
+        LEFT JOIN lease_branch_company g on g.id = a.branch_company_id
+
+        LEFT JOIN lease_account_credit i on e.id = i.account_id
+
+         LEFT JOIN lease_bank j on j.id = abc.bank_id
+
+        LEFT JOIN lease_account_company k on e.id = k.account_id
+        LEFT JOIN lease_bank l on l.id = k.bank_id
+
+        LEFT JOIN lease_car m on m.id = b.card_id
+        left join lease_agents la on a.sale_channel_id=la.id
+
+        WHERE 1=1
+        order by a.update_time DESC
+
+    </select>
+
+    <!--合同所有数据-->
+    <select id="findAll" resultMap="BaseResultMap">
+
+        select
+        <include refid="Base_Column_List"/>
+        from lease_contract
+
+    </select>
+
+    <!--查出 批量扣款 的数据-->
+    <select id="findBatchCont" resultMap="BaseResultMap">
+
+        select
+
+        a.id, a.contract_id "contractId"
+        ,round(a.total, 2) "total"
+        ,e.real_name "accountRealName"
+        ,e.name "accountName"
+        , f.back_card_number "backCardNumber"
+        ,g.name "bankName",g.code "bankCode"
+
+        from lease_scheme_repayment a
+
+        INNER JOIN lease_contract b on a.contract_id = b.id
+        INNER JOIN lease_scheme_order c on c.id = b.scheme_order_id
+        INNER JOIN lease_scheme_order_account d on d.scheme_order_id = c.id and d.is_default_pay = 1
+        LEFT JOIN lease_account_bank_card abc on d.bank_card_id=abc.id
+        INNER JOIN lease_account e on e.id = abc.account_id
+        LEFT JOIN lease_account_credit f on e.id = f.account_id
+        LEFT JOIN lease_bank g on g.id = f.bank_id
+
+        where a.id in
+        <foreach item="item" index="index" collection="repaymentIds" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        and a.is_send_payment = 0
+        and (a.payment_result = 0 or a.payment_result = 3)
+        and (a.overdue = 1 or a.repayment_date &gt; now())
+
+    </select>
+
+    <!--逾期短信通知列表-->
+    <select id="findPostLendingOverdueSms" resultMap="PostLendingMap">
+        select
+
+        a.id "contractId"
+        , (case when a.status=2 then 1 else 0 end) "status"
+        , c.id "repaymentId"
+        , a.complete_contract_number "completeContractNumber"
+        , g.name "branchCompanyName"
+        , e.name "accountName", e.phone "accountPhone", e.type "accountType"
+        , c.repayment_date "repaymentDate"
+
+        , (
+        (case when b.period_count is null or b.period_count=0 then (select count(1) from lease_scheme_repayment dd where
+        dd.contract_id = a.id) else b.period_count end)
+        || '-' || c.period
+        ) "totalPeriod"
+
+        , c.overdue_day "overdueDay"
+
+        <!--
+        , (select sum(aa.overdue_day) from lease_overdue_log aa where aa.contract_id = a.id and (aa.payment_result = 0 or aa.payment_result = 3)) "totalOverdueDay"
+        , (select COALESCE(sum(aa.overdue_day), 0) from lease_allinpay_log aa where aa.contract_id = a.id and aa.status = 2) "totalFail"
+        -->
+
+        , (
+        select sum(totle_price) "totlePrice"
+        from lease_scheme_repayment_status
+        where repayment_id = c.id
+        AND contract_id = a.id and (type = 0 or type = 2)
+        ) "totlePrice"
+
+        , a.id "conId"
+        , c.id "repId"
+
+        , abc.bank_phone "bankPhone"
+
+        from lease_contract a
+        INNER JOIN lease_scheme_order b on b.id = a.scheme_order_id
+        INNER JOIN lease_scheme_repayment c on a.id = c.contract_id and c.repayment_date
+        in
+        <!--扣款日-->
+        <foreach item="item" index="index" collection="repaymentDate" open="(" separator="," close=")">
+            to_timestamp(#{item},'YYYY-MM-DD')
+        </foreach>
+
+        LEFT JOIN lease_scheme_order_account d on d.scheme_order_id = b.id and d.is_default_pay=1
+        LEFT JOIN lease_account_bank_card abc on d.bank_card_id=abc.id
+        LEFT JOIN lease_account e on e.id = abc.account_id
+        LEFT JOIN lease_branch_company g on g.id = a.branch_company_id
+        LEFT JOIN lease_car h on h.id = b.card_id
+
+        INNER JOIN lease_overdue_log lol on lol.contract_id = a.id and lol.repayment_id = c.id
+        INNER JOIN lease_scheme_repayment_status lsrs_0 on lsrs_0.repayment_id = c.id and lsrs_0.contract_id = a.id and lsrs_0.type = 0
+        INNER JOIN lease_scheme_repayment_status lsrs_2 on lsrs_2.repayment_id = c.id and lsrs_2.contract_id = a.id and lsrs_2.type = 2
+
+        WHERE 1=1
+
+        <!--暂只开放个人类型的承租人的合同-->
+        and e.type=0
+
+        <!--当月已经逾期未付款的合同-->
+        and c.overdue_day > 0
+        and (lsrs_0.payment_result = 0 or lsrs_0.payment_result = 3)
+        and (lol.payment_result = 0 or lol.payment_result = 3)
+
+        <!--分公司-->
+        <if test="branchCompanyId != null">
+            and a.branch_company_id = #{branchCompanyId,jdbcType=BIGINT}
+        </if>
+
+        <!--合同状态-->
+        <if test="status != null">
+            and a.status = #{status,jdbcType=INTEGER}
+        </if>
+
+        <!--是否逾期-->
+        <if test="overdue != null">
+            and c.overdue = #{overdue,jdbcType=INTEGER}
+        </if>
+
+        <!--搜索输入框-->
+        <if test="keyParams != null">
+            and (a.complete_contract_number like concat('%',#{keyParams},'%')
+            or e.name like concat('%',#{keyParams},'%')
+            or h.plate_number like concat('%',#{keyParams},'%'))
+        </if>
+
+        order by a.create_time desc
+    </select>
+
+    <!--所有合同的 款项 对应的 支付结果 状态 / 如：逾期短信通知-->
+    <select id="selectAllContractStatusDetailsOverdueSms" resultType="java.util.Map" parameterType="java.util.Map">
+        select table_a.type
+
+        ,count(
+        CASE WHEN table_a.paymentresult = '0' THEN table_a.id end
+        ) as "dualCount"
+
+        ,count(
+        CASE WHEN table_a.paymentresult = '1' THEN table_a.id end
+        ) as "dualingCount"
+
+        ,count(
+        CASE WHEN table_a.paymentresult = '2' THEN table_a.id end
+        ) as "successCount"
+
+        ,count(
+        CASE WHEN table_a.paymentresult = '3' THEN table_a.id end
+        ) as "failCount"
+
+        from (
+
+        select c.id, c.payment_result "paymentresult", c.type
+        from lease_contract a
+        INNER JOIN lease_scheme_order b on b.id = a.scheme_order_id
+        LEFT JOIN lease_scheme_repayment_status c on c.contract_id = a.id
+        INNER JOIN lease_scheme_repayment d on c.repayment_id = d.id
+
+        LEFT JOIN lease_scheme_order_account e on e.scheme_order_id = b.id and e.is_default_pay=1
+        LEFT JOIN lease_account_bank_card abc on e.bank_card_id=abc.id
+        LEFT JOIN lease_account f on f.id = abc.account_id
+        LEFT JOIN lease_car h on h.id = b.card_id
+
+        where 1=1
+
+        <!--暂只开放个人类型的承租人的合同-->
+        and f.type=0
+
+        and (select sum(aa.overdue_day) from lease_overdue_log aa where aa.contract_id = a.id and (payment_result = 0 or
+        payment_result = 3)) > 0
+        and (select count(1) from lease_scheme_repayment_status bb where bb.type=0 and bb.contract_id = a.id and
+        bb.repayment_id = c.id and (bb.payment_result = 1 or bb.payment_result = 2)) &lt;= 0
+
+        and d.repayment_date in
+        <!--扣款日-->
+        <foreach item="item" index="index" collection="repaymentDate" open="(" separator="," close=")">
+            to_timestamp(#{item},'YYYY-MM-DD')
+        </foreach>
+
+        <!--分公司-->
+        <if test="branchCompanyId != null">
+            and a.branch_company_id = #{branchCompanyId,jdbcType=BIGINT}
+        </if>
+
+        <!--合同状态-->
+        <if test="status != null">
+            and a.status = #{status,jdbcType=INTEGER}
+        </if>
+
+        <!--搜索输入框-->
+        <if test="keyParams != null">
+            and (a.complete_contract_number like concat('%',#{keyParams},'%')
+            or f.name like concat('%',#{keyParams},'%')
+            or h.plate_number like concat('%',#{keyParams},'%'))
+        </if>
+
+        ) table_a group by table_a.type
+    </select>
+
+    <!--根据分公司统计所有合同 / 如：逾期短信通知-->
+    <select id="findAllContractStatisticsByCityOverdueSms" resultType="java.util.Map">
+
+        select table_a.branchcompanyname "branchCompanyName"
+        , count(*) as "totalCount"
+
+        from (
+
+        select b.name "branchcompanyname"
+        from lease_contract a
+        LEFT JOIN lease_branch_company b on b.id = a.branch_company_id
+        INNER JOIN lease_scheme_repayment c on a.id = c.contract_id and c.repayment_date
+        in
+        <!--扣款日-->
+        <foreach item="item" index="index" collection="repaymentDate" open="(" separator="," close=")">
+            to_timestamp(#{item},'YYYY-MM-DD')
+        </foreach>
+
+        INNER JOIN lease_scheme_order d on d.id = a.scheme_order_id
+        LEFT JOIN lease_scheme_order_account e on e.scheme_order_id = d.id and e.is_default_pay=1
+        LEFT JOIN lease_account_bank_card abc on e.bank_card_id=abc.id
+        LEFT JOIN lease_account f on f.id = abc.account_id
+        LEFT JOIN lease_car h on h.id = d.card_id
+
+        WHERE 1=1
+
+        <!--暂只开放个人类型的承租人的合同-->
+        and f.type=0
+
+        and (select sum(aa.overdue_day) from lease_overdue_log aa where aa.contract_id = a.id and (payment_result = 0 or
+        payment_result = 3)) > 0
+        and (select count(1) from lease_scheme_repayment_status bb where bb.type=0 and bb.contract_id = a.id and
+        bb.repayment_id = c.id and (bb.payment_result = 1 or bb.payment_result = 2)) &lt;= 0
+
+        <!--分公司-->
+        <if test="branchCompanyId != null">
+            and a.branch_company_id = #{branchCompanyId,jdbcType=BIGINT}
+        </if>
+
+        <!--月供状态 / 合同状态-->
+        <if test="status != null">
+            and a.status = #{status,jdbcType=INTEGER}
+        </if>
+
+        <!--是否逾期-->
+        <if test="overdue != null">
+            and c.overdue = #{overdue,jdbcType=INTEGER}
+        </if>
+
+        <!--搜索输入框-->
+        <if test="keyParams != null">
+            and (a.complete_contract_number like concat('%',#{keyParams},'%')
+            or f.name like concat('%',#{keyParams},'%')
+            or h.plate_number like concat('%',#{keyParams},'%'))
+        </if>
+
+        ) table_a group by table_a.branchcompanyname
+
+    </select>
+
+    <!--根据状态统计所有合同 / 如：逾期短信通知-->
+    <select id="findAllContractStatisticsByStatusOverdueSms" resultType="java.util.Map">
+
+        select (CASE WHEN a.status = '0' THEN '月供还款中' WHEN a.status = '1' THEN '挂靠中' WHEN a.status = '2' THEN '已完结' WHEN
+        a.status = '3' THEN '未开始还款' WHEN a.status = '4' THEN '提前还款' end)
+        ,count(a.id) as "count"
+
+        from lease_contract a
+
+        INNER JOIN lease_scheme_repayment c on a.id = c.contract_id and c.repayment_date
+
+        in
+        <!--扣款日-->
+        <foreach item="item" index="index" collection="repaymentDate" open="(" separator="," close=")">
+            to_timestamp(#{item},'YYYY-MM-DD')
+        </foreach>
+
+        INNER JOIN lease_scheme_order d on d.id = a.scheme_order_id
+        LEFT JOIN lease_scheme_order_account e on e.scheme_order_id = d.id and e.is_default_pay=1
+        LEFT JOIN lease_account_bank_card abc on e.bank_card_id = abc.id
+        LEFT JOIN lease_account f on f.id = abc.account_id
+        LEFT JOIN lease_car h on h.id = d.card_id
+
+        WHERE 1=1
+
+        <!--暂只开放个人类型的承租人的合同-->
+        and f.type=0
+
+        and (select sum(aa.overdue_day) from lease_overdue_log aa where aa.contract_id = a.id and (payment_result = 0 or
+        payment_result = 3)) > 0
+        and (select count(1) from lease_scheme_repayment_status bb where bb.type=0 and bb.contract_id = a.id and
+        bb.repayment_id = c.id and (bb.payment_result = 1 or bb.payment_result = 2)) &lt;= 0
+
+        <!--分公司-->
+        <if test="branchCompanyId != null">
+            and a.branch_company_id = #{branchCompanyId,jdbcType=BIGINT}
+        </if>
+
+        <!--月供状态 / 合同状态-->
+        <if test="status != null">
+            and a.status = #{status,jdbcType=INTEGER}
+        </if>
+
+        <!--是否逾期-->
+        <if test="overdue != null">
+            and c.overdue = #{overdue,jdbcType=INTEGER}
+        </if>
+
+        <!--搜索输入框-->
+        <if test="keyParams != null">
+            and (a.complete_contract_number like concat('%',#{keyParams},'%')
+            or f.name like concat('%',#{keyParams},'%')
+            or h.plate_number like concat('%',#{keyParams},'%'))
+        </if>
+
+        group by a.status;
+
+    </select>
+
+    <!--月供管理列表 / 租金支付计划表 / 还款历史-->
+    <select id="findPostLending" resultMap="PostLendingMap">
+
+        select
+        a.id "contractId"
+        , to_char(a.lease_start_time,'yyyy-mm-dd') "leaseStartTime", to_char(a.lease_end_time,'yyyy-mm-dd')
+        "leaseEndTime"
+        , (case when a.status=1 then 1 else 0 end) "status"
+        , c.id "repaymentId"
+        , a.complete_contract_number "completeContractNumber"
+        , g.name "branchCompanyName"
+        , e.name "accountName", e.phone "accountPhone", e.type "accountType"
+        , (case when e.type=0 then i.id_card when e.type=1 then k.legal_person_id_card end) "idCard"
+        , l.code "bankCode"
+        , l.name "bankName"
+        , abc.back_card_number "backCardNumber"
+        , m.plate_number "plateNumber"
+        , c.repayment_date "repaymentDate"
+
+        , (
+        (case when b.period_count is null or b.period_count=0 then (select count(1) from lease_scheme_repayment dd where dd.contract_id = a.id) else b.period_count end)
+        || '-' || c.period
+        ) "totalPeriod"
+        , c.overdue_day "overdueDay"
+
+        , a.id "conId"
+        , c.id "repId"
+        , b.pay_date "payDate"
+        , (case when n.agrm_no is null then 0 else 1 end ) "isSign"
+        , abc.bank_phone "bankPhone"
+
+        <!--
+        , (select sum(aa.overdue_day) from lease_scheme_repayment aa where aa.contract_id = a.id) "totalOverdueDay"
+        , (select COALESCE(sum(aa.overdue_day), 0) from lease_allinpay_log aa where aa.contract_id = a.id and aa.status = 2) "totalFail"
+        -->
+
+        , (COALESCE(lsrs_0.totle_price,0) + COALESCE(lsrs_2.totle_price,0) + COALESCE(lsrs_7.totle_price,0)) "totlePrice"
+
+        from lease_contract a
+        INNER JOIN lease_scheme_order b on b.id = a.scheme_order_id
+        INNER JOIN lease_scheme_repayment c on a.id = c.contract_id and c.repayment_date in
+        <!--扣款日-->
+        <foreach item="item" index="index" collection="repaymentDate" open="(" separator="," close=")">
+            to_timestamp(#{item},'YYYY-MM-DD')
+        </foreach>
+        LEFT JOIN lease_scheme_order_account d on d.scheme_order_id = b.id and d.is_default_pay=1
+        LEFT JOIN lease_account_bank_card abc on d.bank_card_id = abc.id
+        LEFT JOIN lease_account e on e.id = abc.account_id
+        LEFT JOIN lease_branch_company g on g.id = a.branch_company_id
+        LEFT JOIN lease_account_credit i on e.id = i.account_id
+        LEFT JOIN lease_account_company k on e.id = k.account_id
+        LEFT JOIN lease_bank l on l.id = abc.bank_id
+        LEFT JOIN lease_car m on m.id = b.card_id
+        LEFT JOIN lease_account_bank_pay_sin n on abc.id = n.bank_card_id
+
+        LEFT JOIN lease_scheme_repayment_status lsrs_0 on lsrs_0.repayment_id = c.id and lsrs_0.contract_id = a.id and lsrs_0.type = 0
+        LEFT JOIN lease_scheme_repayment_status lsrs_2 on lsrs_2.repayment_id = c.id and lsrs_2.contract_id = a.id and lsrs_2.type = 2
+        LEFT JOIN lease_scheme_repayment_status lsrs_7 on lsrs_7.repayment_id = c.id and lsrs_7.contract_id = a.id and lsrs_7.type = 7
+
+        WHERE 1=1
+        <!--暂只开放个人类型的承租人的合同-->
+        and e.type=0
+        <if test="contractId != null">
+            and a.id = #{contractId,jdbcType=BIGINT}
+        </if>
+        <!--分公司-->
+        <if test="branchCompanyId != null">
+            and a.branch_company_id = #{branchCompanyId,jdbcType=BIGINT}
+        </if>
+        <!--合同状态-->
+        <if test="status != null">
+            and a.status = #{status,jdbcType=INTEGER}
+        </if>
+        <!--是否逾期-->
+        <if test="overdue != null">
+            and c.overdue = #{overdue,jdbcType=INTEGER}
+        </if>
+        <!--搜索输入框-->
+        <if test="keyParams != null">
+            and (a.complete_contract_number like concat('%',#{keyParams},'%')
+            or e.name like concat('%',#{keyParams},'%')
+            or m.plate_number like concat('%',#{keyParams},'%'))
+        </if>
+        <!--是否逾期-->
+        <if test="isPrivately != null">
+            <if test="isPrivately == 0">
+                and
+                (
+                (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 0 and pay_way = 7) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 1 and pay_way = 7) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 2 and pay_way = 7) = 2
+                )
+            </if>
+            <if test="isPrivately == 1">
+                and
+                (
+                (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 0 and pay_way = 0) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 0 and pay_way = 1) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 0 and pay_way = 2) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 0 and pay_way = 3) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 0 and pay_way = 4) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 0 and pay_way = 5) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 0 and pay_way = 6) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 1 and pay_way = 0) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 1 and pay_way = 1) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 1 and pay_way = 2) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 1 and pay_way = 3) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 1 and pay_way = 4) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 1 and pay_way = 5) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 1 and pay_way = 6) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 2 and pay_way = 0) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 2 and pay_way = 1) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 2 and pay_way = 2) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 2 and pay_way = 3) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 2 and pay_way = 4) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 2 and pay_way = 5) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 2 and pay_way = 6) = 2
+                )
+            </if>
+        </if>
+        order by a.create_time desc
+
+    </select>
+
+    <!--还款历史 查看里面的统计部分-->
+    <select id="findAllinpayLogStatistics" resultMap="FindAllinpayLogStatisticsMap">
+        select
+        a.complete_contract_number "completeContractNumber"
+        , g.name "branchCompanyName"
+        , e.name "accountName", e.phone "accountPhone"
+        , (select sum(aa.overdue_day) from lease_scheme_repayment aa where aa.contract_id = a.id) "totalOverdueDay"
+        , (select COALESCE(sum(aa.overdue_day), 0) from lease_allinpay_log aa where aa.contract_id = a.id and aa.status = 2) "totalFail"
+        from lease_contract a
+        INNER JOIN lease_scheme_order b on b.id = a.scheme_order_id
+        LEFT JOIN lease_scheme_order_account d on d.scheme_order_id = b.id and d.is_default_pay=1
+        LEFT JOIN lease_account_bank_card abc on d.bank_card_id = abc.id
+        LEFT JOIN lease_account e on e.id = abc.account_id
+        LEFT JOIN lease_branch_company g on g.id = a.branch_company_id
+        WHERE 1=1
+        <!--暂只开放个人类型的承租人的合同-->
+        and e.type=0
+        and a.id = #{contractId,jdbcType=BIGINT}
+    </select>
+
+    <!--合同的 款项 对应的 支付方式 对应的 状态-->
+    <select id="selectByContractIdRepaymentId" resultMap="RepaymentDetailsMap" parameterType="java.util.Map">
+        select a.type, a.payment_result "paymentResult", a.payment_result_msg "paymentResultMsg", a.totle_price "totlePrice", a.pay_way "payWay"
+        , (select count(*) from lease_allinpay_log aa where a.type=aa.pay_type and a.id=aa.repayment_status_id and aa.status=0) "dualingCount"
+        , (select count(*) from lease_allinpay_log aa where a.type=aa.pay_type and a.id=aa.repayment_status_id and aa.status=1) "successCount"
+        , (select count(*) from lease_allinpay_log aa where a.type=aa.pay_type and a.id=aa.repayment_status_id and aa.status=2) "failCount"
+        from lease_scheme_repayment_status a
+        where 1=1
+        AND a.contract_id = #{contractId,jdbcType=BIGINT}
+        and (a.repayment_id = #{repaymentId,jdbcType=BIGINT} or a.repayment_id = (select id from lease_contract_link_repayment where contract_id = #{contractId,jdbcType=BIGINT} and repayment_date=(select repayment_date from lease_scheme_repayment where id = #{repaymentId,jdbcType=BIGINT})))
+
+    </select>
+
+    <!--所有合同的 款项 对应的 支付结果 状态-->
+    <select id="selectStatusDetails" resultMap="StatusTypeDetailsMap" parameterType="java.util.Map">
+        select table_a.type
+
+        ,count(
+        CASE WHEN table_a.paymentresult = '0' THEN table_a.id end
+        ) as "dualCount"
+
+        ,count(
+        CASE WHEN table_a.paymentresult = '1' THEN table_a.id end
+        ) as "dualingCount"
+
+        ,count(
+        CASE WHEN table_a.paymentresult = '2' THEN table_a.id end
+        ) as "successCount"
+
+        ,count(
+        CASE WHEN table_a.paymentresult = '3' THEN table_a.id end
+        ) as "failCount"
+
+        from (
+
+        select c.id, c.payment_result "paymentresult", c.type
+        from lease_contract a
+
+        LEFT JOIN lease_scheme_repayment_status c on c.contract_id = a.id
+
+        WHERE a.id=#{contractId,jdbcType=BIGINT}
+
+        ) table_a group by table_a.type;
+    </select>
+
+    <!--各种款项的支付结果统计 / 如：单人综合扣款表头的统计-->
+    <select id="selectAllContractStatusDetails" resultType="java.util.Map" parameterType="java.util.Map">
+        select table_a.type
+
+        ,count(
+        CASE WHEN table_a.paymentresult = '0' THEN table_a.id end
+        ) as "dualCount"
+
+        ,count(
+        CASE WHEN table_a.paymentresult = '1' THEN table_a.id end
+        ) as "dualingCount"
+
+        ,count(
+        CASE WHEN table_a.paymentresult = '2' THEN table_a.id end
+        ) as "successCount"
+
+        ,count(
+        CASE WHEN table_a.paymentresult = '3' THEN table_a.id end
+        ) as "failCount"
+
+        from (
+
+        select d.id, d.payment_result "paymentresult", d.type
+        from lease_contract a
+        INNER JOIN lease_scheme_order b on b.id = a.scheme_order_id
+        INNER JOIN lease_scheme_repayment c on c.contract_id = a.id
+        LEFT JOIN lease_scheme_repayment_status d on d.repayment_id = c.id and d.contract_id = a.id
+        LEFT JOIN lease_scheme_order_account e on e.scheme_order_id = b.id and e.is_default_pay=1
+        LEFT JOIN lease_account_bank_card abc on e.bank_card_id = abc.id
+        LEFT JOIN lease_account f on f.id = abc.account_id
+        LEFT JOIN lease_car h on h.id = b.card_id
+        WHERE 1=1
+        and d.type = 0
+        <!--暂只开放个人类型的承租人的合同-->
+        and f.type=0
+        and c.repayment_date in
+        <!--扣款日-->
+        <foreach item="item" index="index" collection="repaymentDate" open="(" separator="," close=")">
+            to_timestamp(#{item},'YYYY-MM-DD')
+        </foreach>
+
+        <!--分公司-->
+        <if test="branchCompanyId != null">
+            and a.branch_company_id = #{branchCompanyId,jdbcType=BIGINT}
+        </if>
+
+        <!--合同状态-->
+        <if test="status != null">
+            and a.status = #{status,jdbcType=INTEGER}
+        </if>
+
+        <!--搜索输入框-->
+        <if test="keyParams != null">
+            and (a.complete_contract_number like concat('%',#{keyParams},'%')
+            or f.name like concat('%',#{keyParams},'%')
+            or h.plate_number like concat('%',#{keyParams},'%'))
+        </if>
+
+        <!--是否逾期-->
+        <if test="isPrivately != null">
+            <if test="isPrivately == 0">
+                and
+                (
+                (d.type = 0 and d.pay_way = 7 and d.payment_result = 2)
+                or (d.type = 1 and d.pay_way = 7 and d.payment_result = 2)
+                or (d.type = 2 and d.pay_way = 7 and d.payment_result = 2)
+                )
+            </if>
+
+            <if test="isPrivately == 1">
+                and
+                (
+                (d.type = 0 and d.pay_way = 0)
+                or (d.type = 0 and d.pay_way = 1)
+                or (d.type = 0 and d.pay_way = 2)
+                or (d.type = 0 and d.pay_way = 3)
+                or (d.type = 0 and d.pay_way = 4)
+                or (d.type = 0 and d.pay_way = 5)
+                or (d.type = 0 and d.pay_way = 6)
+
+                or (d.type = 1 and d.pay_way = 0)
+                or (d.type = 1 and d.pay_way = 1)
+                or (d.type = 1 and d.pay_way = 2)
+                or (d.type = 1 and d.pay_way = 3)
+                or (d.type = 1 and d.pay_way = 4)
+                or (d.type = 1 and d.pay_way = 5)
+                or (d.type = 1 and d.pay_way = 6)
+
+                or (d.type = 2 and d.pay_way = 0)
+                or (d.type = 2 and d.pay_way = 1)
+                or (d.type = 2 and d.pay_way = 2)
+                or (d.type = 2 and d.pay_way = 3)
+                or (d.type = 2 and d.pay_way = 4)
+                or (d.type = 2 and d.pay_way = 5)
+                or (d.type = 2 and d.pay_way = 6)
+                )
+            </if>
+        </if>
+
+        ) table_a group by table_a.type;
+    </select>
+
+    <!--各种支付方式统计 / 如：单人综合扣款表头的统计-->
+    <select id="selectAllContractPayWayDetails" resultType="java.util.Map" parameterType="java.util.Map">
+        select table_a.payway
+
+        ,count(
+        CASE WHEN table_a.paymentresult = '0' THEN table_a.id end
+        ) as "dualCount"
+
+        ,count(
+        CASE WHEN table_a.paymentresult = '1' THEN table_a.id end
+        ) as "dualingCount"
+
+        ,count(
+        CASE WHEN table_a.paymentresult = '2' THEN table_a.id end
+        ) as "successCount"
+
+        ,count(
+        CASE WHEN table_a.paymentresult = '3' THEN table_a.id end
+        ) as "failCount"
+
+        from (
+
+        select d.id, d.payment_result "paymentresult", d.pay_way "payway"
+        from lease_contract a
+        INNER JOIN lease_scheme_order b on b.id = a.scheme_order_id
+        INNER JOIN lease_scheme_repayment c on c.contract_id = a.id
+        LEFT JOIN lease_scheme_repayment_status d on d.repayment_id = c.id and d.contract_id = a.id
+        LEFT JOIN lease_scheme_order_account e on e.scheme_order_id = b.id and e.is_default_pay=1
+        LEFT JOIN lease_account_bank_card abc on e.bank_card_id = abc.id
+        LEFT JOIN lease_account f on f.id = abc.account_id
+        LEFT JOIN lease_car h on h.id = b.card_id
+        where 1=1
+        and d.type = 0
+        <!--暂只开放个人类型的承租人的合同-->
+        and f.type=0
+        and c.repayment_date in
+        <!--扣款日-->
+        <foreach item="item" index="index" collection="repaymentDate" open="(" separator="," close=")">
+            to_timestamp(#{item},'YYYY-MM-DD')
+        </foreach>
+
+        <!--分公司-->
+        <if test="branchCompanyId != null">
+            and a.branch_company_id = #{branchCompanyId,jdbcType=BIGINT}
+        </if>
+
+        <!--合同状态-->
+        <if test="status != null">
+            and a.status = #{status,jdbcType=INTEGER}
+        </if>
+
+        <!--搜索输入框-->
+        <if test="keyParams != null">
+            and (a.complete_contract_number like concat('%',#{keyParams},'%')
+            or f.name like concat('%',#{keyParams},'%')
+            or h.plate_number like concat('%',#{keyParams},'%'))
+        </if>
+
+        <if test="isPrivately != null">
+            <if test="isPrivately == 0">
+                and
+                (
+                (d.type = 0 and d.pay_way = 7 and d.payment_result = 2)
+                or (d.type = 1 and d.pay_way = 7 and d.payment_result = 2)
+                or (d.type = 2 and d.pay_way = 7 and d.payment_result = 2)
+                )
+            </if>
+
+            <if test="isPrivately == 1">
+                and
+                (
+                (d.type = 0 and d.pay_way = 0)
+                or (d.type = 0 and d.pay_way = 1)
+                or (d.type = 0 and d.pay_way = 2)
+                or (d.type = 0 and d.pay_way = 3)
+                or (d.type = 0 and d.pay_way = 4)
+                or (d.type = 0 and d.pay_way = 5)
+                or (d.type = 0 and d.pay_way = 6)
+
+                or (d.type = 1 and d.pay_way = 0)
+                or (d.type = 1 and d.pay_way = 1)
+                or (d.type = 1 and d.pay_way = 2)
+                or (d.type = 1 and d.pay_way = 3)
+                or (d.type = 1 and d.pay_way = 4)
+                or (d.type = 1 and d.pay_way = 5)
+                or (d.type = 1 and d.pay_way = 6)
+
+                or (d.type = 2 and d.pay_way = 0)
+                or (d.type = 2 and d.pay_way = 1)
+                or (d.type = 2 and d.pay_way = 2)
+                or (d.type = 2 and d.pay_way = 3)
+                or (d.type = 2 and d.pay_way = 4)
+                or (d.type = 2 and d.pay_way = 5)
+                or (d.type = 2 and d.pay_way = 6)
+                )
+            </if>
+        </if>
+
+        ) table_a group by table_a.payway;
+    </select>
+
+    <!--合同状态统计-->
+    <select id="findAllContractStatisticsByStatus" resultType="java.util.Map">
+
+        select (CASE WHEN a.status  = '0' THEN '月供还款中' WHEN a.status  = '1' THEN '挂靠中' WHEN a.status  = '2' THEN '已完结' WHEN a.status  = '3' THEN '未开始还款' WHEN a.status  = '4' THEN '提前还款' end) "status"
+        ,count(a.id) as "count"
+        from lease_contract a
+        INNER JOIN lease_scheme_repayment c on a.id = c.contract_id and c.repayment_date
+        in
+        <!--扣款日-->
+        <foreach item="item" index="index" collection="repaymentDate" open="(" separator="," close=")">
+            to_timestamp(#{item},'YYYY-MM-DD')
+        </foreach>
+        INNER JOIN lease_scheme_order d on d.id = a.scheme_order_id
+        LEFT JOIN lease_scheme_order_account e on e.scheme_order_id = d.id and e.is_default_pay=1
+        LEFT JOIN lease_account_bank_card abc on e.bank_card_id = abc.id
+        LEFT JOIN lease_account f on f.id = abc.account_id
+        LEFT JOIN lease_car h on h.id = d.card_id
+        WHERE 1=1
+        <!--暂只开放个人类型的承租人的合同-->
+        and f.type=0
+
+        <!--分公司-->
+        <if test="branchCompanyId != null">
+            and a.branch_company_id = #{branchCompanyId,jdbcType=BIGINT}
+        </if>
+
+        <!--月供状态 / 合同状态-->
+        <if test="status != null">
+            and a.status = #{status,jdbcType=INTEGER}
+        </if>
+
+        <!--是否逾期-->
+        <if test="overdue != null">
+            and c.overdue = #{overdue,jdbcType=INTEGER}
+        </if>
+
+        <!--搜索输入框-->
+        <if test="keyParams != null">
+            and (a.complete_contract_number like concat('%',#{keyParams},'%')
+            or f.name like concat('%',#{keyParams},'%')
+            or h.plate_number like concat('%',#{keyParams},'%'))
+        </if>
+
+        <if test="isPrivately != null">
+            <if test="isPrivately == 0">
+                and
+                (
+                (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 0 and pay_way = 7) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 1 and pay_way = 7) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 2 and pay_way = 7) = 2
+                )
+            </if>
+
+            <if test="isPrivately == 1">
+                and
+                (
+                (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 0 and pay_way = 0) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 0 and pay_way = 1) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 0 and pay_way = 2) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 0 and pay_way = 3) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 0 and pay_way = 4) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 0 and pay_way = 5) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 0 and pay_way = 6) = 2
+
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 1 and pay_way = 0) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 1 and pay_way = 1) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 1 and pay_way = 2) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 1 and pay_way = 3) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 1 and pay_way = 4) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 1 and pay_way = 5) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 1 and pay_way = 6) = 2
+
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 2 and pay_way = 0) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 2 and pay_way = 1) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 2 and pay_way = 2) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 2 and pay_way = 3) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 2 and pay_way = 4) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 2 and pay_way = 5) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 2 and pay_way = 6) = 2
+                )
+            </if>
+        </if>
+
+        group by a.status;
+
+    </select>
+
+    <!--根据分公司统计所有合同-->
+    <select id="findAllContractStatisticsByCity" resultType="java.util.Map">
+
+        select table_a.branchcompanyname "branchCompanyName"
+        , count(*) as "totalCount"
+
+        from (
+
+        select b.name "branchcompanyname"
+        from lease_contract a
+        LEFT JOIN lease_branch_company b on b.id = a.branch_company_id
+        INNER JOIN lease_scheme_repayment c on a.id = c.contract_id and c.repayment_date
+        in
+        <!--扣款日-->
+        <foreach item="item" index="index" collection="repaymentDate" open="(" separator="," close=")">
+            to_timestamp(#{item},'YYYY-MM-DD')
+        </foreach>
+
+        INNER JOIN lease_scheme_order d on d.id = a.scheme_order_id
+        LEFT JOIN lease_scheme_order_account e on e.scheme_order_id = d.id and e.is_default_pay=1
+        LEFT JOIN lease_account_bank_card abc on e.bank_card_id = abc.id
+        LEFT JOIN lease_account f on f.id = abc.account_id
+        LEFT JOIN lease_car h on h.id = d.card_id
+
+        WHERE 1=1
+
+        <!--暂只开放个人类型的承租人的合同-->
+        and f.type=0
+
+        <!--分公司-->
+        <if test="branchCompanyId != null">
+            and a.branch_company_id = #{branchCompanyId,jdbcType=BIGINT}
+        </if>
+
+        <!--月供状态 / 合同状态-->
+        <if test="status != null">
+            and a.status = #{status,jdbcType=INTEGER}
+        </if>
+
+        <!--是否逾期-->
+        <if test="overdue != null">
+            and c.overdue = #{overdue,jdbcType=INTEGER}
+        </if>
+
+        <!--搜索输入框-->
+        <if test="keyParams != null">
+            and (a.complete_contract_number like concat('%',#{keyParams},'%')
+            or f.name like concat('%',#{keyParams},'%')
+            or h.plate_number like concat('%',#{keyParams},'%'))
+        </if>
+
+        <if test="isPrivately != null">
+            <if test="isPrivately == 0">
+                and
+                (
+                (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 0 and pay_way = 7) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 1 and pay_way = 7) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 2 and pay_way = 7) = 2
+                )
+            </if>
+
+            <if test="isPrivately == 1">
+                and
+                (
+                (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 0 and pay_way = 0) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 0 and pay_way = 1) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 0 and pay_way = 2) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 0 and pay_way = 3) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 0 and pay_way = 4) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 0 and pay_way = 5) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 0 and pay_way = 6) = 2
+
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 1 and pay_way = 0) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 1 and pay_way = 1) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 1 and pay_way = 2) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 1 and pay_way = 3) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 1 and pay_way = 4) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 1 and pay_way = 5) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 1 and pay_way = 6) = 2
+
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 2 and pay_way = 0) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 2 and pay_way = 1) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 2 and pay_way = 2) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 2 and pay_way = 3) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 2 and pay_way = 4) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 2 and pay_way = 5) = 2
+                or (select payment_result from lease_scheme_repayment_status where repayment_id = c.id and contract_id = a.id and type = 2 and pay_way = 6) = 2
+                )
+            </if>
+        </if>
+
+        ) table_a group by table_a.branchcompanyname
+
+    </select>
+
+    <!--合同的尾付-->
+    <select id="findBalancePayment" resultMap="FindBalancePaymentMap">
+
+        select
+        c.balance_payment "balancePayment"
+        ,(case when c.balance_payment_number = (select period from lease_scheme_repayment aa INNER JOIN
+        lease_scheme_repayment_status bb on bb.repayment_id = aa.id where aa.id = #{repaymentId,jdbcType=BIGINT} and
+        aa.contract_id = a.id and (bb.payment_result=0 or bb.payment_result=3) and bb.type=4) then 1 ELSE 0 end)
+        "isBalancePayment"
+        ,(case when c.balance_payment_number = (select period from lease_scheme_repayment aa INNER JOIN
+        lease_scheme_repayment_status bb on bb.repayment_id = aa.id where aa.id = #{repaymentId,jdbcType=BIGINT} and
+        aa.contract_id = a.id and (bb.payment_result=0 or bb.payment_result=3) and bb.type=4) then 4 else 4 end) "type"
+        ,(case
+        when c.balance_payment_number = (select period from lease_scheme_repayment aa INNER JOIN
+        lease_scheme_repayment_status bb on bb.repayment_id = aa.id where aa.id = #{repaymentId,jdbcType=BIGINT} and
+        aa.contract_id = a.id and (bb.payment_result=0 or bb.payment_result=3) and bb.type=4) then (select
+        bb.repayment_id from lease_scheme_repayment aa INNER JOIN lease_scheme_repayment_status bb on bb.repayment_id =
+        aa.id where aa.id = #{repaymentId,jdbcType=BIGINT} and aa.contract_id = a.id and (bb.payment_result=0 or
+        bb.payment_result=3) and bb.type=4)
+        else (select bb.repayment_id from lease_scheme_repayment aa INNER JOIN lease_scheme_repayment_status bb on
+        bb.repayment_id = aa.id where aa.id = #{repaymentId,jdbcType=BIGINT} and aa.contract_id = a.id and
+        (bb.payment_result=0 or bb.payment_result=3) and bb.type=4)
+        end
+        ) "repaymentId"
+        , a.id "contractId"
+        from lease_contract a
+        INNER JOIN lease_scheme_order b on a.scheme_order_id=b.id
+        INNER JOIN lease_package_balance_payment c on b.scheme_id=c.id
+
+        where
+        a.id = #{contractId,jdbcType=BIGINT}
+        and (a.status=0 or a.status=3)
+
+        <!--
+                select
+                d.balance_payment "balancePayment"
+                ,(case when (to_number(e.value, '99999') = (select period from lease_scheme_repayment aa INNER JOIN lease_scheme_repayment_status bb on bb.repayment_id = aa.id where aa.id = #{repaymentId,jdbcType=BIGINT} and aa.contract_id = a.id and (bb.payment_result=0 or bb.payment_result=3) and bb.type=4) or          (SELECT COUNT(*) from lease_contract_advance aa INNER JOIN lease_scheme_repayment_status bb on bb.repayment_id = aa.id where aa.repayment_id = #{repaymentId,jdbcType=BIGINT} and aa.contract_id = #{contractId,jdbcType=BIGINT} and (bb.payment_result=0 or bb.payment_result=3) and bb.type=6) > 0 ) then 1 ELSE 0 end) "isBalancePayment"
+                ,(case when to_number(e.value, '99999') = (select period from lease_scheme_repayment aa INNER JOIN lease_scheme_repayment_status bb on bb.repayment_id = aa.id where aa.id = #{repaymentId,jdbcType=BIGINT} and aa.contract_id = a.id and (bb.payment_result=0 or bb.payment_result=3) and bb.type=4) then 4 when (SELECT COUNT(*) from lease_contract_advance aa INNER JOIN lease_scheme_repayment_status bb on bb.repayment_id = aa.id where aa.repayment_id = #{repaymentId,jdbcType=BIGINT} and aa.contract_id = #{contractId,jdbcType=BIGINT} and (bb.payment_result=0 or bb.payment_result=3) and bb.type=6) > 0 then 6 when ((to_number(e.value, '99999') = (select period from lease_scheme_repayment aa INNER JOIN lease_scheme_repayment_status bb on bb.repayment_id = aa.id where aa.id = #{repaymentId,jdbcType=BIGINT} and aa.contract_id = a.id and (bb.payment_result=0 or bb.payment_result=3) and bb.type=4)) and (SELECT COUNT(*) from lease_contract_advance aa INNER JOIN lease_scheme_repayment_status bb on bb.repayment_id = aa.id where aa.repayment_id = #{repaymentId,jdbcType=BIGINT} and aa.contract_id = #{contractId,jdbcType=BIGINT} and (bb.payment_result=0 or bb.payment_result=3) and bb.type=6) > 0 ) then 4 else 4 end) "type"
+                ,(case
+                when to_number(e.value, '99999') = (select period from lease_scheme_repayment aa INNER JOIN lease_scheme_repayment_status bb on bb.repayment_id = aa.id where aa.id = #{repaymentId,jdbcType=BIGINT} and aa.contract_id = a.id and (bb.payment_result=0 or bb.payment_result=3) and bb.type=4) then (select bb.repayment_id from lease_scheme_repayment aa INNER JOIN lease_scheme_repayment_status bb on bb.repayment_id = aa.id where aa.id = #{repaymentId,jdbcType=BIGINT} and aa.contract_id = a.id and (bb.payment_result=0 or bb.payment_result=3) and bb.type=4)
+                when (SELECT COUNT(*) from lease_contract_advance aa INNER JOIN lease_scheme_repayment_status bb on bb.repayment_id = aa.id where aa.repayment_id = #{repaymentId,jdbcType=BIGINT} and aa.contract_id = #{contractId,jdbcType=BIGINT} and (bb.payment_result=0 or bb.payment_result=3) and bb.type=6) > 0 then (SELECT bb.repayment_id from lease_contract_advance aa INNER JOIN lease_scheme_repayment_status bb on bb.repayment_id = aa.id where aa.repayment_id = #{repaymentId,jdbcType=BIGINT} and aa.contract_id = #{contractId,jdbcType=BIGINT} and (bb.payment_result=0 or bb.payment_result=3) and bb.type=6)
+                when ((to_number(e.value, '99999') = (select period from lease_scheme_repayment aa INNER JOIN lease_scheme_repayment_status bb on bb.repayment_id = aa.id where aa.id = #{repaymentId,jdbcType=BIGINT} and aa.contract_id = a.id and (bb.payment_result=0 or bb.payment_result=3) and bb.type=4)) and (SELECT COUNT(*) from lease_contract_advance aa INNER JOIN lease_scheme_repayment_status bb on bb.repayment_id = aa.id where aa.repayment_id = #{repaymentId,jdbcType=BIGINT} and aa.contract_id = #{contractId,jdbcType=BIGINT} and (bb.payment_result=0 or bb.payment_result=3) and bb.type=6) > 0 ) then (select bb.repayment_id from lease_scheme_repayment aa INNER JOIN lease_scheme_repayment_status bb on bb.repayment_id = aa.id where aa.id = #{repaymentId,jdbcType=BIGINT} and aa.contract_id = a.id and (bb.payment_result=0 or bb.payment_result=3) and bb.type=4)
+                else (select bb.repayment_id from lease_scheme_repayment aa INNER JOIN lease_scheme_repayment_status bb on bb.repayment_id = aa.id where aa.id = #{repaymentId,jdbcType=BIGINT} and aa.contract_id = a.id and (bb.payment_result=0 or bb.payment_result=3) and bb.type=4)
+                end
+                ) "repaymentId"
+                , a.id "contractId"
+                from lease_contract a
+                INNER JOIN lease_scheme_order b on a.scheme_order_id=b.id
+                INNER JOIN lease_scheme_package c on c.scheme_id=b.scheme_id
+                INNER JOIN lease_package d on d.id=c.package_id
+                INNER JOIN lease_dict e on d.staging_number_id=e.id
+                where
+                a.id = #{contractId,jdbcType=BIGINT}
+        -->
+
+    </select>
+
+    <!--融租合同承租人信息-->
+    <select id="findContractAccount" resultType="java.util.Map">
+
+        select
+        a.id "contractId", a.complete_contract_number "completeContractNumber"
+        , b.monthly_rent "monthlyRent"
+        ,d.id "accountId"
+        , d.phone "accountPhone"
+        , d.name "accountName"
+
+        ,(case when d.type=1 then h.bank_account_name else d.name end) "bankAccountName"
+        ,abc.back_card_number "backCardNumber"
+        ,abc.bank_phone "bankPhone"
+        ,(case when d.type=1 then h.legal_person_id_card else e.id_card end) "idCard"
+        ,f.name "bankName"
+        ,f.code "bankCode"
+
+        ,g.name "branchCompanyName"
+        ,(SELECT value from lease_dict WHERE type='OverdueRate') "overdueRate"
+
+        ,i.agrm_no "agrmNo"
+        ,(case when i.agrm_no is null then 0 else 1 end) "isSign"
+
+        ,(case when j.pay_way is null then 4 else j.pay_way end) "supportPayWay"
+        , COALESCE(j.price_limit,0) "priceLimit"
+        , COALESCE(j.day_price_limit,0) "dayPriceLimit"
+
+        from lease_contract a
+        INNER JOIN lease_scheme_order b on b.id = a.scheme_order_id
+        INNER JOIN lease_scheme_order_account c on c.scheme_order_id = b.id and c.is_default_pay = 1
+        LEFT JOIN lease_account_bank_card abc on c.bank_card_id = abc.id
+        INNER JOIN lease_account d on d.id = c.account_id
+        LEFT JOIN lease_account_credit e on d.id = e.account_id
+        LEFT JOIN lease_bank f on f.id = abc.bank_id
+        left join lease_branch_company g on a.branch_company_id =g.id
+        LEFT JOIN lease_account_company h on d.id = h.account_id
+        LEFT JOIN lease_account_bank_pay_sin i on abc.id = i.bank_card_id
+        LEFT JOIN lease_bank_allinpay_price_limit j on f.id = j.bank_id
+
+        where a.id = #{contractId,jdbcType=BIGINT}
+
+    </select>
+
+    <!--融资租赁标的物-->
+    <select id="findContractInfo" resultType="java.util.Map">
+        select
+        a.id "contractId"
+        ,d.real_name "accountRealName"
+        ,d.name "accountName"
+        ,d.type "accountType"
+        ,abc.back_card_number "backCardNumber"
+        ,f.name "bankName",f.code "bankCode"
+        ,a.lease_start_time "leaseStartTime", a.lease_end_time "leaseEndTime"
+        , round(COALESCE(h.balance_payment,0.00), 2) "balancePayment"
+        ,b.lease_price "leasePrice", b.monthly_rent "monthlyRent", b.receive_margin "receiveMargin", b.pay_date
+        "payDate"
+        ,i.engine_number "engineNumber", i.card_frame_number "cardFrameNumber"
+        ,j.name "brandsName", k.name "seriesName", l.complete_model_name "modelName", m.name "colorName"
+
+        from lease_contract a
+        INNER JOIN lease_scheme_order b on b.id = a.scheme_order_id
+        INNER JOIN lease_scheme_order_account c on c.scheme_order_id = b.id and c.is_default_pay = 1
+        LEFT JOIN lease_account_bank_card abc on c.bank_card_id = abc.id
+        INNER JOIN lease_account d on d.id = c.account_id
+        LEFT JOIN lease_account_credit e on d.id = e.account_id
+        LEFT JOIN lease_bank f on f.id = abc.bank_id
+
+        left join lease_scheme_package g on b.scheme_id=g.scheme_id
+        left join lease_package h on g.package_id=h.id
+
+        left join lease_car i on b.card_id=i.id
+        left join lease_car_brands j on i.brands_id=j.id
+        left join lease_car_series k on i.series_id=k.id
+        left join lease_car_model l on i.series_id=l.id
+        left join lease_car_color m on i.color_id=m.id
+
+        where a.id = #{contractId,jdbcType=BIGINT}
+    </select>
+
+    <select id="insertViewParames" resultType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_contract
+    </select>
+
+    <!-- 贷后车辆管理 搜索合同 数据列表 -->
+    <sql id="carManagerFindContractCommon">
+        select
+        c.id "contractId",aa.name "accountName", aa.phone "accountPhone", c.complete_contract_number as "completeContractNumber"
+        , pc.plate_number as "plateNumber"
+        , pc.id "carId",pc.card_frame_number as "cardFrameNumber", cb.name as "brandsName", css.name as "seriesName", cc.name as "colorName"
+        , so.monthly_rent "totalPrice", cm.complete_model_name as "contractCompleteModelName"
+        , (case when so.period_count is null or so.period_count=0 then (select count(1) from lease_scheme_repayment dd
+        where dd.contract_id = c.id) else so.period_count end) "stagingNumberName"
+        , (select count(1) from lease_scheme_repayment_status dd where dd.contract_id = c.id and dd.type=0 and
+        dd.payment_result=2) "payPeriod"
+
+        , (
+        select count(1)
+        from lease_scheme_repayment_status dd
+        inner join lease_scheme_repayment ddd on dd.repayment_id = ddd.id
+        where dd.contract_id = c.id
+        and dd.type = 0
+        and dd.payment_result != 2
+        and ddd.repayment_date &lt; now()
+        ) "noPayPeriod"
+
+        , (
+        select max(ee.repayment_date) from lease_scheme_repayment_status dd
+        inner join lease_scheme_repayment ee on dd.repayment_id=ee.id
+        where dd.contract_id = c.id and dd.type=0 and dd.payment_result!=2
+        ) "repaymentDate"
+        , cm.market_price "marketPrice"
+
+        , so.comprehensive_quote - so.receive_margin - (
+        select COALESCE(sum(ee.return_principal),0)
+        from lease_scheme_repayment_status dd
+        inner join lease_scheme_repayment ee on dd.repayment_id=ee.id
+        where dd.contract_id = c.id
+        and dd.type=0
+        and dd.payment_result=2
+        ) "residualPrincipal"
+
+        , (select to_char(max(expire_time),'yyyy-mm-dd') from lease_car_insurance aa where aa.car_id=pc.id and aa.type=0
+        and aa.year=1) "strongRiskExpireTime"
+        , (select to_char(max(expire_time),'yyyy-mm-dd') from lease_car_insurance aa where aa.car_id=pc.id and aa.type=1
+        and aa.year=1) "commercialInsuranceExpireTime1"
+        , (select to_char(max(expire_time),'yyyy-mm-dd') from lease_car_insurance aa where aa.car_id=pc.id and aa.type=1
+        and aa.year=2) "commercialInsuranceExpireTime12"
+        from lease_contract c
+        left join lease_scheme_order so on c.scheme_order_id=so.id
+        left join lease_car pc on so.card_id=pc.id
+        left join lease_car_brands cb on pc.brands_id=cb.id
+        left join lease_car_series css on pc.series_id=css.id
+        left join lease_car_model cm on pc.model_id=cm.id
+        left join lease_car_color cc on pc.color_id=cc.id
+        left join lease_scheme_order_account soa on soa.scheme_order_id=so.id and soa.is_default_pay=1
+        left join lease_account aa on soa.account_id=aa.id
+
+        where 1=1
+
+        and (select count(1) from lease_contract_car_callback aa where aa.contract_id=c.id and pc.id = aa.car_id) &lt;= 0
+        and (select count(1) from lease_contract_car_lose aa where aa.contract_id=c.id and pc.id = aa.car_id) &lt;= 0
+        and (select count(1) from lease_contract_car_scrap aa where aa.contract_id=c.id and pc.id = aa.car_id) &lt;= 0
+        and (select count(1) from lease_contract_deal_end aa where aa.contract_id=c.id and pc.id = aa.car_id and (aa.deal_way = 2 or aa.deal_way = 3 or aa.deal_way = 4 or aa.deal_way = 5)) &lt;= 0
+
+        and (c.status = 0 or c.status = 3)
+
+        and (
+        c.complete_contract_number like concat('%',#{keyParames},'%')
+        or pc.plate_number like concat('%',#{keyParames},'%')
+        or aa.name like concat('%',#{keyParames},'%')
+        or aa.phone like concat('%',#{keyParames},'%')
+        )
+
+    </sql>
+
+    <!-- 贷后车辆管理 搜索合同 数据列表-->
+    <select id="carManagerFindContract" resultMap="CarManagerFindContractMap">
+
+        <include refid="carManagerFindContractCommon"/>
+
+    </select>
+
+    <!--贷后直租合同 数据列表-->
+    <sql id="contractManagerFindContractConmmon">
+        select
+        c.id "contractId",aa.name "accountName", pc.car_condition "carCondition", c.deal_status "dealStatusName"
+        , aa.phone "accountPhone", so.pay_date "payDate"
+        ,(
+        (case when so.period_count is null or so.period_count=0 then (select count(1) from lease_scheme_repayment dd where dd.contract_id = c.id) else so.period_count end)
+        || '-'
+        ||
+        (
+        case
+        when c.status = 2 then (case when so.period_count is null or so.period_count=0 then (select count(1) from lease_scheme_repayment dd where dd.contract_id = c.id) else so.period_count end)
+        else (select period from lease_scheme_repayment sr where c.id = sr.contract_id and sr.repayment_date = to_timestamp(concat(#{repaymentDate,jdbcType=TIMESTAMP},'-',so.pay_date),'YYYY-MM-DD'))
+        end
+        )
+        ) "totalPeriod"
+        , so.monthly_rent "monthlyRent", la.name "agentsName"
+        , ac.id_card "idCard"
+        , bk.code as "bankCode"
+        , abc.back_card_number as "backCardNumber"
+        , pc.plate_number "plateNumber"
+        , pc.id "carId"
+        , c.lease_start_time as "leaseStartTime"
+        , c.lease_end_time as "leaseEndTime"
+        , (select min(repayment_date) from lease_scheme_repayment aa where aa.contract_id = c.id) as "payStartTime"
+        , (select max(repayment_date) from lease_scheme_repayment aa where aa.contract_id = c.id) as "payEndTime"
+        from lease_contract c
+        left join lease_scheme_order so on c.scheme_order_id=so.id
+        left join lease_car pc on so.card_id=pc.id
+        left join lease_car_brands cb on pc.brands_id=cb.id
+        left join lease_scheme_order_account soa on soa.scheme_order_id=so.id and soa.is_default_pay=1
+        left join lease_account_bank_card abc on soa.bank_card_id=abc.id
+        left join lease_account aa on soa.account_id=aa.id
+        LEFT JOIN lease_account_credit ac on aa.id = ac.account_id
+        left join lease_agents la on c.sale_channel_id=la.id
+        LEFT JOIN lease_bank bk on abc.bank_id = bk.id
+        where 1=1
+        and (c.status = 0 or c.status = 3)
+        <if test="keyParames != null">
+            and (
+            c.complete_contract_number like concat('%',#{keyParames},'%')
+            or aa.name like concat('%',#{keyParames},'%')
+            or pc.plate_number like concat('%',#{keyParames},'%')
+            )
+        </if>
+        <if test="dealStatus != null">
+            and c.dealStatus = #{dealStatus}
+        </if>
+        <if test="carCondition != null">
+            and pc.carCondition = #{carCondition}
+        </if>
+        <if test="contractEndStatus != null">
+            <if test="contractEndStatus = '1'">
+                c.lease_end_time>now()
+            </if>
+            <if test="contractEndStatus = '2'">
+                and now() + INTERVAL '30 day' > c.lease_end_time
+            </if>
+            <if test="contractEndStatus = '3'">
+                c.lease_end_time &lt; now()
+            </if>
+        </if>
+    </sql>
+
+    <!--贷后直租合同 数据列表/改期数-->
+    <select id="contractManagerFindContractUpdatePeriod" resultMap="ContractManagerFindContractMap" parameterType="java.util.Map">
+
+        <include refid="contractManagerFindContractConmmon"/>
+        and c.deal_status != '6-0'
+        and (select count(1) from lease_contract_car_lose aa where aa.contract_id=c.id and pc.id = aa.car_id and aa.deal_way = 3) &lt;= 0
+        and (select count(1) from lease_contract_car_scrap aa where aa.contract_id=c.id and pc.id = aa.car_id and (aa.deal_way = 0 or aa.deal_way = 1)) &lt;= 0
+        and (select count(1) from lease_contract_deal_end aa where aa.contract_id=c.id and pc.id = aa.car_id) &lt;= 0
+    </select>
+
+    <!--贷后直租合同 数据列表/结束处置-->
+    <select id="contractManagerFindContractDealEnd" resultMap="ContractManagerFindContractMap" parameterType="java.util.Map">
+
+        <include refid="contractManagerFindContractConmmon"/>
+        and (select count(1) from lease_contract_car_lose aa where aa.contract_id=c.id and pc.id = aa.car_id and aa.deal_way = 3) &lt;= 0
+        and (select count(1) from lease_contract_car_scrap aa where aa.contract_id=c.id and pc.id = aa.car_id and (aa.deal_way = 0 or aa.deal_way = 1)) &lt;= 0
+        and (select count(1) from lease_contract_deal_end aa where aa.contract_id=c.id and pc.id = aa.car_id) &lt;= 0
+    </select>
+
+    <!--贷前直租合同-次新车处置 合同数据列表-->
+    <sql id="contractDQZZManagerFindContractConmmon">
+        select
+        c.id "contractId",aa.name "accountName", c. complete_contract_number "completeContractNumber", c.create_time "createTime"
+        , (select complete_contract_number from lease_contract aa where aa.id = c.parent_id) "oldCompleteContractNumber"
+        , (
+        case
+        when c.deal_status='0-0' then '还款中'
+        when c.deal_status='0-1' then '挂靠中'
+        when c.deal_status='0-2' then '已结束'
+        when c.deal_status='0-3' then '未开始还款'
+        when c.deal_status='0-4' then '提前还款'
+        when c.deal_status='1-0' then '已回收待处置'
+        when c.deal_status='1-1' then '退回'
+        when c.deal_status='1-2' then '待改期数'
+        when c.deal_status='1-3' then '断供'
+        when c.deal_status='1-4' then '取消回收'
+        when c.deal_status='2-0' then '丢失中'
+        when c.deal_status='2-1' then '找回续租'
+        when c.deal_status='2-2' then '断供'
+        when c.deal_status='2-3' then '丢失结束'
+        when c.deal_status='2-4' then '取消丢失'
+        when c.deal_status='3-0' then '登记为报废中'
+        when c.deal_status='3-1' then '报废结束'
+        when c.deal_status='3-2' then '取消报废登记'
+        when c.deal_status='4-0' then '还款中'
+        when c.deal_status='4-1' then '待过户'
+        when c.deal_status='4-2' then '过户结束'
+        when c.deal_status='4-3' then '待挂靠结束'
+        when c.deal_status='4-4' then '提前还款结束'
+        when c.deal_status='4-5' then '其他到期结束'
+        when c.deal_status='6-0' then '改期数'
+        when c.deal_status='7-0' then '续期'
+        when c.deal_status='8-0' then '转租'
+        end
+        ) "dealStatusName"
+        , (case when (c.deal_status='1-3' or c.deal_status='2-2') then c.update_time end) "contractStopTime"
+        , aa.phone "accountPhone", so.pay_date "payDate"
+        ,(
+        (case when so.period_count is null or so.period_count=0 then (select count(1) from lease_scheme_repayment dd where dd.contract_id = c.id) else so.period_count end)
+        || '-'
+        ||
+        (
+        case
+        when c.status = 2 then (case when so.period_count is null or so.period_count=0 then (select count(1) from lease_scheme_repayment dd where dd.contract_id = c.id) else so.period_count end)
+        else (select period from lease_scheme_repayment sr where c.id = sr.contract_id and sr.repayment_date = to_timestamp(concat(#{repaymentDate,jdbcType=TIMESTAMP},'-',so.pay_date),'YYYY-MM-DD'))
+        end
+        )
+        ) "totalPeriod"
+        , so.monthly_rent "monthlyRent", la.name "agentsName"
+        , ac.id_card "idCard"
+        , bk.code as "bankCode"
+        , abc.back_card_number as "backCardNumber"
+        , pc.plate_number "plateNumber"
+        , c.lease_start_time as "leaseStartTime"
+        , c.lease_end_time as "leaseEndTime"
+        , (select min(repayment_date) from lease_scheme_repayment aa where aa.contract_id = c.id) as "payStartTime"
+        , (select max(repayment_date) from lease_scheme_repayment aa where aa.contract_id = c.id) as "payEndTime"
+        , (case when pc.car_condition = 1 then '新车' when pc.car_condition = 2 then '次新车' end) "carConditionName"
+        , c.remarks
+        , (case when (c.deal_status='1-3' or c.deal_status='2-2') then 1 else 0 end) "isContinue"
+        , (case when (c.deal_status='1-3' or c.deal_status='2-2') then 1 else 0 end) "isTransfer"
+        from lease_contract c
+        left join lease_scheme_order so on c.scheme_order_id=so.id
+
+        left join lease_car pc on so.card_id=pc.id
+        left join lease_car_brands cb on pc.brands_id=cb.id
+        left join lease_scheme_order_account soa on soa.scheme_order_id=so.id and soa.is_default_pay=1
+        left join lease_account_bank_card abc on soa.bank_card_id=abc.id
+        left join lease_account aa on soa.account_id=aa.id
+        LEFT JOIN lease_account_credit ac on aa.id = ac.account_id
+        left join lease_agents la on c.sale_channel_id=la.id
+        LEFT JOIN lease_bank bk on abc.bank_id = bk.id
+        where 1=1
+
+        <if test="keyParames != null">
+            and (
+            c.complete_contract_number like concat('%',#{keyParames},'%')
+            or aa.name like concat('%',#{keyParames},'%')
+            or pc.plate_number like concat('%',#{keyParames},'%')
+            )
+        </if>
+        <if test="contractType != null and contractType !='0'">
+            and c.contractType = #{contractType}
+        </if>
+        <!-- 断供 -->
+        <if test="contractStopTimeStart != null and contractStopTimeEnd != null">
+            and (c.deal_status=='1-3' or c.deal_status=='2-2')
+            and c.update_time between #{contractStopTimeStart} and #{contractStopTimeEnd}
+        </if>
+        <!-- 续租/转租 -->
+        <if test="createTimeStart != null and createTimeEnd != null">
+            and (c.deal_status=='7-0' or c.deal_status=='8-0')
+            and c.create_time between #{createTimeStart} and #{createTimeEnd}
+        </if>
+    </sql>
+
+    <!--贷前直租合同-次新车处置 合同数据列表 / 续期-->
+    <select id="contractDQZZManagerFindContractContinue" resultMap="ContractDQZZManagerFindContractMap" parameterType="java.util.Map">
+        <include refid="contractDQZZManagerFindContractConmmon"/>
+    </select>
+
+    <!--贷前直租合同-次新车处置 合同数据列表 / 转租-->
+    <select id="contractDQZZManagerFindContractTransfer" resultMap="ContractDQZZManagerFindContractMap" parameterType="java.util.Map">
+        <include refid="contractDQZZManagerFindContractConmmon"/>
+    </select>
+
+    <!-- 贷后车辆管理-跟进/处理 合同数据 -->
+    <select id="carManagerDealFindContract" resultMap="CarManagerDealFindContractMap">
+        select
+        c.id "contractId",aa.name "accountName", aa.phone "accountPhone", c.complete_contract_number as
+        "completeContractNumber",
+        pc.plate_number as "plateNumber"
+        , pc.id "carId", pc.card_frame_number as "cardFrameNumber", cb.name as "brandsName", css.name as "seriesName"
+        , so.monthly_rent "totalPrice", cm.complete_model_name as "contractCompleteModelName"
+        , (case when so.period_count is null or so.period_count=0 then (select count(1) from lease_scheme_repayment dd
+        where dd.contract_id = c.id) else so.period_count end) "stagingNumberName"
+        , (select count(1) from lease_scheme_repayment_status dd where dd.contract_id = c.id and dd.type=0 and
+        dd.payment_result=2) "payPeriod"
+        , (select count(1) from lease_scheme_repayment_status dd where dd.contract_id = c.id and dd.type=0 and
+        dd.payment_result!=2) "noPayPeriod"
+        , (
+        select max(ee.repayment_date) from lease_scheme_repayment_status dd
+        inner join lease_scheme_repayment ee on dd.repayment_id=ee.id
+        where dd.contract_id = c.id and dd.type=0 and dd.payment_result!=2
+        ) "repaymentDate"
+        , COALESCE(cm.market_price,0) "marketPrice"
+        , so.comprehensive_quote - so.receive_margin - (
+        select COALESCE(sum(ee.return_principal),0) from lease_scheme_repayment_status dd
+        inner join lease_scheme_repayment ee on dd.repayment_id=ee.id
+        where dd.contract_id = c.id and dd.type=0 and dd.payment_result=2
+        ) "residualPrincipal"
+        , (select to_char(max(expire_time),'yyyy-mm-dd') from lease_car_insurance aa where aa.car_id=pc.id and aa.type=0
+        and aa.year=1) "strongRiskExpireTime"
+        , (select to_char(max(expire_time),'yyyy-mm-dd') from lease_car_insurance aa where aa.car_id=pc.id and aa.type=1
+        and aa.year=1) "commercialInsuranceExpireTime1"
+        , (select to_char(max(expire_time),'yyyy-mm-dd') from lease_car_insurance aa where aa.car_id=pc.id and aa.type=1
+        and aa.year=2) "commercialInsuranceExpireTime12"
+        from lease_contract c
+        left join lease_scheme_order so on c.scheme_order_id=so.id
+        left join lease_car pc on so.card_id=pc.id
+        left join lease_car_brands cb on pc.brands_id=cb.id
+        left join lease_car_series css on pc.series_id=css.id
+        left join lease_car_model cm on pc.model_id=cm.id
+        left join lease_scheme_order_account soa on soa.scheme_order_id=so.id and soa.is_default_pay=1
+        left join lease_account aa on soa.account_id=aa.id
+        where 1=1
+        <if test="contractId != null">
+            and c.id = #{contractId,jdbcType=BIGINT}
+        </if>
+    </select>
+
+    <delete id="deleteBatchById" parameterType="long">
+        delete from lease_contract where id in
+        <foreach item="item" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <update id="updateSaleChannelId" parameterType="java.util.Map">
+        update lease_contract
+        <set>
+            <if test="saleChannelType != null">
+                sale_channel_type = #{saleChannelType,jdbcType=INTEGER},
+            </if>
+            sale_channel_id = #{saleChannelId,jdbcType=BIGINT}
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <!-- 修改 车辆贷后的 处理方案为断供， 则把合同状态改为断供 -->
+    <update id="updateDealStatus" parameterType="com.hc.lease.order.model.LeaseContract">
+        update lease_contract
+        <set>
+            <if test="dealStatus != null">
+                deal_status = #{dealStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER}
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+        and back_status != 2
+    </update>
+
+    <!-- 修改 车辆贷后的 处理方案， 还原合同状态 -->
+    <update id="updateDealStatusAndStatusBack" parameterType="com.hc.lease.order.model.LeaseContract">
+        update lease_contract
+        <set>
+            <if test="dealStatus != null">
+                deal_status = #{dealStatus,jdbcType=VARCHAR},
+            </if>
+            status = back_status
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+        and back_status != 2
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from lease_contract
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.hc.lease.order.model.LeaseContract">
+        insert into lease_contract (id, scheme_order_id, sale_channel_type,
+        sale_channel_id, contract_number_year, contract_number, complete_contract_number,
+        contract_key, pay_staging_time, lease_start_time,
+        lease_end_time, staging_contain_monthly_rent,
+        company_header_id, account_contact_adress, guarantee_name,
+        guarantee_id_card, guarantee_contact_address,
+        third_party_liability_insurance, card_check_accept_img,
+        guarantee_contact, guarantee_contact_name,
+        guarantee_contact_phone, guarantee_zip_code,
+        create_time, update_time, create_by,
+        update_by, sort,
+        status,branch_company_id,contract_baseinfo_id,id_card_img,car_accept_img,contract_type,vsersion_number, deal_status, back_status
+        , parent_id, source_type, price_difference, remarks
+        )
+        values (#{id,jdbcType=BIGINT}, #{schemeOrderId,jdbcType=BIGINT}, #{saleChannelType,jdbcType=INTEGER},
+        #{saleChannelId,jdbcType=BIGINT}, #{contractNumberYear,jdbcType=VARCHAR}, #{contractNumber,jdbcType=VARCHAR},
+        #{completeContractNumber,jdbcType=VARCHAR},
+        #{contractKey,jdbcType=VARCHAR}, #{payStagingTime,jdbcType=TIMESTAMP}, #{leaseStartTime,jdbcType=TIMESTAMP},
+        #{leaseEndTime,jdbcType=TIMESTAMP}, #{stagingContainMonthlyRent,jdbcType=BIT},
+        #{companyHeaderId,jdbcType=BIGINT}, #{accountContactAdress,jdbcType=VARCHAR}, #{guaranteeName,jdbcType=VARCHAR},
+        #{guaranteeIdCard,jdbcType=VARCHAR}, #{guaranteeContactAddress,jdbcType=VARCHAR},
+        #{thirdPartyLiabilityInsurance,jdbcType=NUMERIC}, #{cardCheckAcceptImg,jdbcType=VARCHAR},
+        #{guaranteeContact,jdbcType=VARCHAR}, #{guaranteeContactName,jdbcType=VARCHAR},
+        #{guaranteeContactPhone,jdbcType=VARCHAR}, #{guaranteeZipCode,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT},
+        #{updateBy,jdbcType=BIGINT}, #{sort,jdbcType=INTEGER},
+        #{status,jdbcType=INTEGER},#{branchCompanyId,jdbcType=BIGINT},#{contractBaseinfoId,jdbcType=BIGINT},
+        #{idCardImg,jdbcType=VARCHAR},#{carAcceptImg,jdbcType=VARCHAR},#{contractType,jdbcType=INTEGER},#{vsersionNumber,jdbcType=INTEGER}
+        ,#{dealStatus,jdbcType=VARCHAR},#{backStatus,jdbcType=INTEGER}
+        , #{parentId,jdbcType=BIGINT}, #{sourceType,jdbcType=INTEGER}, #{priceDifference,jdbcType=NUMERIC}, #{remarks,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.hc.lease.order.model.LeaseContract">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_contract_id_seq'::regclass) as id
+        </selectKey>
+
+        insert into lease_contract
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="schemeOrderId != null">
+                scheme_order_id,
+            </if>
+            <if test="saleChannelType != null">
+                sale_channel_type,
+            </if>
+            <if test="saleChannelId != null">
+                sale_channel_id,
+            </if>
+            <if test="contractNumberYear != null">
+                contract_number_year,
+            </if>
+            <if test="contractNumber != null">
+                contract_number,
+            </if>
+            <if test="completeContractNumber != null">
+                complete_contract_number,
+            </if>
+            <if test="contractKey != null">
+                contract_key,
+            </if>
+            <if test="leaseStartTime != null">
+                lease_start_time,
+            </if>
+            <if test="leaseEndTime != null">
+                lease_end_time,
+            </if>
+            <if test="accountContactAdress != null">
+                account_contact_adress,
+            </if>
+            <if test="guaranteeName != null">
+                guarantee_name,
+            </if>
+            <if test="guaranteeIdCard != null">
+                guarantee_id_card,
+            </if>
+            <if test="guaranteeContactAddress != null">
+                guarantee_contact_address,
+            </if>
+            <if test="thirdPartyLiabilityInsurance != null">
+                third_party_liability_insurance,
+            </if>
+            <if test="cardCheckAcceptImg != null">
+                card_check_accept_img,
+            </if>
+            <if test="guaranteeContact != null">
+                guarantee_contact,
+            </if>
+            <if test="guaranteeContactName != null">
+                guarantee_contact_name,
+            </if>
+            <if test="guaranteeContactPhone != null">
+                guarantee_contact_phone,
+            </if>
+            <if test="guaranteeZipCode != null">
+                guarantee_zip_code,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="branchCompanyId != null">
+                branch_company_id,
+            </if>
+            <if test="contractBaseinfoId != null">
+                contract_baseinfo_id,
+            </if>
+            <if test="idCardImg != null">
+                id_card_img,
+            </if>
+            <if test="carAcceptImg != null">
+                car_accept_img,
+            </if>
+            <if test="contractType != null">
+                contract_type,
+            </if>
+            <if test="vsersionNumber != null">
+                vsersion_number,
+            </if>
+            <if test="dealStatus != null">
+                deal_status,
+            </if>
+            <if test="backStatus != null">
+                back_status,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="sourceType != null">
+                source_type,
+            </if>
+            <if test="priceDifference != null">
+                price_difference,
+            </if>
+            <if test="remarks != null">
+                remarks
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="schemeOrderId != null">
+                #{schemeOrderId,jdbcType=BIGINT},
+            </if>
+            <if test="saleChannelType != null">
+                #{saleChannelType,jdbcType=INTEGER},
+            </if>
+            <if test="saleChannelId != null">
+                #{saleChannelId,jdbcType=BIGINT},
+            </if>
+            <if test="contractNumberYear != null">
+                #{contractNumberYear,jdbcType=VARCHAR},
+            </if>
+            <if test="contractNumber != null">
+                #{contractNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="completeContractNumber != null">
+                #{completeContractNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="contractKey != null">
+                #{contractKey,jdbcType=VARCHAR},
+            </if>
+            <if test="leaseStartTime != null">
+                #{leaseStartTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="leaseEndTime != null">
+                #{leaseEndTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="accountContactAdress != null">
+                #{accountContactAdress,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeName != null">
+                #{guaranteeName,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeIdCard != null">
+                #{guaranteeIdCard,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeContactAddress != null">
+                #{guaranteeContactAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="thirdPartyLiabilityInsurance != null">
+                #{thirdPartyLiabilityInsurance,jdbcType=NUMERIC},
+            </if>
+            <if test="cardCheckAcceptImg != null">
+                #{cardCheckAcceptImg,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeContact != null">
+                #{guaranteeContact,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeContactName != null">
+                #{guaranteeContactName,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeContactPhone != null">
+                #{guaranteeContactPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeZipCode != null">
+                #{guaranteeZipCode,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="branchCompanyId != null">
+                #{branchCompanyId,jdbcType=BIGINT},
+            </if>
+            <if test="contractBaseinfoId != null">
+                #{contractBaseinfoId,jdbcType=BIGINT},
+            </if>
+            <if test="idCardImg != null">
+                #{idCardImg,jdbcType=VARCHAR},
+            </if>
+            <if test="carAcceptImg != null">
+                #{carAcceptImg,jdbcType=VARCHAR},
+            </if>
+            <if test="contractType != null">
+                #{contractType,jdbcType=INTEGER},
+            </if>
+            <if test="vsersionNumber != null">
+                #{vsersionNumber,jdbcType=INTEGER},
+            </if>
+            <if test="dealStatus != null">
+                #{dealStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="backStatus != null">
+                #{backStatus,jdbcType=INTEGER},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="sourceType != null">
+                #{sourceType,jdbcType=INTEGER},
+            </if>
+            <if test="priceDifference != null">
+                #{priceDifference,jdbcType=NUMERIC},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.order.model.LeaseContract">
+        update lease_contract
+        <set>
+            <if test="schemeOrderId != null">
+                scheme_order_id = #{schemeOrderId,jdbcType=BIGINT},
+            </if>
+            <if test="saleChannelType != null">
+                sale_channel_type = #{saleChannelType,jdbcType=INTEGER},
+            </if>
+            sale_channel_id = #{saleChannelId,jdbcType=BIGINT},
+            <if test="contractNumberYear != null">
+                contract_number_year = #{contractNumberYear,jdbcType=VARCHAR},
+            </if>
+            <if test="contractNumber != null">
+                contract_number = #{contractNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="completeContractNumber != null">
+                complete_contract_number = #{completeContractNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="contractKey != null">
+                contract_key = #{contractKey,jdbcType=VARCHAR},
+            </if>
+            lease_start_time = #{leaseStartTime,jdbcType=TIMESTAMP},
+            <if test="leaseEndTime != null">
+                lease_end_time = #{leaseEndTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="accountContactAdress != null">
+                account_contact_adress = #{accountContactAdress,jdbcType=VARCHAR},
+            </if>
+            guarantee_name = #{guaranteeName,jdbcType=VARCHAR},
+            guarantee_id_card = #{guaranteeIdCard,jdbcType=VARCHAR},
+            guarantee_contact_address = #{guaranteeContactAddress,jdbcType=VARCHAR},
+
+            <if test="thirdPartyLiabilityInsurance != null">
+                third_party_liability_insurance = #{thirdPartyLiabilityInsurance,jdbcType=NUMERIC},
+            </if>
+
+            card_check_accept_img = #{cardCheckAcceptImg,jdbcType=VARCHAR},
+
+            <if test="guaranteeContact != null">
+                guarantee_contact = #{guaranteeContact,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeContactName != null">
+                guarantee_contact_name = #{guaranteeContactName,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeContactPhone != null">
+                guarantee_contact_phone = #{guaranteeContactPhone,jdbcType=VARCHAR},
+            </if>
+            guarantee_zip_code = #{guaranteeZipCode,jdbcType=VARCHAR},
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="branchCompanyId != null">
+                branch_company_id =#{branchCompanyId,jdbcType=BIGINT},
+            </if>
+            <if test="contractBaseinfoId != null">
+                contract_baseinfo_id=#{contractBaseinfoId,jdbcType=BIGINT},
+            </if>
+            id_card_img = #{idCardImg,jdbcType=VARCHAR},
+            car_accept_img = #{carAcceptImg,jdbcType=VARCHAR},
+            <if test="contractType != null">
+                contract_type = #{contractType,jdbcType=INTEGER},
+            </if>
+            <if test="vsersionNumber != null">
+                vsersion_number = #{vsersionNumber,jdbcType=INTEGER},
+            </if>
+            <if test="dealStatus != null">
+                deal_status = #{dealStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="backStatus != null">
+                back_status = #{backStatus,jdbcType=INTEGER},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="sourceType != null">
+                source_type = #{sourceType,jdbcType=INTEGER},
+            </if>
+            <if test="priceDifference != null">
+                price_difference = #{priceDifference,jdbcType=NUMERIC},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hc.lease.order.model.LeaseContract">
+        update lease_contract
+        set scheme_order_id = #{schemeOrderId,jdbcType=BIGINT},
+        sale_channel_type = #{saleChannelType,jdbcType=INTEGER},
+        sale_channel_id = #{saleChannelId,jdbcType=BIGINT},
+        contract_number_year = #{contractNumberYear,jdbcType=VARCHAR},
+        contract_number = #{contractNumber,jdbcType=VARCHAR},
+        complete_contract_number = #{completeContractNumber,jdbcType=VARCHAR},
+        contract_key = #{contractKey,jdbcType=VARCHAR},
+        lease_start_time = #{leaseStartTime,jdbcType=TIMESTAMP},
+        lease_end_time = #{leaseEndTime,jdbcType=TIMESTAMP},
+        account_contact_adress = #{accountContactAdress,jdbcType=VARCHAR},
+        guarantee_name = #{guaranteeName,jdbcType=VARCHAR},
+        guarantee_id_card = #{guaranteeIdCard,jdbcType=VARCHAR},
+        guarantee_contact_address = #{guaranteeContactAddress,jdbcType=VARCHAR},
+        third_party_liability_insurance = #{thirdPartyLiabilityInsurance,jdbcType=NUMERIC},
+        card_check_accept_img = #{cardCheckAcceptImg,jdbcType=VARCHAR},
+        guarantee_contact = #{guaranteeContact,jdbcType=VARCHAR},
+        guarantee_contact_name = #{guaranteeContactName,jdbcType=VARCHAR},
+        guarantee_contact_phone = #{guaranteeContactPhone,jdbcType=VARCHAR},
+        guarantee_zip_code = #{guaranteeZipCode,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        create_by = #{createBy,jdbcType=BIGINT},
+        update_by = #{updateBy,jdbcType=BIGINT},
+        sort = #{sort,jdbcType=INTEGER},
+        status = #{status,jdbcType=INTEGER},
+        branchcompanyId =#{branchCompanyId,jdbcType=BIGINT},
+        contract_baseinfo_id=#{contractBaseinfoId,jdbcType=BIGINT},
+        id_card_img = #{idCardImg,jdbcType=VARCHAR},
+        car_accept_img = #{carAcceptImg,jdbcType=VARCHAR},
+        contract_type = #{contractType,jdbcType=INTEGER},
+        vsersion_number = #{vsersionNumber,jdbcType=INTEGER},
+        deal_status = #{dealStatus,jdbcType=VARCHAR},
+        back_status = #{backStatus,jdbcType=INTEGER},
+        parent_id = #{parentId,jdbcType=BIGINT},
+        source_type = #{sourceType,jdbcType=INTEGER},
+        price_difference = #{priceDifference,jdbcType=NUMERIC},
+        remarks = #{remarks,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

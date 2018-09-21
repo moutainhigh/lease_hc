@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+
+<generatorConfiguration>
+
+    <classPathEntry
+            location="E:/luomingtong/work/repository1/org/postgresql/postgresql/9.4.1212.jre7/postgresql-9.4.1212.jre7.jar"/>
+
+    <context id="context1" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="org.postgresql.Driver"
+                        connectionURL="jdbc:postgresql://192.168.122.111:5432/liangce_hc_lease" userId="postgres"
+                        password="BaSx5fbGjNqyMd7Z"/>
+        <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/liangce_hc_lease?characterEncoding=UTF-8" userId="root" password="root"/>-->
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--entry-->
+        <javaModelGenerator targetPackage="com.hc.lease.user.model" targetProject="E:\luomingtong\work\project\hc_lease\hc_lease\hc-lease-user-adapter-api\src\main\java">
+            <property name="trimStrings" value="true"/>
+            <property name="enableSubPackages" value="true"/>
+        </javaModelGenerator>
+
+        <!--mapping.xml-->
+        <sqlMapGenerator targetPackage="mapping" targetProject="E:\luomingtong\work\project\hc_lease\hc_lease\hc-lease-user-adapter\src\main\resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!--dao-->
+        <javaClientGenerator targetPackage="com.hc.lease.user.dao" targetProject="E:\luomingtong\work\project\hc_lease\hc_lease\hc-lease-user-adapter\src\main\java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <table tableName="lease_autho_user_role" domainObjectName="LeaseAuthoUserRole" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+
+    </context>
+
+</generatorConfiguration>

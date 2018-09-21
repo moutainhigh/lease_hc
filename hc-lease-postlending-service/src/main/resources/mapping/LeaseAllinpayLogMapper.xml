@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.postlending.dao.LeaseAllinpayLogMapper">
+    <resultMap id="BaseResultMap" type="com.hc.lease.postlending.model.LeaseAllinpayLog">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="repayment_id" property="repaymentId" jdbcType="BIGINT"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="pay_way" property="payWay" jdbcType="INTEGER"/>
+        <result column="pay_type" property="payType" jdbcType="INTEGER"/>
+        <result column="overdue" property="overdue" jdbcType="BIT"/>
+        <result column="overdue_day" property="overdueDay" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="ret_code" property="retCode" jdbcType="VARCHAR"/>
+        <result column="err_msg" property="errMsg" jdbcType="VARCHAR"/>
+        <result column="back_time" property="backTime" jdbcType="TIMESTAMP"/>
+        <result column="single_or_batch" property="singleOrBatch" jdbcType="INTEGER"/>
+        <result column="allinpay_batch_id" property="allinpayBatchId" jdbcType="BIGINT"/>
+        <result column="totle_price" property="totlePrice" jdbcType="NUMERIC"/>
+        <result column="monthly_payment_price" property="monthlyPaymentPrice" jdbcType="NUMERIC"/>
+        <result column="overdue_price" property="overduePrice" jdbcType="NUMERIC"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="req_sn" property="reqSn" jdbcType="VARCHAR"/>
+        <result column="sn" property="sn" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, repayment_id, contract_id, pay_way, pay_type, overdue, overdue_day, create_time, update_time,
+    create_by, update_by, status, ret_code, err_msg, back_time, single_or_batch, allinpay_batch_id,
+    totle_price, monthly_payment_price, overdue_price, remarks, req_sn, sn
+  </sql>
+
+    <!--需要轮询通联 的 交易流水-->
+    <select id="findQueryTradeNew" resultType="java.util.Map">
+        select a.id repaymentId, a.is_send_payment "isSendPayment", a.payment_result "paymentResult"
+        , b.id,b.req_sn "reqSn",b.status, b.sn, b.single_or_batch "singleOrBatch"
+        from lease_scheme_repayment a
+        inner join lease_allinpay_log b on (a.id=b.repayment_id and b.create_time=(select max(c.create_time) from lease_allinpay_log c where a.id=c.repayment_id) and b.status=0)
+        where a.payment_result=1
+        and a.is_send_payment=1
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_allinpay_log
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <!--支付历史-->
+    <select id="findPage" resultType="java.util.Map">
+    select
+
+    a.id, a.repayment_id "repaymentId", a.contract_id "contractId", a.pay_way "payWay", a.pay_type "payType", a.overdue
+    , a.overdue_day "overdueDay", a.create_time "createTime", a.update_time "updateTime"
+    , a.create_by "createBy", a.update_by "updateBy", a.status, a.ret_code "retCode", a.err_msg "errMsg"
+    , a.back_time "backTime", a.single_or_batch "singleOrBatch", a.allinpay_batch_id "allinpayBatchId"
+    , a.totle_price "totlePrice", a.monthly_payment_price "monthlyPaymentPrice"
+    , a.overdue_price "overduePrice", a.remarks, a.req_sn "reqSn"
+
+    from lease_allinpay_log a
+    INNER JOIN lease_contract b on a.contract_id = b.id
+
+    WHERE b.id = #{id,jdbcType=BIGINT}
+
+    ORDER BY a.create_time DESC
+
+  </select>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_allinpay_log ORDER BY create_time DESC
+    </select>
+
+    <select id="selectByReqSn" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_allinpay_log
+        where 1=1
+        <if test="reqSn != null">
+            and req_sn = #{reqSn,jdbcType=VARCHAR}
+        </if>
+        <if test="sn != null">
+            and sn = #{sn,jdbcType=VARCHAR}
+        </if>
+
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from lease_allinpay_log
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="insertList">
+
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_allinpay_log_id_seq'::regclass) as id
+        </selectKey>
+
+        insert into lease_allinpay_log (
+        id, repayment_id, contract_id, pay_way,
+        pay_type, overdue, overdue_day,
+        create_time, update_time, create_by,
+        update_by, status, ret_code,
+        err_msg, back_time, single_or_batch,
+        allinpay_batch_id, totle_price, monthly_payment_price,
+        overdue_price, remarks, req_sn, sn)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{id}, #{item.repaymentId}, #{item.contractId}, #{item.payWay},
+            #{item.payType}, #{item.overdue}, #{item.overdueDay},
+            #{item.createTime}, #{item.updateTime}, #{item.createBy},
+            #{item.updateBy}, #{item.status}, #{item.retCode},
+            #{item.errMsg}, #{item.backTime}, #{item.singleOrBatch},
+            #{item.allinpayBatchId}, #{item.totlePrice}, #{item.monthlyPaymentPrice},
+            #{item.overduePrice}, #{item.remarks}, #{item.reqSn}, #{item.sn})
+        </foreach>
+
+    </insert>
+
+    <insert id="insert" parameterType="com.hc.lease.postlending.model.LeaseAllinpayLog">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_allinpay_log_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_allinpay_log (
+        id, repayment_id, contract_id, pay_way,
+        pay_type, overdue, overdue_day,
+        create_time, update_time, create_by,
+        update_by, status, ret_code,
+        err_msg, back_time, single_or_batch,
+        allinpay_batch_id, totle_price, monthly_payment_price,
+        overdue_price, remarks, req_sn, sn)
+        values (#{id,jdbcType=BIGINT}, #{repaymentId,jdbcType=BIGINT}, #{contractId,jdbcType=BIGINT},
+        #{payWay,jdbcType=INTEGER},
+        #{payType,jdbcType=INTEGER}, #{overdue,jdbcType=BIT}, #{overdueDay,jdbcType=INTEGER},
+        #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT},
+        #{updateBy,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, #{retCode,jdbcType=VARCHAR},
+        #{errMsg,jdbcType=VARCHAR}, #{backTime,jdbcType=TIMESTAMP}, #{singleOrBatch,jdbcType=INTEGER},
+        #{allinpayBatchId,jdbcType=BIGINT}, #{totlePrice,jdbcType=NUMERIC}, #{monthlyPaymentPrice,jdbcType=NUMERIC},
+        #{overduePrice,jdbcType=NUMERIC}, #{remarks,jdbcType=VARCHAR}, #{reqSn,jdbcType=VARCHAR},
+        #{sn,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.hc.lease.postlending.model.LeaseAllinpayLog">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_allinpay_log_id_seq'::regclass) as id
+        </selectKey>
+
+        insert into lease_allinpay_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="repaymentId != null">
+                repayment_id,
+            </if>
+            <if test="contractId != null">
+                contract_id,
+            </if>
+            <if test="payWay != null">
+                pay_way,
+            </if>
+            <if test="payType != null">
+                pay_type,
+            </if>
+            <if test="overdue != null">
+                overdue,
+            </if>
+            <if test="overdueDay != null">
+                overdue_day,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="retCode != null">
+                ret_code,
+            </if>
+            <if test="errMsg != null">
+                err_msg,
+            </if>
+            <if test="backTime != null">
+                back_time,
+            </if>
+            <if test="singleOrBatch != null">
+                single_or_batch,
+            </if>
+            <if test="allinpayBatchId != null">
+                allinpay_batch_id,
+            </if>
+            <if test="totlePrice != null">
+                totle_price,
+            </if>
+            <if test="monthlyPaymentPrice != null">
+                monthly_payment_price,
+            </if>
+            <if test="overduePrice != null">
+                overdue_price,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <if test="reqSn != null">
+                req_sn,
+            </if>
+            <if test="sn != null">
+                sn
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="repaymentId != null">
+                #{repaymentId,jdbcType=BIGINT},
+            </if>
+            <if test="contractId != null">
+                #{contractId,jdbcType=BIGINT},
+            </if>
+            <if test="payWay != null">
+                #{payWay,jdbcType=INTEGER},
+            </if>
+            <if test="payType != null">
+                #{payType,jdbcType=INTEGER},
+            </if>
+            <if test="overdue != null">
+                #{overdue,jdbcType=BIT},
+            </if>
+            <if test="overdueDay != null">
+                #{overdueDay,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="retCode != null">
+                #{retCode,jdbcType=VARCHAR},
+            </if>
+            <if test="errMsg != null">
+                #{errMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="backTime != null">
+                #{backTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="singleOrBatch != null">
+                #{singleOrBatch,jdbcType=INTEGER},
+            </if>
+            <if test="allinpayBatchId != null">
+                #{allinpayBatchId,jdbcType=BIGINT},
+            </if>
+            <if test="totlePrice != null">
+                #{totlePrice,jdbcType=NUMERIC},
+            </if>
+            <if test="monthlyPaymentPrice != null">
+                #{monthlyPaymentPrice,jdbcType=NUMERIC},
+            </if>
+            <if test="overduePrice != null">
+                #{overduePrice,jdbcType=NUMERIC},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="reqSn != null">
+                #{reqSn,jdbcType=VARCHAR},
+            </if>
+            <if test="sn != null">
+                #{sn,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.postlending.model.LeaseAllinpayLog">
+        update lease_allinpay_log
+        <set>
+            <if test="repaymentId != null">
+                repayment_id = #{repaymentId,jdbcType=BIGINT},
+            </if>
+            <if test="contractId != null">
+                contract_id = #{contractId,jdbcType=BIGINT},
+            </if>
+            <if test="payWay != null">
+                pay_way = #{payWay,jdbcType=INTEGER},
+            </if>
+            <if test="payType != null">
+                pay_type = #{payType,jdbcType=INTEGER},
+            </if>
+            <if test="overdue != null">
+                overdue = #{overdue,jdbcType=BIT},
+            </if>
+            <if test="overdueDay != null">
+                overdue_day = #{overdueDay,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="retCode != null">
+                ret_code = #{retCode,jdbcType=VARCHAR},
+            </if>
+            <if test="errMsg != null">
+                err_msg = #{errMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="backTime != null">
+                back_time = #{backTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="singleOrBatch != null">
+                single_or_batch = #{singleOrBatch,jdbcType=INTEGER},
+            </if>
+            <if test="allinpayBatchId != null">
+                allinpay_batch_id = #{allinpayBatchId,jdbcType=BIGINT},
+            </if>
+            <if test="totlePrice != null">
+                totle_price = #{totlePrice,jdbcType=NUMERIC},
+            </if>
+            <if test="monthlyPaymentPrice != null">
+                monthly_payment_price = #{monthlyPaymentPrice,jdbcType=NUMERIC},
+            </if>
+            <if test="overduePrice != null">
+                overdue_price = #{overduePrice,jdbcType=NUMERIC},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="reqSn != null">
+                req_sn = #{reqSn,jdbcType=VARCHAR},
+            </if>
+            <if test="sn != null">
+                sn = #{reqSn,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.hc.lease.postlending.model.LeaseAllinpayLog">
+    update lease_allinpay_log
+    set repayment_id = #{repaymentId,jdbcType=BIGINT},
+      contract_id = #{contractId,jdbcType=BIGINT},
+      pay_way = #{payWay,jdbcType=INTEGER},
+      pay_type = #{payType,jdbcType=INTEGER},
+      overdue = #{overdue,jdbcType=BIT},
+      overdue_day = #{overdueDay,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      status = #{status,jdbcType=INTEGER},
+      ret_code = #{retCode,jdbcType=VARCHAR},
+      err_msg = #{errMsg,jdbcType=VARCHAR},
+      back_time = #{backTime,jdbcType=TIMESTAMP},
+      single_or_batch = #{singleOrBatch,jdbcType=INTEGER},
+      allinpay_batch_id = #{allinpayBatchId,jdbcType=BIGINT},
+      totle_price = #{totlePrice,jdbcType=NUMERIC},
+      monthly_payment_price = #{monthlyPaymentPrice,jdbcType=NUMERIC},
+      overdue_price = #{overduePrice,jdbcType=NUMERIC},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      req_sn = #{reqSn,jdbcType=VARCHAR},
+      sn = #{sn,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <update id="updateByReqSn" parameterType="com.hc.lease.postlending.model.LeaseAllinpayLog">
+    update lease_allinpay_log
+    set
+
+    status = #{status,jdbcType=INTEGER},
+    ret_code = #{retCode,jdbcType=VARCHAR},
+    err_msg = #{errMsg,jdbcType=VARCHAR},
+    back_time = #{backTime,jdbcType=TIMESTAMP}
+
+    where
+    req_sn = #{reqSn,jdbcType=VARCHAR}
+    and repayment_id = #{repaymentId,jdbcType=BIGINT}
+  </update>
+
+</mapper>

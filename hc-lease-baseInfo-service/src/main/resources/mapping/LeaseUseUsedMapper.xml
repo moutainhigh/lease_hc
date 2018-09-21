@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.baseInfo.dao.LeaseUseUsedMapper" >
+  <!--使用和被使用的数据-->
+  <resultMap id="BaseResultMap" type="com.hc.lease.baseInfo.model.LeaseUseUsed" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="use_id" property="useId" jdbcType="BIGINT" />
+    <result column="use_name" property="useName" jdbcType="VARCHAR" />
+    <result column="used_id" property="usedId" jdbcType="BIGINT" />
+    <result column="used_name" property="usedName" jdbcType="VARCHAR" />
+    <result column="use_type" property="useType" jdbcType="VARCHAR" />
+    <result column="used_type" property="usedType" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, use_id, use_name, used_id, used_name, use_type, used_type
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from lease_use_used
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lease_use_used
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <delete id="deleteByUseUsed">
+    delete from lease_use_used
+    where 1=1
+    <if test="useId != null" >
+      and use_id = #{useId,jdbcType=BIGINT}
+    </if>
+    <if test="usedId != null" >
+      and used_id = #{usedId,jdbcType=BIGINT}
+    </if>
+    <if test="useType != null" >
+      and use_type = #{useType,jdbcType=VARCHAR}
+    </if>
+    <if test="usedType != null" >
+      and used_type = #{usedType,jdbcType=VARCHAR}
+    </if>
+
+  </delete>
+
+  <select id="selectByUsed" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from lease_use_used
+    where
+    used_id = #{usedId,jdbcType=BIGINT}
+    and used_type = #{usedType,jdbcType=VARCHAR}
+  </select>
+
+  <insert id="insert" parameterType="com.hc.lease.baseInfo.model.LeaseUseUsed" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_use_used_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_use_used (id, use_id, use_name,
+      used_id, used_name, use_type, 
+      used_type)
+    values (#{id,jdbcType=BIGINT}, #{useId,jdbcType=BIGINT}, #{useName,jdbcType=VARCHAR}, 
+      #{usedId,jdbcType=BIGINT}, #{usedName,jdbcType=VARCHAR}, #{useType,jdbcType=VARCHAR}, 
+      #{usedType,jdbcType=VARCHAR})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.hc.lease.baseInfo.model.LeaseUseUsed" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_use_used_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_use_used
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="useId != null" >
+        use_id,
+      </if>
+      <if test="useName != null" >
+        use_name,
+      </if>
+      <if test="usedId != null" >
+        used_id,
+      </if>
+      <if test="usedName != null" >
+        used_name,
+      </if>
+      <if test="useType != null" >
+        use_type,
+      </if>
+      <if test="usedType != null" >
+        used_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="useId != null" >
+        #{useId,jdbcType=BIGINT},
+      </if>
+      <if test="useName != null" >
+        #{useName,jdbcType=VARCHAR},
+      </if>
+      <if test="usedId != null" >
+        #{usedId,jdbcType=BIGINT},
+      </if>
+      <if test="usedName != null" >
+        #{usedName,jdbcType=VARCHAR},
+      </if>
+      <if test="useType != null" >
+        #{useType,jdbcType=VARCHAR},
+      </if>
+      <if test="usedType != null" >
+        #{usedType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.baseInfo.model.LeaseUseUsed" >
+    update lease_use_used
+    <set >
+      <if test="useId != null" >
+        use_id = #{useId,jdbcType=BIGINT},
+      </if>
+      <if test="useName != null" >
+        use_name = #{useName,jdbcType=VARCHAR},
+      </if>
+      <if test="usedId != null" >
+        used_id = #{usedId,jdbcType=BIGINT},
+      </if>
+      <if test="usedName != null" >
+        used_name = #{usedName,jdbcType=VARCHAR},
+      </if>
+      <if test="useType != null" >
+        use_type = #{useType,jdbcType=VARCHAR},
+      </if>
+      <if test="usedType != null" >
+        used_type = #{usedType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.hc.lease.baseInfo.model.LeaseUseUsed" >
+    update lease_use_used
+    set use_id = #{useId,jdbcType=BIGINT},
+      use_name = #{useName,jdbcType=VARCHAR},
+      used_id = #{usedId,jdbcType=BIGINT},
+      used_name = #{usedName,jdbcType=VARCHAR},
+      use_type = #{useType,jdbcType=VARCHAR},
+      used_type = #{usedType,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+</mapper>

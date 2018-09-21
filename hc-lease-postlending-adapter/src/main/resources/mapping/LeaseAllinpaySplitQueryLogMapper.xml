@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.postlending.dao.LeaseAllinpaySplitQueryLogMapper">
+    <!-- 通联支付超额拆分交易明细 通联轮询流水 -->
+    <resultMap id="BaseResultMap" type="com.hc.lease.postlending.model.LeaseAllinpaySplitQueryLog">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="allinpay_split_log_id" property="allinpaySplitLogId" jdbcType="BIGINT"/>
+        <result column="repayment_id" property="repaymentId" jdbcType="BIGINT"/>
+        <result column="allinpay_split_id" property="allinpaySplitId" jdbcType="BIGINT"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="ret_code" property="retCode" jdbcType="VARCHAR"/>
+        <result column="err_msg" property="errMsg" jdbcType="VARCHAR"/>
+        <result column="back_time" property="backTime" jdbcType="TIMESTAMP"/>
+        <result column="req_sn" property="reqSn" jdbcType="VARCHAR"/>
+        <result column="sn" property="sn" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, allinpay_split_log_id, repayment_id, allinpay_split_id, contract_id, status, 
+    ret_code, err_msg, back_time, req_sn, sn
+  </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_allinpay_split_query_log
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <!---->
+    <select id="selectByAllinpaySplitLogId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_allinpay_split_query_log
+        where allinpay_split_log_id = #{allinpaySplitLogId,jdbcType=BIGINT}
+        and repayment_id = #{repaymentId,jdbcType=BIGINT}
+        and allinpay_split_id = #{allinpaySplitId,jdbcType=BIGINT}
+        and contract_id = #{contractId,jdbcType=BIGINT}
+        and req_sn = #{reqSn,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from lease_allinpay_split_query_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+    <insert id="insert" parameterType="com.hc.lease.postlending.model.LeaseAllinpaySplitQueryLog">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_allinpay_split_query_log_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_allinpay_split_query_log (id, allinpay_split_log_id, repayment_id,
+        allinpay_split_id, contract_id, status,
+        ret_code, err_msg, back_time,
+        req_sn, sn)
+        values (#{id,jdbcType=BIGINT}, #{allinpaySplitLogId,jdbcType=BIGINT}, #{repaymentId,jdbcType=BIGINT},
+        #{allinpaySplitId,jdbcType=BIGINT}, #{contractId,jdbcType=BIGINT}, #{status,jdbcType=INTEGER},
+        #{retCode,jdbcType=VARCHAR}, #{errMsg,jdbcType=VARCHAR}, #{backTime,jdbcType=TIMESTAMP},
+        #{reqSn,jdbcType=VARCHAR}, #{sn,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.hc.lease.postlending.model.LeaseAllinpaySplitQueryLog">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_allinpay_split_query_log_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_allinpay_split_query_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="allinpaySplitLogId != null">
+                allinpay_split_log_id,
+            </if>
+            <if test="repaymentId != null">
+                repayment_id,
+            </if>
+            <if test="allinpaySplitId != null">
+                allinpay_split_id,
+            </if>
+            <if test="contractId != null">
+                contract_id,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="retCode != null">
+                ret_code,
+            </if>
+            <if test="errMsg != null">
+                err_msg,
+            </if>
+            <if test="backTime != null">
+                back_time,
+            </if>
+            <if test="reqSn != null">
+                req_sn,
+            </if>
+            <if test="sn != null">
+                sn,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="allinpaySplitLogId != null">
+                #{allinpaySplitLogId,jdbcType=BIGINT},
+            </if>
+            <if test="repaymentId != null">
+                #{repaymentId,jdbcType=BIGINT},
+            </if>
+            <if test="allinpaySplitId != null">
+                #{allinpaySplitId,jdbcType=BIGINT},
+            </if>
+            <if test="contractId != null">
+                #{contractId,jdbcType=BIGINT},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="retCode != null">
+                #{retCode,jdbcType=VARCHAR},
+            </if>
+            <if test="errMsg != null">
+                #{errMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="backTime != null">
+                #{backTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="reqSn != null">
+                #{reqSn,jdbcType=VARCHAR},
+            </if>
+            <if test="sn != null">
+                #{sn,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.postlending.model.LeaseAllinpaySplitQueryLog">
+        update lease_allinpay_split_query_log
+        <set>
+            <if test="allinpaySplitLogId != null">
+                allinpay_split_log_id = #{allinpaySplitLogId,jdbcType=BIGINT},
+            </if>
+            <if test="repaymentId != null">
+                repayment_id = #{repaymentId,jdbcType=BIGINT},
+            </if>
+            <if test="allinpaySplitId != null">
+                allinpay_split_id = #{allinpaySplitId,jdbcType=BIGINT},
+            </if>
+            <if test="contractId != null">
+                contract_id = #{contractId,jdbcType=BIGINT},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="retCode != null">
+                ret_code = #{retCode,jdbcType=VARCHAR},
+            </if>
+            <if test="errMsg != null">
+                err_msg = #{errMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="backTime != null">
+                back_time = #{backTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="reqSn != null">
+                req_sn = #{reqSn,jdbcType=VARCHAR},
+            </if>
+            <if test="sn != null">
+                sn = #{sn,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.hc.lease.postlending.model.LeaseAllinpaySplitQueryLog">
+    update lease_allinpay_split_query_log
+    set allinpay_split_log_id = #{allinpaySplitLogId,jdbcType=BIGINT},
+      repayment_id = #{repaymentId,jdbcType=BIGINT},
+      allinpay_split_id = #{allinpaySplitId,jdbcType=BIGINT},
+      contract_id = #{contractId,jdbcType=BIGINT},
+      status = #{status,jdbcType=INTEGER},
+      ret_code = #{retCode,jdbcType=VARCHAR},
+      err_msg = #{errMsg,jdbcType=VARCHAR},
+      back_time = #{backTime,jdbcType=TIMESTAMP},
+      req_sn = #{reqSn,jdbcType=VARCHAR},
+      sn = #{sn,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <!-- 合同修改同时修改 拆单的还款计划主键id,同时修改 -->
+    <update id="updateRepaymentId">
+
+        update
+        lease_allinpay_split_query_log as i
+        set
+        repayment_id = t.repayment_id
+        from (
+        select
+        a.contract_id
+        ,b.repayment_id AS split_repayment_id
+        ,c.id repayment_id
+        ,c.period
+        from
+        lease_scheme_repayment_history a
+        inner join lease_allinpay_split_connect b on a.contract_id=b.contract_id and a.history_id=b.repayment_id
+        inner join lease_scheme_repayment c on a.contract_id=c.contract_id and a.period=c.period
+        where a.contract_id = #{contractId,jdbcType=BIGINT}
+        ) as t
+        where i.repayment_id = t.split_repayment_id
+        and i.contract_id = t.contract_id
+
+    </update>
+
+</mapper>

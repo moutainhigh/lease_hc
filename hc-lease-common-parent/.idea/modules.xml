@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../hc-lease-account-adapter/hc-lease-account-adapter.iml" filepath="$PROJECT_DIR$/../hc-lease-account-adapter/hc-lease-account-adapter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hc-lease-account-adapter-api/hc-lease-account-adapter-api.iml" filepath="$PROJECT_DIR$/../hc-lease-account-adapter-api/hc-lease-account-adapter-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hc-lease-activity-adapter/hc-lease-activity-adapter.iml" filepath="$PROJECT_DIR$/../hc-lease-activity-adapter/hc-lease-activity-adapter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hc-lease-activity-adapter-api/hc-lease-activity-adapter-api.iml" filepath="$PROJECT_DIR$/../hc-lease-activity-adapter-api/hc-lease-activity-adapter-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hc-lease-allinpayquick/hc-lease-allinpayquick.iml" filepath="$PROJECT_DIR$/../hc-lease-allinpayquick/hc-lease-allinpayquick.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hc-lease-allinpayxmlentity/hc-lease-allinpayxmlentity.iml" filepath="$PROJECT_DIR$/../hc-lease-allinpayxmlentity/hc-lease-allinpayxmlentity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hc-lease-allinpayxsigntool/hc-lease-allinpayxsigntool.iml" filepath="$PROJECT_DIR$/../hc-lease-allinpayxsigntool/hc-lease-allinpayxsigntool.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hc-lease-baseInfo-adapter/hc-lease-baseInfo-adapter.iml" filepath="$PROJECT_DIR$/../hc-lease-baseInfo-adapter/hc-lease-baseInfo-adapter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hc-lease-baseInfo-adapter-api/hc-lease-baseInfo-adapter-api.iml" filepath="$PROJECT_DIR$/../hc-lease-baseInfo-adapter-api/hc-lease-baseInfo-adapter-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hc-lease-common-allinpay/hc-lease-common-allinpay.iml" filepath="$PROJECT_DIR$/../hc-lease-common-allinpay/hc-lease-common-allinpay.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hc-lease-common-config/hc-lease-common-config.iml" filepath="$PROJECT_DIR$/../hc-lease-common-config/hc-lease-common-config.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hc-lease-common-core/hc-lease-common-core.iml" filepath="$PROJECT_DIR$/../hc-lease-common-core/hc-lease-common-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hc-lease-common-parent.iml" filepath="$PROJECT_DIR$/hc-lease-common-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hc-lease-common-thirdparty-plugin/hc-lease-common-thirdparty-plugin.iml" filepath="$PROJECT_DIR$/../hc-lease-common-thirdparty-plugin/hc-lease-common-thirdparty-plugin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hc-lease-common-util/hc-lease-common-util.iml" filepath="$PROJECT_DIR$/../hc-lease-common-util/hc-lease-common-util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hc-lease-order-adapter/hc-lease-order-adapter.iml" filepath="$PROJECT_DIR$/../hc-lease-order-adapter/hc-lease-order-adapter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hc-lease-order-adapter-api/hc-lease-order-adapter-api.iml" filepath="$PROJECT_DIR$/../hc-lease-order-adapter-api/hc-lease-order-adapter-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hc-lease-postlending-adapter/hc-lease-postlending-adapter.iml" filepath="$PROJECT_DIR$/../hc-lease-postlending-adapter/hc-lease-postlending-adapter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hc-lease-postlending-adapter-api/hc-lease-postlending-adapter-api.iml" filepath="$PROJECT_DIR$/../hc-lease-postlending-adapter-api/hc-lease-postlending-adapter-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hc-lease-supplier-adapter/hc-lease-supplier-adapter.iml" filepath="$PROJECT_DIR$/../hc-lease-supplier-adapter/hc-lease-supplier-adapter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hc-lease-supplier-adapter-api/hc-lease-supplier-adapter-api.iml" filepath="$PROJECT_DIR$/../hc-lease-supplier-adapter-api/hc-lease-supplier-adapter-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hc-lease-user-adapter/hc-lease-user-adapter.iml" filepath="$PROJECT_DIR$/../hc-lease-user-adapter/hc-lease-user-adapter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hc-lease-user-adapter-api/hc-lease-user-adapter-api.iml" filepath="$PROJECT_DIR$/../hc-lease-user-adapter-api/hc-lease-user-adapter-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hc-lease-web-consumer/hc-lease-web-consumer.iml" filepath="$PROJECT_DIR$/../hc-lease-web-consumer/hc-lease-web-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hc-lease-workflow-adapter/hc-lease-workflow-adapter.iml" filepath="$PROJECT_DIR$/../hc-lease-workflow-adapter/hc-lease-workflow-adapter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hc-lease-workflow-adapter-api/hc-lease-workflow-adapter-api.iml" filepath="$PROJECT_DIR$/../hc-lease-workflow-adapter-api/hc-lease-workflow-adapter-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hc-lease-wx-adapter/hc-lease-wx-adapter.iml" filepath="$PROJECT_DIR$/../hc-lease-wx-adapter/hc-lease-wx-adapter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hc-lease-wx-adapter-api/hc-lease-wx-adapter-api.iml" filepath="$PROJECT_DIR$/../hc-lease-wx-adapter-api/hc-lease-wx-adapter-api.iml" />
+    </modules>
+  </component>
+</project>

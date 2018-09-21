@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.wx.dao.LeaseWxCustomerMapper" >
+  <resultMap id="BaseResultMap" type="com.hc.lease.wx.model.LeaseWxCustomer" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="openid" property="openid" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="province_id" property="provinceId" jdbcType="BIGINT" />
+    <result column="province_name" property="provinceName" jdbcType="VARCHAR" />
+    <result column="city_id" property="cityId" jdbcType="BIGINT" />
+    <result column="city_name" property="cityName" jdbcType="VARCHAR" />
+    <result column="area_id" property="areaId" jdbcType="BIGINT" />
+    <result column="area_name" property="areaName" jdbcType="VARCHAR" />
+    <result column="deal" property="deal" jdbcType="SMALLINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+    <result column="is_enable" property="isEnable" jdbcType="BIT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="deal_name" property="dealName" jdbcType="VARCHAR" />
+    <result column="car_id" property="carId" jdbcType="BIGINT" />
+    <result column="staging_number" property="stagingNumber" jdbcType="INTEGER" />
+    <result column="buy_time" property="buyTime" jdbcType="VARCHAR" />
+    <result column="car_name" property="carName" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, openid, phone, province_id, province_name, city_id, city_name, area_id, 
+    area_name, deal, create_time, update_time, create_by, update_by, is_enable, sort,car_id,staging_number,buy_time,remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from lease_wx_customer
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lease_wx_customer
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+
+  <select id="findPage"  resultMap="BaseResultMap">
+    select
+    cc.id,cc.name, cc.openid, cc.phone, cc.province_id, cc.province_name, cc.city_id, cc.city_name, cc.area_id,cc.remark,
+    cc.area_name, cc.deal, cc.create_time, cc.update_time, cc.create_by, cc.update_by, cc.is_enable, cc.sort,cc.car_id,cc.staging_number,cc.buy_time,wc.car_name,
+    case
+    when cc.deal =1  then '已处理'
+    else '未处理' end as "dealName"
+    from lease_wx_customer cc
+    left join lease_wx_car wc on cc.car_id=wc.id
+    where  1=1
+    <if test="provinceName != null" >
+      and  cc.province_name = #{provinceName}
+    </if>
+    <if test="cityName != null" >
+      and  cc.city_name = #{cityName}
+    </if>
+    <if test="areaName != null" >
+      and  cc.area_name = #{areaName}
+    </if>
+    <if test="deal != null" >
+      and  cc.deal = #{deal}
+    </if>
+    <if test="name != null" >
+      and  (cc.name like concat('%',#{name},'%') or cc.phone like concat('%',#{name},'%'))
+    </if>
+    <if test="carName != null" >
+      and  wc.car_name like concat('%',#{carName},'%')
+    </if>
+    <if test="createTimeFrom != null and createTimeFrom!='' and createTimeTo != null and createTimeTo !=''">
+      and cc.create_time BETWEEN to_timestamp(#{createTimeFrom},'YYYY-MM-DD HH24:MI:SS') and
+      to_timestamp(#{createTimeTo},'YYYY-MM-DD HH24:MI:SS')
+    </if>
+    order by cc.create_time desc
+  </select>
+
+<update id="updateDealStatus"  parameterType="java.util.Map">
+   update lease_wx_customer
+   set deal=#{deal}
+   where id=#{id}
+</update>
+
+  <insert id="insert" parameterType="com.hc.lease.wx.model.LeaseWxCustomer" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_wx_customer_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_wx_customer (id, name, openid, 
+      phone, province_id, province_name, 
+      city_id, city_name, area_id, 
+      area_name, deal, create_time, 
+      update_time, create_by, update_by, 
+      is_enable, sort,car_id,staging_number,buy_time,remark)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{provinceId,jdbcType=BIGINT}, #{provinceName,jdbcType=VARCHAR}, 
+      #{cityId,jdbcType=BIGINT}, #{cityName,jdbcType=VARCHAR}, #{areaId,jdbcType=BIGINT}, 
+      #{areaName,jdbcType=VARCHAR}, #{deal,jdbcType=SMALLINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT}, 
+      #{isEnable,jdbcType=BIT}, #{sort,jdbcType=INTEGER},#{carId,jdbcType=BIGINT},#{stagingNumber,jdbcType=INTEGER}, #{buyTime,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hc.lease.wx.model.LeaseWxCustomer" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_wx_customer_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_wx_customer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="openid != null" >
+        openid,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="provinceName != null" >
+        province_name,
+      </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+      <if test="cityName != null" >
+        city_name,
+      </if>
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="areaName != null" >
+        area_name,
+      </if>
+      <if test="deal != null" >
+        deal,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="isEnable != null" >
+        is_enable,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="carId != null" >
+        car_id,
+      </if>
+      <if test="stagingNumber != null" >
+        staging_number,
+      </if>
+      <if test="buyTime != null" >
+        buy_time,
+      </if>
+      <if test="remark != null" >
+        remark
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null" >
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="provinceName != null" >
+        #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="cityName != null" >
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=BIGINT},
+      </if>
+      <if test="areaName != null" >
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="deal != null" >
+        #{deal,jdbcType=SMALLINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="carId != null" >
+        #{carId,jdbcType=BIGINT},
+      </if>
+      <if test="stagingNumber != null" >
+        #{stagingNumber,jdbcType=INTEGER},
+      </if>
+      <if test="buyTime != null" >
+        #{buyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+         #{remark,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.wx.model.LeaseWxCustomer" >
+    update lease_wx_customer
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null" >
+        openid = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="provinceName != null" >
+        province_name = #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="cityName != null" >
+        city_name = #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        area_id = #{areaId,jdbcType=BIGINT},
+      </if>
+      <if test="areaName != null" >
+        area_name = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="deal != null" >
+        deal = #{deal,jdbcType=SMALLINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="isEnable != null" >
+        is_enable = #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="carId != null" >
+        car_id = #{carId,jdbcType=BIGINT},
+      </if>
+      <if test="stagingNumber != null" >
+        staging_number = #{stagingNumber,jdbcType=INTEGER},
+      </if>
+      <if test="buyTime != null" >
+        buy_time =#{buyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark =#{remark,jdbcType=VARCHAR}
+      </if>
+
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hc.lease.wx.model.LeaseWxCustomer" >
+    update lease_wx_customer
+    set name = #{name,jdbcType=VARCHAR},
+      openid = #{openid,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=BIGINT},
+      province_name = #{provinceName,jdbcType=VARCHAR},
+      city_id = #{cityId,jdbcType=BIGINT},
+      city_name = #{cityName,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=BIGINT},
+      area_name = #{areaName,jdbcType=VARCHAR},
+      deal = #{deal,jdbcType=SMALLINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      is_enable = #{isEnable,jdbcType=BIT},
+      sort = #{sort,jdbcType=INTEGER},
+     car_id = #{carId,jdbcType=BIGINT},
+     staging_number = #{stagingNumber,jdbcType=INTEGER},
+     buy_time =#{buyTime,jdbcType=VARCHAR},
+    remark =#{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

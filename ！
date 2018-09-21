@@ -1,0 +1,205 @@
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	modified:   hc-lease-common-config/src/main/resources/dbconfig.properties
+#	modified:   hc-lease-common-config/target/classes/dbconfig.properties
+#	modified:   hc-lease-common-config/target/hc-lease-common-config.jar
+#	modified:   hc-lease-common-util/target/classes/hc/lease/common/constant/DictType.class
+#	new file:   hc-lease-supplier-adapter-api/target/classes/com/hc/lease/supplier/adapter/api/LeaseBranchCompanyAdapter.class
+#	new file:   hc-lease-supplier-adapter-api/target/classes/com/hc/lease/supplier/adapter/api/LeaseCarAdapter.class
+#	new file:   hc-lease-supplier-adapter-api/target/classes/com/hc/lease/supplier/adapter/api/LeaseCarInsuranceAdapter.class
+#	new file:   hc-lease-supplier-adapter-api/target/classes/com/hc/lease/supplier/adapter/api/LeaseCarInventoryAdapter.class
+#	new file:   hc-lease-supplier-adapter-api/target/classes/com/hc/lease/supplier/adapter/api/LeaseCarSupplierAdapter.class
+#	new file:   hc-lease-supplier-adapter-api/target/classes/com/hc/lease/supplier/adapter/api/LeaseGpsSupplierAdapter.class
+#	new file:   hc-lease-supplier-adapter-api/target/classes/com/hc/lease/supplier/adapter/api/LeaseInsuranceCompanyAdapter.class
+#	new file:   hc-lease-supplier-adapter-api/target/classes/com/hc/lease/supplier/adapter/api/LeaseInsuranceTypeAdapter.class
+#	new file:   hc-lease-supplier-adapter-api/target/classes/com/hc/lease/supplier/adapter/api/LeasePackageAdapter.class
+#	new file:   hc-lease-supplier-adapter-api/target/classes/com/hc/lease/supplier/adapter/api/LeasePurchaseContractAdapter.class
+#	new file:   hc-lease-supplier-adapter-api/target/classes/com/hc/lease/supplier/adapter/api/LeaseSchemeCarAdapter.class
+#	new file:   hc-lease-supplier-adapter-api/target/classes/com/hc/lease/supplier/adapter/api/LeaseSchemePackageAdapter.class
+#	new file:   hc-lease-supplier-adapter-api/target/classes/com/hc/lease/supplier/adapter/api/LeaseStorehouseAdapter.class
+#	modified:   hc-lease-supplier-adapter-api/target/hc-lease-supplier-adapter-api-1.0.0-SNAPSHOT.jar
+#	modified:   hc-lease-supplier-adapter/src/main/java/com/hc/lease/supplier/adapter/impl/LeaseBranchCompanyAdapterImpl.java
+#	modified:   hc-lease-supplier-adapter/src/main/java/com/hc/lease/supplier/adapter/impl/LeaseCarAdapterImpl.java
+#	modified:   hc-lease-supplier-adapter/src/main/java/com/hc/lease/supplier/adapter/impl/LeaseCarInsuranceAdapterImpl.java
+#	modified:   hc-lease-supplier-adapter/src/main/java/com/hc/lease/supplier/adapter/impl/LeaseCarInventoryAdapterImpl.java
+#	modified:   hc-lease-supplier-adapter/src/main/java/com/hc/lease/supplier/adapter/impl/LeaseCarSupplierAdapterImpl.java
+#	modified:   hc-lease-supplier-adapter/src/main/java/com/hc/lease/supplier/adapter/impl/LeaseGpsSupplierAdapterImpl.java
+#	modified:   hc-lease-supplier-adapter/src/main/java/com/hc/lease/supplier/adapter/impl/LeaseInsuranceCompanyAdapterImpl.java
+#	modified:   hc-lease-supplier-adapter/src/main/java/com/hc/lease/supplier/adapter/impl/LeaseInsuranceTypeAdapterImpl.java
+#	modified:   hc-lease-supplier-adapter/src/main/java/com/hc/lease/supplier/adapter/impl/LeasePackageAdapterImpl.java
+#	modified:   hc-lease-supplier-adapter/src/main/java/com/hc/lease/supplier/adapter/impl/LeasePurchaseContractAdapterImpl.java
+#	modified:   hc-lease-supplier-adapter/src/main/java/com/hc/lease/supplier/adapter/impl/LeasePurchasePaymentHistoryAdapterImpl.java
+#	modified:   hc-lease-supplier-adapter/src/main/java/com/hc/lease/supplier/adapter/impl/LeaseSchemeAdapterImpl.java
+#	modified:   hc-lease-supplier-adapter/src/main/java/com/hc/lease/supplier/adapter/impl/LeaseSchemeCarAdapterImpl.java
+#	modified:   hc-lease-supplier-adapter/src/main/java/com/hc/lease/supplier/adapter/impl/LeaseSchemePackageAdapterImpl.java
+#	modified:   hc-lease-supplier-adapter/src/main/java/com/hc/lease/supplier/adapter/impl/LeaseStorehouseAdapterImpl.java
+#	modified:   hc-lease-supplier-adapter/src/main/resources/META-INF/spring/ApplicationContext-dubbo-consumer.xml
+#	modified:   hc-lease-supplier-adapter/target/classes/META-INF/spring/ApplicationContext-dubbo-consumer.xml
+#	modified:   hc-lease-supplier-adapter/target/classes/com/hc/lease/supplier/adapter/impl/LeaseCarSupplierAdapterImpl.class
+#	modified:   hc-lease-supplier-adapter/target/hc-lease-supplier-adapter-1.0.0-SNAPSHOT.war
+#	modified:   hc-lease-supplier-adapter/target/hc-lease-supplier-adapter-1.0.0-SNAPSHOT/WEB-INF/classes/META-INF/spring/ApplicationContext-dubbo-consumer.xml
+#	modified:   hc-lease-supplier-adapter/target/hc-lease-supplier-adapter-1.0.0-SNAPSHOT/WEB-INF/classes/com/hc/lease/supplier/adapter/impl/LeaseCarSupplierAdapterImpl.class
+#	new file:   hc-lease-supplier-adapter/target/hc-lease-supplier-adapter-1.0.0-SNAPSHOT/WEB-INF/lib/classmate-1.1.0.jar
+#	modified:   hc-lease-supplier-adapter/target/hc-lease-supplier-adapter-1.0.0-SNAPSHOT/WEB-INF/lib/hc-lease-baseInfo-service-api-1.0.0-SNAPSHOT.jar
+#	copied:     hc-lease-supplier-web-consumer/target/hc-lease-supplier-web-consumer/WEB-INF/lib/hc-lease-common-config-1.0.0-SNAPSHOT.jar -> hc-lease-supplier-adapter/target/hc-lease-supplier-adapter-1.0.0-SNAPSHOT/WEB-INF/lib/hc-lease-common-config-1.0.0-SNAPSHOT.jar
+#	modified:   hc-lease-supplier-adapter/target/hc-lease-supplier-adapter-1.0.0-SNAPSHOT/WEB-INF/lib/hc-lease-common-util-1.0.0-SNAPSHOT.jar
+#	modified:   hc-lease-supplier-adapter/target/hc-lease-supplier-adapter-1.0.0-SNAPSHOT/WEB-INF/lib/hc-lease-supplier-adapter-api-1.0.0-SNAPSHOT.jar
+#	modified:   hc-lease-supplier-adapter/target/hc-lease-supplier-adapter-1.0.0-SNAPSHOT/WEB-INF/lib/hc-lease-supplier-service-api-1.0.0-SNAPSHOT.jar
+#	new file:   hc-lease-supplier-adapter/target/hc-lease-supplier-adapter-1.0.0-SNAPSHOT/WEB-INF/lib/jackson-dataformat-xml-2.9.0.pr2.jar
+#	new file:   hc-lease-supplier-adapter/target/hc-lease-supplier-adapter-1.0.0-SNAPSHOT/WEB-INF/lib/mapstruct-1.0.0.Final.jar
+#	new file:   hc-lease-supplier-adapter/target/hc-lease-supplier-adapter-1.0.0-SNAPSHOT/WEB-INF/lib/spring-plugin-core-1.2.0.RELEASE.jar
+#	new file:   hc-lease-supplier-adapter/target/hc-lease-supplier-adapter-1.0.0-SNAPSHOT/WEB-INF/lib/spring-plugin-metadata-1.2.0.RELEASE.jar
+#	new file:   hc-lease-supplier-adapter/target/hc-lease-supplier-adapter-1.0.0-SNAPSHOT/WEB-INF/lib/springfox-core-2.5.0.jar
+#	new file:   hc-lease-supplier-adapter/target/hc-lease-supplier-adapter-1.0.0-SNAPSHOT/WEB-INF/lib/springfox-schema-2.5.0.jar
+#	new file:   hc-lease-supplier-adapter/target/hc-lease-supplier-adapter-1.0.0-SNAPSHOT/WEB-INF/lib/springfox-spi-2.5.0.jar
+#	new file:   hc-lease-supplier-adapter/target/hc-lease-supplier-adapter-1.0.0-SNAPSHOT/WEB-INF/lib/springfox-spring-web-2.5.0.jar
+#	new file:   hc-lease-supplier-adapter/target/hc-lease-supplier-adapter-1.0.0-SNAPSHOT/WEB-INF/lib/springfox-swagger-common-2.5.0.jar
+#	new file:   hc-lease-supplier-adapter/target/hc-lease-supplier-adapter-1.0.0-SNAPSHOT/WEB-INF/lib/springfox-swagger-ui-2.5.0.jar
+#	new file:   hc-lease-supplier-adapter/target/hc-lease-supplier-adapter-1.0.0-SNAPSHOT/WEB-INF/lib/springfox-swagger2-2.5.0.jar
+#	new file:   hc-lease-supplier-adapter/target/hc-lease-supplier-adapter-1.0.0-SNAPSHOT/WEB-INF/lib/stax2-api-3.1.4.jar
+#	new file:   hc-lease-supplier-adapter/target/hc-lease-supplier-adapter-1.0.0-SNAPSHOT/WEB-INF/lib/swagger-annotations-1.5.9.jar
+#	new file:   hc-lease-supplier-adapter/target/hc-lease-supplier-adapter-1.0.0-SNAPSHOT/WEB-INF/lib/swagger-models-1.5.9.jar
+#	new file:   hc-lease-supplier-adapter/target/hc-lease-supplier-adapter-1.0.0-SNAPSHOT/WEB-INF/lib/woodstox-core-5.0.3.jar
+#	modified:   hc-lease-supplier-adapter/target/maven-archiver/pom.properties
+#	modified:   hc-lease-supplier-service-api/src/main/java/com/hc/lease/supplier/model/LeaseBranchCompany.java
+#	modified:   hc-lease-supplier-service-api/src/main/java/com/hc/lease/supplier/model/LeaseCar.java
+#	modified:   hc-lease-supplier-service-api/src/main/java/com/hc/lease/supplier/model/LeaseCarInsurance.java
+#	modified:   hc-lease-supplier-service-api/src/main/java/com/hc/lease/supplier/model/LeaseCarInventory.java
+#	modified:   hc-lease-supplier-service-api/src/main/java/com/hc/lease/supplier/model/LeaseCarSupplier.java
+#	modified:   hc-lease-supplier-service-api/src/main/java/com/hc/lease/supplier/model/LeaseGpsSupplier.java
+#	modified:   hc-lease-supplier-service-api/src/main/java/com/hc/lease/supplier/model/LeaseInsuranceCompany.java
+#	modified:   hc-lease-supplier-service-api/src/main/java/com/hc/lease/supplier/model/LeaseInsuranceType.java
+#	modified:   hc-lease-supplier-service-api/src/main/java/com/hc/lease/supplier/model/LeasePackage.java
+#	modified:   hc-lease-supplier-service-api/src/main/java/com/hc/lease/supplier/model/LeasePurchaseContract.java
+#	modified:   hc-lease-supplier-service-api/src/main/java/com/hc/lease/supplier/model/LeasePurchasePaymentHistory.java
+#	modified:   hc-lease-supplier-service-api/src/main/java/com/hc/lease/supplier/model/LeaseScheme.java
+#	modified:   hc-lease-supplier-service-api/src/main/java/com/hc/lease/supplier/model/LeaseSchemeCar.java
+#	modified:   hc-lease-supplier-service-api/src/main/java/com/hc/lease/supplier/model/LeaseSchemePackage.java
+#	modified:   hc-lease-supplier-service-api/src/main/java/com/hc/lease/supplier/model/LeaseStorehouse.java
+#	modified:   hc-lease-supplier-service-api/target/classes/com/hc/lease/supplier/model/LeaseBranchCompany.class
+#	modified:   hc-lease-supplier-service-api/target/hc-lease-supplier-service-api-1.0.0-SNAPSHOT.jar
+#	modified:   hc-lease-supplier-service/src/main/java/com/hc/lease/supplier/impl/LeaseBranchCompanyServiceImpl.java
+#	modified:   hc-lease-supplier-service/src/main/java/com/hc/lease/supplier/impl/LeaseCarInsuranceServiceImpl.java
+#	modified:   hc-lease-supplier-service/src/main/java/com/hc/lease/supplier/impl/LeaseCarInventoryServiceImpl.java
+#	modified:   hc-lease-supplier-service/src/main/java/com/hc/lease/supplier/impl/LeaseCarServiceImpl.java
+#	modified:   hc-lease-supplier-service/src/main/java/com/hc/lease/supplier/impl/LeaseCarSupplierServiceImpl.java
+#	modified:   hc-lease-supplier-service/src/main/java/com/hc/lease/supplier/impl/LeaseGpsSupplierServiceImpl.java
+#	modified:   hc-lease-supplier-service/src/main/java/com/hc/lease/supplier/impl/LeaseInsuranceCompanyServiceImpl.java
+#	modified:   hc-lease-supplier-service/src/main/java/com/hc/lease/supplier/impl/LeaseInsuranceTypeServiceImpl.java
+#	modified:   hc-lease-supplier-service/src/main/java/com/hc/lease/supplier/impl/LeasePackageServiceImpl.java
+#	modified:   hc-lease-supplier-service/src/main/java/com/hc/lease/supplier/impl/LeasePurchaseContractServiceImpl.java
+#	modified:   hc-lease-supplier-service/src/main/java/com/hc/lease/supplier/impl/LeasePurchasePaymentHistoryServiceImpl.java
+#	modified:   hc-lease-supplier-service/src/main/java/com/hc/lease/supplier/impl/LeaseSchemeCarServiceImpl.java
+#	modified:   hc-lease-supplier-service/src/main/java/com/hc/lease/supplier/impl/LeaseSchemePackageServiceImpl.java
+#	modified:   hc-lease-supplier-service/src/main/java/com/hc/lease/supplier/impl/LeaseSchemeServiceImpl.java
+#	modified:   hc-lease-supplier-service/src/main/java/com/hc/lease/supplier/impl/LeaseStorehouseServiceImpl.java
+#	modified:   hc-lease-supplier-service/src/main/resources/mapping/LeaseBranchCompanyMapper.xml
+#	modified:   hc-lease-supplier-service/src/main/resources/mapping/LeaseCarInsuranceMapper.xml
+#	modified:   hc-lease-supplier-service/src/main/resources/mapping/LeaseCarInventoryMapper.xml
+#	modified:   hc-lease-supplier-service/src/main/resources/mapping/LeaseCarMapper.xml
+#	modified:   hc-lease-supplier-service/src/main/resources/mapping/LeaseCarSupplierMapper.xml
+#	modified:   hc-lease-supplier-service/src/main/resources/mapping/LeaseGpsSupplierMapper.xml
+#	modified:   hc-lease-supplier-service/src/main/resources/mapping/LeaseInsuranceCompanyMapper.xml
+#	modified:   hc-lease-supplier-service/src/main/resources/mapping/LeaseInsuranceTypeMapper.xml
+#	modified:   hc-lease-supplier-service/src/main/resources/mapping/LeasePackageMapper.xml
+#	modified:   hc-lease-supplier-service/src/main/resources/mapping/LeasePurchasePaymentHistoryMapper.xml
+#	modified:   hc-lease-supplier-service/src/main/resources/mapping/LeaseSchemeCarMapper.xml
+#	modified:   hc-lease-supplier-service/src/main/resources/mapping/LeaseSchemeMapper.xml
+#	modified:   hc-lease-supplier-service/src/main/resources/mapping/LeaseSchemePackageMapper.xml
+#	modified:   hc-lease-supplier-service/src/main/resources/mapping/LeaseStorehouseMapper.xml
+#	modified:   hc-lease-supplier-service/src/main/resources/mapping/leasePurchaseContractMapper.xml
+#	new file:   hc-lease-supplier-service/target/classes/com/hc/lease/supplier/dao/LeaseCarInsuranceMapper.class
+#	new file:   hc-lease-supplier-service/target/classes/com/hc/lease/supplier/dao/LeaseCarInventoryMapper.class
+#	new file:   hc-lease-supplier-service/target/classes/com/hc/lease/supplier/dao/LeaseCarMapper.class
+#	new file:   hc-lease-supplier-service/target/classes/com/hc/lease/supplier/dao/LeaseCarSupplierMapper.class
+#	new file:   hc-lease-supplier-service/target/classes/com/hc/lease/supplier/dao/LeaseGpsSupplierMapper.class
+#	new file:   hc-lease-supplier-service/target/classes/com/hc/lease/supplier/dao/LeaseInsuranceCompanyMapper.class
+#	new file:   hc-lease-supplier-service/target/classes/com/hc/lease/supplier/dao/LeasePackageMapper.class
+#	new file:   hc-lease-supplier-service/target/classes/com/hc/lease/supplier/dao/LeasePurchaseContractMapper.class
+#	new file:   hc-lease-supplier-service/target/classes/com/hc/lease/supplier/dao/LeaseSchemeMapper.class
+#	new file:   hc-lease-supplier-service/target/classes/com/hc/lease/supplier/dao/LeaseStorehouseMapper.class
+#	modified:   hc-lease-supplier-service/target/classes/mapping/LeasePackageMapper.xml
+#	modified:   hc-lease-supplier-service/target/classes/mapping/LeaseSchemeMapper.xml
+#	modified:   hc-lease-supplier-service/target/classes/mapping/leasePurchaseContractMapper.xml
+#	modified:   hc-lease-supplier-service/target/hc-lease-supplier-service-1.0.0-SNAPSHOT.war
+#	new file:   hc-lease-supplier-service/target/hc-lease-supplier-service-1.0.0-SNAPSHOT/WEB-INF/lib/classmate-1.1.0.jar
+#	modified:   hc-lease-supplier-service/target/hc-lease-supplier-service-1.0.0-SNAPSHOT/WEB-INF/lib/hc-lease-common-config-1.0.0-SNAPSHOT.jar
+#	modified:   hc-lease-supplier-service/target/hc-lease-supplier-service-1.0.0-SNAPSHOT/WEB-INF/lib/hc-lease-common-util-1.0.0-SNAPSHOT.jar
+#	modified:   hc-lease-supplier-service/target/hc-lease-supplier-service-1.0.0-SNAPSHOT/WEB-INF/lib/hc-lease-supplier-service-api-1.0.0-SNAPSHOT.jar
+#	new file:   hc-lease-supplier-service/target/hc-lease-supplier-service-1.0.0-SNAPSHOT/WEB-INF/lib/jackson-dataformat-xml-2.9.0.pr2.jar
+#	new file:   hc-lease-supplier-service/target/hc-lease-supplier-service-1.0.0-SNAPSHOT/WEB-INF/lib/mapstruct-1.0.0.Final.jar
+#	new file:   hc-lease-supplier-service/target/hc-lease-supplier-service-1.0.0-SNAPSHOT/WEB-INF/lib/spring-plugin-core-1.2.0.RELEASE.jar
+#	new file:   hc-lease-supplier-service/target/hc-lease-supplier-service-1.0.0-SNAPSHOT/WEB-INF/lib/spring-plugin-metadata-1.2.0.RELEASE.jar
+#	new file:   hc-lease-supplier-service/target/hc-lease-supplier-service-1.0.0-SNAPSHOT/WEB-INF/lib/springfox-core-2.5.0.jar
+#	new file:   hc-lease-supplier-service/target/hc-lease-supplier-service-1.0.0-SNAPSHOT/WEB-INF/lib/springfox-schema-2.5.0.jar
+#	new file:   hc-lease-supplier-service/target/hc-lease-supplier-service-1.0.0-SNAPSHOT/WEB-INF/lib/springfox-spi-2.5.0.jar
+#	new file:   hc-lease-supplier-service/target/hc-lease-supplier-service-1.0.0-SNAPSHOT/WEB-INF/lib/springfox-spring-web-2.5.0.jar
+#	new file:   hc-lease-supplier-service/target/hc-lease-supplier-service-1.0.0-SNAPSHOT/WEB-INF/lib/springfox-swagger-common-2.5.0.jar
+#	new file:   hc-lease-supplier-service/target/hc-lease-supplier-service-1.0.0-SNAPSHOT/WEB-INF/lib/springfox-swagger-ui-2.5.0.jar
+#	new file:   hc-lease-supplier-service/target/hc-lease-supplier-service-1.0.0-SNAPSHOT/WEB-INF/lib/springfox-swagger2-2.5.0.jar
+#	new file:   hc-lease-supplier-service/target/hc-lease-supplier-service-1.0.0-SNAPSHOT/WEB-INF/lib/stax2-api-3.1.4.jar
+#	new file:   hc-lease-supplier-service/target/hc-lease-supplier-service-1.0.0-SNAPSHOT/WEB-INF/lib/swagger-annotations-1.5.9.jar
+#	new file:   hc-lease-supplier-service/target/hc-lease-supplier-service-1.0.0-SNAPSHOT/WEB-INF/lib/swagger-models-1.5.9.jar
+#	new file:   hc-lease-supplier-service/target/hc-lease-supplier-service-1.0.0-SNAPSHOT/WEB-INF/lib/woodstox-core-5.0.3.jar
+#	modified:   hc-lease-supplier-service/target/maven-archiver/pom.properties
+#	new file:   hc-lease-supplier-web-consumer/src/main/java/com/hc/lease/common/core/swagger/SwaggerConfig.java
+#	modified:   hc-lease-supplier-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseBranchCompanyController.java
+#	modified:   hc-lease-supplier-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseCarController.java
+#	modified:   hc-lease-supplier-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseCarInsuranceController.java
+#	modified:   hc-lease-supplier-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseCarInventoryController.java
+#	modified:   hc-lease-supplier-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseCarSupplierController.java
+#	modified:   hc-lease-supplier-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseGpsSupplierController.java
+#	modified:   hc-lease-supplier-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseInsuranceCompanyController.java
+#	modified:   hc-lease-supplier-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseInsuranceTypeController.java
+#	modified:   hc-lease-supplier-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeasePackageController.java
+#	modified:   hc-lease-supplier-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeasePurchaseContractController.java
+#	modified:   hc-lease-supplier-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeasePurchasePaymentHistoryController.java
+#	modified:   hc-lease-supplier-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseSchemeCarController.java
+#	modified:   hc-lease-supplier-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseSchemeController.java
+#	modified:   hc-lease-supplier-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseSchemePackageController.java
+#	modified:   hc-lease-supplier-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseStorehouseController.java
+#	modified:   hc-lease-supplier-web-consumer/src/main/resources/META-INF/spring/ApplicationContext-mvc.xml
+#	modified:   hc-lease-supplier-web-consumer/target/classes/META-INF/spring/ApplicationContext-dubbo-consumer.xml
+#	new file:   hc-lease-supplier-web-consumer/target/classes/com/hc/lease/common/core/swagger/SwaggerConfig.class
+#	modified:   hc-lease-supplier-web-consumer/target/classes/com/hc/lease/supplier/controller/LeaseBranchCompanyController.class
+#	new file:   hc-lease-supplier-web-consumer/target/classes/com/hc/lease/supplier/controller/LeaseCarController.class
+#	new file:   hc-lease-supplier-web-consumer/target/classes/com/hc/lease/supplier/controller/LeaseCarInsuranceController.class
+#	new file:   hc-lease-supplier-web-consumer/target/classes/com/hc/lease/supplier/controller/LeaseCarSupplierController.class
+#	new file:   hc-lease-supplier-web-consumer/target/classes/com/hc/lease/supplier/controller/LeaseGpsSupplierController.class
+#	new file:   hc-lease-supplier-web-consumer/target/classes/com/hc/lease/supplier/controller/LeaseInsuranceCompanyController.class
+#	copied:     hc-lease-supplier-web-consumer/target/classes/com/hc/lease/supplier/controller/LeaseBranchCompanyController.class -> hc-lease-supplier-web-consumer/target/classes/com/hc/lease/supplier/controller/LeaseInsuranceTypeController.class
+#	new file:   hc-lease-supplier-web-consumer/target/classes/com/hc/lease/supplier/controller/LeasePackageController.class
+#	new file:   hc-lease-supplier-web-consumer/target/classes/com/hc/lease/supplier/controller/LeaseSchemeCarController.class
+#	copied:     hc-lease-supplier-web-consumer/target/hc-lease-supplier-web-consumer/WEB-INF/classes/com/hc/lease/supplier/controller/LeaseBranchCompanyController.class -> hc-lease-supplier-web-consumer/target/classes/com/hc/lease/supplier/controller/LeaseSchemePackageController.class
+#	modified:   hc-lease-supplier-web-consumer/target/hc-lease-supplier-web-consumer.war
+#	modified:   hc-lease-supplier-web-consumer/target/hc-lease-supplier-web-consumer/WEB-INF/classes/META-INF/spring/ApplicationContext-dubbo-consumer.xml
+#	new file:   hc-lease-supplier-web-consumer/target/hc-lease-supplier-web-consumer/WEB-INF/classes/com/hc/lease/common/core/swagger/SwaggerConfig.class
+#	modified:   hc-lease-supplier-web-consumer/target/hc-lease-supplier-web-consumer/WEB-INF/classes/com/hc/lease/supplier/controller/LeaseBranchCompanyController.class
+#	new file:   hc-lease-supplier-web-consumer/target/hc-lease-supplier-web-consumer/WEB-INF/lib/classmate-1.1.0.jar
+#	modified:   hc-lease-supplier-web-consumer/target/hc-lease-supplier-web-consumer/WEB-INF/lib/hc-lease-common-config-1.0.0-SNAPSHOT.jar
+#	modified:   hc-lease-supplier-web-consumer/target/hc-lease-supplier-web-consumer/WEB-INF/lib/hc-lease-common-util-1.0.0-SNAPSHOT.jar
+#	modified:   hc-lease-supplier-web-consumer/target/hc-lease-supplier-web-consumer/WEB-INF/lib/hc-lease-supplier-adapter-api-1.0.0-SNAPSHOT.jar
+#	modified:   hc-lease-supplier-web-consumer/target/hc-lease-supplier-web-consumer/WEB-INF/lib/hc-lease-supplier-service-api-1.0.0-SNAPSHOT.jar
+#	new file:   hc-lease-supplier-web-consumer/target/hc-lease-supplier-web-consumer/WEB-INF/lib/jackson-dataformat-xml-2.9.0.pr2.jar
+#	new file:   hc-lease-supplier-web-consumer/target/hc-lease-supplier-web-consumer/WEB-INF/lib/mapstruct-1.0.0.Final.jar
+#	new file:   hc-lease-supplier-web-consumer/target/hc-lease-supplier-web-consumer/WEB-INF/lib/spring-plugin-core-1.2.0.RELEASE.jar
+#	new file:   hc-lease-supplier-web-consumer/target/hc-lease-supplier-web-consumer/WEB-INF/lib/spring-plugin-metadata-1.2.0.RELEASE.jar
+#	new file:   hc-lease-supplier-web-consumer/target/hc-lease-supplier-web-consumer/WEB-INF/lib/springfox-core-2.5.0.jar
+#	new file:   hc-lease-supplier-web-consumer/target/hc-lease-supplier-web-consumer/WEB-INF/lib/springfox-schema-2.5.0.jar
+#	new file:   hc-lease-supplier-web-consumer/target/hc-lease-supplier-web-consumer/WEB-INF/lib/springfox-spi-2.5.0.jar
+#	new file:   hc-lease-supplier-web-consumer/target/hc-lease-supplier-web-consumer/WEB-INF/lib/springfox-spring-web-2.5.0.jar
+#	new file:   hc-lease-supplier-web-consumer/target/hc-lease-supplier-web-consumer/WEB-INF/lib/springfox-swagger-common-2.5.0.jar
+#	new file:   hc-lease-supplier-web-consumer/target/hc-lease-supplier-web-consumer/WEB-INF/lib/springfox-swagger-ui-2.5.0.jar
+#	new file:   hc-lease-supplier-web-consumer/target/hc-lease-supplier-web-consumer/WEB-INF/lib/springfox-swagger2-2.5.0.jar
+#	new file:   hc-lease-supplier-web-consumer/target/hc-lease-supplier-web-consumer/WEB-INF/lib/stax2-api-3.1.4.jar
+#	new file:   hc-lease-supplier-web-consumer/target/hc-lease-supplier-web-consumer/WEB-INF/lib/swagger-annotations-1.5.9.jar
+#	new file:   hc-lease-supplier-web-consumer/target/hc-lease-supplier-web-consumer/WEB-INF/lib/swagger-models-1.5.9.jar
+#	new file:   hc-lease-supplier-web-consumer/target/hc-lease-supplier-web-consumer/WEB-INF/lib/woodstox-core-5.0.3.jar
+#	modified:   hc-lease-supplier-web-consumer/target/maven-archiver/pom.properties
+增加swagger批量删除
+

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://code.alibabatech.com/schema/dubbo
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<dubbo:registry address="${dubbo.registry.zookeeper}"/>
+	<!-- 生成远程服务代理，可以像使用本地bean一样使用demoService -->
+
+	<dubbo:reference interface="com.hc.lease.baseInfo.service.api.LeaseArchiveLocationService" id="leaseArchiveLocationService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.baseInfo.service.api.LeaseBankService" id="leaseBankService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.baseInfo.service.api.LeaseCarBrandsService" id="leaseCarBrandsService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.baseInfo.service.api.LeaseCarBuyFinancingerService" id="leaseCarBuyFinancingerService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.baseInfo.service.api.LeaseCarColorService" id="leaseCarColorService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.baseInfo.service.api.LeaseCarMaintainRuleService" id="leaseCarMaintainRuleService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.baseInfo.service.api.LeaseCarModelColorService" id="leaseCarModelColorService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.baseInfo.service.api.LeaseCarModelService" id="leaseCarModelService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.baseInfo.service.api.LeaseCarSeriesService" id="leaseCarSeriesService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.baseInfo.service.api.LeaseCompanyHeaderService" id="leaseCompanyHeaderService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.baseInfo.service.api.LeaseContractBaseinfoService" id="leaseContractBaseinfoService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.baseInfo.service.api.LeaseDealerService" id="leaseDealerService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.baseInfo.service.api.LeaseDictService" id="leaseDictService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.baseInfo.service.api.LeaseInvoiceHeaderService" id="leaseInvoiceHeaderService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.baseInfo.service.api.LeaseMaintenancePartnerService" id="leaseMaintenancePartnerService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.baseInfo.service.api.LeaseRuleService" id="leaseRuleService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.baseInfo.service.api.LeaseAreaService" id="leaseAreaService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.baseInfo.service.api.LeaseBranchCompanyService" id="leaseBranchCompanyService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.baseInfo.service.api.LeaseCommonService" id="leaseCommonService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.baseInfo.service.api.LeaseUseUsedService" id="leaseUseUsedService" check="false" timeout="1200000" />
+
+	<dubbo:reference interface="com.hc.lease.order.service.api.LeaseSchemeOrderService" id="leaseSchemeOrderService" check="false" timeout="1200000" />
+
+
+
+
+</beans>

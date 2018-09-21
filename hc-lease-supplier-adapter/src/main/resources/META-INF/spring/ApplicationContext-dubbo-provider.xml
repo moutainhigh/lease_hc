@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://code.alibabatech.com/schema/dubbo
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 提供方应用信息，用于计算依赖关系 -->
+	<dubbo:application name="lease_supplier_adapter" />
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<dubbo:registry address="${dubbo.registry.zookeeper}"/>
+	<!-- <dubbo:registry address="multicast://224.5.6.7:1234" /> -->
+	<!-- 用dubbo协议在20883端口暴露服务 -->
+	<dubbo:protocol name="dubbo" port="${dubbo.protocol.supplierAdapter}"/>
+
+	<!-- 监控中心配置，protocol="registry"，表示从注册中心发现监控中心地址 -->
+	<dubbo:monitor protocol="registry"/>
+
+	<!-- 当ProtocolConfig和ServiceConfig某属性没有配置时,采用此缺省值 -->
+	<dubbo:provider timeout="10000" threadpool="fixed" threads="100" accepts="1000" token="true"/>
+
+	<!-- 声明需要暴露的服务接口 -->
+	<dubbo:service interface="com.hc.lease.supplier.adapter.api.LeaseCarSupplierAdapter" ref="leaseCarSupplierAdapter" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.adapter.api.LeaseCarAdapter" ref="leaseCarAdapter" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.adapter.api.LeaseCarInsuranceAdapter" ref="leaseCarInsuranceAdapter" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.supplier.adapter.api.LeaseCarInventoryAdapter" ref="leaseCarInventoryAdapter"  timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.adapter.api.LeaseInsuranceTypeAdapter" ref="leaseInsuranceTypeAdapter" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.supplier.adapter.api.LeaseInsuranceCompanyAdapter" ref="leaseInsuranceCompanyAdapter" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.supplier.adapter.api.LeasePackageAdapter" ref="leasePackageAdapter"  timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.adapter.api.LeaseGpsSupplierAdapter" ref="leaseGpsSupplierAdapter" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.adapter.api.LeaseSchemeAdapter" ref="leaseSchemeAdapter" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.supplier.adapter.api.LeaseSchemeCarAdapter" ref="leaseSchemeCarAdapter" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.adapter.api.LeaseSchemePackageAdapter" ref="leaseSchemePackageAdapter" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.supplier.adapter.api.LeaseStorehouseAdapter" ref="leaseStorehouseAdapter" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.adapter.api.LeasePurchaseContractAdapter" ref="leasePurchaseContractAdapter" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.adapter.api.LeasePurchasePaymentHistoryAdapter" ref="leasePurchasePaymentHistoryAdapter" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.adapter.api.LeaseInventoryAdjustmentAdapter" ref="leaseInventoryAdjustmentAdapter" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.adapter.api.LeaseCostCheckAdapter" ref="leaseCostCheckAdapter" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.adapter.api.CarCostHandleAdapter" ref="carCostHandleAdapter" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.adapter.api.LeasePackageBalancePaymentAdapter" ref="leasePackageBalancePaymentAdapter" timeout="1200000" accesslog="true"/>
+
+	<dubbo:service interface="com.hc.lease.supplier.adapter.api.LeaseAgentsLevelAdapter" ref="leaseAgentsLevelAdapter" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.supplier.adapter.api.LeaseAgentsSecondaryAdapter" ref="leaseAgentsSecondaryAdapter" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.supplier.adapter.api.LeaseAgentsAdapter" ref="leaseAgentsAdapter" timeout="1200000" accesslog="true" />
+
+	<dubbo:service interface="com.hc.lease.supplier.adapter.api.LeaseSchemePriceAdapter" ref="leaseSchemePriceAdapter" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.supplier.adapter.api.LeaseSchemePrice1xAdapter" ref="leaseSchemePrice1xAdapter" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.supplier.adapter.api.LeaseSchemePriceAnnualAdapter" ref="leaseSchemePriceAnnualAdapter" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.supplier.adapter.api.LeaseSchemePriceStagesAdapter" ref="leaseSchemePriceStagesAdapter" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.supplier.adapter.api.LeaseSchemePriceRentAdapter" ref="leaseSchemePriceRentAdapter" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.supplier.adapter.api.LeaseSchemeContractAdapter" ref="leaseSchemeContractAdapter" timeout="1200000" accesslog="true" />
+
+	<!-- 声明需要暴露的服务接口 -->
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeaseCarSupplierService" ref="leaseCarSupplierService" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeaseSchemeService" ref="leaseSchemeService" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeaseSchemePackageService" ref="leaseSchemePackageService" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeaseSchemeCarService" ref="leaseSchemeCarService" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeasePackageService" ref="leasePackageService" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeaseCarInsuranceService" ref="leaseCarInsuranceService" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeaseCarInventoryService" ref="leaseCarInventoryService" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeaseCarService" ref="leaseCarService" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeaseGpsSupplierService" ref="leaseGpsSupplierService" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeaseInsuranceCompanyService" ref="leaseInsuranceCompanyService" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeaseInsuranceTypeService" ref="leaseInsuranceTypeService" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeaseStorehouseService" ref="leaseStorehouseService" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeasePurchaseContractService" ref="leasePurchaseContractService" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeasePurchasePaymentHistoryService" ref="leasePurchasePaymentHistoryService" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeaseInventoryAdjustmentService" ref="leaseInventoryAdjustmentService" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeaseSchemeVehicleService" ref="leaseSchemeVehicleService" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeaseSchemeAreaService" ref="leaseSchemeAreaService" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeaseCarDictAccessoryService" ref="leaseCarDictAccessoryService" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeaseSchemeCarFinancingerService" ref="leaseSchemeCarFinancingerService" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeaseCostCheckService" ref="leaseCostCheckService" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.service.api.CarCostHandleService" ref="carCostHandleService" timeout="1200000" accesslog="true"/>
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeasePackageBalancePaymentService" ref="leasePackageBalancePaymentService" timeout="1200000" accesslog="true"/>
+
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeaseAgentsLevelService" ref="leaseAgentsLevelService" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeaseAgentsSecondaryService" ref="leaseAgentsSecondaryService" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeaseAgentsService" ref="leaseAgentsService" timeout="1200000" accesslog="true" />
+
+
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeaseSchemePriceService" ref="leaseSchemePriceService" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeaseSchemePrice1xService" ref="leaseSchemePrice1xService" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeaseSchemePriceAnnualService" ref="leaseSchemePriceAnnualService" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeaseSchemePriceStagesService" ref="leaseSchemePriceStagesService" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeaseSchemePriceRentService" ref="leaseSchemePriceRentService" timeout="1200000" accesslog="true" />
+	<dubbo:service interface="com.hc.lease.supplier.service.api.LeaseSchemeContractService" ref="leaseSchemeContractService" timeout="1200000" accesslog="true" />
+
+</beans>

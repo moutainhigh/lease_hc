@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.supplier.dao.LeaseCarOtherCostMapper" >
+
+    <!-- 表名 -->
+    <sql id="table_name">public.lease_car_other_cost</sql>
+
+    <!-- 表所有字段 -->
+    <sql id="select_all_fileds">
+        lease_car_other_cost_id,  car_id,                   tax_free_gps_price,   gps_tax,
+        tax_freight_price,        tax_free_freight_price,   freight_tax,          purchasing_fee,
+        create_time,              update_time
+    </sql>
+
+    <resultMap id="entityMap" type="com.hc.lease.supplier.model.LeaseCarOtherCost">
+        <id column="lease_car_other_cost_id"        jdbcType="BIGINT"       property="leaseCarOtherCostId" />
+        <result column="car_id"                     jdbcType="BIGINT"       property="carId" />
+        <result column="tax_free_gps_price"         jdbcType="NUMERIC"      property="taxFreeGpsPrice" />
+        <result column="gps_tax"                    jdbcType="NUMERIC"      property="gpsTax" />
+        <result column="tax_freight_price"          jdbcType="NUMERIC"      property="taxFreightPrice" />
+        <result column="tax_free_freight_price"     jdbcType="NUMERIC"      property="taxFreeFreightPrice" />
+        <result column="freight_tax"                jdbcType="NUMERIC"      property="freightTax" />
+        <result column="purchasing_fee"             jdbcType="NUMERIC"      property="purchasingFee" />
+        <result column="create_time"                jdbcType="TIMESTAMP"    property="createTime" />
+        <result column="update_time"                jdbcType="TIMESTAMP"    property="updateTime" />
+    </resultMap>
+
+    <insert id="insertEntity" parameterType="com.hc.lease.supplier.model.LeaseCarOtherCost">
+        INSERT INTO <include refid="table_name" />
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="carId != null">
+                car_id,
+            </if>
+            <if test="taxFreeGpsPrice != null">
+                tax_free_gps_price,
+            </if>
+            <if test="gpsTax != null">
+                gps_tax,
+            </if>
+            <if test="taxFreightPrice != null">
+                tax_freight_price,
+            </if>
+            <if test="taxFreeFreightPrice != null">
+                tax_free_freight_price,
+            </if>
+            <if test="freightTax != null">
+                freight_tax,
+            </if>
+            <if test="purchasingFee != null">
+                purchasing_fee,
+            </if>
+                create_time
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="carId != null">
+                #{carId,jdbcType=BIGINT},
+            </if>
+            <if test="taxFreeGpsPrice != null">
+                #{taxFreeGpsPrice,jdbcType=NUMERIC},
+            </if>
+            <if test="gpsTax != null">
+                #{gpsTax,jdbcType=NUMERIC},
+            </if>
+            <if test="taxFreightPrice != null">
+                #{taxFreightPrice,jdbcType=NUMERIC},
+            </if>
+            <if test="taxFreeFreightPrice != null">
+                #{taxFreeFreightPrice,jdbcType=NUMERIC},
+            </if>
+            <if test="freightTax != null">
+                #{freightTax,jdbcType=NUMERIC},
+            </if>
+            <if test="purchasingFee != null">
+                #{purchasingFee,jdbcType=NUMERIC},
+            </if>
+            Now()
+        </trim>
+    </insert>
+
+    <update id="updateEntity" parameterType="com.hc.lease.supplier.model.LeaseCarOtherCost">
+        UPDATE <include refid="table_name" />
+        <set>
+            <if test="taxFreeGpsPrice != null">
+                tax_free_gps_price = #{taxFreeGpsPrice,jdbcType=NUMERIC},
+            </if>
+            <if test="gpsTax != null">
+                gps_tax = #{gpsTax,jdbcType=NUMERIC},
+            </if>
+            <if test="taxFreightPrice != null">
+                tax_freight_price = #{taxFreightPrice,jdbcType=NUMERIC},
+            </if>
+            <if test="taxFreeFreightPrice != null">
+                tax_free_freight_price = #{taxFreeFreightPrice,jdbcType=NUMERIC},
+            </if>
+            <if test="freightTax != null">
+                freight_tax = #{freightTax,jdbcType=NUMERIC},
+            </if>
+            <if test="purchasingFee != null">
+                purchasing_fee = #{purchasingFee,jdbcType=NUMERIC},
+            </if>
+            update_time = now()
+        </set>
+        where lease_car_other_cost_id = #{leaseCarOtherCostId,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectEntity" resultMap="entityMap">
+        SELECT <include refid="select_all_fileds" />
+        FROM <include refid="table_name" />
+        WHERE 1=1
+        <if test="carId != null">
+            AND car_id = #{carId}
+        </if>
+    </select>
+
+</mapper>

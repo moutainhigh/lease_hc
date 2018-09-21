@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.user.dao.LeaseUserLoginLogMapper">
+    <!--后台用户登录日志-->
+    <resultMap id="BaseResultMap" type="com.hc.lease.user.model.LeaseUserLoginLog">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="device_id" property="deviceId" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="login_in_time" property="loginInTime" jdbcType="TIMESTAMP"/>
+        <result column="login_out_time" property="loginOutTime" jdbcType="TIMESTAMP"/>
+        <result column="login_ip" property="loginIp" jdbcType="VARCHAR"/>
+        <result column="login_error" property="loginError" jdbcType="VARCHAR"/>
+        <result column="session_current" property="sessionCurrent" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, device_id, phone, user_id, login_in_time, login_out_time, login_ip, login_error, session_current
+  </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_user_login_log
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from lease_user_login_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+    <insert id="insert" parameterType="com.hc.lease.user.model.LeaseUserLoginLog">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_user_login_log_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_user_login_log (id, device_id, phone, user_id,
+        login_in_time, login_out_time, login_ip,
+        login_error, session_current)
+        values (#{id,jdbcType=BIGINT}, #{deviceId,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+        #{userId,jdbcType=BIGINT},
+        #{loginInTime,jdbcType=TIMESTAMP}, #{loginOutTime,jdbcType=TIMESTAMP}, #{loginIp,jdbcType=VARCHAR},
+        #{loginError,jdbcType=VARCHAR}, #{sessionCurrent,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.hc.lease.user.model.LeaseUserLoginLog">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_user_login_log_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_user_login_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="deviceId != null">
+                device_id,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="loginInTime != null">
+                login_in_time,
+            </if>
+            <if test="loginOutTime != null">
+                login_out_time,
+            </if>
+            <if test="loginIp != null">
+                login_ip,
+            </if>
+            <if test="loginError != null">
+                login_error,
+            </if>
+            <if test="sessionCurrent != null">
+                session_current,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="deviceId != null">
+                #{deviceId,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="loginInTime != null">
+                #{loginInTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="loginOutTime != null">
+                #{loginOutTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="loginIp != null">
+                #{loginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="loginError != null">
+                #{loginError,jdbcType=VARCHAR},
+            </if>
+            <if test="sessionCurrent != null">
+                #{sessionCurrent,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="addSelective" parameterType="com.hc.lease.user.model.LeaseUserLoginLog">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_user_login_log_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_user_login_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="deviceId != null">
+                device_id,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="loginInTime != null">
+                login_in_time,
+            </if>
+            <if test="loginOutTime != null">
+                login_out_time,
+            </if>
+            <if test="loginIp != null">
+                login_ip,
+            </if>
+            <if test="loginError != null">
+                login_error,
+            </if>
+            <if test="sessionCurrent != null">
+                session_current,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="deviceId != null">
+                #{deviceId,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="loginInTime != null">
+                #{loginInTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="loginOutTime != null">
+                #{loginOutTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="loginIp != null">
+                #{loginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="loginError != null">
+                #{loginError,jdbcType=VARCHAR},
+            </if>
+            <if test="sessionCurrent != null">
+                #{sessionCurrent,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.user.model.LeaseUserLoginLog">
+        update lease_user_login_log
+        <set>
+            <if test="deviceId != null">
+                device_id = #{deviceId,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="loginInTime != null">
+                login_in_time = #{loginInTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="loginOutTime != null">
+                login_out_time = #{loginOutTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="loginIp != null">
+                login_ip = #{loginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="loginError != null">
+                login_error = #{loginError,jdbcType=VARCHAR},
+            </if>
+            <if test="sessionCurrent != null">
+                session_current = #{sessionCurrent,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.hc.lease.user.model.LeaseUserLoginLog">
+    update lease_user_login_log
+    set device_id = #{deviceId,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      login_in_time = #{loginInTime,jdbcType=TIMESTAMP},
+      login_out_time = #{loginOutTime,jdbcType=TIMESTAMP},
+      login_ip = #{loginIp,jdbcType=VARCHAR},
+      login_error = #{loginError,jdbcType=VARCHAR},
+      session_current = #{sessionCurrent,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <update id="updateBySessionCurrent" parameterType="com.hc.lease.user.model.LeaseUserLoginLog">
+        update lease_user_login_log
+        set
+        login_out_time = #{loginOutTime,jdbcType=TIMESTAMP}
+        where session_current = #{sessionCurrent,jdbcType=BIGINT}
+    </update>
+
+</mapper>

@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.order.dao.LeaseContractLinkRepaymentMapper">
+    <!--融租合同-挂靠还款明细,挂靠还款时间跟月租还款时间相同，首次操作还款则添加一条记录，即一个扣款日一条记录，类似还款计划明细，假如没有操作扣款而被检测到过期则自动添加一条过期月份的记录-->
+    <resultMap id="BaseResultMap" type="com.hc.lease.order.model.LeaseContractLinkRepayment">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="contract_link_id" property="contractLinkId" jdbcType="BIGINT"/>
+        <result column="account_id" property="accountId" jdbcType="BIGINT"/>
+        <result column="totle_price" property="totlePrice" jdbcType="NUMERIC"/>
+        <result column="repayment_date" property="repaymentDate" jdbcType="TIMESTAMP"/>
+        <result column="overdue" property="overdue" jdbcType="SMALLINT"/>
+        <result column="overdue_day" property="overdueDay" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="is_enable" property="isEnable" jdbcType="BIT"/>
+    </resultMap>
+
+    <resultMap id="findLinkMap" type="com.hc.lease.order.vo.FindLinkVo">
+        <result column="repayment_id" property="repaymentId" jdbcType="BIGINT"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="contract_link_id" property="contractLinkId" jdbcType="BIGINT"/>
+        <result column="account_id" property="accountId" jdbcType="BIGINT"/>
+        <result column="totle_price" property="totlePrice" jdbcType="NUMERIC"/>
+        <result column="repayment_date" property="repaymentDate" jdbcType="TIMESTAMP"/>
+        <result column="account_id" property="accountId" jdbcType="VARCHAR"/>
+        <result column="account_name" property="accountName" jdbcType="VARCHAR"/>
+        <result column="back_card_number" property="backCardNumber" jdbcType="VARCHAR"/>
+        <result column="bank_name" property="bankName" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="findOverdueMap" type="com.hc.lease.order.vo.FindOverdueVo">
+        <result column="repayment_id" property="repaymentId" jdbcType="BIGINT"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="total" property="total" jdbcType="NUMERIC"/>
+        <result column="price" property="price" jdbcType="NUMERIC"/>
+        <result column="repayment_time" property="repaymentTime" jdbcType="TIMESTAMP"/>
+        <result column="now_time" property="nowTime" jdbcType="TIMESTAMP"/>
+        <result column="overdue_day" property="overdueDay" jdbcType="INTEGER"/>
+        <result column="overdue_rate" property="overdueRate" jdbcType="NUMERIC"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, contract_id, contract_link_id, account_id, totle_price, repayment_date, overdue, 
+    overdue_day, create_time, update_time, create_by, update_by, sort, is_enable
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_contract_link_repayment
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <!--融租合同的 当月挂靠、过期未付款的挂靠-->
+    <select id="findLink" resultMap="findLinkMap">
+
+    select a.id "repaymentId", a.contract_id "contractId", round(a.totle_price, 2) "totlePrice", a.repayment_date "repaymentDate"
+    , c.id "accountId", c.name "accountName", c.phone, d.back_card_number "backCardNumber" , e.name "bankName"
+
+    from lease_contract_link_repayment a
+    INNER JOIN lease_scheme_repayment_status b on a.id = b.repayment_id and b.type = 1
+
+    LEFT JOIN lease_account c on a.account_id=c.id
+    LEFT JOIN lease_account_credit d on d.account_id=c.id
+    LEFT JOIN lease_bank e on e.id = d.bank_id
+
+    where 1=1
+
+    <!--暂只开放个人类型的承租人的合同-->
+    and c.type=0
+
+    and a.overdue = 1
+    and a.contract_id = #{contractId,jdbcType=BIGINT}
+    and (b.payment_result = 0 or b.payment_result = 3)
+
+    UNION ALL
+
+    select a.id, a.contract_id "contractId", round(a.totle_price, 2) "totlePrice", a.repayment_date "repaymentDate"
+    , c.id "accountId", c.name "accountName", c.phone, d.back_card_number "backCardNumber" , e.name "bankName"
+
+    from lease_contract_link_repayment a
+    INNER JOIN lease_scheme_repayment_status b on a.id = b.repayment_id and b.type = 1
+
+    LEFT JOIN lease_account c on a.account_id=c.id
+    LEFT JOIN lease_account_credit d on d.account_id=c.id
+    LEFT JOIN lease_bank e on e.id = d.bank_id
+
+    where 1=1
+
+    <!--暂只开放个人类型的承租人的合同-->
+    and c.type=0
+
+    and a.overdue = 0
+    and a.contract_id = #{contractId,jdbcType=BIGINT}
+    and (b.payment_result = 0 or b.payment_result = 3)
+
+  </select>
+
+    <!--融租合同的 已逾期的挂靠还款记录-->
+    <select id="findOverdue" resultMap="findOverdueMap">
+
+    select
+
+     a.id "repaymentId", a.contract_id "contractId", round(a.totle_price, 2) "totle", c.repayment_time "repaymentTime", c.now_time "nowTime", c.price
+    , c.overdue_day "overdueDay"
+    , (SELECT value from lease_dict WHERE type='OverdueRate') "overdueRate"
+
+    from lease_contract_link_repayment a
+    INNER JOIN lease_scheme_repayment_status b on a.id = b.repayment_id and b.type = 1
+    INNER JOIN lease_overdue_log c on a.contract_id=c.contract_id and c.repayment_id = a.id and c.type = 1
+    where 1=1
+    and a.overdue = 0
+    and a.contract_id = #{contractId,jdbcType=BIGINT}
+    and (b.payment_result = 0 or b.payment_result = 3)
+
+  </select>
+
+    <!--检测 融租合同的 已逾期的挂靠-->
+    <select id="checkOverdue" resultMap="BaseResultMap">
+    select
+    id, contract_id "contractId", account_id "accountId", totle_price "totlePrice" , repayment_date "repaymentDate", overdue_day "overdueDay"
+    from lease_contract_link_repayment
+    where 1=1 and (overdue = 0 or repayment_date &lt; now())
+  </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from lease_contract_link_repayment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+    <insert id="insert" parameterType="com.hc.lease.order.model.LeaseContractLinkRepayment">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_contract_link_repayment_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_contract_link_repayment (id, contract_id, contract_link_id,
+        account_id, totle_price, repayment_date,
+        overdue, overdue_day, create_time,
+        update_time, create_by, update_by,
+        sort, is_enable)
+        values (#{id,jdbcType=BIGINT}, #{contractId,jdbcType=BIGINT}, #{contractLinkId,jdbcType=BIGINT},
+        #{accountId,jdbcType=BIGINT}, #{totlePrice,jdbcType=NUMERIC}, #{repaymentDate,jdbcType=TIMESTAMP},
+        #{overdue,jdbcType=SMALLINT}, #{overdueDay,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT},
+        #{sort,jdbcType=INTEGER}, #{isEnable,jdbcType=BIT})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.hc.lease.order.model.LeaseContractLinkRepayment">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_contract_link_repayment_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_contract_link_repayment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="contractId != null">
+                contract_id,
+            </if>
+            <if test="contractLinkId != null">
+                contract_link_id,
+            </if>
+            <if test="accountId != null">
+                account_id,
+            </if>
+            <if test="totlePrice != null">
+                totle_price,
+            </if>
+            <if test="repaymentDate != null">
+                repayment_date,
+            </if>
+            <if test="overdue != null">
+                overdue,
+            </if>
+            <if test="overdueDay != null">
+                overdue_day,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="isEnable != null">
+                is_enable,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="contractId != null">
+                #{contractId,jdbcType=BIGINT},
+            </if>
+            <if test="contractLinkId != null">
+                #{contractLinkId,jdbcType=BIGINT},
+            </if>
+            <if test="accountId != null">
+                #{accountId,jdbcType=BIGINT},
+            </if>
+            <if test="totlePrice != null">
+                #{totlePrice,jdbcType=NUMERIC},
+            </if>
+            <if test="repaymentDate != null">
+                #{repaymentDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="overdue != null">
+                #{overdue,jdbcType=SMALLINT},
+            </if>
+            <if test="overdueDay != null">
+                #{overdueDay,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="isEnable != null">
+                #{isEnable,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="insertList" parameterType="java.util.List">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_contract_link_repayment_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_contract_link_repayment (id, contract_id, contract_link_id,
+        account_id, totle_price, repayment_date,
+        overdue, overdue_day, create_time,
+        update_time, create_by, update_by,
+        sort, is_enable)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id}, #{item.contractId}, #{item.contractLinkId},
+            #{item.accountId}, #{item.totlePrice}, #{item.repaymentDate},
+            #{item.overdue}, #{item.overdueDay}, #{item.createTime},
+            #{item.updateTime}, #{item.createBy}, #{item.updateBy},
+            #{item.sort}, #{item.isEnable})
+        </foreach>
+
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.order.model.LeaseContractLinkRepayment">
+        update lease_contract_link_repayment
+        <set>
+            <if test="contractId != null">
+                contract_id = #{contractId,jdbcType=BIGINT},
+            </if>
+            <if test="contractLinkId != null">
+                contract_link_id = #{contractLinkId,jdbcType=BIGINT},
+            </if>
+            <if test="accountId != null">
+                account_id = #{accountId,jdbcType=BIGINT},
+            </if>
+            <if test="totlePrice != null">
+                totle_price = #{totlePrice,jdbcType=NUMERIC},
+            </if>
+            <if test="repaymentDate != null">
+                repayment_date = #{repaymentDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="overdue != null">
+                overdue = #{overdue,jdbcType=SMALLINT},
+            </if>
+            <if test="overdueDay != null">
+                overdue_day = #{overdueDay,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="isEnable != null">
+                is_enable = #{isEnable,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.hc.lease.order.model.LeaseContractLinkRepayment">
+    update lease_contract_link_repayment
+    set contract_id = #{contractId,jdbcType=BIGINT},
+      contract_link_id = #{contractLinkId,jdbcType=BIGINT},
+      account_id = #{accountId,jdbcType=BIGINT},
+      totle_price = #{totlePrice,jdbcType=NUMERIC},
+      repayment_date = #{repaymentDate,jdbcType=TIMESTAMP},
+      overdue = #{overdue,jdbcType=SMALLINT},
+      overdue_day = #{overdueDay,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      sort = #{sort,jdbcType=INTEGER},
+      is_enable = #{isEnable,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <!--批量更新-->
+    <update id="batchUpdate" parameterType="java.util.List">
+
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update lease_contract_link_repayment
+            <set>
+                overdue = ${item.overdue},
+                overdue_day = ${item.overdueDay}
+            </set>
+            where id = ${item.id}
+        </foreach>
+
+    </update>
+
+</mapper>

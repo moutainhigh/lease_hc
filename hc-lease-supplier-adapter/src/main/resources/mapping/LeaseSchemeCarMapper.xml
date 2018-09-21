@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.supplier.dao.LeaseSchemeCarMapper" >
+  <resultMap id="BaseResultMap" type="com.hc.lease.supplier.model.LeaseSchemeCar" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="scheme_id" property="schemeId" jdbcType="BIGINT" />
+    <result column="car_id" property="carId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, scheme_id, car_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from lease_scheme_car
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="findPage" resultType="java.util.Map">
+    select
+     id, scheme_id as "schemeId", car_id as "carId"
+    from lease_scheme_car
+  </select>
+
+  <select id="findAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from lease_scheme_car
+  </select>
+
+  <select id="insertViewParames" resultType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from lease_scheme_car
+  </select>
+
+<update id="updateBySchemeId" parameterType="com.hc.lease.supplier.model.LeaseSchemeCar" >
+   update lease_scheme_car
+    set  car_id = #{carId,jdbcType=BIGINT}
+    where scheme_id = #{schemeId,jdbcType=BIGINT}
+</update>
+<delete id="deleteBySchemeId" parameterType="java.lang.Long">
+delete from lease_scheme_car
+    where scheme_id = #{id,jdbcType=BIGINT}
+
+</delete>
+  <delete id="deleteBatchById" parameterType="long">
+    delete from lease_scheme_car where id in
+    <foreach item="item" collection="list" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lease_scheme_car
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hc.lease.supplier.model.LeaseSchemeCar" >
+    insert into lease_scheme_car (id, scheme_id, car_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{schemeId,jdbcType=BIGINT}, #{carId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hc.lease.supplier.model.LeaseSchemeCar" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_scheme_car_id_seq'::regclass) as id
+    </selectKey>
+
+    insert into lease_scheme_car
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="schemeId != null" >
+        scheme_id,
+      </if>
+      <if test="carId != null" >
+        car_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="schemeId != null" >
+        #{schemeId,jdbcType=BIGINT},
+      </if>
+      <if test="carId != null" >
+        #{carId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.supplier.model.LeaseSchemeCar" >
+    update lease_scheme_car
+    <set >
+      <if test="schemeId != null" >
+        scheme_id = #{schemeId,jdbcType=BIGINT},
+      </if>
+      <if test="carId != null" >
+        car_id = #{carId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hc.lease.supplier.model.LeaseSchemeCar" >
+    update lease_scheme_car
+    set scheme_id = #{schemeId,jdbcType=BIGINT},
+      car_id = #{carId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.supplier.dao.LeaseSchemeVehicleMapper" >
+  <resultMap id="BaseResultMap" type="com.hc.lease.supplier.model.LeaseSchemeVehicle" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="scheme_id" property="schemeId" jdbcType="BIGINT" />
+    <result column="brands_id" property="brandsId" jdbcType="BIGINT" />
+    <result column="series_id" property="seriesId" jdbcType="BIGINT" />
+    <result column="model_id" property="modelId" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+    <result column="is_enable" property="isEnable" jdbcType="BIT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="brands_name" property="brandsName" jdbcType="VARCHAR"/>
+    <result column="series_name" property="seriesName" jdbcType="VARCHAR"/>
+    <result column="complete_model_name" property="completeModelName" jdbcType="VARCHAR"/>
+    <result column="business_model_name" property="businessModelName" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, scheme_id, brands_id, series_id, model_id, create_time, update_time, create_by, 
+    update_by, is_enable, sort
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from lease_scheme_vehicle
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectBySchemeId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select
+  sv.brands_id as "brandsId",sv.series_id as "seriesId",sv.model_id as "modelId",cb.name as "brandsName",css.name as "seriesName",
+  cm.complete_model_name as "completeModelName",cm.business_model_name as "businessModelName"
+    from lease_scheme_vehicle sv
+    left join lease_car_brands cb on sv.brands_id=cb.id
+    left join lease_car_series css on sv.series_id=css.id
+    left join lease_car_model cm on sv.model_id=cm.id
+    where sv.scheme_id = #{id,jdbcType=BIGINT}
+  </select>
+
+
+<delete id="deleteBySchemeId" parameterType="java.lang.Long">
+    delete from lease_scheme_vehicle
+    where scheme_id = #{id,jdbcType=BIGINT}
+</delete>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lease_scheme_vehicle
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hc.lease.supplier.model.LeaseSchemeVehicle" >
+    insert into lease_scheme_vehicle (id, scheme_id, brands_id, 
+      series_id, model_id, create_time, 
+      update_time, create_by, update_by, 
+      is_enable, sort)
+    values (#{id,jdbcType=BIGINT}, #{schemeId,jdbcType=BIGINT}, #{brandsId,jdbcType=BIGINT}, 
+      #{seriesId,jdbcType=BIGINT}, #{modelId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT}, 
+      #{isEnable,jdbcType=BIT}, #{sort,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hc.lease.supplier.model.LeaseSchemeVehicle" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_scheme_vehicle_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_scheme_vehicle
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="schemeId != null" >
+        scheme_id,
+      </if>
+      <if test="brandsId != null" >
+        brands_id,
+      </if>
+      <if test="seriesId != null" >
+        series_id,
+      </if>
+      <if test="modelId != null" >
+        model_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="isEnable != null" >
+        is_enable,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="schemeId != null" >
+        #{schemeId,jdbcType=BIGINT},
+      </if>
+      <if test="brandsId != null" >
+        #{brandsId,jdbcType=BIGINT},
+      </if>
+      <if test="seriesId != null" >
+        #{seriesId,jdbcType=BIGINT},
+      </if>
+      <if test="modelId != null" >
+        #{modelId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.supplier.model.LeaseSchemeVehicle" >
+    update lease_scheme_vehicle
+    <set >
+      <if test="schemeId != null" >
+        scheme_id = #{schemeId,jdbcType=BIGINT},
+      </if>
+      <if test="brandsId != null" >
+        brands_id = #{brandsId,jdbcType=BIGINT},
+      </if>
+      <if test="seriesId != null" >
+        series_id = #{seriesId,jdbcType=BIGINT},
+      </if>
+      <if test="modelId != null" >
+        model_id = #{modelId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="isEnable != null" >
+        is_enable = #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hc.lease.supplier.model.LeaseSchemeVehicle" >
+    update lease_scheme_vehicle
+    set scheme_id = #{schemeId,jdbcType=BIGINT},
+      brands_id = #{brandsId,jdbcType=BIGINT},
+      series_id = #{seriesId,jdbcType=BIGINT},
+      model_id = #{modelId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      is_enable = #{isEnable,jdbcType=BIT},
+      sort = #{sort,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

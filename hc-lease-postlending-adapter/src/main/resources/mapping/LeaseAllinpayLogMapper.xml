@@ -1,0 +1,984 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.postlending.dao.LeaseAllinpayLogMapper">
+    <resultMap id="BaseResultMap" type="com.hc.lease.postlending.model.LeaseAllinpayLog">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="repayment_id" property="repaymentId" jdbcType="BIGINT"/>
+        <result column="repayment_status_id" property="repaymentStatusId" jdbcType="BIGINT"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="pay_way" property="payWay" jdbcType="INTEGER"/>
+        <result column="pay_type" property="payType" jdbcType="INTEGER"/>
+        <result column="overdue" property="overdue" jdbcType="BIT"/>
+        <result column="overdue_day" property="overdueDay" jdbcType="INTEGER"/>
+        <result column="real_overdue_day" property="realOverdueDay" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="ret_code" property="retCode" jdbcType="VARCHAR"/>
+        <result column="err_msg" property="errMsg" jdbcType="VARCHAR"/>
+        <result column="back_time" property="backTime" jdbcType="TIMESTAMP"/>
+        <result column="single_or_batch" property="singleOrBatch" jdbcType="INTEGER"/>
+        <result column="allinpay_batch_id" property="allinpayBatchId" jdbcType="BIGINT"/>
+        <result column="totle_price" property="totlePrice" jdbcType="NUMERIC"/>
+        <result column="real_price" property="realPrice" jdbcType="NUMERIC"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="req_sn" property="reqSn" jdbcType="VARCHAR"/>
+        <result column="sn" property="sn" jdbcType="VARCHAR"/>
+        <result column="account_id" property="accountId" jdbcType="BIGINT"/>
+        <result column="update_type" property="updateType" jdbcType="INTEGER"/>
+        <result column="controller_source" property="controllerSource" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap id="ContractAllinpayLogMap" type="com.hc.lease.postlending.vo.ContractAllinpayLogVo">
+        <result column="create_time" property="createTime" jdbcType="VARCHAR"/>
+        <result column="repayment_date" property="repaymentDate" jdbcType="VARCHAR"/>
+        <result column="total_period" property="totalPeriod" jdbcType="VARCHAR"/>
+        <result column="pay_type_name" property="payTypeName" jdbcType="VARCHAR"/>
+        <result column="pay_way_name" property="payWayName" jdbcType="VARCHAR"/>
+        <result column="overdue_day" property="overdueDay" jdbcType="INTEGER"/>
+        <result column="real_overdue_day" property="realOverdueDay" jdbcType="INTEGER"/>
+        <result column="payment_result_name" property="paymentResultName" jdbcType="VARCHAR"/>
+        <result column="err_msg" property="errMsg" jdbcType="VARCHAR"/>
+        <result column="totle_price" property="totlePrice" jdbcType="NUMERIC"/>
+        <result column="real_price" property="realPrice" jdbcType="NUMERIC"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="complete_contract_number" property="completeContractNumber" jdbcType="VARCHAR"/>
+        <result column="account_name" property="accountName" jdbcType="VARCHAR"/>
+        <result column="branch_company_name" property="branchCompanyName" jdbcType="VARCHAR"/>
+        <result column="back_card_number" property="backCardNumber" jdbcType="VARCHAR"/>
+        <result column="bank_name" property="bankName" jdbcType="VARCHAR"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="req_sn" property="reqSn" jdbcType="VARCHAR"/>
+        <result column="is_privately_name" property="isPrivatelyName" jdbcType="VARCHAR"/>
+        <result column="month_totle_price" property="monthTotlePrice" jdbcType="NUMERIC"/>
+        <result column="overdue_price" property="overduePrice" jdbcType="NUMERIC"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, repayment_id, repayment_status_id, contract_id, pay_way, pay_type, overdue, overdue_day, real_overdue_day, create_time, update_time,
+    create_by, update_by, status, ret_code, err_msg, back_time, single_or_batch, allinpay_batch_id,
+    totle_price, real_price, remarks, req_sn, sn, account_id, update_type, controller_source
+  </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_allinpay_log
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="findPage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_allinpay_log
+    </select>
+
+    <!--还款历史/合同还款明细-->
+    <select id="findByContractId" resultMap="ContractAllinpayLogMap">
+
+        select DISTINCT
+
+        table_1.repaymentdate "repaymentDate",table_1.totalperiod "totalPeriod",table_1.overdueday "overdueDay",table_1.totleprice "totlePrice"
+        ,table_1.realoverdueday "realOverdueDay",table_1.realprice "realPrice"
+        ,table_1.paytypename "payTypeName",table_1.paywayname "payWayName",table_1.paymentresultname "paymentResultName"
+        ,table_1.errmsg "errMsg",table_1.remarks,table_1.createtime "createTime",table_1.reqsn "reqSn"
+
+        from (
+
+        select
+        (case
+        when a.pay_type='1' then (select repayment_date from lease_contract_link_repayment where id = a.repayment_id and a.pay_type='2')
+        when (a.pay_type='3' or a.pay_type='5') then (select repayment_date from lease_contract_advance where id = a.repayment_id and (a.pay_type='3' or a.pay_type='5'))
+        else (select repayment_date from lease_scheme_repayment where id = a.repayment_id)
+        end) "repaymentdate"
+        , (
+        (select aa.period_count from lease_scheme_order aa INNER JOIN lease_contract bb on bb.scheme_order_id=aa.id where bb.id = #{contractId,jdbcType=BIGINT})
+        || '-' ||
+        (case when a.pay_type='3' or a.pay_type='5' then (select period from lease_contract_advance where id = a.repayment_id and (a.pay_type='3' or a.pay_type='5')) else (select period from lease_scheme_repayment where id = a.repayment_id) end)
+        ) "totalperiod"
+        ,COALESCE(a.overdue_day,0) "overdueday"
+        ,COALESCE(a.totle_price,0) "totleprice"
+        ,COALESCE(a.real_overdue_day,0) "realoverdueday"
+        ,COALESCE(a.real_price,0) "realprice"
+        ,(case
+        when a.pay_type='0' THEN '月供'
+        when a.pay_type='1' THEN '挂靠费'
+        when a.pay_type='2' THEN '逾期滞纳金'
+        when a.pay_type='3' THEN '提前还款/剩余本金'
+        when a.pay_type='4' THEN '尾款'
+        when a.pay_type='5' THEN '提前还款罚款'
+        when a.pay_type='6' THEN '尾款'
+        when a.pay_type='7' THEN '其他款项'
+        end) "paytypename"
+        ,(case
+        when a.pay_way='0' THEN 'pos'
+        when a.pay_way='1' THEN '转账'
+        when a.pay_way='2' THEN '微信'
+        when a.pay_way='3' THEN '支付宝'
+        when a.pay_way='4' THEN '通联代扣'
+        when a.pay_way='5' THEN '其他'
+        when a.pay_way='6' THEN'批量补录'
+        when a.pay_way='7' THEN'线下缴款登记'
+        when a.pay_way='8' THEN'未开始还款'
+        when a.pay_way='9' THEN'通联协议支付'
+        end) "paywayname"
+
+        ,(case
+        when (a.pay_way='4' or a.pay_way='9') then (select (case when aa.payment_result='1' then '扣款中' when aa.payment_result='2' then '成功' when aa.payment_result='3' then '失败' end) from lease_allinpay_status_log aa where aa.allinpay_log_id = a.id and aa.create_time=(select max(create_time) from lease_allinpay_status_log aa where aa.allinpay_log_id = a.id))
+        else (case when a.status='0' then '扣款中' when a.status='1' then '成功' when a.status='2' then '失败' end)
+        end ) "paymentresultname"
+
+        ,(case
+        when (a.pay_way='4' or a.pay_way='9') then (select aa.payment_result_msg from lease_allinpay_status_log aa where aa.allinpay_log_id = a.id and aa.create_time=(select max(create_time) from lease_allinpay_status_log aa where aa.allinpay_log_id = a.id))
+        else a.err_msg
+        end ) "errmsg"
+
+        , a.remarks, a.create_time "createtime", a.req_sn "reqsn"
+        from lease_allinpay_log a
+        LEFT JOIN lease_allinpay_query_log b on b.allinpay_log_id = a.id
+        LEFT JOIN lease_scheme_repayment_status c on c.id = a.repayment_status_id
+        WHERE a.contract_id = #{contractId,jdbcType=BIGINT}
+        and a.pay_type !='3' and a.pay_type !='5'
+        and a.update_type = 0
+
+        UNION ALL
+
+        select
+        (select repayment_date from lease_scheme_repayment_history where history_id = a.repayment_id) "repaymentdate"
+        , (
+        (select aa.period_count from lease_scheme_order aa INNER JOIN lease_contract bb on bb.scheme_order_id=aa.id where bb.id = #{contractId,jdbcType=BIGINT})
+        || '-' ||
+        (select period from lease_scheme_repayment_history where history_id = a.repayment_id)
+        ) "totalperiod"
+        ,COALESCE(a.overdue_day,0) "overdueday"
+        ,COALESCE(a.totle_price,0) "totleprice"
+        ,COALESCE(a.real_overdue_day,0) "realoverdueday"
+        ,COALESCE(a.real_price,0) "realprice"
+        ,(case
+        when a.pay_type='0' THEN '月供'
+        when a.pay_type='1' THEN '挂靠费'
+        when a.pay_type='2' THEN '逾期滞纳金'
+        when a.pay_type='3' THEN '提前还款/剩余本金'
+        when a.pay_type='4' THEN '尾款'
+        when a.pay_type='5' THEN '提前还款罚款'
+        when a.pay_type='6' THEN '尾款'
+        when a.pay_type='7' THEN '其他款项'
+        end) "paytypename"
+        ,(case
+        when a.pay_way='0' THEN 'pos'
+        when a.pay_way='1' THEN '转账'
+        when a.pay_way='2' THEN '微信'
+        when a.pay_way='3' THEN '支付宝'
+        when a.pay_way='4' THEN '通联代扣'
+        when a.pay_way='5' THEN '其他'
+        when a.pay_way='6' THEN'批量补录'
+        when a.pay_way='7' THEN'线下缴款登记'
+        when a.pay_way='8' THEN'未开始还款'
+        when a.pay_way='9' THEN'通联协议支付'
+        end) "paywayname"
+
+        ,(case
+        when (a.pay_way='4' or a.pay_way='9') then (select (case when aa.payment_result='1' then '扣款中' when aa.payment_result='2' then '成功' when aa.payment_result='3' then '失败' end) from lease_allinpay_status_log aa where aa.allinpay_log_id = a.id and aa.create_time=(select max(create_time) from lease_allinpay_status_log aa where aa.allinpay_log_id = a.id))
+        else (case when a.status='0' then '扣款中' when a.status='1' then '成功' when a.status='2' then '失败' end)
+        end ) "paymentresultname"
+
+        ,(case
+        when (a.pay_way='4' or a.pay_way='9') then (select aa.payment_result_msg from lease_allinpay_status_log aa where aa.allinpay_log_id = a.id and aa.create_time=(select max(create_time) from lease_allinpay_status_log aa where aa.allinpay_log_id = a.id))
+        else a.err_msg
+        end ) "errmsg"
+
+        , a.remarks, a.create_time "createtime", a.req_sn "reqsn"
+        from lease_allinpay_log a
+        LEFT JOIN lease_allinpay_query_log b on b.allinpay_log_id = a.id
+        LEFT JOIN lease_scheme_repayment_status_h c on c.history_repayment_status_id = a.repayment_status_id
+        WHERE a.contract_id = #{contractId,jdbcType=BIGINT}
+        and a.pay_type !='3' and a.pay_type !='5'
+        and a.update_type = 1
+
+        ) table_1 ORDER BY table_1.createtime DESC
+
+    </select>
+
+    <!--通联日志 查询 单笔/批扣 明细-->
+    <select id="paymentLogDetail" resultMap="ContractAllinpayLogMap">
+
+        select to_char(table_a.createtime, 'yyyy-MM-dd hh24:mi:ss') "createTime", table_a.branchcompanyname
+        "branchCompanyName", table_a.accountname
+        "accountName", table_a.accounttype "accountType"
+        , table_a.paytypename "payTypeName", table_a.totleprice "totlePrice", table_a.realprice "realPrice"
+        , table_a.backcardnumber "backCardNumber", table_a.bankname "bankName"
+        , table_a.username "userName", table_a.completecontractnumber "completeContractNumber", table_a.totalperiod
+        "totalPeriod", table_a.reqsn "reqSn", table_a.remarks,table_a.phone
+
+        ,(case
+        when (table_a.payway='4' or table_a.payway='9') then (case when lasl.payment_result='1' then '扣款中' when lasl.payment_result='2' then '成功' when lasl.payment_result='3' then '失败' end)
+        else (case when table_a.status='0' then '扣款中' when table_a.status='1' then '成功' when table_a.status='2' then '失败' end)
+        end ) "paymentResultName"
+        ,(case
+        when (table_a.payway='4' or table_a.payway='9') then lasl.payment_result_msg
+        else table_a.errmsg
+        end ) "errMsg"
+
+        from
+        (
+
+        select
+
+        table_1.id
+        ,table_1.payway, table_1.status, table_1.errmsg
+        , table_1.createtime, table_1.branchcompanyname
+        , table_1.accountname, table_1.accounttype,table_1.phone
+        , table_1.paytypename,table_1.totleprice,table_1.realprice,table_1.backcardnumber,table_1.bankname,table_1.username
+        , table_1.completecontractnumber,table_1.totalperiod,table_1.reqsn, table_1.remarks
+
+        from
+        (
+        select
+        a.id
+        ,a.pay_way "payway", a.status, a.err_msg "errmsg"
+        , a.create_time "createtime", h.name "branchcompanyname"
+        , f.name "accountname", f.type "accounttype",f.phone
+        ,(case
+        when a.pay_type='0' THEN '月供'
+        when a.pay_type='1' THEN '挂靠费'
+        when a.pay_type='2' THEN '逾期滞纳金'
+        when a.pay_type='3' THEN '提前还款/剩余本金'
+        when a.pay_type='4' THEN '尾款'
+        when a.pay_type='5' THEN '提前还款罚款'
+        when a.pay_type='6' THEN '尾款'
+        when a.pay_type='7' THEN '其他款项'
+        end)
+        "paytypename"
+        , round(a.totle_price, 2) "totleprice"
+        , round(a.real_price, 2) "realprice"
+        , abc.back_card_number "backcardnumber"
+        , i.name "bankname"
+
+        , j.name "username"
+        , c.complete_contract_number "completecontractnumber"
+        , (
+        (case when d.period_count is null or d.period_count=0 then (select count(1) from lease_scheme_repayment dd where dd.contract_id = c.id) else d.period_count end)
+        || '-' ||
+        (select period from lease_scheme_repayment where id = a.repayment_id)
+        ) "totalperiod"
+        , a.req_sn "reqsn"
+        , a.remarks
+        from lease_allinpay_log a
+        LEFT JOIN lease_allinpay_query_log b on b.allinpay_log_id = a.id
+        LEFT JOIN lease_scheme_repayment_status aa on aa.id = a.repayment_status_id
+        INNER JOIN lease_contract c on c.id = a.contract_id
+        INNER JOIN lease_scheme_order d on d.id = c.scheme_order_id
+        LEFT JOIN lease_scheme_order_account e on e.scheme_order_id = d.id and e.is_default_pay=1
+        LEFT JOIN lease_account_bank_card abc on e.bank_card_id = abc.id
+        LEFT JOIN lease_account f on f.id = e.account_id
+        LEFT join lease_account_credit g on g.account_id=f.id
+        LEFT JOIN lease_branch_company h on h.id = c.branch_company_id
+        LEFT join lease_bank i on abc.bank_id=i.id
+        LEFT JOIN lease_user j on a.create_by=j.id
+
+        WHERE 1=1
+        and (a.pay_way = 4 or a.pay_way = 9)
+        and a.pay_type !=3
+        and a.pay_type !=5
+        and a.update_type = 0
+        <if test="allinpayBatchId != null">
+            and a.allinpay_batch_id = #{allinpayBatchId,jdbcType=BIGINT}
+        </if>
+        and a.single_or_batch = #{singleOrBatch,jdbcType=INTEGER}
+        <if test="effectiveTimeFrom != null and effectiveTimeFrom!='' and effectiveTimeTo != null and effectiveTimeTo !=''">
+            and a.create_time BETWEEN to_timestamp(#{effectiveTimeFrom},'YYYY-MM-DD HH24:MI:SS') and
+            to_timestamp(#{effectiveTimeTo},'YYYY-MM-DD HH24:MI:SS')
+        </if>
+
+        ) table_1
+
+        UNION ALL
+
+        select
+        table_1.id
+        , table_1.payway, table_1.status, table_1.errmsg
+        , table_1.createtime, table_1.branchcompanyname
+        , table_1.accountname, table_1.accounttype,table_1.phone
+        , table_1.paytypename,table_1.totleprice,table_1.realprice,table_1.backcardnumber,table_1.bankname,table_1.username
+        , table_1.completecontractnumber,table_1.totalperiod,table_1.reqsn, table_1.remarks
+
+        from
+        (
+        select
+        a.id
+        ,a.pay_way "payway", a.status, a.err_msg "errmsg"
+        ,a.create_time "createtime", h.name "branchcompanyname"
+        , f.name "accountname", f.type "accounttype",f.phone
+        ,(case
+        when a.pay_type='0' THEN '月供'
+        when a.pay_type='1' THEN '挂靠费'
+        when a.pay_type='2' THEN '逾期滞纳金'
+        when a.pay_type='3' THEN '提前还款/剩余本金'
+        when a.pay_type='4' THEN '尾款'
+        when a.pay_type='5' THEN '提前还款罚款'
+        when a.pay_type='6' THEN '尾款'
+        when a.pay_type='7' THEN '其他款项'
+        end)
+        "paytypename"
+        , round(a.totle_price, 2) "totleprice"
+        , round(a.real_price, 2) "realprice"
+        , abc.back_card_number "backcardnumber"
+        , i.name "bankname"
+
+        , j.name "username"
+        , c.complete_contract_number "completecontractnumber"
+        , (
+        (case when d.period_count is null or d.period_count=0 then (select count(1) from lease_scheme_repayment_history dd where dd.contract_id = c.id) else d.period_count end)
+        || '-' ||
+        (select period from lease_scheme_repayment_history where history_id = a.repayment_id)
+        ) "totalperiod"
+        , a.req_sn "reqsn"
+        , a.remarks
+        from lease_allinpay_log a
+        LEFT JOIN lease_allinpay_query_log b on b.allinpay_log_id = a.id
+        LEFT JOIN lease_scheme_repayment_status_h aa on aa.history_repayment_status_id = a.repayment_status_id
+        INNER JOIN lease_contract c on c.id = a.contract_id
+        INNER JOIN lease_scheme_order d on d.id = c.scheme_order_id
+        LEFT JOIN lease_scheme_order_account e on e.scheme_order_id = d.id and e.is_default_pay=1
+        LEFT JOIN lease_account_bank_card abc on e.bank_card_id = abc.id
+        LEFT JOIN lease_account f on f.id = e.account_id
+        LEFT join lease_account_credit g on g.account_id=f.id
+        LEFT JOIN lease_branch_company h on h.id = c.branch_company_id
+        LEFT join lease_bank i on abc.bank_id=i.id
+        LEFT JOIN lease_user j on a.create_by=j.id
+        WHERE 1=1
+        and (a.pay_way = 4 or a.pay_way = 9)
+        and a.pay_type !=3
+        and a.pay_type !=5
+        and a.update_type = 1
+        <if test="allinpayBatchId != null">
+            and a.allinpay_batch_id = #{allinpayBatchId,jdbcType=BIGINT}
+        </if>
+        and a.single_or_batch = #{singleOrBatch,jdbcType=INTEGER}
+        <if test="effectiveTimeFrom != null and effectiveTimeFrom!='' and effectiveTimeTo != null and effectiveTimeTo !=''">
+            and a.create_time BETWEEN to_timestamp(#{effectiveTimeFrom},'YYYY-MM-DD HH24:MI:SS') and
+            to_timestamp(#{effectiveTimeTo},'YYYY-MM-DD HH24:MI:SS')
+        </if>
+
+        ) table_1
+
+        )table_a
+        LEFT JOIN lease_allinpay_status_log lasl on lasl.allinpay_log_id = table_a.id and lasl.create_time=(select DISTINCT max(create_time) from lease_allinpay_status_log lasl where lasl.allinpay_log_id = table_a.id)
+        ORDER BY table_a.createtime DESC
+
+    </select>
+
+
+
+    <!-- 通联日志导出 -->
+    <select id="exportAllinpayLog" resultMap="ContractAllinpayLogMap">
+         select
+        to_char(a.create_time, 'yyyy-MM-dd hh24:mi:ss') "createTime", h.name "branchCompanyName"
+        , f.name "accountName", f.type "accountType",f.phone
+
+        ,(case
+        when a.pay_type='0' THEN '月供'
+        when a.pay_type='1' THEN '挂靠费'
+        when a.pay_type='2' THEN '逾期滞纳金'
+        when a.pay_type='3' THEN '提前还款/剩余本金'
+        when a.pay_type='4' THEN '尾款'
+        when a.pay_type='5' THEN '提前还款罚款'
+        when a.pay_type='6' THEN '尾款'
+        when a.pay_type='7' THEN '其他款项'
+        end)
+        "payTypeName"
+
+        , round(a.totle_price, 2) "totleprice"
+        , round(a.real_price, 2) "realprice"
+
+        , abc.back_card_number "backCardNumber"
+        , i.name "bankName"
+
+        ,(case
+        when (a.pay_way='4' or a.pay_way='9') then (case when b.status is null then (case when aa.payment_result='0'
+        then '待付款' when aa.payment_result='1' then '扣款中' when aa.payment_result='2' then '成功' when aa.payment_result='3'
+        then '失败' end) else (case when b.status='0' then '扣款中' when b.status='1' then '成功' when b.status='2' then '失败'
+        end) end)
+        else (case when a.status='0' then '扣款中' when a.status='1' then '成功' when a.status='2' then '失败' end)
+        end ) "paymentResultName"
+
+        ,(case when (a.pay_way='4' or a.pay_way='9') then (case when b.status is null then aa.payment_result_msg else
+        b.err_msg end) else a.err_msg end) "errMsg"
+
+        , j.name "userName"
+
+        , c.complete_contract_number "completeContractNumber"
+
+        , (
+        (case when d.period_count is null or d.period_count=0 then (select count(1) from lease_scheme_repayment dd where
+        dd.contract_id = c.id) else d.period_count end)
+        || '-' ||
+        (case when a.pay_type='3' or a.pay_type='5' then (select period from lease_contract_advance where id =
+        a.repayment_id and (a.pay_type='3' or a.pay_type='5')) else (select period from lease_scheme_repayment where id
+        = a.repayment_id) end)
+        ) "totalPeriod"
+        , a.req_sn "reqSn"
+        , a.remarks
+
+        from lease_allinpay_log a
+
+        LEFT JOIN lease_allinpay_query_log b on b.allinpay_log_id = a.id
+        LEFT JOIN lease_scheme_repayment_status aa on aa.id = a.repayment_status_id
+        INNER JOIN lease_contract c on c.id = a.contract_id
+        INNER JOIN lease_scheme_order d on d.id = c.scheme_order_id
+        LEFT JOIN lease_scheme_order_account e on e.scheme_order_id = d.id and e.is_default_pay=1
+        LEFT JOIN lease_account_bank_card abc on e.bank_card_id = abc.id
+        LEFT JOIN lease_account f on f.id = e.account_id
+        LEFT join lease_account_credit g on g.account_id=f.id
+        LEFT JOIN lease_branch_company h on h.id = c.branch_company_id
+        LEFT join lease_bank i on abc.bank_id=i.id
+        LEFT JOIN lease_user j on a.create_by=j.id
+
+        WHERE 1=1 and (a.pay_way = 4 or a.pay_way = 9) and a.pay_type !=3 and a.pay_type !=5 and a.update_type = 0
+
+        <if test="effectiveTimeFrom != null and effectiveTimeFrom!='' and effectiveTimeTo != null and effectiveTimeTo !=''">
+            and a.create_time BETWEEN to_timestamp(#{effectiveTimeFrom},'YYYY-MM-DD HH24:MI:SS') and
+            to_timestamp(#{effectiveTimeTo},'YYYY-MM-DD HH24:MI:SS')
+        </if>
+        ORDER BY a.create_time DESC
+
+    </select>
+
+
+
+    <!--查看统计/总计-->
+    <select id="allinpayBatchStatistics" resultType="java.util.Map">
+
+        select
+
+        round(sum(COALESCE(table_a.total, 0)), 2) as "totalSum"
+
+        , COALESCE(
+        round(
+        sum(
+        CASE WHEN table_a.paymentresult = '2' THEN table_a.total end
+        ), 2
+        )
+        ,0) as "collectedSum"
+
+        , COALESCE(
+        round(
+        sum(
+        CASE WHEN table_a.paymentresult = '1' or table_a.paymentresult = '0' or table_a.paymentresult = '3' THEN table_a.total end
+        ), 2
+        )
+        ,0) as "unCollectedSum"
+
+        ,count(COALESCE(table_a.total, 0)) as "totalCount"
+
+        ,count(
+        CASE WHEN table_a.paymentresult = '2' THEN COALESCE(table_a.total, 0) end
+        ) as "collectedCount"
+
+        ,count(
+        CASE WHEN table_a.paymentresult = '1' or table_a.paymentresult = '0' or table_a.paymentresult = '3' THEN COALESCE(table_a.total, 0) end
+        ) as "unCollectedCount"
+
+        from(
+
+        select e.name "branchcompanyname", a.real_price "total", (CASE WHEN f.payment_result is null then 1 ELSE f.payment_result end) "paymentresult"
+        from lease_allinpay_log a
+        INNER JOIN lease_scheme_repayment b on b.id = a.repayment_id
+        INNER JOIN lease_contract aa on aa.id = a.contract_id
+        INNER JOIN lease_scheme_order d on d.id = aa.scheme_order_id
+        LEFT JOIN lease_branch_company e on e.id = aa.branch_company_id
+        LEFT JOIN lease_allinpay_status_log f on a.id = f.allinpay_log_id and f.type = 2
+        WHERE a.allinpay_batch_id = #{allinpayBatchId,jdbcType=BIGINT}
+        and a.single_or_batch = 1 and a.update_type = 0
+
+        UNION ALL
+
+        select e.name "branchcompanyname", a.real_price "total", (CASE WHEN f.payment_result is null then 1 ELSE f.payment_result end) "paymentresult"
+        from lease_allinpay_log a
+        INNER JOIN lease_scheme_repayment_history b on b.history_id = a.repayment_id
+        INNER JOIN lease_contract aa on aa.id = a.contract_id
+        INNER JOIN lease_scheme_order d on d.id = aa.scheme_order_id
+        LEFT JOIN lease_branch_company e on e.id = aa.branch_company_id
+        LEFT JOIN lease_allinpay_status_log f on a.id = f.allinpay_log_id and f.type = 2
+        WHERE a.allinpay_batch_id = #{allinpayBatchId,jdbcType=BIGINT}
+        and a.single_or_batch = 1 and a.update_type = 1
+
+        ) table_a
+
+
+    </select>
+
+    <!--批扣数据用城市统计/查看统计-->
+    <select id="allinpayBatchStatisticsByCity" resultType="java.util.Map">
+
+        select table_a.branchcompanyname "branchCompanyName"
+
+        , round(sum(COALESCE(table_a.total, 0)), 2) as "totalSum"
+
+        , COALESCE(round(
+        sum(
+        CASE WHEN table_a.paymentresult = '2' THEN table_a.total end
+        ), 2
+        ), 0) as "collectedSum"
+
+        , COALESCE(round(
+        sum(CASE WHEN table_a.paymentresult = '1' or table_a.paymentresult = '0' or table_a.paymentresult = '3' THEN table_a.total end), 2
+        ), 0) as "unCollectedSum"
+
+        ,count(COALESCE(table_a.total, 0)) as "totalCount"
+
+        ,count(
+        CASE WHEN table_a.paymentresult = '2' THEN COALESCE(table_a.total, 0) end
+        ) as "collectedCount"
+
+        ,count(
+        CASE WHEN table_a.paymentresult = '1' or table_a.paymentresult = '0' or table_a.paymentresult = '3' THEN COALESCE(table_a.total, 0) end
+        ) as "unCollectedCount"
+
+        from(
+            select e.name "branchcompanyname", a.real_price "total", (CASE WHEN f.payment_result is null then 1 ELSE f.payment_result end) "paymentresult"
+            from lease_allinpay_log a
+            INNER JOIN lease_scheme_repayment b on b.id = a.repayment_id
+            INNER JOIN lease_contract aa on aa.id = a.contract_id
+            INNER JOIN lease_scheme_order d on d.id = aa.scheme_order_id
+            LEFT JOIN lease_branch_company e on e.id = aa.branch_company_id
+            LEFT JOIN lease_allinpay_status_log f on a.id = f.allinpay_log_id and (f.type = 3 or f.type = 5)
+            WHERE a.allinpay_batch_id = #{allinpayBatchId,jdbcType=BIGINT}
+            and a.single_or_batch = 1 and a.update_type = 0
+
+            UNION ALL
+
+            select e.name "branchcompanyname", a.real_price "total", (CASE WHEN f.payment_result is null then 1 ELSE f.payment_result end) "paymentresult"
+            from lease_allinpay_log a
+            INNER JOIN lease_scheme_repayment_history b on b.history_id = a.repayment_id
+            INNER JOIN lease_contract aa on aa.id = a.contract_id
+            INNER JOIN lease_scheme_order d on d.id = aa.scheme_order_id
+            LEFT JOIN lease_branch_company e on e.id = aa.branch_company_id
+            LEFT JOIN lease_allinpay_status_log f on a.id = f.allinpay_log_id and (f.type = 3 or f.type = 5)
+            WHERE a.allinpay_batch_id = #{allinpayBatchId,jdbcType=BIGINT}
+            and a.single_or_batch = 1 and a.update_type = 1
+
+        ) table_a group by table_a.branchcompanyname
+
+
+    </select>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_allinpay_log ORDER BY create_time DESC
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from lease_allinpay_log
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="insertList">
+
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_allinpay_log_id_seq'::regclass) as id
+        </selectKey>
+
+        insert into lease_allinpay_log (
+        id, repayment_id, repayment_status_id, contract_id, pay_way,
+        pay_type, overdue, overdue_day, real_overdue_day,
+        create_time, update_time, create_by,
+        update_by, status, ret_code,
+        err_msg, back_time, single_or_batch,
+        allinpay_batch_id, totle_price, real_price,
+        remarks, req_sn, sn, account_id, controller_source
+        )
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{id}, #{item.repaymentId}, #{item.repaymentStatusId}, #{item.contractId}, #{item.payWay},
+            #{item.payType}, #{item.overdue}, #{item.overdueDay}, #{item.overdueDay},
+            #{item.createTime}, #{item.updateTime}, #{item.createBy},
+            #{item.updateBy}, #{item.status}, #{item.retCode},
+            #{item.errMsg}, #{item.backTime}, #{item.singleOrBatch},
+            #{item.allinpayBatchId}, #{item.totlePrice}, #{item.totlePrice}, #{item.remarks}, #{item.reqSn}, #{item.sn},
+            #{item.accountId}, #{item.controllerSource}
+            )
+        </foreach>
+
+    </insert>
+
+    <insert id="insert" parameterType="com.hc.lease.postlending.model.LeaseAllinpayLog">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_allinpay_log_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_allinpay_log (
+        id, repayment_id, repayment_status_id, contract_id, pay_way,
+        pay_type, overdue, overdue_day, real_overdue_day,
+        create_time, update_time, create_by,
+        update_by, status, ret_code,
+        err_msg, back_time, single_or_batch,
+        allinpay_batch_id, totle_price, real_price,
+        remarks, req_sn, sn, account_id,
+        update_type, controller_source
+        )
+        values (#{id,jdbcType=BIGINT}, #{repaymentId,jdbcType=BIGINT}, #{repaymentStatusId,jdbcType=BIGINT},
+        #{contractId,jdbcType=BIGINT},
+        #{payWay,jdbcType=INTEGER},
+        #{payType,jdbcType=INTEGER}, #{overdue,jdbcType=BIT}, #{overdueDay,jdbcType=INTEGER},
+        #{realOverdueDay,jdbcType=INTEGER},
+        #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT},
+        #{updateBy,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, #{retCode,jdbcType=VARCHAR},
+        #{errMsg,jdbcType=VARCHAR}, #{backTime,jdbcType=TIMESTAMP}, #{singleOrBatch,jdbcType=INTEGER},
+        #{allinpayBatchId,jdbcType=BIGINT}, #{totlePrice,jdbcType=NUMERIC}, #{realPrice,jdbcType=NUMERIC},
+        #{remarks,jdbcType=VARCHAR},
+        #{reqSn,jdbcType=VARCHAR},
+        #{sn,jdbcType=VARCHAR}, #{accountId,jdbcType=BIGINT},
+        #{updateType,jdbcType=INTEGER}, #{controllerSource,jdbcType=INTEGER}
+        )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.hc.lease.postlending.model.LeaseAllinpayLog">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_allinpay_log_id_seq'::regclass) as id
+        </selectKey>
+
+        insert into lease_allinpay_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="repaymentId != null">
+                repayment_id,
+            </if>
+            <if test="repaymentStatusId != null">
+                repayment_status_id,
+            </if>
+            <if test="contractId != null">
+                contract_id,
+            </if>
+            <if test="payWay != null">
+                pay_way,
+            </if>
+            <if test="payType != null">
+                pay_type,
+            </if>
+            <if test="overdue != null">
+                overdue,
+            </if>
+            <if test="overdueDay != null">
+                overdue_day,
+            </if>
+            <if test="realOverdueDay != null">
+                real_overdue_day,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="retCode != null">
+                ret_code,
+            </if>
+            <if test="errMsg != null">
+                err_msg,
+            </if>
+            <if test="backTime != null">
+                back_time,
+            </if>
+            <if test="singleOrBatch != null">
+                single_or_batch,
+            </if>
+            <if test="allinpayBatchId != null">
+                allinpay_batch_id,
+            </if>
+            <if test="totlePrice != null">
+                totle_price,
+            </if>
+            <if test="realPrice != null">
+                real_price,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <if test="reqSn != null">
+                req_sn,
+            </if>
+            <if test="sn != null">
+                sn,
+            </if>
+            <if test="accountId != null">
+                account_id,
+            </if>
+            <if test="updateType != null">
+                update_type,
+            </if>
+            <if test="controllerSource != null">
+                controller_source
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="repaymentId != null">
+                #{repaymentId,jdbcType=BIGINT},
+            </if>
+            <if test="repaymentStatusId != null">
+                #{repaymentStatusId,jdbcType=BIGINT},
+            </if>
+            <if test="contractId != null">
+                #{contractId,jdbcType=BIGINT},
+            </if>
+            <if test="payWay != null">
+                #{payWay,jdbcType=INTEGER},
+            </if>
+            <if test="payType != null">
+                #{payType,jdbcType=INTEGER},
+            </if>
+            <if test="overdue != null">
+                #{overdue,jdbcType=BIT},
+            </if>
+            <if test="overdueDay != null">
+                #{overdueDay,jdbcType=INTEGER},
+            </if>
+            <if test="realOverdueDay != null">
+                #{realOverdueDay,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="retCode != null">
+                #{retCode,jdbcType=VARCHAR},
+            </if>
+            <if test="errMsg != null">
+                #{errMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="backTime != null">
+                #{backTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="singleOrBatch != null">
+                #{singleOrBatch,jdbcType=INTEGER},
+            </if>
+            <if test="allinpayBatchId != null">
+                #{allinpayBatchId,jdbcType=BIGINT},
+            </if>
+            <if test="totlePrice != null">
+                #{totlePrice,jdbcType=NUMERIC},
+            </if>
+            <if test="realPrice != null">
+                #{realPrice,jdbcType=NUMERIC},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="reqSn != null">
+                #{reqSn,jdbcType=VARCHAR},
+            </if>
+            <if test="sn != null">
+                #{sn,jdbcType=VARCHAR},
+            </if>
+            <if test="accountId != null">
+                #{accountId,jdbcType=BIGINT},
+            </if>
+            <if test="updateType != null">
+                #{updateType,jdbcType=INTEGER},
+            </if>
+            <if test="controllerSource != null">
+                #{controllerSource,jdbcType=INTEGER}
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.postlending.model.LeaseAllinpayLog">
+        update lease_allinpay_log
+        <set>
+            <if test="repaymentId != null">
+                repayment_id = #{repaymentId,jdbcType=BIGINT},
+            </if>
+            <if test="repaymentStatusId != null">
+                repayment_status_id = #{repaymentStatusId,jdbcType=BIGINT},
+            </if>
+            <if test="contractId != null">
+                contract_id = #{contractId,jdbcType=BIGINT},
+            </if>
+            <if test="payWay != null">
+                pay_way = #{payWay,jdbcType=INTEGER},
+            </if>
+            <if test="payType != null">
+                pay_type = #{payType,jdbcType=INTEGER},
+            </if>
+            <if test="overdue != null">
+                overdue = #{overdue,jdbcType=BIT},
+            </if>
+            <if test="overdueDay != null">
+                overdue_day = #{overdueDay,jdbcType=INTEGER},
+            </if>
+            <if test="realOverdueDay != null">
+                real_overdue_day = #{realOverdueDay,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="retCode != null">
+                ret_code = #{retCode,jdbcType=VARCHAR},
+            </if>
+            <if test="errMsg != null">
+                err_msg = #{errMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="backTime != null">
+                back_time = #{backTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="singleOrBatch != null">
+                single_or_batch = #{singleOrBatch,jdbcType=INTEGER},
+            </if>
+            <if test="allinpayBatchId != null">
+                allinpay_batch_id = #{allinpayBatchId,jdbcType=BIGINT},
+            </if>
+            <if test="totlePrice != null">
+                totle_price = #{totlePrice,jdbcType=NUMERIC},
+            </if>
+            <if test="realPrice != null">
+                real_price = #{realPrice,jdbcType=NUMERIC},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="reqSn != null">
+                req_sn = #{reqSn,jdbcType=VARCHAR},
+            </if>
+            <if test="sn != null">
+                sn = #{reqSn,jdbcType=VARCHAR},
+            </if>
+            <if test="accountId != null">
+                account_id = #{accountId,jdbcType=BIGINT},
+            </if>
+            <if test="updateType != null">
+                update_type = #{updateType,jdbcType=INTEGER},
+            </if>
+            <if test="controllerSource != null">
+                controller_source = #{controllerSource,jdbcType=INTEGER}
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.hc.lease.postlending.model.LeaseAllinpayLog">
+        update lease_allinpay_log
+        set repayment_id = #{repaymentId,jdbcType=BIGINT},
+        repayment_status_id = #{repaymentStatusId,jdbcType=BIGINT},
+        contract_id = #{contractId,jdbcType=BIGINT},
+        pay_way = #{payWay,jdbcType=INTEGER},
+        pay_type = #{payType,jdbcType=INTEGER},
+        overdue = #{overdue,jdbcType=BIT},
+        overdue_day = #{overdueDay,jdbcType=INTEGER},
+        real_overdue_day = #{realOverdueDay,jdbcType=INTEGER},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        create_by = #{createBy,jdbcType=BIGINT},
+        update_by = #{updateBy,jdbcType=BIGINT},
+        status = #{status,jdbcType=INTEGER},
+        ret_code = #{retCode,jdbcType=VARCHAR},
+        err_msg = #{errMsg,jdbcType=VARCHAR},
+        back_time = #{backTime,jdbcType=TIMESTAMP},
+        single_or_batch = #{singleOrBatch,jdbcType=INTEGER},
+        allinpay_batch_id = #{allinpayBatchId,jdbcType=BIGINT},
+        totle_price = #{totlePrice,jdbcType=NUMERIC},
+        real_price = #{realPrice,jdbcType=NUMERIC},
+        remarks = #{remarks,jdbcType=VARCHAR},
+        req_sn = #{reqSn,jdbcType=VARCHAR},
+        sn = #{sn,jdbcType=VARCHAR},
+        account_id = #{accountId,jdbcType=BIGINT},
+        update_type = #{updateType,jdbcType=INTEGER},
+        controller_source = #{controllerSource,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByReqSn" parameterType="com.hc.lease.postlending.model.LeaseAllinpayLog">
+        update lease_allinpay_log
+        set
+
+        status = #{status,jdbcType=INTEGER},
+        back_time = #{backTime,jdbcType=TIMESTAMP}
+
+        where
+        req_sn = #{reqSn,jdbcType=VARCHAR}
+        and repayment_id = #{repaymentId,jdbcType=BIGINT}
+        and repayment_status_id = #{repaymentStatusId,jdbcType=BIGINT}
+        and pay_type = #{payType,jdbcType=INTEGER}
+    </update>
+
+    <!--  -->
+    <select id="findByReqSn" resultMap="BaseResultMap">
+        select
+        a.id, a.single_or_batch "singleOrBatch", a.allinpay_batch_id "allinpayBatchId", a.totle_price "totlePrice", a.real_price "realPrice"
+        from lease_allinpay_log a
+
+        where
+        a.req_sn = #{reqSn,jdbcType=VARCHAR}
+        and a.pay_type = #{payType,jdbcType=INTEGER}
+        and a.contract_id = #{contractId,jdbcType=BIGINT}
+        and a.repayment_status_id = #{repaymentStatusId,jdbcType=BIGINT}
+        and a.repayment_id = #{repaymentId,jdbcType=BIGINT}
+
+    </select>
+
+    <!-- 检测拆分明细扣款结果，更新计划明细的时候查询 -->
+    <select id="findOnSplitCheck" resultMap="BaseResultMap">
+        select a.id,a.repayment_id,a.repayment_status_id,a.contract_id,a.allinpay_batch_id,a.pay_type,a.pay_way,a.req_sn,a.real_price,c.batch_number,c.receivable_price,c.receipts_price,c.number,c.success_number,c.fail_number,c.fail_price
+        from lease_allinpay_log a
+        inner join lease_scheme_repayment_status b on a.repayment_status_id=b.id
+        inner join lease_allinpay_batch c on a.allinpay_batch_id=c.id
+        where
+        a.repayment_id=#{repaymentId,jdbcType=BIGINT}
+        and a.contract_id=#{contractId,jdbcType=BIGINT}
+        and a.single_or_batch=1
+        and a.status=0
+        and a.create_time=(select max(aa.create_time) from lease_allinpay_log aa where a.id=aa.id)
+    </select>
+
+    <delete id="deleteByContractId" parameterType="java.lang.Long">
+        delete from lease_allinpay_log
+        where contract_id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <update id="updateByContractId" parameterType="com.hc.lease.postlending.model.LeaseAllinpayLog">
+        update lease_allinpay_log
+        set
+        update_type = #{updateType,jdbcType=INTEGER}
+        where contract_id = #{contractId,jdbcType=BIGINT}
+    </update>
+
+</mapper>

@@ -1,0 +1,719 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.order.dao.LeaseContractMapper">
+    <resultMap id="BaseResultMap" type="com.hc.lease.order.model.LeaseContract">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="repayment_id" property="repaymentId" jdbcType="BIGINT"/>
+        <result column="scheme_order_id" property="schemeOrderId" jdbcType="BIGINT"/>
+        <result column="sale_channel_type" property="saleChannelType" jdbcType="INTEGER"/>
+        <result column="sale_channel_id" property="saleChannelId" jdbcType="BIGINT"/>
+        <result column="contract_number_year" property="contractNumberYear" jdbcType="VARCHAR"/>
+        <result column="contract_number" property="contractNumber" jdbcType="VARCHAR"/>
+        <result column="contract_key" property="contractKey" jdbcType="VARCHAR"/>
+        <!--<result column="pay_staging_time" property="payStagingTime" jdbcType="TIMESTAMP" />-->
+        <result column="lease_start_time" property="leaseStartTime" jdbcType="TIMESTAMP"/>
+        <result column="lease_end_time" property="leaseEndTime" jdbcType="TIMESTAMP"/>
+        <!-- <result column="staging_contain_monthly_rent" property="stagingContainMonthlyRent" jdbcType="BIT" />
+         <result column="company_header_id" property="companyHeaderId" jdbcType="BIGINT" />-->
+        <result column="account_contact_adress" property="accountContactAdress" jdbcType="VARCHAR"/>
+        <result column="guarantee_name" property="guaranteeName" jdbcType="VARCHAR"/>
+        <result column="guarantee_id_card" property="guaranteeIdCard" jdbcType="VARCHAR"/>
+        <result column="guarantee_contact_address" property="guaranteeContactAddress" jdbcType="VARCHAR"/>
+        <result column="third_party_liability_insurance" property="thirdPartyLiabilityInsurance" jdbcType="NUMERIC"/>
+        <result column="card_check_accept_img" property="cardCheckAcceptImg" jdbcType="VARCHAR"/>
+        <result column="guarantee_contact" property="guaranteeContact" jdbcType="VARCHAR"/>
+        <result column="guarantee_contact_name" property="guaranteeContactName" jdbcType="VARCHAR"/>
+        <result column="guarantee_contact_phone" property="guaranteeContactPhone" jdbcType="VARCHAR"/>
+        <result column="guarantee_zip_code" property="guaranteeZipCode" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="branch_company_id" property="branchCompanyId" jdbcType="BIGINT"/>
+        <result column="contract_baseinfo_id" property="contractBaseinfoId" jdbcType="BIGINT"/>
+
+        <result column="branch_company_name" property="branchCompanyName" jdbcType="VARCHAR"/>
+        <result column="contract_party_name" property="contractPartyName" jdbcType="VARCHAR"/>
+        <result column="dealer_name" property="dealerName" jdbcType="VARCHAR"/>
+        <result column="comprehensive_quote" property="comprehensiveQuote" jdbcType="NUMERIC"/>
+        <result column="brands_name" property="brandsName" jdbcType="VARCHAR"/>
+        <result column="series_name" property="seriesName" jdbcType="VARCHAR"/>
+        <result column="business_model_name" property="businessModelName" jdbcType="VARCHAR"/>
+        <result column="color_name" property="colorName" jdbcType="VARCHAR"/>
+        <result column="scheme_name" property="schemeName" jdbcType="VARCHAR"/>
+        <result column="plate_number" property="plateNumber" jdbcType="VARCHAR"/>
+        <result column="scheme_id" property="schemeId" jdbcType="BIGINT"/>
+        <result column="card_id" property="cardId" jdbcType="BIGINT"/>
+        <result column="sn" property="sn" jdbcType="VARCHAR"/>
+        <result column="car_price" property="carPrice" jdbcType="NUMERIC"/>
+        <result column="totle_car_price" property="totleCarPrice" jdbcType="NUMERIC"/>
+        <result column="lease_price" property="leasePrice" jdbcType="NUMERIC"/>
+        <result column="contract_party_id" property="contractPartyId" jdbcType="BIGINT"/>
+        <result column="annual_interest" property="annualInterest" jdbcType="NUMERIC"/>
+        <result column="down_payment" property="downPayment" jdbcType="NUMERIC"/>
+        <result column="balance_payment" property="balancePayment" jdbcType="NUMERIC"/>
+        <result column="staging_number_id" property="stagingNumberId" jdbcType="BIGINT"/>
+        <result column="commission" property="commission" jdbcType="NUMERIC"/>
+        <result column="receive_margin" property="receiveMargin" jdbcType="NUMERIC"/>
+        <result column="id_card_img" property="idCardImg" jdbcType="VARCHAR"/>
+        <result column="car_accept_img" property="carAcceptImg" jdbcType="VARCHAR"/>
+        <result column="engine_number" property="engineNumber" jdbcType="VARCHAR"/>
+        <result column="card_frame_number" property="cardFrameNumber" jdbcType="VARCHAR"/>
+        <collection property="leaseSchemeOrderAccounts" column="schemeOrderId"
+                    ofType="com.hc.lease.order.model.LeaseSchemeOrderAccount" javaType="java.util.ArrayList"
+                    select="selectBySchemeOrderId"/>
+        <collection property="leaseContractArchiveLocationList" column="id"
+                    ofType="com.hc.lease.order.model.LeaseContractArchiveLocation" javaType="java.util.ArrayList"
+                    select="com.hc.lease.order.dao.LeaseContractArchiveLocationMapper.selectByContractId"/>
+
+    </resultMap>
+
+
+    <resultMap id="LeaseSchemeOrderAccountMap" type="com.hc.lease.order.model.LeaseSchemeOrderAccount">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="scheme_order_id" jdbcType="BIGINT" property="schemeOrderId"/>
+        <result column="account_id" jdbcType="BIGINT" property="accountId"/>
+        <result column="account_name" jdbcType="VARCHAR" property="accountName"/>
+        <result column="account_contact" jdbcType="VARCHAR" property="accountContact"/>
+        <result column="is_default_pay" jdbcType="INTEGER" property="isDefaultPay"/>
+        <result column="id_card" jdbcType="VARCHAR" property="idCard"/>
+        <result column="live_address" jdbcType="VARCHAR" property="liveAddress"/>
+        <result column="emergency_contact" jdbcType="VARCHAR" property="emergencyContact"/>
+        <result column="branch_bank" jdbcType="VARCHAR" property="branchBank"/>
+        <result column="back_card_number" jdbcType="VARCHAR" property="backCardNumber"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="bank_name" jdbcType="VARCHAR" property="bankName"/>
+
+    </resultMap>
+
+
+    <resultMap id="ContractMap" type="com.hc.lease.order.model.LeaseContract">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="repayment_id" property="repaymentId" jdbcType="BIGINT"/>
+        <result column="scheme_order_id" property="schemeOrderId" jdbcType="BIGINT"/>
+        <result column="sale_channel_type" property="saleChannelType" jdbcType="INTEGER"/>
+        <result column="sale_channel_id" property="saleChannelId" jdbcType="BIGINT"/>
+        <result column="contract_number_year" property="contractNumberYear" jdbcType="VARCHAR"/>
+        <result column="contract_number" property="contractNumber" jdbcType="VARCHAR"/>
+        <result column="contract_key" property="contractKey" jdbcType="VARCHAR"/>
+        <!--<result column="pay_staging_time" property="payStagingTime" jdbcType="TIMESTAMP" />-->
+        <result column="lease_start_time" property="leaseStartTime" jdbcType="TIMESTAMP"/>
+        <result column="lease_end_time" property="leaseEndTime" jdbcType="TIMESTAMP"/>
+        <!-- <result column="staging_contain_monthly_rent" property="stagingContainMonthlyRent" jdbcType="BIT" />
+         <result column="company_header_id" property="companyHeaderId" jdbcType="BIGINT" />-->
+        <result column="account_contact_adress" property="accountContactAdress" jdbcType="VARCHAR"/>
+        <result column="guarantee_name" property="guaranteeName" jdbcType="VARCHAR"/>
+        <result column="guarantee_id_card" property="guaranteeIdCard" jdbcType="VARCHAR"/>
+        <result column="guarantee_contact_address" property="guaranteeContactAddress" jdbcType="VARCHAR"/>
+        <result column="third_party_liability_insurance" property="thirdPartyLiabilityInsurance" jdbcType="NUMERIC"/>
+        <result column="card_check_accept_img" property="cardCheckAcceptImg" jdbcType="VARCHAR"/>
+        <result column="guarantee_contact" property="guaranteeContact" jdbcType="VARCHAR"/>
+        <result column="guarantee_contact_name" property="guaranteeContactName" jdbcType="VARCHAR"/>
+        <result column="guarantee_contact_phone" property="guaranteeContactPhone" jdbcType="VARCHAR"/>
+        <result column="guarantee_zip_code" property="guaranteeZipCode" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="branch_company_id" property="branchCompanyId" jdbcType="BIGINT"/>
+        <result column="contract_baseinfo_id" property="contractBaseinfoId" jdbcType="BIGINT"/>
+
+        <result column="branch_company_name" property="branchCompanyName" jdbcType="VARCHAR"/>
+        <result column="contract_party_name" property="contractPartyName" jdbcType="VARCHAR"/>
+        <result column="dealer_name" property="dealerName" jdbcType="VARCHAR"/>
+        <result column="comprehensive_quote" property="comprehensiveQuote" jdbcType="NUMERIC"/>
+        <result column="brands_name" property="brandsName" jdbcType="VARCHAR"/>
+        <result column="series_name" property="seriesName" jdbcType="VARCHAR"/>
+        <result column="business_model_name" property="businessModelName" jdbcType="VARCHAR"/>
+        <result column="color_name" property="colorName" jdbcType="VARCHAR"/>
+        <result column="scheme_name" property="schemeName" jdbcType="VARCHAR"/>
+        <result column="plate_number" property="plateNumber" jdbcType="VARCHAR"/>
+        <result column="scheme_id" property="schemeId" jdbcType="BIGINT"/>
+        <result column="card_id" property="cardId" jdbcType="BIGINT"/>
+        <result column="sn" property="sn" jdbcType="VARCHAR"/>
+        <result column="car_price" property="carPrice" jdbcType="NUMERIC"/>
+        <result column="totle_car_price" property="totleCarPrice" jdbcType="NUMERIC"/>
+        <result column="lease_price" property="leasePrice" jdbcType="NUMERIC"/>
+        <result column="contract_party_id" property="contractPartyId" jdbcType="BIGINT"/>
+        <result column="annual_interest" property="annualInterest" jdbcType="NUMERIC"/>
+        <result column="down_payment" property="downPayment" jdbcType="NUMERIC"/>
+        <result column="balance_payment" property="balancePayment" jdbcType="NUMERIC"/>
+        <result column="staging_number_id" property="stagingNumberId" jdbcType="BIGINT"/>
+        <result column="commission" property="commission" jdbcType="NUMERIC"/>
+        <result column="receive_margin" property="receiveMargin" jdbcType="NUMERIC"/>
+        <result column="id_card_img" property="idCardImg" jdbcType="VARCHAR"/>
+        <result column="car_accept_img" property="carAcceptImg" jdbcType="VARCHAR"/>
+        <result column="card_frame_number" property="cardFrameNumber" jdbcType="VARCHAR"/>
+        <result column="engine_number" property="engineNumber" jdbcType="VARCHAR"/>
+        <result column="purchase_tax" property="purchaseTax" jdbcType="NUMERIC"/>
+        <result column="on_plate_cost" property="onPlateCost" jdbcType="NUMERIC"/>
+        <result column="vehicle_vessel_tax" property="vehicleVesselTax" jdbcType="NUMERIC"/>
+        <result column="item_type" property="itemType" jdbcType="VARCHAR"/>
+
+        <collection property="leaseSchemeOrderAccounts" column="schemeOrderId"
+                    ofType="com.hc.lease.order.model.LeaseSchemeOrderAccount" javaType="java.util.ArrayList"
+                    select="selectBySchemeOrderId"/>
+        <collection property="leaseContractArchiveLocationList" column="id"
+                    ofType="com.hc.lease.order.model.LeaseContractArchiveLocation" javaType="java.util.ArrayList"
+                    select="com.hc.lease.order.dao.LeaseContractArchiveLocationMapper.selectByContractId"/>
+
+        <collection property="leaseSchemeRepaymentList" column="id"
+                    ofType="com.hc.lease.order.model.LeaseSchemeRepayment" javaType="java.util.ArrayList"
+                    select="com.hc.lease.order.dao.LeaseSchemeRepaymentMapper.selectByContractId"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, scheme_order_id, sale_channel_type, sale_channel_id, contract_number_year, contract_number, 
+    contract_key, pay_staging_time, lease_start_time, lease_end_time, staging_contain_monthly_rent, 
+    company_header_id, account_contact_adress, guarantee_name, guarantee_id_card, guarantee_contact_address,
+    third_party_liability_insurance, card_check_accept_img, guarantee_contact, guarantee_contact_name, 
+    guarantee_contact_phone, guarantee_zip_code, create_time, update_time, create_by, 
+    update_by, sort, status,branch_company_id,contract_baseinfo_id,id_card_img,car_accept_img
+  </sql>
+
+
+    <select id="selectBySchemeOrderId" resultMap="LeaseSchemeOrderAccountMap" parameterType="java.lang.Long">
+    select
+    soa.scheme_order_id,soa.account_id,soa.account_name,soa.account_contact,soa.is_default_pay,a.id_card "idCard"
+    ,ac.live_address,ac.emergency_contact,ac.branch_bank,ac.back_card_number,a.phone,b.name as "bankName"
+    from lease_scheme_order_account soa
+    join lease_account a on soa.account_id=a.id
+    join lease_account_credit ac on soa.account_id=ac.account_id
+    join lease_bank b on ac.bank_id=b.id
+    where soa.scheme_order_id = #{schemeOrderId}
+  </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_contract
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="findByParams" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select k.numbers,k.id from(
+        SELECT concat(contract_number_year,contract_number)as numbers ,id FROM lease_contract) k
+        where 1=1
+        <if test="contractNumber != null">
+            and k.numbers = #{contractNumber,jdbcType=VARCHAR}
+        </if>
+        <if test="id != null">
+            and k.id != #{id,jdbcType=BIGINT}
+        </if>
+    </select>
+
+    <select id="selectOrderInfo"  resultMap="ContractMap" parameterType="java.util.Map">
+         select
+        c.id, c.scheme_order_id as "schemeOrderId", c.sale_channel_type as "saleChannelType", c.sale_channel_id as
+        "saleChannelId" , c.contract_number_year as "contractNumberYear", c.contract_number as "contractNumber",
+        c.contract_key as "contractKey", c.pay_staging_time as "payStagingTime", c.lease_start_time as "leaseStartTime",
+        c.lease_end_time as "leaseEndTime", c.staging_contain_monthly_rent as "stagingContainMonthlyRent",
+        c.company_header_id, c.account_contact_adress, c.guarantee_name, c.guarantee_id_card,
+        c.guarantee_contact_address,
+        c.third_party_liability_insurance as "thirdPartyLiabilityInsurance" ,c.card_check_accept_img as
+        "cardCheckAcceptImg", c.guarantee_contact as "guaranteeContact", c.guarantee_contact_name as
+        "guaranteeContactName",
+        c.guarantee_contact_phone as "guaranteeContactPhone", c.guarantee_zip_code as "guaranteeZipCode",
+        c.status,c.branch_company_id as "branchCompanyId",bc.name as "branchCompanyName",ch.name as "contractPartyName",
+        d.name as "dealerName",so.comprehensive_quote as "comprehensiveQuote",cb.name as "brandsName",css.name as
+        "seriesName",cm.business_model_name as "businessModelName",cm.item_type as "itemType",cc.name as "colorName",s.scheme_name as
+        "schemeName",pc.plate_number as "plateNumber",
+        so.scheme_id as "schemeId",so.card_id as "cardId",so.sn as "sn",so.car_price as "carPrice",so.totle_car_price as
+        "totleCarPrice",so.lease_price as "leasePrice",so.contract_party_id as "contractPartyId",c.contract_baseinfo_id
+        as "contractBaseinfoId",
+        s.annual_interest as "annualInterest",p.down_payment as "downPayment",p.balance_payment as
+        "balancePayment",p.staging_number_id as "stagingNumberId"
+        ,so.commission,so.receive_margin as "receiveMargin"
+        ,pc.card_frame_number,pc.engine_number,pc.purchase_tax,pc.on_plate_cost,pc.vehicle_vessel_tax,
+        c.id_card_img,c.car_accept_img
+        from lease_contract c
+        left join lease_scheme_order so on c.scheme_order_id=so.id
+        left join lease_branch_company bc on c.branch_company_id =bc.id
+        left join lease_company_header ch on so.contract_party_id=ch.id
+        left join lease_dealer d on c.sale_channel_id=d.id
+        left join lease_scheme s on so.scheme_id =s.id
+        left join lease_car pc on so.card_id=pc.id
+        left join lease_car_brands cb on pc.brands_id=cb.id
+        left join lease_car_series css on pc.series_id=css.id
+        left join lease_car_model cm on pc.model_id=cm.id
+        left join lease_car_color cc on pc.color_id=cc.id
+        left join lease_scheme_package sp on so.scheme_id=sp.scheme_id
+        left join lease_package p on sp.package_id=p.id
+        where  c.id=#{contractId}
+    </select>
+
+    <select id="findPage" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        c.id, c.scheme_order_id as "schemeOrderId", c.sale_channel_type as "saleChannelType", c.sale_channel_id as
+        "saleChannelId" , c.contract_number_year as "contractNumberYear", c.contract_number as "contractNumber",
+        c.contract_key as "contractKey", c.pay_staging_time as "payStagingTime", c.lease_start_time as "leaseStartTime",
+        c.lease_end_time as "leaseEndTime", c.staging_contain_monthly_rent as "stagingContainMonthlyRent",
+        c.company_header_id, c.account_contact_adress, c.guarantee_name, c.guarantee_id_card,
+        c.guarantee_contact_address,
+        c.third_party_liability_insurance as "thirdPartyLiabilityInsurance" ,c.card_check_accept_img as
+        "cardCheckAcceptImg", c.guarantee_contact as "guaranteeContact", c.guarantee_contact_name as
+        "guaranteeContactName",
+        c.guarantee_contact_phone as "guaranteeContactPhone", c.guarantee_zip_code as "guaranteeZipCode",
+        c.status,c.branch_company_id as "branchCompanyId",bc.name as "branchCompanyName",ch.name as "contractPartyName",
+        d.name as "dealerName",so.comprehensive_quote as "comprehensiveQuote",cb.name as "brandsName",css.name as
+        "seriesName",cm.business_model_name as "businessModelName",cc.name as "colorName",s.scheme_name as
+        "schemeName",pc.plate_number as "plateNumber",pc.engine_number as "engineNumber",pc.card_frame_number as "cardFrameNumber",
+        so.scheme_id as "schemeId",so.card_id as "cardId",so.sn as "sn",so.car_price as "carPrice",so.totle_car_price as
+        "totleCarPrice",so.lease_price as "leasePrice",so.contract_party_id as "contractPartyId",c.contract_baseinfo_id
+        as "contractBaseinfoId",
+        s.annual_interest as "annualInterest",p.down_payment as "downPayment",p.balance_payment as
+        "balancePayment",p.staging_number_id as "stagingNumberId"
+        ,so.commission
+        ,so.receive_margin as "receiveMargin", c.id_card_img as "idCardImg",c.car_accept_img as "carAcceptImg"
+        from lease_contract c
+        left join lease_scheme_order so on c.scheme_order_id=so.id
+        left join lease_branch_company bc on c.branch_company_id =bc.id
+        left join lease_company_header ch on so.contract_party_id=ch.id
+        left join lease_dealer d on c.sale_channel_id=d.id
+        left join lease_scheme s on so.scheme_id =s.id
+        left join lease_car pc on so.card_id=pc.id
+        left join lease_car_brands cb on pc.brands_id=cb.id
+        left join lease_car_series css on pc.series_id=css.id
+        left join lease_car_model cm on pc.model_id=cm.id
+        left join lease_car_color cc on pc.color_id=cc.id
+        left join lease_scheme_package sp on so.scheme_id=sp.scheme_id
+        left join lease_package p on sp.package_id=p.id
+        where 1=1
+        <if test="contractNumber != null and contractNumber!=''">
+            and c.contract_number = #{contractNumber}
+        </if>
+        <if test="brandsId != null and brandsId !='' ">
+            and pc.brands_id = #{brandsId}
+        </if>
+        <if test="seriesId != null and  seriesId !=''">
+            and pc.series_id = #{seriesId}
+        </if>
+        <if test="modelId != null and  modelId !='' ">
+            and pc.model_id = #{modelId}
+        </if>
+        <if test="branchCompanyId != null and  branchCompanyId !='' ">
+            and c.branch_company_id = #{branchCompanyId}
+        </if>
+        <if test="effectiveTimeFrom != null and effectiveTimeFrom!='' and effectiveTimeTo != null and effectiveTimeTo !=''">
+            and c.lease_start_time BETWEEN to_timestamp(#{effectiveTimeFrom},'YYYY-MM-DD HH24:MI:SS') and
+            to_timestamp(#{effectiveTimeTo},'YYYY-MM-DD HH24:MI:SS')
+        </if>
+        order by c.update_time DESC
+    </select>
+
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_contract
+    </select>
+
+    <!--支付历史统计-->
+    <select id="allinpayLogStatistics" resultType="java.util.Map">
+        select
+        d.name, d.phone
+        ,(select count(1) from lease_allinpay_log WHERE status = 2 and contract_id = #{id,jdbcType=BIGINT}) failSum
+        ,(select count(1) from lease_overdue_log WHERE contract_id = #{id,jdbcType=BIGINT}) overdueSum
+        from lease_contract a
+        INNER JOIN lease_scheme_order b on b.id = a.scheme_order_id
+        INNER JOIN lease_scheme_order_account c on c.scheme_order_id = b.id and c.is_default_pay = 1
+        INNER JOIN lease_account d on d.id = c.account_id
+        where a.id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <!--月供管理统计/成功 统计-->
+    <select id="postLendingStatisticsSuccess" resultType="java.lang.Integer">
+        select count(1) successSum from lease_scheme_repayment b inner join lease_contract a on a.id = b.contract_id where b.payment_result = 2 and b.repayment_date = #{repaymentDate,jdbcType=TIMESTAMP}
+    </select>
+
+    <!--月供管理统计/失败 统计-->
+    <select id="postLendingStatisticsFail" resultType="java.lang.Integer">
+        select count(1) failSum from lease_scheme_repayment b inner join lease_contract a on a.id = b.contract_id where b.payment_result = 3 and b.repayment_date = #{repaymentDate,jdbcType=TIMESTAMP}
+    </select>
+
+    <!--月供管理统计/逾期 统计-->
+    <select id="postLendingStatisticsOverdue" resultType="java.lang.Integer">
+        select count(1) overdueSum from lease_scheme_repayment b inner join lease_contract a on a.id = b.contract_id inner join lease_overdue_log c on c.repayment_id=b.id where c.is_pay = false and b.repayment_date = #{repaymentDate,jdbcType=TIMESTAMP}
+    </select>
+
+    <!--月供管理列表-->
+    <select id="findPostLending" resultType="java.util.Map">
+        select
+
+        a.id, b.sn
+        , a.contract_key "contractKey"
+        , e.name "accountName", e.phone "accountPhone"
+        , f.plate_number "plateNumber"
+        , round(c.total, 2) total, c.payment_result "paymentResult", c.payment_result_msg "paymentResultMsg", c.id "repaymentId"
+        , (select count(1) FROM lease_overdue_log WHERE contract_id=a.id) "paymentResultCount"
+        ,g.name "branchCompanyName"
+
+        from lease_contract a
+        INNER JOIN lease_scheme_order b on b.id = a.scheme_order_id
+        INNER JOIN lease_scheme_repayment c on a.id = c.contract_id and c.repayment_date = #{repaymentDate,jdbcType=TIMESTAMP}
+        LEFT JOIN lease_scheme_order_account d on d.scheme_order_id = b.id and d.is_default_pay=1
+        LEFT JOIN lease_account e on e.id = d.account_id
+        LEFT JOIN lease_car f on f.id = b.card_id
+        LEFT JOIN lease_branch_company g on g.id = a.branch_company_id
+
+        <!--支付方式-->
+        <if test="payWay != null and paymentResult!=0">
+            inner JOIN lease_allinpay_log h on c.id = h.repayment_id and h.create_time=(select max(create_time) from
+            lease_allinpay_log where c.id = repayment_id and pay_way = #{payWay,jdbcType=INTEGER})
+        </if>
+
+        WHERE 1=1
+
+        <!--支付结果-->
+        <if test="paymentResult != null">
+            and c.payment_result = #{paymentResult,jdbcType=INTEGER}
+        </if>
+
+        <!--月供状态 / 合同状态-->
+        <if test="status != null">
+            and a.status = #{status,jdbcType=INTEGER}
+        </if>
+
+    </select>
+
+    <select id="insertViewParames" resultType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_contract
+    </select>
+
+    <delete id="deleteBatchById" parameterType="long">
+        delete from lease_contract where id in
+        <foreach item="item" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from lease_contract
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.hc.lease.order.model.LeaseContract">
+    insert into lease_contract (id, scheme_order_id, sale_channel_type, 
+      sale_channel_id, contract_number_year, contract_number, 
+      contract_key, pay_staging_time, lease_start_time, 
+      lease_end_time, staging_contain_monthly_rent, 
+      company_header_id, account_contact_adress, guarantee_name, 
+      guarantee_id_card, guarantee_contact_address, 
+      third_party_liability_insurance, card_check_accept_img, 
+      guarantee_contact, guarantee_contact_name, 
+      guarantee_contact_phone, guarantee_zip_code, 
+      create_time, update_time, create_by, 
+      update_by, sort, status,branch_company_id,contract_baseinfo_id,id_card_img,car_accept_img
+      )
+    values (#{id,jdbcType=BIGINT}, #{schemeOrderId,jdbcType=BIGINT}, #{saleChannelType,jdbcType=INTEGER}, 
+      #{saleChannelId,jdbcType=BIGINT}, #{contractNumberYear,jdbcType=VARCHAR}, #{contractNumber,jdbcType=VARCHAR}, 
+      #{contractKey,jdbcType=VARCHAR}, #{payStagingTime,jdbcType=TIMESTAMP}, #{leaseStartTime,jdbcType=TIMESTAMP}, 
+      #{leaseEndTime,jdbcType=TIMESTAMP}, #{stagingContainMonthlyRent,jdbcType=BIT}, 
+      #{companyHeaderId,jdbcType=BIGINT}, #{accountContactAdress,jdbcType=VARCHAR}, #{guaranteeName,jdbcType=VARCHAR}, 
+      #{guaranteeIdCard,jdbcType=VARCHAR}, #{guaranteeContactAddress,jdbcType=VARCHAR}, 
+      #{thirdPartyLiabilityInsurance,jdbcType=NUMERIC}, #{cardCheckAcceptImg,jdbcType=VARCHAR}, 
+      #{guaranteeContact,jdbcType=VARCHAR}, #{guaranteeContactName,jdbcType=VARCHAR}, 
+      #{guaranteeContactPhone,jdbcType=VARCHAR}, #{guaranteeZipCode,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, 
+      #{updateBy,jdbcType=BIGINT}, #{sort,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},#{branchCompanyId,jdbcType=BIGINT},#{contractBaseinfoId,jdbcType=BIGINT},
+      #{idCardImg,jdbcType=VARCHAR},#{carAcceptImg,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.hc.lease.order.model.LeaseContract">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_contract_id_seq'::regclass) as id
+        </selectKey>
+
+        insert into lease_contract
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="schemeOrderId != null">
+                scheme_order_id,
+            </if>
+            <if test="saleChannelType != null">
+                sale_channel_type,
+            </if>
+            <if test="saleChannelId != null">
+                sale_channel_id,
+            </if>
+            <if test="contractNumberYear != null">
+                contract_number_year,
+            </if>
+            <if test="contractNumber != null">
+                contract_number,
+            </if>
+            <if test="contractKey != null">
+                contract_key,
+            </if>
+            <if test="leaseStartTime != null">
+                lease_start_time,
+            </if>
+            <if test="leaseEndTime != null">
+                lease_end_time,
+            </if>
+            <if test="accountContactAdress != null">
+                account_contact_adress,
+            </if>
+            <if test="guaranteeName != null">
+                guarantee_name,
+            </if>
+            <if test="guaranteeIdCard != null">
+                guarantee_id_card,
+            </if>
+            <if test="guaranteeContactAddress != null">
+                guarantee_contact_address,
+            </if>
+            <if test="thirdPartyLiabilityInsurance != null">
+                third_party_liability_insurance,
+            </if>
+            <if test="cardCheckAcceptImg != null">
+                card_check_accept_img,
+            </if>
+            <if test="guaranteeContact != null">
+                guarantee_contact,
+            </if>
+            <if test="guaranteeContactName != null">
+                guarantee_contact_name,
+            </if>
+            <if test="guaranteeContactPhone != null">
+                guarantee_contact_phone,
+            </if>
+            <if test="guaranteeZipCode != null">
+                guarantee_zip_code,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="branchCompanyId != null">
+                branch_company_id,
+            </if>
+            <if test="contractBaseinfoId != null">
+                contract_baseinfo_id,
+            </if>
+            <if test="idCardImg != null">
+                id_card_img,
+            </if>
+            <if test="carAcceptImg != null">
+                car_accept_img
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="schemeOrderId != null">
+                #{schemeOrderId,jdbcType=BIGINT},
+            </if>
+            <if test="saleChannelType != null">
+                #{saleChannelType,jdbcType=INTEGER},
+            </if>
+            <if test="saleChannelId != null">
+                #{saleChannelId,jdbcType=BIGINT},
+            </if>
+            <if test="contractNumberYear != null">
+                #{contractNumberYear,jdbcType=VARCHAR},
+            </if>
+            <if test="contractNumber != null">
+                #{contractNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="contractKey != null">
+                #{contractKey,jdbcType=VARCHAR},
+            </if>
+            <if test="leaseStartTime != null">
+                #{leaseStartTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="leaseEndTime != null">
+                #{leaseEndTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="accountContactAdress != null">
+                #{accountContactAdress,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeName != null">
+                #{guaranteeName,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeIdCard != null">
+                #{guaranteeIdCard,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeContactAddress != null">
+                #{guaranteeContactAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="thirdPartyLiabilityInsurance != null">
+                #{thirdPartyLiabilityInsurance,jdbcType=NUMERIC},
+            </if>
+            <if test="cardCheckAcceptImg != null">
+                #{cardCheckAcceptImg,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeContact != null">
+                #{guaranteeContact,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeContactName != null">
+                #{guaranteeContactName,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeContactPhone != null">
+                #{guaranteeContactPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeZipCode != null">
+                #{guaranteeZipCode,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="branchCompanyId != null">
+                #{branchCompanyId,jdbcType=BIGINT},
+            </if>
+            <if test="contractBaseinfoId != null">
+                #{contractBaseinfoId,jdbcType=BIGINT},
+            </if>
+            <if test="idCardImg != null">
+                #{idCardImg,jdbcType=VARCHAR},
+            </if>
+            <if test="carAcceptImg != null">
+                #{carAcceptImg,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.order.model.LeaseContract">
+        update lease_contract
+        <set>
+            <if test="schemeOrderId != null">
+                scheme_order_id = #{schemeOrderId,jdbcType=BIGINT},
+            </if>
+            <if test="saleChannelType != null">
+                sale_channel_type = #{saleChannelType,jdbcType=INTEGER},
+            </if>
+            sale_channel_id = #{saleChannelId,jdbcType=BIGINT},
+            <if test="contractNumberYear != null">
+                contract_number_year = #{contractNumberYear,jdbcType=VARCHAR},
+            </if>
+            <if test="contractNumber != null">
+                contract_number = #{contractNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="contractKey != null">
+                contract_key = #{contractKey,jdbcType=VARCHAR},
+            </if>
+                lease_start_time = #{leaseStartTime,jdbcType=TIMESTAMP},
+            <if test="leaseEndTime != null">
+                lease_end_time = #{leaseEndTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="accountContactAdress != null">
+                account_contact_adress = #{accountContactAdress,jdbcType=VARCHAR},
+            </if>
+                guarantee_name = #{guaranteeName,jdbcType=VARCHAR},
+                guarantee_id_card = #{guaranteeIdCard,jdbcType=VARCHAR},
+                guarantee_contact_address = #{guaranteeContactAddress,jdbcType=VARCHAR},
+
+            <if test="thirdPartyLiabilityInsurance != null">
+                third_party_liability_insurance = #{thirdPartyLiabilityInsurance,jdbcType=NUMERIC},
+            </if>
+
+                card_check_accept_img = #{cardCheckAcceptImg,jdbcType=VARCHAR},
+
+            <if test="guaranteeContact != null">
+                guarantee_contact = #{guaranteeContact,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeContactName != null">
+                guarantee_contact_name = #{guaranteeContactName,jdbcType=VARCHAR},
+            </if>
+            <if test="guaranteeContactPhone != null">
+                guarantee_contact_phone = #{guaranteeContactPhone,jdbcType=VARCHAR},
+            </if>
+              guarantee_zip_code = #{guaranteeZipCode,jdbcType=VARCHAR},
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="branchCompanyId != null">
+                branchcompanyId =#{branchCompanyId,jdbcType=BIGINT},
+            </if>
+            <if test="contractBaseinfoId != null">
+                contract_baseinfo_id=#{contractBaseinfoId,jdbcType=BIGINT},
+            </if>
+            id_card_img = #{idCardImg,jdbcType=VARCHAR},
+            car_accept_img = #{carAcceptImg,jdbcType=VARCHAR}
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hc.lease.order.model.LeaseContract">
+    update lease_contract
+    set scheme_order_id = #{schemeOrderId,jdbcType=BIGINT},
+      sale_channel_type = #{saleChannelType,jdbcType=INTEGER},
+      sale_channel_id = #{saleChannelId,jdbcType=BIGINT},
+      contract_number_year = #{contractNumberYear,jdbcType=VARCHAR},
+      contract_number = #{contractNumber,jdbcType=VARCHAR},
+      contract_key = #{contractKey,jdbcType=VARCHAR},
+      lease_start_time = #{leaseStartTime,jdbcType=TIMESTAMP},
+      lease_end_time = #{leaseEndTime,jdbcType=TIMESTAMP},
+      account_contact_adress = #{accountContactAdress,jdbcType=VARCHAR},
+      guarantee_name = #{guaranteeName,jdbcType=VARCHAR},
+      guarantee_id_card = #{guaranteeIdCard,jdbcType=VARCHAR},
+      guarantee_contact_address = #{guaranteeContactAddress,jdbcType=VARCHAR},
+      third_party_liability_insurance = #{thirdPartyLiabilityInsurance,jdbcType=NUMERIC},
+      card_check_accept_img = #{cardCheckAcceptImg,jdbcType=VARCHAR},
+      guarantee_contact = #{guaranteeContact,jdbcType=VARCHAR},
+      guarantee_contact_name = #{guaranteeContactName,jdbcType=VARCHAR},
+      guarantee_contact_phone = #{guaranteeContactPhone,jdbcType=VARCHAR},
+      guarantee_zip_code = #{guaranteeZipCode,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      sort = #{sort,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      branchcompanyId =#{branchCompanyId,jdbcType=BIGINT},
+      contract_baseinfo_id=#{contractBaseinfoId,jdbcType=BIGINT},
+      id_card_img = #{idCardImg,jdbcType=VARCHAR},
+      car_accept_img = #{carAcceptImg,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

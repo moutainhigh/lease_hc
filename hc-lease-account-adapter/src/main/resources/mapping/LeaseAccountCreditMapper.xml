@@ -1,0 +1,663 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.account.dao.LeaseAccountCreditMapper" >
+  <!--注册用户/承租人征信信息-->
+  <resultMap id="BaseResultMap" type="com.hc.lease.account.model.LeaseAccountCredit" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="account_id" property="accountId" jdbcType="BIGINT" />
+    <result column="id_card_address" property="idCardAddress" jdbcType="VARCHAR" />
+    <result column="live_address" property="liveAddress" jdbcType="VARCHAR" />
+    <result column="zip_code" property="zipCode" jdbcType="VARCHAR" />
+    <result column="housing_type" property="housingType" jdbcType="BIGINT" />
+    <result column="housing_type_other_describe" property="housingTypeOtherDescribe" jdbcType="VARCHAR" />
+    <result column="spouse_name" property="spouseName" jdbcType="VARCHAR" />
+    <result column="spouse_phone" property="spousePhone" jdbcType="VARCHAR" />
+    <result column="spouse_id_card" property="spouseIdCard" jdbcType="VARCHAR" />
+    <result column="spouse_id_card_img_obverse_sid" property="spouseIdCardImgObverseSid" jdbcType="VARCHAR" />
+    <result column="spouse_id_card_img_reverse_sid" property="spouseIdCardImgReverseSid" jdbcType="VARCHAR" />
+    <result column="marriage_certificate_img" property="marriageCertificateImg" jdbcType="VARCHAR" />
+    <result column="emergency_contact" property="emergencyContact" jdbcType="VARCHAR" javaType="com.hc.lease.account.vo.EmergencyContactVo" typeHandler="com.hc.lease.common.core.mybatis.JsonTypeHandler" />
+    <result column="work_unit" property="workUnit" jdbcType="VARCHAR" />
+    <result column="work_unit_phone" property="workUnitPhone" jdbcType="VARCHAR" />
+    <result column="half_year_month_income" property="halfYearMonthIncome" jdbcType="VARCHAR" />
+    <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+    <result column="id_card_img_obverse_side" property="idCardImgObverseSide" jdbcType="VARCHAR" />
+    <result column="id_card_img_reverse_side" property="idCardImgReverseSide" jdbcType="VARCHAR" />
+    <result column="driver_license_number" property="driverLicenseNumber" jdbcType="VARCHAR" />
+    <result column="driver_license_img" property="driverLicenseImg" jdbcType="VARCHAR" />
+    <result column="driver_license_counterpart_img" property="driverLicenseCounterpartImg" jdbcType="VARCHAR" />
+    <result column="bank_id" property="bankId" jdbcType="BIGINT" />
+    <result column="branch_bank" property="branchBank" jdbcType="VARCHAR" />
+    <result column="back_card_number" property="backCardNumber" jdbcType="VARCHAR" />
+    <result column="back_card_img" property="backCardImg" jdbcType="VARCHAR" />
+    <result column="bank_statement_img" property="bankStatementImg" jdbcType="VARCHAR" />
+    <result column="earnings_proof_img" property="earningsProofImg" jdbcType="VARCHAR" />
+    <result column="net_car_receivable_log_img" property="netCarReceivableLogImg" jdbcType="VARCHAR" />
+    <result column="communication_list_img" property="communicationListImg" jdbcType="VARCHAR" />
+    <result column="attoney_power_img" property="attoneyPowerImg" jdbcType="VARCHAR" />
+    <result column="other_phone" property="otherPhone" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, account_id, id_card_address, live_address, zip_code, housing_type, housing_type_other_describe, 
+    spouse_name, spouse_phone, spouse_id_card, spouse_id_card_img_obverse_sid, spouse_id_card_img_reverse_sid, 
+    marriage_certificate_img, emergency_contact, work_unit, work_unit_phone, half_year_month_income, 
+    id_card, id_card_img_obverse_side, id_card_img_reverse_side, driver_license_number, 
+    driver_license_img, driver_license_counterpart_img, bank_id, branch_bank, back_card_number, back_card_img, bank_statement_img,
+    earnings_proof_img, net_car_receivable_log_img, communication_list_img, attoney_power_img, 
+    create_time, update_time, create_by, update_by,other_phone
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from lease_account_credit
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lease_account_credit
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <delete id="deleteByAccountId" parameterType="java.lang.Long" >
+    delete from lease_account_credit
+    where account_id = #{accountId,jdbcType=BIGINT}
+  </delete>
+
+  <!-- 批量删除 -->
+  <delete id="deleteBatchByAccountId" parameterType="long">
+    delete from lease_account_credit where account_id in
+    <foreach item="idItem" collection="list" open="(" separator="," close=")">
+      #{idItem}
+    </foreach>
+  </delete>
+
+  <insert id="insert" parameterType="com.hc.lease.account.model.LeaseAccountCredit" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_account_credit_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_account_credit (id, account_id, id_card_address, 
+      live_address, zip_code, housing_type, 
+      housing_type_other_describe, spouse_name, spouse_phone, 
+      spouse_id_card, spouse_id_card_img_obverse_sid, 
+      spouse_id_card_img_reverse_sid, marriage_certificate_img, 
+      emergency_contact, work_unit, work_unit_phone, 
+      half_year_month_income, id_card, id_card_img_obverse_side, 
+      id_card_img_reverse_side, driver_license_number, 
+      driver_license_img, driver_license_counterpart_img, bank_id, branch_bank,
+      back_card_number, back_card_img, bank_statement_img, 
+      earnings_proof_img, net_car_receivable_log_img, 
+      communication_list_img, attoney_power_img, 
+      create_time, update_time, create_by, 
+      update_by,other_phone)
+    values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, #{idCardAddress,jdbcType=VARCHAR},
+      #{liveAddress,jdbcType=VARCHAR}, #{zipCode,jdbcType=VARCHAR}, #{housingType,jdbcType=BIGINT}, 
+      #{housingTypeOtherDescribe,jdbcType=VARCHAR}, #{spouseName,jdbcType=VARCHAR}, #{spousePhone,jdbcType=VARCHAR}, 
+      #{spouseIdCard,jdbcType=VARCHAR}, #{spouseIdCardImgObverseSid,jdbcType=VARCHAR}, 
+      #{spouseIdCardImgReverseSid,jdbcType=VARCHAR}, #{marriageCertificateImg,jdbcType=VARCHAR}, 
+      #{emergencyContact,jdbcType=VARCHAR, typeHandler=com.hc.lease.common.core.mybatis.JsonTypeHandler}, #{workUnit,jdbcType=VARCHAR}, #{workUnitPhone,jdbcType=VARCHAR},
+      #{halfYearMonthIncome,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, #{idCardImgObverseSide,jdbcType=VARCHAR}, 
+      #{idCardImgReverseSide,jdbcType=VARCHAR}, #{driverLicenseNumber,jdbcType=VARCHAR}, 
+      #{driverLicenseImg,jdbcType=VARCHAR}, #{driverLicenseCounterpartImg,jdbcType=VARCHAR}, #{bankId,jdbcType=BIGINT}, #{branchBank,jdbcType=VARCHAR},
+      #{backCardNumber,jdbcType=VARCHAR}, #{backCardImg,jdbcType=VARCHAR}, #{bankStatementImg,jdbcType=VARCHAR}, 
+      #{earningsProofImg,jdbcType=VARCHAR}, #{netCarReceivableLogImg,jdbcType=VARCHAR}, 
+      #{communicationListImg,jdbcType=VARCHAR}, #{attoneyPowerImg,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, 
+      #{updateBy,jdbcType=BIGINT}, #{otherPhone,jdbcType=VARCHAR})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.hc.lease.account.model.LeaseAccountCredit" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_account_credit_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_account_credit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      <if test="idCardAddress != null" >
+        id_card_address,
+      </if>
+      <if test="liveAddress != null" >
+        live_address,
+      </if>
+      <if test="zipCode != null" >
+        zip_code,
+      </if>
+      <if test="housingType != null" >
+        housing_type,
+      </if>
+      <if test="housingTypeOtherDescribe != null" >
+        housing_type_other_describe,
+      </if>
+      <if test="spouseName != null" >
+        spouse_name,
+      </if>
+      <if test="spousePhone != null" >
+        spouse_phone,
+      </if>
+      <if test="spouseIdCard != null" >
+        spouse_id_card,
+      </if>
+      <if test="spouseIdCardImgObverseSid != null" >
+        spouse_id_card_img_obverse_sid,
+      </if>
+      <if test="spouseIdCardImgReverseSid != null" >
+        spouse_id_card_img_reverse_sid,
+      </if>
+      <if test="marriageCertificateImg != null" >
+        marriage_certificate_img,
+      </if>
+      <if test="emergencyContact != null" >
+        emergency_contact,
+      </if>
+      <if test="workUnit != null" >
+        work_unit,
+      </if>
+      <if test="workUnitPhone != null" >
+        work_unit_phone,
+      </if>
+      <if test="halfYearMonthIncome != null" >
+        half_year_month_income,
+      </if>
+      <if test="idCard != null" >
+        id_card,
+      </if>
+      <if test="idCardImgObverseSide != null" >
+        id_card_img_obverse_side,
+      </if>
+      <if test="idCardImgReverseSide != null" >
+        id_card_img_reverse_side,
+      </if>
+      <if test="driverLicenseNumber != null" >
+        driver_license_number,
+      </if>
+      <if test="driverLicenseImg != null" >
+        driver_license_img,
+      </if>
+      <if test="driverLicenseCounterpartImg != null" >
+        driver_license_counterpart_img,
+      </if>
+      <if test="bankId != null" >
+        bank_id,
+      </if>
+      <if test="branchBank != null" >
+        branch_bank,
+      </if>
+      <if test="backCardNumber != null" >
+        back_card_number,
+      </if>
+      <if test="backCardImg != null" >
+        back_card_img,
+      </if>
+      <if test="bankStatementImg != null" >
+        bank_statement_img,
+      </if>
+      <if test="earningsProofImg != null" >
+        earnings_proof_img,
+      </if>
+      <if test="netCarReceivableLogImg != null" >
+        net_car_receivable_log_img,
+      </if>
+      <if test="communicationListImg != null" >
+        communication_list_img,
+      </if>
+      <if test="attoneyPowerImg != null" >
+        attoney_power_img,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="otherPhone != null" >
+        other_phone
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="accountId != null" >
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="idCardAddress != null" >
+        #{idCardAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="liveAddress != null" >
+        #{liveAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null" >
+        #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="housingType != null" >
+        #{housingType,jdbcType=BIGINT},
+      </if>
+      <if test="housingTypeOtherDescribe != null" >
+        #{housingTypeOtherDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseName != null" >
+        #{spouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="spousePhone != null" >
+        #{spousePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseIdCard != null" >
+        #{spouseIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseIdCardImgObverseSid != null" >
+        #{spouseIdCardImgObverseSid,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseIdCardImgReverseSid != null" >
+        #{spouseIdCardImgReverseSid,jdbcType=VARCHAR},
+      </if>
+      <if test="marriageCertificateImg != null" >
+        #{marriageCertificateImg,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyContact != null" >
+        #{emergencyContact,jdbcType=VARCHAR, typeHandler=com.hc.lease.common.core.mybatis.JsonTypeHandler},
+      </if>
+      <if test="workUnit != null" >
+        #{workUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="workUnitPhone != null" >
+        #{workUnitPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="halfYearMonthIncome != null" >
+        #{halfYearMonthIncome,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardImgObverseSide != null" >
+        #{idCardImgObverseSide,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardImgReverseSide != null" >
+        #{idCardImgReverseSide,jdbcType=VARCHAR},
+      </if>
+      <if test="driverLicenseNumber != null" >
+        #{driverLicenseNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="driverLicenseImg != null" >
+        #{driverLicenseImg,jdbcType=VARCHAR},
+      </if>
+      <if test="driverLicenseCounterpartImg != null" >
+        #{driverLicenseCounterpartImg,jdbcType=VARCHAR},
+      </if>
+      <if test="bankId != null" >
+        #{bankId,jdbcType=BIGINT},
+      </if>
+      <if test="branchBank != null" >
+        #{branchBank,jdbcType=VARCHAR},
+      </if>
+      <if test="backCardNumber != null" >
+        #{backCardNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="backCardImg != null" >
+        #{backCardImg,jdbcType=VARCHAR},
+      </if>
+      <if test="bankStatementImg != null" >
+        #{bankStatementImg,jdbcType=VARCHAR},
+      </if>
+      <if test="earningsProofImg != null" >
+        #{earningsProofImg,jdbcType=VARCHAR},
+      </if>
+      <if test="netCarReceivableLogImg != null" >
+        #{netCarReceivableLogImg,jdbcType=VARCHAR},
+      </if>
+      <if test="communicationListImg != null" >
+        #{communicationListImg,jdbcType=VARCHAR},
+      </if>
+      <if test="attoneyPowerImg != null" >
+        #{attoneyPowerImg,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="otherPhone != null" >
+        #{otherPhone,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.account.model.LeaseAccountCredit" >
+    update lease_account_credit
+    <set >
+      <if test="accountId != null" >
+        account_id = #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="idCardAddress != null" >
+        id_card_address = #{idCardAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="liveAddress != null" >
+        live_address = #{liveAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null" >
+        zip_code = #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="housingType != null" >
+        housing_type = #{housingType,jdbcType=BIGINT},
+      </if>
+      <if test="housingTypeOtherDescribe != null" >
+        housing_type_other_describe = #{housingTypeOtherDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseName != null" >
+        spouse_name = #{spouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="spousePhone != null" >
+        spouse_phone = #{spousePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseIdCard != null" >
+        spouse_id_card = #{spouseIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseIdCardImgObverseSid != null" >
+        spouse_id_card_img_obverse_sid = #{spouseIdCardImgObverseSid,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseIdCardImgReverseSid != null" >
+        spouse_id_card_img_reverse_sid = #{spouseIdCardImgReverseSid,jdbcType=VARCHAR},
+      </if>
+      <if test="marriageCertificateImg != null" >
+        marriage_certificate_img = #{marriageCertificateImg,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyContact != null" >
+        emergency_contact = #{emergencyContact,jdbcType=VARCHAR, typeHandler=com.hc.lease.common.core.mybatis.JsonTypeHandler},
+      </if>
+      <if test="workUnit != null" >
+        work_unit = #{workUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="workUnitPhone != null" >
+        work_unit_phone = #{workUnitPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="halfYearMonthIncome != null" >
+        half_year_month_income = #{halfYearMonthIncome,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardImgObverseSide != null" >
+        id_card_img_obverse_side = #{idCardImgObverseSide,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardImgReverseSide != null" >
+        id_card_img_reverse_side = #{idCardImgReverseSide,jdbcType=VARCHAR},
+      </if>
+      <if test="driverLicenseNumber != null" >
+        driver_license_number = #{driverLicenseNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="driverLicenseImg != null" >
+        driver_license_img = #{driverLicenseImg,jdbcType=VARCHAR},
+      </if>
+      <if test="driverLicenseCounterpartImg != null" >
+        driver_license_counterpart_img = #{driverLicenseCounterpartImg,jdbcType=VARCHAR},
+      </if>
+      <if test="bankId != null" >
+        bank_id = #{bankId,jdbcType=BIGINT},
+      </if>
+      <if test="branchBank != null" >
+        branch_bank = #{branchBank,jdbcType=VARCHAR},
+      </if>
+      <if test="backCardNumber != null" >
+        back_card_number = #{backCardNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="backCardImg != null" >
+        back_card_img = #{backCardImg,jdbcType=VARCHAR},
+      </if>
+      <if test="bankStatementImg != null" >
+        bank_statement_img = #{bankStatementImg,jdbcType=VARCHAR},
+      </if>
+      <if test="earningsProofImg != null" >
+        earnings_proof_img = #{earningsProofImg,jdbcType=VARCHAR},
+      </if>
+      <if test="netCarReceivableLogImg != null" >
+        net_car_receivable_log_img = #{netCarReceivableLogImg,jdbcType=VARCHAR},
+      </if>
+      <if test="communicationListImg != null" >
+        communication_list_img = #{communicationListImg,jdbcType=VARCHAR},
+      </if>
+      <if test="attoneyPowerImg != null" >
+        attoney_power_img = #{attoneyPowerImg,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="otherPhone != null" >
+        other_phone = #{otherPhone,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.hc.lease.account.model.LeaseAccountCredit" >
+    update lease_account_credit
+    set account_id = #{accountId,jdbcType=BIGINT},
+      id_card_address = #{idCardAddress,jdbcType=VARCHAR},
+      live_address = #{liveAddress,jdbcType=VARCHAR},
+      zip_code = #{zipCode,jdbcType=VARCHAR},
+      housing_type = #{housingType,jdbcType=BIGINT},
+      housing_type_other_describe = #{housingTypeOtherDescribe,jdbcType=VARCHAR},
+      spouse_name = #{spouseName,jdbcType=VARCHAR},
+      spouse_phone = #{spousePhone,jdbcType=VARCHAR},
+      spouse_id_card = #{spouseIdCard,jdbcType=VARCHAR},
+      spouse_id_card_img_obverse_sid = #{spouseIdCardImgObverseSid,jdbcType=VARCHAR},
+      spouse_id_card_img_reverse_sid = #{spouseIdCardImgReverseSid,jdbcType=VARCHAR},
+      marriage_certificate_img = #{marriageCertificateImg,jdbcType=VARCHAR},
+      emergency_contact = #{emergencyContact,jdbcType=VARCHAR, typeHandler=com.hc.lease.common.core.mybatis.JsonTypeHandler},
+      work_unit = #{workUnit,jdbcType=VARCHAR},
+      work_unit_phone = #{workUnitPhone,jdbcType=VARCHAR},
+      half_year_month_income = #{halfYearMonthIncome,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      id_card_img_obverse_side = #{idCardImgObverseSide,jdbcType=VARCHAR},
+      id_card_img_reverse_side = #{idCardImgReverseSide,jdbcType=VARCHAR},
+      driver_license_number = #{driverLicenseNumber,jdbcType=VARCHAR},
+      driver_license_img = #{driverLicenseImg,jdbcType=VARCHAR},
+      driver_license_counterpart_img = #{driverLicenseCounterpartImg,jdbcType=VARCHAR},
+      bank_id = #{bankId,jdbcType=BIGINT},
+      branch_bank = #{branchBank,jdbcType=VARCHAR},
+      back_card_number = #{backCardNumber,jdbcType=VARCHAR},
+      back_card_img = #{backCardImg,jdbcType=VARCHAR},
+      bank_statement_img = #{bankStatementImg,jdbcType=VARCHAR},
+      earnings_proof_img = #{earningsProofImg,jdbcType=VARCHAR},
+      net_car_receivable_log_img = #{netCarReceivableLogImg,jdbcType=VARCHAR},
+      communication_list_img = #{communicationListImg,jdbcType=VARCHAR},
+      attoney_power_img = #{attoneyPowerImg,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      other_phone = #{otherPhone,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateByAccountId" parameterType="com.hc.lease.account.model.LeaseAccountCredit" >
+    update lease_account_credit
+    set
+    id_card_address = #{idCardAddress,jdbcType=VARCHAR},
+    live_address = #{liveAddress,jdbcType=VARCHAR},
+    zip_code = #{zipCode,jdbcType=VARCHAR},
+    housing_type = #{housingType,jdbcType=BIGINT},
+    housing_type_other_describe = #{housingTypeOtherDescribe,jdbcType=VARCHAR},
+    spouse_name = #{spouseName,jdbcType=VARCHAR},
+    spouse_phone = #{spousePhone,jdbcType=VARCHAR},
+    spouse_id_card = #{spouseIdCard,jdbcType=VARCHAR},
+    spouse_id_card_img_obverse_sid = #{spouseIdCardImgObverseSid,jdbcType=VARCHAR},
+    spouse_id_card_img_reverse_sid = #{spouseIdCardImgReverseSid,jdbcType=VARCHAR},
+    marriage_certificate_img = #{marriageCertificateImg,jdbcType=VARCHAR},
+    emergency_contact = #{emergencyContact,jdbcType=VARCHAR, typeHandler=com.hc.lease.common.core.mybatis.JsonTypeHandler},
+    work_unit = #{workUnit,jdbcType=VARCHAR},
+    work_unit_phone = #{workUnitPhone,jdbcType=VARCHAR},
+    half_year_month_income = #{halfYearMonthIncome,jdbcType=VARCHAR},
+    id_card = #{idCard,jdbcType=VARCHAR},
+    id_card_img_obverse_side = #{idCardImgObverseSide,jdbcType=VARCHAR},
+    id_card_img_reverse_side = #{idCardImgReverseSide,jdbcType=VARCHAR},
+    driver_license_number = #{driverLicenseNumber,jdbcType=VARCHAR},
+    driver_license_img = #{driverLicenseImg,jdbcType=VARCHAR},
+    driver_license_counterpart_img = #{driverLicenseCounterpartImg,jdbcType=VARCHAR},
+    bank_id = #{bankId,jdbcType=BIGINT},
+    branch_bank = #{branchBank,jdbcType=VARCHAR},
+    back_card_number = #{backCardNumber,jdbcType=VARCHAR},
+    back_card_img = #{backCardImg,jdbcType=VARCHAR},
+    bank_statement_img = #{bankStatementImg,jdbcType=VARCHAR},
+    earnings_proof_img = #{earningsProofImg,jdbcType=VARCHAR},
+    net_car_receivable_log_img = #{netCarReceivableLogImg,jdbcType=VARCHAR},
+    communication_list_img = #{communicationListImg,jdbcType=VARCHAR},
+    attoney_power_img = #{attoneyPowerImg,jdbcType=VARCHAR},
+    create_time = #{createTime,jdbcType=TIMESTAMP},
+    update_time = #{updateTime,jdbcType=TIMESTAMP},
+    create_by = #{createBy,jdbcType=BIGINT},
+    update_by = #{updateBy,jdbcType=BIGINT},
+    other_phone = #{otherPhone,jdbcType=VARCHAR}
+    where account_id = #{accountId,jdbcType=BIGINT}
+  </update>
+
+
+
+
+  <update id="updateByAccountIdPrimaryKeySelective" parameterType="com.hc.lease.account.model.LeaseAccountCredit" >
+    update lease_account_credit
+    <set >
+      <if test="idCardAddress != null" >
+        id_card_address = #{idCardAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="liveAddress != null" >
+        live_address = #{liveAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null" >
+        zip_code = #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="housingType != null" >
+        housing_type = #{housingType,jdbcType=BIGINT},
+      </if>
+      <if test="housingTypeOtherDescribe != null" >
+        housing_type_other_describe = #{housingTypeOtherDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseName != null" >
+        spouse_name = #{spouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="spousePhone != null" >
+        spouse_phone = #{spousePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseIdCard != null" >
+        spouse_id_card = #{spouseIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseIdCardImgObverseSid != null" >
+        spouse_id_card_img_obverse_sid = #{spouseIdCardImgObverseSid,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseIdCardImgReverseSid != null" >
+        spouse_id_card_img_reverse_sid = #{spouseIdCardImgReverseSid,jdbcType=VARCHAR},
+      </if>
+      <if test="marriageCertificateImg != null" >
+        marriage_certificate_img = #{marriageCertificateImg,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyContact != null" >
+        emergency_contact = #{emergencyContact,jdbcType=VARCHAR, typeHandler=com.hc.lease.common.core.mybatis.JsonTypeHandler},
+      </if>
+      <if test="workUnit != null" >
+        work_unit = #{workUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="workUnitPhone != null" >
+        work_unit_phone = #{workUnitPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="halfYearMonthIncome != null" >
+        half_year_month_income = #{halfYearMonthIncome,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardImgObverseSide != null" >
+        id_card_img_obverse_side = #{idCardImgObverseSide,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardImgReverseSide != null" >
+        id_card_img_reverse_side = #{idCardImgReverseSide,jdbcType=VARCHAR},
+      </if>
+      <if test="driverLicenseNumber != null" >
+        driver_license_number = #{driverLicenseNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="driverLicenseImg != null" >
+        driver_license_img = #{driverLicenseImg,jdbcType=VARCHAR},
+      </if>
+      <if test="driverLicenseCounterpartImg != null" >
+        driver_license_counterpart_img = #{driverLicenseCounterpartImg,jdbcType=VARCHAR},
+      </if>
+      <if test="bankId != null" >
+        bank_id = #{bankId,jdbcType=BIGINT},
+      </if>
+      <if test="branchBank != null" >
+        branch_bank = #{branchBank,jdbcType=VARCHAR},
+      </if>
+      <if test="backCardNumber != null" >
+        back_card_number = #{backCardNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="backCardImg != null" >
+        back_card_img = #{backCardImg,jdbcType=VARCHAR},
+      </if>
+      <if test="bankStatementImg != null" >
+        bank_statement_img = #{bankStatementImg,jdbcType=VARCHAR},
+      </if>
+      <if test="earningsProofImg != null" >
+        earnings_proof_img = #{earningsProofImg,jdbcType=VARCHAR},
+      </if>
+      <if test="netCarReceivableLogImg != null" >
+        net_car_receivable_log_img = #{netCarReceivableLogImg,jdbcType=VARCHAR},
+      </if>
+      <if test="communicationListImg != null" >
+        communication_list_img = #{communicationListImg,jdbcType=VARCHAR},
+      </if>
+      <if test="attoneyPowerImg != null" >
+        attoney_power_img = #{attoneyPowerImg,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="otherPhone != null" >
+        other_phone = #{otherPhone,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where account_id = #{accountId,jdbcType=BIGINT}
+  </update>
+
+
+
+
+
+</mapper>

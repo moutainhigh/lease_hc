@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 承租人银行卡通联支付签约日志 -->
+<mapper namespace="com.hc.lease.account.dao.LeaseAccountBankpaysinLogMapper" >
+  <resultMap id="BaseResultMap" type="com.hc.lease.account.model.LeaseAccountBankpaysinLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="account_id" property="accountId" jdbcType="BIGINT" />
+    <result column="bank_pay_sin_id" property="bankPaySinId" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="req_sn" property="reqSn" jdbcType="VARCHAR" />
+    <result column="agrm_no" property="agrmNo" jdbcType="VARCHAR" />
+    <result column="req_msg" property="reqMsg" jdbcType="VARCHAR" />
+    <result column="req_code" property="reqCode" jdbcType="VARCHAR" />
+    <result column="srcreq_sn" property="srcreqSn" jdbcType="VARCHAR" />
+    <result column="rnpa_code" property="rnpaCode" jdbcType="VARCHAR" />
+    <result column="rnpa_msg" property="rnpaMsg" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, account_id, bank_pay_sin_id, create_time, update_time, create_by, update_by, 
+    status, req_sn, agrm_no, req_msg, req_code, srcreq_sn, rnpa_code, rnpa_msg
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from lease_account_bankpaysin_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lease_account_bankpaysin_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByAccountId" parameterType="java.lang.Long" >
+    delete from lease_account_bankpaysin_log
+    where account_id = #{accountId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hc.lease.account.model.LeaseAccountBankpaysinLog" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_account_bank_pay_sin_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_account_bankpaysin_log (id, account_id, bank_pay_sin_id, 
+      create_time, update_time, create_by, 
+      update_by, status, req_sn, 
+      agrm_no, req_msg, req_code, 
+      srcreq_sn, rnpa_code, rnpa_msg
+      )
+    values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, #{bankPaySinId,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, 
+      #{updateBy,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, #{reqSn,jdbcType=VARCHAR}, 
+      #{agrmNo,jdbcType=VARCHAR}, #{reqMsg,jdbcType=VARCHAR}, #{reqCode,jdbcType=VARCHAR}, 
+      #{srcreqSn,jdbcType=VARCHAR}, #{rnpaCode,jdbcType=VARCHAR}, #{rnpaMsg,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hc.lease.account.model.LeaseAccountBankpaysinLog" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_account_bank_pay_sin_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_account_bankpaysin_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      <if test="bankPaySinId != null" >
+        bank_pay_sin_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="reqSn != null" >
+        req_sn,
+      </if>
+      <if test="agrmNo != null" >
+        agrm_no,
+      </if>
+      <if test="reqMsg != null" >
+        req_msg,
+      </if>
+      <if test="reqCode != null" >
+        req_code,
+      </if>
+      <if test="srcreqSn != null" >
+        srcreq_sn,
+      </if>
+      <if test="rnpaCode != null" >
+        rnpa_code,
+      </if>
+      <if test="rnpaMsg != null" >
+        rnpa_msg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="accountId != null" >
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="bankPaySinId != null" >
+        #{bankPaySinId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="reqSn != null" >
+        #{reqSn,jdbcType=VARCHAR},
+      </if>
+      <if test="agrmNo != null" >
+        #{agrmNo,jdbcType=VARCHAR},
+      </if>
+      <if test="reqMsg != null" >
+        #{reqMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="reqCode != null" >
+        #{reqCode,jdbcType=VARCHAR},
+      </if>
+      <if test="srcreqSn != null" >
+        #{srcreqSn,jdbcType=VARCHAR},
+      </if>
+      <if test="rnpaCode != null" >
+        #{rnpaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="rnpaMsg != null" >
+        #{rnpaMsg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.account.model.LeaseAccountBankpaysinLog" >
+    update lease_account_bankpaysin_log
+    <set >
+      <if test="accountId != null" >
+        account_id = #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="bankPaySinId != null" >
+        bank_pay_sin_id = #{bankPaySinId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="reqSn != null" >
+        req_sn = #{reqSn,jdbcType=VARCHAR},
+      </if>
+      <if test="agrmNo != null" >
+        agrm_no = #{agrmNo,jdbcType=VARCHAR},
+      </if>
+      <if test="reqMsg != null" >
+        req_msg = #{reqMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="reqCode != null" >
+        req_code = #{reqCode,jdbcType=VARCHAR},
+      </if>
+      <if test="srcreqSn != null" >
+        srcreq_sn = #{srcreqSn,jdbcType=VARCHAR},
+      </if>
+      <if test="rnpaCode != null" >
+        rnpa_code = #{rnpaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="rnpaMsg != null" >
+        rnpa_msg = #{rnpaMsg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hc.lease.account.model.LeaseAccountBankpaysinLog" >
+    update lease_account_bankpaysin_log
+    set account_id = #{accountId,jdbcType=BIGINT},
+      bank_pay_sin_id = #{bankPaySinId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      status = #{status,jdbcType=INTEGER},
+      req_sn = #{reqSn,jdbcType=VARCHAR},
+      agrm_no = #{agrmNo,jdbcType=VARCHAR},
+      req_msg = #{reqMsg,jdbcType=VARCHAR},
+      req_code = #{reqCode,jdbcType=VARCHAR},
+      srcreq_sn = #{srcreqSn,jdbcType=VARCHAR},
+      rnpa_code = #{rnpaCode,jdbcType=VARCHAR},
+      rnpa_msg = #{rnpaMsg,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

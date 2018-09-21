@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.baseInfo.dao.LeaseAreaMapper">
+    <resultMap id="BaseResultMap" type="com.hc.lease.baseInfo.model.LeaseArea">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="BIGINT"/>
+        <result column="short_name" property="shortName" jdbcType="VARCHAR"/>
+        <result column="level" property="level" jdbcType="INTEGER"/>
+        <result column="merger_name" property="mergerName" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="zip_code" property="zipCode" jdbcType="VARCHAR"/>
+        <result column="pin_yin" property="pinYin" jdbcType="VARCHAR"/>
+        <result column="short_py" property="shortPy" jdbcType="VARCHAR"/>
+        <result column="model" property="model" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="is_enable" property="isEnable" jdbcType="BIT"/>
+        <result column="is_hot" property="isHot" jdbcType="BIT"/>
+    </resultMap>
+
+    <resultMap id="allResult" type="com.hc.lease.baseInfo.model.LeaseArea">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="model" property="model"/>
+        <collection property="children" column="{model=model ,id=id}" ofType="com.hc.lease.baseInfo.model.LeaseArea" javaType="java.util.ArrayList" select="findAreaByEnableAndModel"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, name, parent_id, short_name, level, merger_name, code, zip_code, pin_yin, short_py, 
+    model, create_time, update_time, create_by, update_by, sort, is_enable, is_hot
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_area
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="findPage" resultType="java.util.Map" parameterType="map">
+    select
+    id, name, parent_id "parentId", short_name "shortName", level
+    , merger_name "mergerName", code, zip_code "zipCode", pin_yin "pinYin", short_py "shortPy",
+    model, create_time "createTime", update_time "updateTime", create_by "createBy"
+    , update_by "updateBy", sort, is_enable "isEnable", is_hot "isHot"
+    from lease_area ORDER BY create_time DESC
+  </select>
+
+    <select id="findAll" parameterType="map" resultMap="allResult">
+        select id ,name, parent_id parentId, level, #{model,jdbcType=VARCHAR} model
+        from lease_area
+        where 1=1
+
+        <if test="id != null">
+            and parent_id = #{id,jdbcType=BIGINT}
+        </if>
+
+        and is_enable=TRUE
+
+        <if test="model != null">
+            and model LIKE concat('%',#{model,jdbcType=VARCHAR},'%')
+        </if>
+
+         ORDER BY create_time DESC
+    </select>
+
+    <select id="insertViewParames" resultType="java.util.Map">
+        select
+        id, name
+        from lease_area ORDER BY create_time DESC
+    </select>
+
+    <select id="findAreaByEnableAndModel" resultType="java.util.Map">
+        select id ,name, level, parent_id "parentId"
+        from lease_area
+        where 1=1
+
+        <!--
+        <if test="id != null">
+            and parent_id = #{id,jdbcType=BIGINT}
+        </if>
+        <if test="model != null">
+            and model LIKE concat('%',#{model,jdbcType=VARCHAR},'%')
+        </if>
+        -->
+
+        and is_enable = TRUE
+
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from lease_area
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+    <!-- 批量删除 -->
+    <delete id="deleteBatchById" parameterType="long">
+        delete from lease_area where id in
+        <foreach item="idItem" collection="list" open="(" separator="," close=")">
+            #{idItem}
+        </foreach>
+    </delete>
+
+    <insert id="insert" parameterType="com.hc.lease.baseInfo.model.LeaseArea">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_area_id_seq'::regclass) as id
+        </selectKey>
+    insert into lease_area (id, name, parent_id, 
+      short_name, level, merger_name, 
+      code, zip_code, pin_yin, 
+      short_py, model, create_time, 
+      update_time, create_by, update_by, 
+      sort, is_enable, is_hot)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, 
+      #{shortName,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, #{mergerName,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{zipCode,jdbcType=VARCHAR}, #{pinYin,jdbcType=VARCHAR}, 
+      #{shortPy,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT}, 
+      #{sort,jdbcType=INTEGER}, #{isEnable,jdbcType=BIT}, #{isHot,jdbcType=BIT})
+  </insert>
+    <insert id="insertSelective" parameterType="com.hc.lease.baseInfo.model.LeaseArea">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_area_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_area
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="shortName != null">
+                short_name,
+            </if>
+            <if test="level != null">
+                level,
+            </if>
+            <if test="mergerName != null">
+                merger_name,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+            <if test="zipCode != null">
+                zip_code,
+            </if>
+            <if test="pinYin != null">
+                pin_yin,
+            </if>
+            <if test="shortPy != null">
+                short_py,
+            </if>
+            <if test="model != null">
+                model,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="isEnable != null">
+                is_enable,
+            </if>
+            <if test="isHot != null">
+                is_hot,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="shortName != null">
+                #{shortName,jdbcType=VARCHAR},
+            </if>
+            <if test="level != null">
+                #{level,jdbcType=INTEGER},
+            </if>
+            <if test="mergerName != null">
+                #{mergerName,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null">
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="zipCode != null">
+                #{zipCode,jdbcType=VARCHAR},
+            </if>
+            <if test="pinYin != null">
+                #{pinYin,jdbcType=VARCHAR},
+            </if>
+            <if test="shortPy != null">
+                #{shortPy,jdbcType=VARCHAR},
+            </if>
+            <if test="model != null">
+                #{model,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="isEnable != null">
+                #{isEnable,jdbcType=BIT},
+            </if>
+            <if test="isHot != null">
+                #{isHot,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.baseInfo.model.LeaseArea">
+        update lease_area
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="shortName != null">
+                short_name = #{shortName,jdbcType=VARCHAR},
+            </if>
+            <if test="level != null">
+                level = #{level,jdbcType=INTEGER},
+            </if>
+            <if test="mergerName != null">
+                merger_name = #{mergerName,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null">
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="zipCode != null">
+                zip_code = #{zipCode,jdbcType=VARCHAR},
+            </if>
+            <if test="pinYin != null">
+                pin_yin = #{pinYin,jdbcType=VARCHAR},
+            </if>
+            <if test="shortPy != null">
+                short_py = #{shortPy,jdbcType=VARCHAR},
+            </if>
+            <if test="model != null">
+                model = #{model,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="isEnable != null">
+                is_enable = #{isEnable,jdbcType=BIT},
+            </if>
+            <if test="isHot != null">
+                is_hot = #{isHot,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hc.lease.baseInfo.model.LeaseArea">
+    update lease_area
+    set name = #{name,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      short_name = #{shortName,jdbcType=VARCHAR},
+      level = #{level,jdbcType=INTEGER},
+      merger_name = #{mergerName,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      zip_code = #{zipCode,jdbcType=VARCHAR},
+      pin_yin = #{pinYin,jdbcType=VARCHAR},
+      short_py = #{shortPy,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      sort = #{sort,jdbcType=INTEGER},
+      is_enable = #{isEnable,jdbcType=BIT},
+      is_hot = #{isHot,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

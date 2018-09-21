@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.postlending.dao.LeaseAllinpayBatchMapper" >
+  <!--通联批量代收批次统计-->
+  <resultMap id="BaseResultMap" type="com.hc.lease.postlending.model.LeaseAllinpayBatch" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="batch_number" property="batchNumber" jdbcType="VARCHAR" />
+    <result column="receivable_price" property="receivablePrice" jdbcType="NUMERIC" />
+    <result column="receipts_price" property="receiptsPrice" jdbcType="NUMERIC" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="success_number" property="successNumber" jdbcType="INTEGER" />
+    <result column="fail_number" property="failNumber" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, batch_number, receivable_price, receipts_price, number, success_number, fail_number, 
+    create_time, update_time, create_by, update_by
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from lease_allinpay_batch
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lease_allinpay_batch
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hc.lease.postlending.model.LeaseAllinpayBatch" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_allinpay_batch_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_allinpay_batch (id, batch_number, receivable_price, 
+      receipts_price, number, success_number, 
+      fail_number, create_time, update_time, 
+      create_by, update_by)
+    values (#{id,jdbcType=BIGINT}, #{batchNumber,jdbcType=VARCHAR}, #{receivablePrice,jdbcType=NUMERIC}, 
+      #{receiptsPrice,jdbcType=NUMERIC}, #{number,jdbcType=INTEGER}, #{successNumber,jdbcType=INTEGER}, 
+      #{failNumber,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hc.lease.postlending.model.LeaseAllinpayBatch" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_allinpay_batch_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_allinpay_batch
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="batchNumber != null" >
+        batch_number,
+      </if>
+      <if test="receivablePrice != null" >
+        receivable_price,
+      </if>
+      <if test="receiptsPrice != null" >
+        receipts_price,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="successNumber != null" >
+        success_number,
+      </if>
+      <if test="failNumber != null" >
+        fail_number,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="batchNumber != null" >
+        #{batchNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="receivablePrice != null" >
+        #{receivablePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="receiptsPrice != null" >
+        #{receiptsPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="successNumber != null" >
+        #{successNumber,jdbcType=INTEGER},
+      </if>
+      <if test="failNumber != null" >
+        #{failNumber,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.postlending.model.LeaseAllinpayBatch" >
+    update lease_allinpay_batch
+    <set >
+      <if test="batchNumber != null" >
+        batch_number = #{batchNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="receivablePrice != null" >
+        receivable_price = #{receivablePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="receiptsPrice != null" >
+        receipts_price = #{receiptsPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="successNumber != null" >
+        success_number = #{successNumber,jdbcType=INTEGER},
+      </if>
+      <if test="failNumber != null" >
+        fail_number = #{failNumber,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hc.lease.postlending.model.LeaseAllinpayBatch" >
+    update lease_allinpay_batch
+    set batch_number = #{batchNumber,jdbcType=VARCHAR},
+      receivable_price = #{receivablePrice,jdbcType=NUMERIC},
+      receipts_price = #{receiptsPrice,jdbcType=NUMERIC},
+      number = #{number,jdbcType=INTEGER},
+      success_number = #{successNumber,jdbcType=INTEGER},
+      fail_number = #{failNumber,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

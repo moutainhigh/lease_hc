@@ -1,0 +1,696 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.postlending.dao.LeaseAllinpaySplitMapper">
+    <!-- 通联支付超额拆分交易明细 -->
+    <resultMap id="BaseResultMap" type="com.hc.lease.postlending.model.LeaseAllinpaySplit">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="repayment_id" property="repaymentId" jdbcType="BIGINT"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="account_id" property="accountId" jdbcType="BIGINT"/>
+        <result column="split_connect_id" property="splitConnectId" jdbcType="BIGINT"/>
+        <result column="pay_way" property="payWay" jdbcType="INTEGER"/>
+        <result column="payment_result" property="paymentResult" jdbcType="INTEGER"/>
+        <result column="totle_price" property="totlePrice" jdbcType="NUMERIC"/>
+        <result column="payment_result_msg" property="paymentResultMsg" jdbcType="VARCHAR"/>
+        <result column="req_sn" property="reqSn" jdbcType="VARCHAR"/>
+        <result column="sn" property="sn" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="repayment_date" property="repaymentDate" jdbcType="TIMESTAMP"/>
+        <result column="is_over_time" property="isOverTime" jdbcType="INTEGER"/>
+        <result column="sequence_number_start" property="sequenceNumberStart" jdbcType="INTEGER"/>
+        <result column="sequence_number_end" property="sequenceNumberEnd" jdbcType="INTEGER"/>
+        <result column="update_type" property="updateType" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <resultMap id="FindPageMap" type="com.hc.lease.postlending.vo.AllinpaySplitFindPageVo">
+        <result column="account_name" property="accountName" jdbcType="VARCHAR"/>
+        <result column="repayment_date" property="repaymentDate" jdbcType="VARCHAR"/>
+        <result column="sequence_number" property="sequenceNumber" jdbcType="VARCHAR"/>
+        <result column="payment_result_name" property="paymentResultName" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="NUMERIC"/>
+        <result column="month_price" property="monthPrice" jdbcType="NUMERIC"/>
+        <result column="overdue_price" property="overduePrice" jdbcType="NUMERIC"/>
+        <result column="other_price" property="otherPrice" jdbcType="NUMERIC"/>
+        <result column="totle_price" property="totlePrice" jdbcType="NUMERIC"/>
+        <result column="total_period" property="totalPeriod" jdbcType="VARCHAR"/>
+        <result column="is_sign" property="isSign" jdbcType="INTEGER"/>
+        <result column="account_phone" property="accountPhone" jdbcType="VARCHAR"/>
+        <result column="pay_way_name" property="payWayName" jdbcType="VARCHAR"/>
+        <result column="complete_contract_number" property="completeContractNumber" jdbcType="VARCHAR"/>
+        <result column="overdue_day" property="overdueDay" jdbcType="INTEGER"/>
+        <result column="id_card" property="idCard" jdbcType="VARCHAR"/>
+        <result column="bank_code" property="bankCode" jdbcType="VARCHAR"/>
+        <result column="bank_name" property="bankName" jdbcType="VARCHAR"/>
+        <result column="backc_ard_number" property="backCardNumber" jdbcType="VARCHAR"/>
+        <result column="plate_number" property="plateNumber" jdbcType="VARCHAR"/>
+        <result column="lease_start_time" property="leaseStartTime" jdbcType="VARCHAR"/>
+        <result column="lease_end_time" property="leaseEndTime" jdbcType="VARCHAR"/>
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="repayment_id" property="repaymentId" jdbcType="BIGINT"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="account_id" property="accountId" jdbcType="BIGINT"/>
+        <result column="split_connect_id" property="splitConnectId" jdbcType="BIGINT"/>
+        <result column="pay_way" property="payWay" jdbcType="INTEGER"/>
+        <result column="payment_result" property="paymentResult" jdbcType="INTEGER"/>
+        <result column="payment_result_msg" property="paymentResultMsg" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="is_over_time" property="isOverTime" jdbcType="INTEGER"/>
+        <result column="req_sn" property="reqSn" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap id="BatchSplitMap" type="com.hc.lease.postlending.vo.BatchPostlendingPaymentSplitVo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="repayment_id" property="repaymentId" jdbcType="BIGINT"/>
+        <result column="account_id" property="accountId" jdbcType="BIGINT"/>
+        <result column="split_connect_id" property="splitConnectId" jdbcType="BIGINT"/>
+        <result column="pay_way" property="payWay" jdbcType="INTEGER"/>
+        <result column="totle_price" property="totlePrice" jdbcType="NUMERIC"/>
+        <result column="id_card" property="idCard" jdbcType="VARCHAR"/>
+        <result column="bank_name" property="bankName" jdbcType="VARCHAR"/>
+        <result column="bank_code" property="bankCode" jdbcType="VARCHAR"/>
+        <result column="agrm_no" property="agrmNo" jdbcType="VARCHAR"/>
+        <result column="backc_ard_number" property="backCardNumber" jdbcType="VARCHAR"/>
+        <result column="bank_phone" property="bankPhone" jdbcType="VARCHAR"/>
+        <result column="account_name" property="accountName" jdbcType="VARCHAR"/>
+        <result column="bank_account_name" property="bankAccountName" jdbcType="VARCHAR"/>
+        <result column="is_sign" property="isSign" jdbcType="INTEGER"/>
+        <result column="complete_contract_number" property="completeContractNumber" jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+
+    <resultMap id="findQueryTradeNewSplitMap" type="com.hc.lease.postlending.vo.FindQueryTradeNewSplitVo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="repayment_id" property="repaymentId" jdbcType="BIGINT"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="payment_result" property="paymentResult" jdbcType="INTEGER"/>
+        <result column="req_sn" property="reqSn" jdbcType="VARCHAR"/>
+        <result column="sn" property="sn" jdbcType="VARCHAR"/>
+        <result column="pay_way" property="payWay" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="allinpay_split_log_id" property="allinpaySplitLogId" jdbcType="BIGINT"/>
+        <result column="single_or_batch" property="singleOrBatch" jdbcType="INTEGER"/>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+    id, repayment_id, contract_id, account_id, split_connect_id, pay_way, payment_result, totle_price,
+    payment_result_msg, req_sn, sn, status, repayment_date, is_over_time, sequence_number_start, sequence_number_end, update_type,
+    create_time, create_by, update_time, update_by
+  </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_allinpay_split
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="findPageSplit" resultMap="FindPageMap" parameterType="java.util.Map">
+
+        select
+        aa.name "accountName", a.repayment_date "repaymentDate", concat(a.sequence_number_start, '-', a.sequence_number_end) "sequenceNumber"
+        , (case when a.status=1 then '挂起' when a.payment_result=1 then '扣款中' when a.payment_result=2 then '成功' when a.payment_result=3 then '失败' end) "paymentResultName"
+        , COALESCE(a.totle_price,0) "price"
+
+        , (
+        case when
+        COALESCE(lal_0.real_price,0) is null
+        then
+        (select COALESCE(aa.real_price,0) from lease_allinpay_log aa where (select id from lease_scheme_repayment bbb where bbb.contract_id=a.contract_id and bbb.period = (select aaa.period from lease_scheme_repayment_history aaa where aaa.contract_id=a.contract_id and aaa.history_id=aa.repayment_id)) = a.repayment_id and aa.contract_id = a.contract_id and aa.pay_type=0 and aa.sn = a.sn)
+        else
+				COALESCE(lal_0.real_price,0)
+        end
+        ) "monthPrice"
+
+        , (
+        case when
+        COALESCE(lal_2.real_price,0) is null
+        then
+        (select COALESCE(aa.real_price,0) from lease_allinpay_log aa where (select id from lease_scheme_repayment bbb where bbb.contract_id=a.contract_id and bbb.period = (select aaa.period from lease_scheme_repayment_history aaa where aaa.contract_id=a.contract_id and aaa.history_id=aa.repayment_id)) = a.repayment_id and aa.contract_id = a.contract_id and aa.pay_type=2 and aa.sn = a.sn)
+        else
+        COALESCE(lal_2.real_price,0)
+        end
+        ) "overduePrice"
+
+        , COALESCE(lsrs_7.totle_price,0) "otherPrice"
+
+        ,
+        (
+        case when
+        COALESCE(lal_0.real_price,0) is null
+        then
+        (select COALESCE(aa.real_price,0) from lease_allinpay_log aa where (select id from lease_scheme_repayment bbb where bbb.contract_id=a.contract_id and bbb.period = (select aaa.period from lease_scheme_repayment_history aaa where aaa.contract_id=a.contract_id and aaa.history_id=aa.repayment_id)) = a.repayment_id and aa.contract_id = a.contract_id and aa.pay_type=0 and aa.sn = a.sn)
+        else
+				COALESCE(lal_0.real_price,0)
+        end
+        )
+        +
+        (
+        case when
+        COALESCE(lal_2.real_price,0) is null
+        then
+        (select COALESCE(aa.real_price,0) from lease_allinpay_log aa where (select id from lease_scheme_repayment bbb where bbb.contract_id=a.contract_id and bbb.period = (select aaa.period from lease_scheme_repayment_history aaa where aaa.contract_id=a.contract_id and aaa.history_id=aa.repayment_id)) = a.repayment_id and aa.contract_id = a.contract_id and aa.pay_type=2 and aa.sn = a.sn)
+        else
+        COALESCE(lal_2.real_price,0)
+        end
+        )
+        +
+        COALESCE(lsrs_7.totle_price,0) "totlePrice"
+
+        , ((case when e.period_count is null or e.period_count=0 then (select count(1) from lease_scheme_repayment bb where bb.contract_id = a.contract_id) else e.period_count end)
+        || '-' || c.period
+        ) "totalPeriod"
+        , (case when h.agrm_no is null then 0 else 1 end ) "isSign"
+        , aa.phone "accountPhone"
+        , (case
+        when a.pay_way='0' THEN 'pos'
+        when a.pay_way='1' THEN '转账'
+        when a.pay_way='2' THEN '微信'
+        when a.pay_way='3' THEN '支付宝'
+        when a.pay_way='4' THEN '通联代扣'
+        when a.pay_way='5' THEN '其他'
+        when a.pay_way='6' THEN'批量补录'
+        when a.pay_way='7' THEN'线下缴款登记'
+        when a.pay_way='8' THEN'未开始还款'
+        when a.pay_way='9' THEN'通联协议支付'
+        end) "payWayName"
+        , d.complete_contract_number "completeContractNumber"
+
+        ,(
+        case when
+        COALESCE(lal_2.real_price,0) is null
+        then
+        (select COALESCE(aa.real_overdue_day,0) from lease_allinpay_log aa where (select id from lease_scheme_repayment bbb where bbb.contract_id=a.contract_id and bbb.period = (select aaa.period from lease_scheme_repayment_history aaa where aaa.contract_id=a.contract_id and aaa.history_id=aa.repayment_id)) = a.repayment_id and aa.contract_id = a.contract_id and aa.pay_type=2 and aa.sn = a.sn)
+        else
+        COALESCE(lal_2.real_price,0)
+        end
+        ) "overdueDay"
+
+        , i.id_card "idCard"
+        , j.code "bankCode"
+        , j.name "bankName"
+        , g.back_card_number "backCardNumber"
+        , k.plate_number "plateNumber"
+        , to_char(d.lease_start_time, 'yyyy-MM-dd') "leaseStartTime"
+        , to_char(d.lease_end_time, 'yyyy-MM-dd') "leaseEndTime"
+
+        , a.id, a.repayment_id "repaymentId", a.contract_id "contractId", a.account_id "accountId", a.split_connect_id "splitConnectId", a.pay_way "payWay", a.payment_result "paymentResult"
+        , a.payment_result_msg "paymentResultMsg", a.status, a.is_over_time "isOverTime", a.req_sn "reqSn"
+        from lease_allinpay_split a
+
+        INNER JOIN lease_scheme_repayment c on a.repayment_id = c.id and c.contract_id=a.contract_id
+        INNER JOIN lease_contract d on a.contract_id = d.id
+        INNER JOIN lease_scheme_order e on e.id = d.scheme_order_id
+        LEFT JOIN lease_scheme_order_account f on f.scheme_order_id = e.id and f.is_default_pay=1
+        LEFT JOIN lease_account_bank_card g on f.bank_card_id = g.id
+        INNER JOIN lease_account aa on aa.id = f.account_id
+        LEFT JOIN lease_account_bank_pay_sin h on g.id = h.bank_card_id
+        LEFT JOIN lease_account_credit i on aa.id = i.account_id
+        LEFT JOIN lease_bank j on j.id = g.bank_id
+        LEFT JOIN lease_car k on k.id = e.card_id
+
+        LEFT JOIN lease_allinpay_log lal_0 on lal_0.repayment_id = a.repayment_id and lal_0.contract_id = a.contract_id and lal_0.pay_type=0 and lal_0.sn = a.sn
+        LEFT JOIN lease_allinpay_log lal_2 on lal_2.repayment_id = a.repayment_id and lal_2.contract_id = a.contract_id and lal_2.pay_type=2 and lal_2.sn = a.sn
+        LEFT JOIN lease_scheme_repayment_status lsrs_7 on lsrs_7.repayment_id=a.repayment_id and lsrs_7.contract_id=a.contract_id and lsrs_7.type=7 and lsrs_7.sn = a.sn
+
+        where a.update_type = 0
+        order by a.repayment_date desc
+
+    </select>
+
+    <!-- 批量协议支付查询需要处理的数据 -->
+    <select id="findBatchSplitDual" resultMap="BatchSplitMap">
+
+        select
+
+        table_1.id, table_1.contractid "contractId", table_1.repaymentid "repaymentId", table_1.accountid "accountId",
+        table_1.payway "payWay", table_1.totleprice "totlePrice"
+        , table_1.idcard "idCard"
+        , table_1.bankname "bankName"
+        , table_1.bankcode "bankCode"
+        , table_1.agrmno "agrmNo"
+        , table_1.backcardnumber "backCardNumber"
+        , table_1.bankphone "bankPhone"
+        , table_1.accountname "accountName"
+        , table_1.issign "isSign"
+        , table_1.completecontractnumber "completeContractNumber"
+
+        from (
+        select
+
+        a.id, a.repayment_id "repaymentid", a.contract_id "contractid", a.account_id "accountid", a.split_connect_id
+        "splitConnectId", a.pay_way "payway"
+        , a.totle_price "totleprice"
+        , h.id_card "idcard"
+        , i.name "bankname"
+        , i.code "bankcode"
+        , j.agrm_no "agrmno"
+        , f.back_card_number "backcardnumber"
+        , f.bank_phone "bankphone"
+        , g.name "accountname"
+        , (case when j.agrm_no is null then 0 else 1 end ) "issign"
+        , c.complete_contract_number "completecontractnumber"
+
+        from lease_allinpay_split a
+        INNER JOIN lease_scheme_repayment b on b.id = a.repayment_id and a.contract_id = b.contract_id
+        INNER JOIN lease_contract c on c.id = a.contract_id
+        INNER JOIN lease_scheme_order d on d.id = c.scheme_order_id
+        LEFT JOIN lease_scheme_order_account e on e.scheme_order_id = d.id
+        LEFT JOIN lease_account_bank_card f on e.bank_card_id = f.id
+        LEFT JOIN lease_account g on g.id = f.account_id
+        LEFT JOIN lease_account_credit h on g.id = h.account_id
+        LEFT JOIN lease_bank i on i.id = f.bank_id
+        LEFT JOIN lease_account_bank_pay_sin j on f.id = j.bank_card_id
+
+        where 1=1
+
+        <!--暂只开放个人类型的承租人的合同-->
+        and g.type=0
+
+        and (a.payment_result = 0 or a.payment_result = 3)
+
+        <if test="allinpaySplitIds != null">
+            and a.id in
+            <foreach item="item" collection="allinpaySplitIds" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+
+        <if test="repaymentDate != null">
+            and a.repayment_date = #{repaymentDate,jdbcType=TIMESTAMP}
+        </if>
+
+        <if test="status != null">
+            and a.status != #{status,jdbcType=INTEGER}
+        </if>
+
+        )table_1 where 1=1
+        <if test="payWay != null">
+            and table_1.payway = #{payWay}
+        </if>
+
+    </select>
+
+    <select id="selectDualSinglePostlendingPaymentSplit" resultMap="BatchSplitMap">
+        select
+        a.id, a.repayment_id "repaymentId", a.contract_id "contractId", a.account_id "accountId", a.split_connect_id "splitConnectId", a.pay_way "payWay"
+        , a.totle_price "totlePrice"
+        , (case when g.type=1 then k.legal_person_id_card else h.id_card end) "idCard"
+        , i.name "bankName"
+        , i.code "bankCode"
+        , j.agrm_no "agrmNo"
+        , f.back_card_number "backCardNumber"
+        , f.bank_phone "bankPhone"
+        , g.name "accountName"
+        ,(case when g.type=1 then k.bank_account_name else g.name end) "bankAccountName"
+        , (case when j.agrm_no is null then 0 else 1 end ) "isSign"
+        , c.complete_contract_number "completeContractNumber"
+        from lease_allinpay_split a
+        INNER JOIN lease_scheme_repayment b on b.id = a.repayment_id and a.contract_id = b.contract_id
+        INNER JOIN lease_contract c on c.id = a.contract_id
+        INNER JOIN lease_scheme_order d on d.id = c.scheme_order_id
+        LEFT JOIN lease_scheme_order_account e on e.scheme_order_id = d.id
+        LEFT JOIN lease_account_bank_card f on e.bank_card_id = f.id
+        LEFT JOIN lease_account g on g.id = f.account_id
+        LEFT JOIN lease_account_credit h on g.id = h.account_id
+        LEFT JOIN lease_bank i on i.id = f.bank_id
+        LEFT JOIN lease_account_bank_pay_sin j on f.id = j.bank_card_id
+        LEFT JOIN lease_account_company k on g.id = k.account_id
+        where 1=1
+        and g.type=0
+        and (a.payment_result = 0 or a.payment_result = 3)
+        and a.id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <!-- 需要轮询通联超额拆分 的 交易流水/状态为扣款中 -->
+    <select id="findQueryTradeNewSplit" resultMap="findQueryTradeNewSplitMap">
+        select a.id, a.repayment_id "repaymentId", a.contract_id "contractId", a.payment_result "paymentResult",a.req_sn "reqSn", a.sn
+        , a.pay_way "payWay"
+        , b.status, b.id "allinpaySplitLogId", b.single_or_batch "singleOrBatch"
+        from lease_allinpay_split a
+        inner join lease_allinpay_split_log b on (a.id=b.allinpay_split_id and b.create_time=(select max(c.create_time) from lease_allinpay_split_log c where a.id=c.allinpay_split_id) and b.status=0)
+        where 1=1
+        and a.payment_result=1
+        and (a.pay_way = 4 or a.pay_way = 9)
+        and a.req_sn is not NULL
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from lease_allinpay_split
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+    <!-- 批量添加 -->
+    <insert id="insertList">
+
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            insert into lease_allinpay_split ( repayment_id, contract_id
+            ,account_id, split_connect_id, pay_way, payment_result
+            ,totle_price
+            ,status, repayment_date
+            ,is_over_time, sequence_number_start, sequence_number_end
+            , create_time, update_time
+            , create_by, update_by, sn
+            )
+            values (#{item.repaymentId,jdbcType=BIGINT}, #{item.contractId,jdbcType=BIGINT}
+            ,#{item.accountId,jdbcType=BIGINT}, #{item.splitConnectId,jdbcType=BIGINT}, #{item.payWay,jdbcType=INTEGER},
+            #{item.paymentResult,jdbcType=INTEGER}
+            ,#{item.totlePrice,jdbcType=NUMERIC}
+            ,#{item.status,jdbcType=INTEGER}, #{item.repaymentDate,jdbcType=TIMESTAMP}
+            ,#{item.isOverTime,jdbcType=INTEGER}, #{item.sequenceNumberStart,jdbcType=INTEGER}
+            ,#{item.sequenceNumberEnd,jdbcType=INTEGER}
+            , #{item.createTime,jdbcType=TIMESTAMP},#{item.updateTime,jdbcType=TIMESTAMP}
+            , #{item.createBy,jdbcType=BIGINT}, #{item.updateBy,jdbcType=BIGINT}, #{item.sn,jdbcType=VARCHAR}
+            )
+        </foreach>
+
+    </insert>
+
+    <insert id="insert" parameterType="com.hc.lease.postlending.model.LeaseAllinpaySplit">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_allinpay_split_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_allinpay_split (id, repayment_id, contract_id,
+        account_id, split_connect_id, pay_way, payment_result,
+        totle_price, payment_result_msg, req_sn,
+        sn, status, repayment_date,
+        is_over_time, sequence_number_start, sequence_number_start, update_type, create_time,
+        create_by, update_time, update_by
+        )
+        values (#{id,jdbcType=BIGINT}, #{repaymentId,jdbcType=BIGINT}, #{contractId,jdbcType=BIGINT},
+        #{accountId,jdbcType=BIGINT}, #{item.splitConnectId,jdbcType=BIGINT}, #{payWay,jdbcType=INTEGER},
+        #{paymentResult,jdbcType=INTEGER},
+        #{totlePrice,jdbcType=NUMERIC}, #{paymentResultMsg,jdbcType=VARCHAR}, #{reqSn,jdbcType=VARCHAR},
+        #{sn,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{repaymentDate,jdbcType=TIMESTAMP},
+        #{isOverTime,jdbcType=INTEGER}, #{sequenceNumberStart,jdbcType=INTEGER},
+        #{item.sequenceNumberEnd,jdbcType=INTEGER}, #{updateType,jdbcType=INTEGER}
+        , #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP},
+        #{updateBy,jdbcType=BIGINT}
+        )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.hc.lease.postlending.model.LeaseAllinpaySplit">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_allinpay_split_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_allinpay_split
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="repaymentId != null">
+                repayment_id,
+            </if>
+            <if test="contractId != null">
+                contract_id,
+            </if>
+            <if test="splitConnectId != null">
+                split_connect_id,
+            </if>
+            <if test="accountId != null">
+                account_id,
+            </if>
+            <if test="splitConnectId != null">
+                split_connect_id,
+            </if>
+            <if test="payWay != null">
+                pay_way,
+            </if>
+            <if test="paymentResult != null">
+                payment_result,
+            </if>
+            <if test="totlePrice != null">
+                totle_price,
+            </if>
+            <if test="paymentResultMsg != null">
+                payment_result_msg,
+            </if>
+            <if test="reqSn != null">
+                req_sn,
+            </if>
+            <if test="sn != null">
+                sn,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="repaymentDate != null">
+                repayment_date,
+            </if>
+            <if test="isOverTime != null">
+                is_over_time,
+            </if>
+            <if test="sequenceNumberStart != null">
+                sequence_number_start,
+            </if>
+            <if test="sequenceNumberEnd != null">
+                sequence_number_end,
+            </if>
+            <if test="updateType != null">
+                update_type,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="repaymentId != null">
+                #{repaymentId,jdbcType=BIGINT},
+            </if>
+            <if test="contractId != null">
+                #{contractId,jdbcType=BIGINT},
+            </if>
+            <if test="accountId != null">
+                #{accountId,jdbcType=BIGINT},
+            </if>
+            <if test="splitConnectId != null">
+                #{splitConnectId,jdbcType=BIGINT},
+            </if>
+            <if test="payWay != null">
+                #{payWay,jdbcType=INTEGER},
+            </if>
+            <if test="paymentResult != null">
+                #{paymentResult,jdbcType=INTEGER},
+            </if>
+            <if test="totlePrice != null">
+                #{totlePrice,jdbcType=NUMERIC},
+            </if>
+            <if test="paymentResultMsg != null">
+                #{paymentResultMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="reqSn != null">
+                #{reqSn,jdbcType=VARCHAR},
+            </if>
+            <if test="sn != null">
+                #{sn,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="repaymentDate != null">
+                #{repaymentDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isOverTime != null">
+                #{isOverTime,jdbcType=INTEGER},
+            </if>
+            <if test="sequenceNumberStart != null">
+                #{sequenceNumberStart,jdbcType=INTEGER},
+            </if>
+            <if test="sequenceNumberEnd != null">
+                #{sequenceNumberEnd,jdbcType=INTEGER},
+            </if>
+            <if test="updateType != null">
+                #{updateType,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.postlending.model.LeaseAllinpaySplit">
+        update lease_allinpay_split
+        <set>
+            <if test="repaymentId != null">
+                repayment_id = #{repaymentId,jdbcType=BIGINT},
+            </if>
+            <if test="contractId != null">
+                contract_id = #{contractId,jdbcType=BIGINT},
+            </if>
+            <if test="accountId != null">
+                account_id = #{accountId,jdbcType=BIGINT},
+            </if>
+            <if test="splitConnectId != null">
+                split_connect_id = #{splitConnectId,jdbcType=BIGINT},
+            </if>
+            <if test="payWay != null">
+                pay_way = #{payWay,jdbcType=INTEGER},
+            </if>
+            <if test="paymentResult != null">
+                payment_result = #{paymentResult,jdbcType=INTEGER},
+            </if>
+            <if test="totlePrice != null">
+                totle_price = #{totlePrice,jdbcType=NUMERIC},
+            </if>
+            <if test="paymentResultMsg != null">
+                payment_result_msg = #{paymentResultMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="reqSn != null">
+                req_sn = #{reqSn,jdbcType=VARCHAR},
+            </if>
+            <if test="sn != null">
+                sn = #{sn,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="repaymentDate != null">
+                repayment_date = #{repaymentDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isOverTime != null">
+                is_over_time = #{isOverTime,jdbcType=INTEGER},
+            </if>
+            <if test="sequenceNumberStart != null">
+                sequence_number_start = #{sequenceNumberStart,jdbcType=INTEGER},
+            </if>
+            <if test="sequenceNumberEnd != null">
+                sequence_number_end = #{sequenceNumberEnd,jdbcType=INTEGER},
+            </if>
+            <if test="updateType != null">
+                update_type = #{updateType,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.hc.lease.postlending.model.LeaseAllinpaySplit">
+    update lease_allinpay_split
+    set repayment_id = #{repaymentId,jdbcType=BIGINT},
+      contract_id = #{contractId,jdbcType=BIGINT},
+      account_id = #{accountId,jdbcType=BIGINT},
+      split_connect_id = #{splitConnectId,jdbcType=BIGINT},
+      pay_way = #{payWay,jdbcType=INTEGER},
+      payment_result = #{paymentResult,jdbcType=INTEGER},
+      totle_price = #{totlePrice,jdbcType=NUMERIC},
+      payment_result_msg = #{paymentResultMsg,jdbcType=VARCHAR},
+      req_sn = #{reqSn,jdbcType=VARCHAR},
+      sn = #{sn,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      repayment_date = #{repaymentDate,jdbcType=TIMESTAMP},
+      is_over_time = #{isOverTime,jdbcType=INTEGER},
+      sequence_number_start = #{sequenceNumberStart,jdbcType=INTEGER},
+      sequence_number_end = #{sequenceNumberEnd,jdbcType=INTEGER},
+      update_type = #{updateType,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <update id="changeStatusHangUpOrDown" parameterType="java.util.Map">
+        update lease_allinpay_split
+        set status = #{status,jdbcType=INTEGER}
+        where id in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <!-- 批量更新 -->
+    <update id="batchUpdateByContract">
+
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update lease_allinpay_split
+            <set>
+                payment_result = #{item.paymentResult},
+                payment_result_msg = #{item.paymentResultMsg},
+                pay_way = #{item.payWay},
+                update_time = #{item.updateTime},
+                update_by = #{item.updateBy}
+                where id = #{item.id}
+            </set>
+        </foreach>
+
+    </update>
+
+    <update id="changeIsOverTime" parameterType="java.util.Map">
+        update lease_allinpay_split
+        set is_over_time = 1
+        where status !=1
+        and payment_result !=2
+        and is_over_time=0
+        and repayment_date &lt;=#{repaymentDate,jdbcType=TIMESTAMP}
+    </update>
+
+    <update id="updateByContractId" parameterType="com.hc.lease.postlending.model.LeaseAllinpaySplit">
+        update lease_allinpay_split
+        set
+        update_type = #{updateType,jdbcType=INTEGER}
+        where contract_id = #{contractId,jdbcType=BIGINT}
+    </update>
+
+    <!-- 合同修改同时修改 拆单的还款计划主键id,同时修改 -->
+    <update id="updateRepaymentId">
+
+        update
+            lease_allinpay_split as i
+        set
+            repayment_id = t.repayment_id
+        from (
+            select
+                a.contract_id
+                ,b.repayment_id AS split_repayment_id
+                ,c.id repayment_id
+                ,c.period
+            from
+            lease_scheme_repayment_history a
+            inner join lease_allinpay_split_connect b on a.contract_id=b.contract_id and a.history_id=b.repayment_id
+            inner join lease_scheme_repayment c on a.contract_id=c.contract_id and a.period=c.period
+            where a.contract_id = #{contractId,jdbcType=BIGINT}
+        ) as t
+        where i.repayment_id = t.split_repayment_id
+        and i.contract_id = t.contract_id
+
+    </update>
+
+</mapper>

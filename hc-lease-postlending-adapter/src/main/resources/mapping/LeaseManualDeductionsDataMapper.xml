@@ -1,0 +1,678 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.postlending.dao.LeaseManualDeductionsDataMapper">
+
+    <resultMap id="BaseResultMap" type="com.hc.lease.postlending.model.LeaseManualDeductionsData">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="statist_id" property="statistId" jdbcType="BIGINT"/>
+        <result column="repayment_id" property="repaymentId" jdbcType="BIGINT"/>
+        <result column="repayment_status_id" property="repaymentStatusId" jdbcType="BIGINT"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="branch_company" property="branchCompany" jdbcType="VARCHAR"/>
+        <result column="bank_account_name" property="bankAccountName" jdbcType="VARCHAR"/>
+        <result column="bank_phone" property="bankPhone" jdbcType="VARCHAR"/>
+        <result column="really_bank_phone" property="reallyBankPhone" jdbcType="VARCHAR"/>
+        <result column="bank_code" property="bankCode" jdbcType="VARCHAR"/>
+        <result column="back_card_number" property="backCardNumber" jdbcType="VARCHAR"/>
+        <result column="agrm_no" property="agrmNo" jdbcType="VARCHAR"/>
+        <result column="id_card" property="idCard" jdbcType="VARCHAR"/>
+        <result column="total_price" property="totalPrice" jdbcType="NUMERIC"/>
+        <result column="overdue_day" property="overdueDay" jdbcType="INTEGER"/>
+        <result column="plate_number" property="plateNumber" jdbcType="VARCHAR"/>
+        <result column="repayment_date" property="repaymentDate" jdbcType="TIMESTAMP"/>
+        <result column="really_repayment_date" property="reallyRepaymentDate" jdbcType="TIMESTAMP"/>
+        <result column="payment_result" property="paymentResult" jdbcType="INTEGER"/>
+        <result column="payment_result_msg" property="paymentResultMsg" jdbcType="VARCHAR"/>
+        <result column="req_sn" property="reqSn" jdbcType="VARCHAR"/>
+        <result column="sn" property="sn" jdbcType="VARCHAR"/>
+        <result column="pay_way" property="payWay" jdbcType="INTEGER"/>
+        <result column="is_operation" property="isOperation" jdbcType="INTEGER"/>
+        <result column="is_operation_msg" property="isOperationMsg" jdbcType="VARCHAR"/>
+        <result column="is_exist_contract" property="isExistContract" jdbcType="INTEGER"/>
+        <result column="is_sign" property="isSign" jdbcType="INTEGER"/>
+        <result column="is_excess_limit" property="isExcessLimit" jdbcType="INTEGER"/>
+        <result column="is_price_err" property="isPriceErr" jdbcType="INTEGER"/>
+        <result column="is_repayment_date_err" property="isRepaymentDateErr" jdbcType="INTEGER"/>
+        <result column="is_bank_phone_err" property="isBankPhoneErr" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <resultMap id="FindNeedPayMap" type="com.hc.lease.postlending.vo.FindNeedPayVo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="statist_id" property="statistId" jdbcType="BIGINT"/>
+        <result column="repayment_id" property="repaymentId" jdbcType="BIGINT"/>
+        <result column="repayment_status_id" property="repaymentStatusId" jdbcType="BIGINT"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="branch_company" property="branchCompany" jdbcType="VARCHAR"/>
+        <result column="bank_account_name" property="bankAccountName" jdbcType="VARCHAR"/>
+        <result column="bank_phone" property="bankPhone" jdbcType="VARCHAR"/>
+        <result column="bank_code" property="bankCode" jdbcType="VARCHAR"/>
+        <result column="back_card_number" property="backCardNumber" jdbcType="VARCHAR"/>
+        <result column="id_card" property="idCard" jdbcType="VARCHAR"/>
+        <result column="total_price" property="totalPrice" jdbcType="NUMERIC"/>
+        <result column="repayment_date" property="repaymentDate" jdbcType="TIMESTAMP"/>
+        <result column="payment_result" property="paymentResult" jdbcType="INTEGER"/>
+        <result column="is_operation" property="isOperation" jdbcType="INTEGER"/>
+        <result column="is_operation_msg" property="isOperationMsg" jdbcType="VARCHAR"/>
+        <result column="is_exist_contract" property="isExistContract" jdbcType="INTEGER"/>
+        <result column="is_sign" property="isSign" jdbcType="INTEGER"/>
+        <result column="is_excess_limit" property="isExcessLimit" jdbcType="INTEGER"/>
+        <result column="is_price_err" property="isPriceErr" jdbcType="INTEGER"/>
+        <result column="is_repayment_date_err" property="isRepaymentDateErr" jdbcType="INTEGER"/>
+        <result column="is_bank_phone_err" property="isBankPhoneErr" jdbcType="INTEGER"/>
+        <result column="agrm_no" property="agrmNo" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <resultMap id="FindQueryTradeMap" type="com.hc.lease.postlending.vo.FindQueryTradeVo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="statist_id" property="statistId" jdbcType="BIGINT"/>
+        <result column="repayment_id" property="repaymentId" jdbcType="BIGINT"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="payment_result" property="paymentResult" jdbcType="INTEGER"/>
+        <result column="req_sn" property="reqSn" jdbcType="VARCHAR"/>
+        <result column="sn" property="sn" jdbcType="VARCHAR"/>
+        <result column="pay_way" property="payWay" jdbcType="INTEGER"/>
+        <result column="total_price" property="totalPrice" jdbcType="NUMERIC"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="pay_id" property="payId" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <resultMap id="ExportManualDeductionsCheckExcelMap" type="com.hc.lease.postlending.vo.ExportManualDeductionsCheckExcelVo">
+        <result column="branch_company" property="branchCompany" jdbcType="VARCHAR"/>
+        <result column="bank_account_name" property="bankAccountName" jdbcType="VARCHAR"/>
+        <result column="bank_phone" property="bankPhone" jdbcType="VARCHAR"/>
+        <result column="really_bank_phone" property="reallyBankPhone" jdbcType="VARCHAR"/>
+        <result column="bank_code" property="bankCode" jdbcType="VARCHAR"/>
+        <result column="back_card_number" property="backCardNumber" jdbcType="VARCHAR"/>
+        <result column="id_card" property="idCard" jdbcType="VARCHAR"/>
+        <result column="total_price" property="totalPrice" jdbcType="NUMERIC"/>
+        <result column="overdue_day" property="overdueDay" jdbcType="INTEGER"/>
+        <result column="plate_number" property="plateNumber" jdbcType="VARCHAR"/>
+        <result column="repayment_date" property="repaymentDate" jdbcType="TIMESTAMP"/>
+        <result column="really_repayment_date" property="reallyRepaymentDate" jdbcType="TIMESTAMP"/>
+        <result column="payment_result_name" property="paymentResultName" jdbcType="VARCHAR"/>
+        <result column="payment_result_msg" property="paymentResultMsg" jdbcType="VARCHAR"/>
+        <result column="is_operation_name" property="isOperationName" jdbcType="VARCHAR"/>
+        <result column="is_operation_msg" property="isOperationMsg" jdbcType="VARCHAR"/>
+        <result column="is_exist_contract_name" property="isExistContractName" jdbcType="VARCHAR"/>
+        <result column="is_sign_name" property="isSignName" jdbcType="VARCHAR"/>
+        <result column="is_excess_limit_name" property="isExcessLimitName" jdbcType="VARCHAR"/>
+        <result column="is_price_err_name" property="isPriceErrName" jdbcType="VARCHAR"/>
+        <result column="is_repayment_date_err_name" property="isRepaymentDateErrName" jdbcType="VARCHAR"/>
+        <result column="is_bank_phone_err_name" property="isBankPhoneErrName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, statist_id, repayment_id, repayment_status_id, contract_id, branch_company, bank_account_name, 
+    bank_phone, really_bank_phone, bank_code, back_card_number, agrm_no, id_card, total_price, overdue_day, plate_number,
+    repayment_date, really_repayment_date, payment_result, payment_result_msg, req_sn, sn, pay_way, is_operation, is_operation_msg,
+    is_exist_contract, is_sign, is_excess_limit, is_price_err, is_repayment_date_err, 
+    is_bank_phone_err, create_time, create_by, update_time, update_by
+  </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_manual_deductions_data
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <!-- 下载核对、下载结果 -->
+    <select id="exportManualDeductionsCheckExcel" resultMap="ExportManualDeductionsCheckExcelMap">
+        select
+        a.branch_company "branchCompany", a.bank_account_name "bankAccountName"
+        , a.bank_phone "bankPhone", a.really_bank_phone "reallyBankPhone", a.bank_code "bankCode"
+        , a.back_card_number "backCardNumber", a.id_card "idCard", a.total_price "totalPrice"
+        , a.overdue_day "overdueDay", a.plate_number "plateNumber"
+        , a.repayment_date "repaymentDate", a.really_repayment_date "reallyRepaymentDate"
+        , (case when a.payment_result=0 then '待付款' when a.payment_result=1 then '扣款中' when a.payment_result=2 then '成功'
+        when a.payment_result=3 then '失败' end) "paymentResultName"
+        , a.payment_result_msg "paymentResultMsg"
+
+        , (case when a.is_operation=1 then (case when c.payment_result is null then '是' else (case when (c.payment_result=1 or c.payment_result=2) then '否'  else '是' end) end) else '否' end) "isOperationName"
+        , (case when a.is_operation=1 then (case when c.payment_result is null then a.is_operation_msg else (case when (c.payment_result=1 or c.payment_result=2) then '合同已经操作过通联扣款或线下缴款登记'  else a.is_operation_msg end) end) else a.is_operation_msg end) "isOperationMsg"
+
+        , (case when a.is_exist_contract=0 then '否' else '是' end) "isExistContractName"
+        , (case when a.is_sign=0 then '否' else '是' end) "isSignName"
+        , (case when a.is_excess_limit=0 then '否' else '是' end) "isExcessLimitName"
+        , (case when a.is_price_err=1 then '金额异常,月租+滞纳金金额相差大于0.1' end) "isPriceErrName"
+        , (case when a.is_repayment_date_err=0 then '否' else '是' end) "isRepaymentDateErrName"
+        , (case when a.is_bank_phone_err=0 then '否' else '是' end) "isBankPhoneErrName"
+
+        from lease_manual_deductions_data a
+        inner join lease_manual_deductions_statist b on a.statist_id = b.id
+        left join lease_scheme_repayment_status c on a.repayment_id = c.repayment_id and a.contract_id = c.contract_id and c.type=0
+        where b.id = #{statistId,jdbcType=BIGINT}
+        <if test="isPay != null">
+            and b.is_pay = #{isPay,jdbcType=INTEGER}
+        </if>
+
+    </select>
+
+    <!-- 需要轮询通联手动扣款 的 交易流水/状态为扣款中 -->
+    <select id="findQueryTrade" resultMap="FindQueryTradeMap">
+        select a.id, a.statist_id "statistId", a.repayment_id "repaymentId", a.contract_id "contractId", a.payment_result "paymentResult",a.req_sn "reqSn", a.sn
+        , a.pay_way "payWay", a.total_price "totalPrice"
+        , b.status, b.id "payId"
+        from lease_manual_deductions_data a
+        inner join lease_manual_deductions_pay_log b on (a.id=b.data_id and b.create_time=(select max(c.create_time) from lease_manual_deductions_pay_log c where a.id=c.data_id) and b.status=0)
+        where 1=1
+        and a.payment_result=1
+        and a.pay_way = 9
+        and a.req_sn is not NULL
+    </select>
+
+    <!-- 可以扣款的数据 -->
+    <select id="findNeedPay" resultMap="FindNeedPayMap">
+
+        select
+        table_1.id, table_1.statistid "statistId", table_1.repaymentid "repaymentId", table_1.repaymentstatusid "repaymentStatusId"
+        , table_1.contractid "contractId", table_1.branchcompany "branchCompany", table_1.bankaccountname "bankAccountName",
+        table_1.bankphone "bankPhone", table_1.bankcode "bankCode", table_1.backcardnumber "backCardNumber", table_1.agrmno "agrmNo"
+        , table_1.idcard "idCard", table_1.totalprice "totalPrice", table_1.overdueday "overdueDay", table_1.platenumber "plateNumber",
+        table_1.repaymentdate "repaymentDate", table_1.paymentresult "paymentResult", table_1.isoperation "isOperation", table_1.isoperationmsg "isOperationMsg",
+        table_1.isexistcontract "isExistContract", table_1.issign "isSign", table_1.isexcesslimit "isExcessLimit", table_1.ispriceerr "isPriceErr", table_1.isrepaymentdateerr "isRepaymentDateErr"
+        , table_1.ispay "isPay"
+        , table_1.isbankphoneerr "isBankPhoneErr"
+        , table_1.createtime "createTime", table_1.createby "createBy"
+
+        from(
+
+        select
+        a.id, a.statist_id "statistid", a.repayment_id "repaymentid", a.repayment_status_id "repaymentstatusid"
+        , a.contract_id "contractid", a.branch_company "branchcompany", a.bank_account_name "bankaccountname",
+        a.bank_phone "bankphone", a.bank_code "bankcode", a.back_card_number "backcardnumber", a.agrm_no "agrmno"
+        , a.id_card "idcard", a.total_price "totalprice", a.overdue_day "overdueday", a.plate_number "platenumber",
+        a.repayment_date "repaymentdate", a.payment_result "paymentresult", a.is_operation "isoperation", a.is_operation_msg "isoperationmsg",
+        a.is_exist_contract "isexistcontract", a.is_sign "issign", a.is_excess_limit "isexcesslimit", a.is_price_err "ispriceerr", a.is_repayment_date_err "isrepaymentdateerr"
+
+        , (case when a.is_exist_contract=1 then
+        (
+        case when ((select payment_result from lease_scheme_repayment_status aa where a.repayment_id = aa.repayment_id and a.contract_id = aa.contract_id and aa.type=0)=0 or (select payment_result from lease_scheme_repayment_status aa where a.repayment_id = aa.repayment_id and a.contract_id = aa.contract_id and aa.type=0)=3)
+        then 1 else 0 end
+        )
+        else 1 end) "ispay"
+
+        , a.is_bank_phone_err "isbankphoneerr"
+        , a.create_time "createtime", a.create_by "createby"
+
+        from lease_manual_deductions_data a
+        inner join lease_manual_deductions_statist b on a.statist_id = b.id
+        where 1=1
+        and (a.payment_result = 0 or a.payment_result = 3)
+        and a.is_operation = 1
+        and a.statist_id = #{statistId,jdbcType=BIGINT}
+
+        )table_1 where table_1.ispay=1
+
+
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from lease_manual_deductions_data
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+    <delete id="deleteByStatistId" parameterType="java.lang.Long">
+        delete from lease_manual_deductions_data
+        where statist_id = #{statistId,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="insertList">
+
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            insert into lease_manual_deductions_data
+            (statist_id, repayment_id,
+            repayment_status_id, contract_id, branch_company,
+            bank_account_name, bank_phone, really_bank_phone, bank_code,
+            back_card_number, agrm_no, id_card, total_price,
+            overdue_day, plate_number, repayment_date,really_repayment_date,
+            payment_result, is_operation, is_operation_msg,
+            is_exist_contract, is_sign, is_excess_limit,
+            is_price_err, is_repayment_date_err, is_bank_phone_err,
+            create_time, create_by, update_time,
+            update_by
+            )
+            values (#{item.statistId,jdbcType=BIGINT}
+            , #{item.repaymentId,jdbcType=BIGINT},
+            #{item.repaymentStatusId,jdbcType=BIGINT}
+            , #{item.contractId,jdbcType=BIGINT},
+            #{item.branchCompany,jdbcType=VARCHAR},
+            #{item.bankAccountName,jdbcType=VARCHAR}
+            , #{item.bankPhone,jdbcType=VARCHAR}
+            , #{item.reallyBankPhone,jdbcType=VARCHAR},
+            #{item.bankCode,jdbcType=VARCHAR},
+            #{item.backCardNumber,jdbcType=VARCHAR}
+            , #{item.agrmNo,jdbcType=VARCHAR}
+            , #{item.idCard,jdbcType=VARCHAR},
+            #{item.totalPrice,jdbcType=NUMERIC},
+            #{item.overdueDay,jdbcType=INTEGER}
+            , #{item.plateNumber,jdbcType=VARCHAR},
+            #{item.repaymentDate,jdbcType=TIMESTAMP}
+            ,#{item.reallyRepaymentDate,jdbcType=TIMESTAMP}
+            ,#{item.paymentResult,jdbcType=INTEGER},
+            #{item.isOperation,jdbcType=INTEGER},
+            #{item.isOperationMsg,jdbcType=VARCHAR},
+            #{item.isExistContract,jdbcType=INTEGER}
+            , #{item.isSign,jdbcType=INTEGER},
+            #{item.isExcessLimit,jdbcType=INTEGER},
+            #{item.isPriceErr,jdbcType=INTEGER}
+            , #{item.isRepaymentDateErr,jdbcType=INTEGER},
+            #{item.isBankPhoneErr,jdbcType=INTEGER},
+            #{item.createTime,jdbcType=TIMESTAMP}
+            , #{item.createBy,jdbcType=BIGINT},
+            #{item.updateTime,jdbcType=TIMESTAMP}
+            , #{item.updateBy,jdbcType=BIGINT})
+        </foreach>
+
+    </insert>
+
+    <insert id="insert" parameterType="com.hc.lease.postlending.model.LeaseManualDeductionsData">
+
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_manual_deductions_data_id_seq'::regclass) as id
+        </selectKey>
+
+        insert into lease_manual_deductions_data (id, statist_id, repayment_id,
+        repayment_status_id, contract_id, branch_company,
+        bank_account_name, bank_phone, really_bank_phone, bank_code,
+        back_card_number, agrm_no, id_card, total_price,
+        overdue_day, plate_number, repayment_date,really_repayment_date,
+        payment_result, payment_result_msg, req_sn,
+        sn, pay_way, is_operation, is_operation_msg,
+        is_exist_contract, is_sign, is_excess_limit,
+        is_price_err, is_repayment_date_err, is_bank_phone_err,
+        create_time, create_by, update_time,
+        update_by)
+        values (#{id,jdbcType=BIGINT}, #{statistId,jdbcType=BIGINT}, #{repaymentId,jdbcType=BIGINT},
+        #{repaymentStatusId,jdbcType=BIGINT}, #{contractId,jdbcType=BIGINT}, #{branchCompany,jdbcType=VARCHAR},
+        #{bankAccountName,jdbcType=VARCHAR}, #{bankPhone,jdbcType=VARCHAR}, #{item.reallyBankPhone,jdbcType=VARCHAR},
+        #{bankCode,jdbcType=VARCHAR},
+        #{backCardNumber,jdbcType=VARCHAR}, #{agrmNo,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR},
+        #{totalPrice,jdbcType=NUMERIC},
+        #{overdueDay,jdbcType=INTEGER}, #{plateNumber,jdbcType=VARCHAR},
+        #{repaymentDate,jdbcType=TIMESTAMP},#{item.reallyRepaymentDate,jdbcType=TIMESTAMP},
+        #{paymentResult,jdbcType=INTEGER}, #{paymentResultMsg,jdbcType=VARCHAR}, #{reqSn,jdbcType=VARCHAR},
+        #{sn,jdbcType=VARCHAR}, #{payWay,jdbcType=INTEGER}, #{isOperation,jdbcType=INTEGER},
+        #{isOperationMsg,jdbcType=VARCHAR},
+        #{isExistContract,jdbcType=INTEGER}, #{isSign,jdbcType=INTEGER}, #{isExcessLimit,jdbcType=INTEGER},
+        #{isPriceErr,jdbcType=INTEGER}, #{isRepaymentDateErr,jdbcType=INTEGER}, #{isBankPhoneErr,jdbcType=INTEGER},
+        #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP},
+        #{updateBy,jdbcType=BIGINT})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.hc.lease.postlending.model.LeaseManualDeductionsData">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_manual_deductions_data_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_manual_deductions_data
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="statistId != null">
+                statist_id,
+            </if>
+            <if test="repaymentId != null">
+                repayment_id,
+            </if>
+            <if test="repaymentStatusId != null">
+                repayment_status_id,
+            </if>
+            <if test="contractId != null">
+                contract_id,
+            </if>
+            <if test="branchCompany != null">
+                branch_company,
+            </if>
+            <if test="bankAccountName != null">
+                bank_account_name,
+            </if>
+            <if test="bankPhone != null">
+                bank_phone,
+            </if>
+            <if test="reallyBankPhone != null">
+                really_bank_phone,
+            </if>
+            <if test="bankCode != null">
+                bank_code,
+            </if>
+            <if test="backCardNumber != null">
+                back_card_number,
+            </if>
+            <if test="idCard != null">
+                id_card,
+            </if>
+            <if test="agrmNo != null">
+                agrm_no,
+            </if>
+            <if test="totalPrice != null">
+                total_price,
+            </if>
+            <if test="overdueDay != null">
+                overdue_day,
+            </if>
+            <if test="plateNumber != null">
+                plate_number,
+            </if>
+            <if test="repaymentDate != null">
+                repayment_date,
+            </if>
+            <if test="reallyRepaymentDate != null">
+                really_repayment_date,
+            </if>
+            <if test="paymentResult != null">
+                payment_result,
+            </if>
+            <if test="paymentResultMsg != null">
+                payment_result_msg,
+            </if>
+            <if test="reqSn != null">
+                req_sn,
+            </if>
+            <if test="sn != null">
+                sn,
+            </if>
+            <if test="payWay != null">
+                pay_way,
+            </if>
+            <if test="isOperation != null">
+                is_operation,
+            </if>
+            <if test="isOperationMsg != null">
+                is_operation_msg,
+            </if>
+            <if test="isExistContract != null">
+                is_exist_contract,
+            </if>
+            <if test="isSign != null">
+                is_sign,
+            </if>
+            <if test="isExcessLimit != null">
+                is_excess_limit,
+            </if>
+            <if test="isPriceErr != null">
+                is_price_err,
+            </if>
+            <if test="isRepaymentDateErr != null">
+                is_repayment_date_err,
+            </if>
+            <if test="isBankPhoneErr != null">
+                is_bank_phone_err,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="statistId != null">
+                #{statistId,jdbcType=BIGINT},
+            </if>
+            <if test="repaymentId != null">
+                #{repaymentId,jdbcType=BIGINT},
+            </if>
+            <if test="repaymentStatusId != null">
+                #{repaymentStatusId,jdbcType=BIGINT},
+            </if>
+            <if test="contractId != null">
+                #{contractId,jdbcType=BIGINT},
+            </if>
+            <if test="branchCompany != null">
+                #{branchCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="bankAccountName != null">
+                #{bankAccountName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankPhone != null">
+                #{bankPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="reallyBankPhone != null">
+                #{reallyBankPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="bankCode != null">
+                #{bankCode,jdbcType=VARCHAR},
+            </if>
+            <if test="backCardNumber != null">
+                #{backCardNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="agrmNo != null">
+                #{agrmNo,jdbcType=VARCHAR},
+            </if>
+            <if test="idCard != null">
+                #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="totalPrice != null">
+                #{totalPrice,jdbcType=NUMERIC},
+            </if>
+            <if test="overdueDay != null">
+                #{overdueDay,jdbcType=INTEGER},
+            </if>
+            <if test="plateNumber != null">
+                #{plateNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="repaymentDate != null">
+                #{repaymentDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="reallyRepaymentDate != null">
+                #{reallyRepaymentDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="paymentResult != null">
+                #{paymentResult,jdbcType=INTEGER},
+            </if>
+            <if test="paymentResultMsg != null">
+                #{paymentResultMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="reqSn != null">
+                #{reqSn,jdbcType=VARCHAR},
+            </if>
+            <if test="sn != null">
+                #{sn,jdbcType=VARCHAR},
+            </if>
+            <if test="payWay != null">
+                #{payWay,jdbcType=INTEGER},
+            </if>
+            <if test="isOperation != null">
+                #{isOperation,jdbcType=INTEGER},
+            </if>
+            <if test="isOperationMsg != null">
+                #{isOperationMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="isExistContract != null">
+                #{isExistContract,jdbcType=INTEGER},
+            </if>
+            <if test="isSign != null">
+                #{isSign,jdbcType=INTEGER},
+            </if>
+            <if test="isExcessLimit != null">
+                #{isExcessLimit,jdbcType=INTEGER},
+            </if>
+            <if test="isPriceErr != null">
+                #{isPriceErr,jdbcType=INTEGER},
+            </if>
+            <if test="isRepaymentDateErr != null">
+                #{isRepaymentDateErr,jdbcType=INTEGER},
+            </if>
+            <if test="isBankPhoneErr != null">
+                #{isBankPhoneErr,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.postlending.model.LeaseManualDeductionsData">
+        update lease_manual_deductions_data
+        <set>
+            <if test="statistId != null">
+                statist_id = #{statistId,jdbcType=BIGINT},
+            </if>
+            <if test="repaymentId != null">
+                repayment_id = #{repaymentId,jdbcType=BIGINT},
+            </if>
+            <if test="repaymentStatusId != null">
+                repayment_status_id = #{repaymentStatusId,jdbcType=BIGINT},
+            </if>
+            <if test="contractId != null">
+                contract_id = #{contractId,jdbcType=BIGINT},
+            </if>
+            <if test="branchCompany != null">
+                branch_company = #{branchCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="bankAccountName != null">
+                bank_account_name = #{bankAccountName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankPhone != null">
+                bank_phone = #{bankPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="reallyBankPhone != null">
+                really_bank_phone = #{reallyBankPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="bankCode != null">
+                bank_code = #{bankCode,jdbcType=VARCHAR},
+            </if>
+            <if test="backCardNumber != null">
+                back_card_number = #{backCardNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="agrmNo != null">
+                agrm_no = #{agrmNo,jdbcType=VARCHAR},
+            </if>
+            <if test="idCard != null">
+                id_card = #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="totalPrice != null">
+                total_price = #{totalPrice,jdbcType=NUMERIC},
+            </if>
+            <if test="overdueDay != null">
+                overdue_day = #{overdueDay,jdbcType=INTEGER},
+            </if>
+            <if test="plateNumber != null">
+                plate_number = #{plateNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="repaymentDate != null">
+                repayment_date = #{repaymentDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="reallyRepaymentDate != null">
+                really_repayment_date = #{reallyRepaymentDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="paymentResult != null">
+                payment_result = #{paymentResult,jdbcType=INTEGER},
+            </if>
+            <if test="paymentResultMsg != null">
+                payment_result_msg = #{paymentResultMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="reqSn != null">
+                req_sn = #{reqSn,jdbcType=VARCHAR},
+            </if>
+            <if test="sn != null">
+                sn = #{sn,jdbcType=VARCHAR},
+            </if>
+            <if test="payWay != null">
+                pay_way = #{payWay,jdbcType=INTEGER},
+            </if>
+            <if test="isOperation != null">
+                is_operation = #{isOperation,jdbcType=INTEGER},
+            </if>
+            <if test="isOperationMsg != null">
+                is_operation_msg = #{isOperationMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="isExistContract != null">
+                is_exist_contract = #{isExistContract,jdbcType=INTEGER},
+            </if>
+            <if test="isSign != null">
+                is_sign = #{isSign,jdbcType=INTEGER},
+            </if>
+            <if test="isExcessLimit != null">
+                is_excess_limit = #{isExcessLimit,jdbcType=INTEGER},
+            </if>
+            <if test="isPriceErr != null">
+                is_price_err = #{isPriceErr,jdbcType=INTEGER},
+            </if>
+            <if test="isRepaymentDateErr != null">
+                is_repayment_date_err = #{isRepaymentDateErr,jdbcType=INTEGER},
+            </if>
+            <if test="isBankPhoneErr != null">
+                is_bank_phone_err = #{isBankPhoneErr,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.hc.lease.postlending.model.LeaseManualDeductionsData">
+    update lease_manual_deductions_data
+    set statist_id = #{statistId,jdbcType=BIGINT},
+      repayment_id = #{repaymentId,jdbcType=BIGINT},
+      repayment_status_id = #{repaymentStatusId,jdbcType=BIGINT},
+      contract_id = #{contractId,jdbcType=BIGINT},
+      branch_company = #{branchCompany,jdbcType=VARCHAR},
+      bank_account_name = #{bankAccountName,jdbcType=VARCHAR},
+      bank_phone = #{bankPhone,jdbcType=VARCHAR},
+      really_bank_phone = #{reallyBankPhone,jdbcType=VARCHAR},
+      bank_code = #{bankCode,jdbcType=VARCHAR},
+      back_card_number = #{backCardNumber,jdbcType=VARCHAR},
+      agrm_no = #{agrmNo,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      total_price = #{totalPrice,jdbcType=NUMERIC},
+      overdue_day = #{overdueDay,jdbcType=INTEGER},
+      plate_number = #{plateNumber,jdbcType=VARCHAR},
+      repayment_date = #{repaymentDate,jdbcType=TIMESTAMP},
+      really_repayment_date = #{reallyRepaymentDate,jdbcType=TIMESTAMP},
+      payment_result = #{paymentResult,jdbcType=INTEGER},
+      payment_result_msg = #{paymentResultMsg,jdbcType=VARCHAR},
+      req_sn = #{reqSn,jdbcType=VARCHAR},
+      sn = #{sn,jdbcType=VARCHAR},
+      pay_way = #{payWay,jdbcType=INTEGER},
+      is_operation = #{isOperation,jdbcType=INTEGER},
+      is_operation_msg = #{isOperationMsg,jdbcType=VARCHAR},
+      is_exist_contract = #{isExistContract,jdbcType=INTEGER},
+      is_sign = #{isSign,jdbcType=INTEGER},
+      is_excess_limit = #{isExcessLimit,jdbcType=INTEGER},
+      is_price_err = #{isPriceErr,jdbcType=INTEGER},
+      is_repayment_date_err = #{isRepaymentDateErr,jdbcType=INTEGER},
+      is_bank_phone_err = #{isBankPhoneErr,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+</mapper>

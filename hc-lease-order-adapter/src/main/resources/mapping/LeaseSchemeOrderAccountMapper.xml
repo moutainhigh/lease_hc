@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hc.lease.order.dao.LeaseSchemeOrderAccountMapper">
+
+  <resultMap id="BaseResultMap" type="com.hc.lease.order.model.LeaseSchemeOrderAccount">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="scheme_order_id" jdbcType="BIGINT" property="schemeOrderId" />
+    <result column="account_id" jdbcType="BIGINT" property="accountId" />
+    <result column="account_name" jdbcType="VARCHAR" property="accountName" />
+    <result column="account_contact" jdbcType="VARCHAR" property="accountContact" />
+    <result column="is_default_pay" jdbcType="INTEGER" property="isDefaultPay" />
+    <result column="bank_card_id" jdbcType="BIGINT" property="bankCardId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, scheme_order_id, account_id, account_name, account_contact, is_default_pay,bank_card_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from lease_scheme_order_account
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectByAccountId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from lease_scheme_order_account
+    where account_id = #{accountId,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectBySchemeOrderId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from lease_scheme_order_account
+    where scheme_order_id = #{schemeOrderId,jdbcType=BIGINT}
+  </select>
+
+  <select id="findPage" resultType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from lease_scheme_order_account
+
+  </select>
+
+  <select id="findAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from lease_scheme_order_account
+  </select>
+
+  <select id="insertViewParames" resultType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from lease_scheme_order_account
+  </select>
+
+  <delete id="deleteBatchById" parameterType="long">
+    delete from lease_scheme_order_account where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=",">
+      #{item}
+    </foreach>
+  </delete>
+
+  <delete id="deleteBySchemeOrderId" parameterType="java.lang.Long">
+    delete from lease_scheme_order_account
+    where scheme_order_id = #{id}
+  </delete>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from lease_scheme_order_account
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hc.lease.order.model.LeaseSchemeOrderAccount">
+    insert into lease_scheme_order_account (id, scheme_order_id, account_id,
+    account_name, account_contact, is_default_pay,bank_card_id
+    )
+    values (#{id,jdbcType=BIGINT}, #{schemeOrderId,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT},
+    #{accountName,jdbcType=VARCHAR}, #{accountContact,jdbcType=VARCHAR}, #{isDefaultPay,jdbcType=INTEGER},#{bankCardId,jdbcType=BIGINT}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hc.lease.order.model.LeaseSchemeOrderAccount">
+    <selectKey keyProperty="id" order="BEFORE" resultType="Long">
+      SELECT nextval('lease_scheme_order_account_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_scheme_order_account
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="schemeOrderId != null">
+        scheme_order_id,
+      </if>
+      <if test="accountId != null">
+        account_id,
+      </if>
+      <if test="accountName != null">
+        account_name,
+      </if>
+      <if test="accountContact != null">
+        account_contact,
+      </if>
+      <if test="isDefaultPay != null">
+        is_default_pay,
+      </if>
+      <if test="bankCardId != null">
+        bank_card_id
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="schemeOrderId != null">
+        #{schemeOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="accountName != null">
+        #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="accountContact != null">
+        #{accountContact,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefaultPay != null">
+        #{isDefaultPay,jdbcType=INTEGER},
+      </if>
+      <if test="bankCardId != null">
+        #{bankCardId,jdbcType=BIGINT}
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.order.model.LeaseSchemeOrderAccount">
+    update lease_scheme_order_account
+    <set>
+      <if test="schemeOrderId != null">
+        scheme_order_id = #{schemeOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="accountId != null">
+        account_id = #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="accountName != null">
+        account_name = #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="accountContact != null">
+        account_contact = #{accountContact,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefaultPay != null">
+        is_default_pay = #{isDefaultPay,jdbcType=INTEGER},
+      </if>
+      <if test="bankCardId != null">
+        bank_card_id = #{bankCardId,jdbcType=BIGINT}
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateBySchemeOrderIdSelective" parameterType="com.hc.lease.order.model.LeaseSchemeOrderAccount">
+    update lease_scheme_order_account
+    <set>
+      <if test="accountId != null">
+        account_id = #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="accountName != null">
+        account_name = #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="accountContact != null">
+        account_contact = #{accountContact,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefaultPay != null">
+        is_default_pay = #{isDefaultPay,jdbcType=INTEGER},
+      </if>
+      <if test="bankCardId != null">
+        bank_card_id = #{bankCardId,jdbcType=BIGINT}
+      </if>
+    </set>
+    where scheme_order_id = #{schemeOrderId,jdbcType=BIGINT}
+  </update>
+
+
+
+
+  <update id="updateByPrimaryKey" parameterType="com.hc.lease.order.model.LeaseSchemeOrderAccount">
+    update lease_scheme_order_account
+    set scheme_order_id = #{schemeOrderId,jdbcType=BIGINT},
+    account_id = #{accountId,jdbcType=BIGINT},
+    account_name = #{accountName,jdbcType=VARCHAR},
+    account_contact = #{accountContact,jdbcType=VARCHAR},
+    is_default_pay = #{isDefaultPay,jdbcType=INTEGER},
+    bank_card_id = #{bankCardId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

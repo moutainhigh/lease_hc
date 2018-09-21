@@ -1,0 +1,1164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.supplier.dao.LeaseCarMapper">
+
+    <!-- 表名 -->
+    <sql id="table_name">public.lease_car</sql>
+
+    <resultMap id="BaseResultMap" type="com.hc.lease.supplier.model.LeaseCar">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="contract_number" property="contractNumber" jdbcType="VARCHAR"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="car_buy_financinger_id" property="carBuyFinancingerId" jdbcType="BIGINT"/>
+        <result column="brands_id" property="brandsId" jdbcType="BIGINT"/>
+        <result column="series_id" property="seriesId" jdbcType="BIGINT"/>
+        <result column="model_id" property="modelId" jdbcType="BIGINT"/>
+        <result column="color_id" property="colorId" jdbcType="BIGINT"/>
+        <result column="card_frame_number" property="cardFrameNumber" jdbcType="VARCHAR"/>
+        <result column="engine_number" property="engineNumber" jdbcType="VARCHAR"/>
+        <result column="manufacture_time" property="manufactureTime" jdbcType="TIMESTAMP"/>
+        <result column="certificate_number" property="certificateNumber" jdbcType="VARCHAR"/>
+        <result column="invoice_number" property="invoiceNumber" jdbcType="VARCHAR"/>
+        <result column="accessory_id" property="accessoryId" jdbcType="BIGINT"/>
+        <result column="mortgage_type_id" property="mortgageTypeId" jdbcType="BIGINT"/>
+        <result column="mortgage_type_name" property="mortgageTypeName" jdbcType="VARCHAR"/>
+        <result column="buy_card_capital_type_id" property="buyCardCapitalTypeId" jdbcType="BIGINT"/>
+        <result column="buy_card_capital_type_name" property="buyCardCapitalTypeName" jdbcType="VARCHAR"/>
+        <result column="belonger_tpye" property="belongerTpye" jdbcType="INTEGER"/>
+        <result column="belonger_company_header_id" property="belongerCompanyHeaderId" jdbcType="BIGINT"/>
+        <result column="insurance_beneficiary_type" property="insuranceBeneficiaryType" jdbcType="INTEGER"/>
+        <result column="beneficiary_company_header_id" property="beneficiaryCompanyHeaderId" jdbcType="BIGINT"/>
+        <result column="beneficia_financinger_id" property="beneficiaFinancingerId" jdbcType="BIGINT"/>
+        <result column="plate_number" property="plateNumber" jdbcType="VARCHAR"/>
+        <result column="registration_number" property="registrationNumber" jdbcType="VARCHAR"/>
+        <result column="registration_number_img" property="registrationNumberImg" jdbcType="VARCHAR"/>
+        <result column="gps_supplier_id" property="gpsSupplierId" jdbcType="BIGINT"/>
+        <result column="price" property="price" jdbcType="NUMERIC"/>
+        <result column="purchase_tax_rate" property="purchaseTaxRate" jdbcType="NUMERIC"/>
+        <result column="purchase_tax" property="purchaseTax" jdbcType="NUMERIC"/>
+        <result column="on_plate_cost" property="onPlateCost" jdbcType="NUMERIC"/>
+        <result column="gps_cost" property="gpsCost" jdbcType="NUMERIC"/>
+        <result column="mortgage_cost" property="mortgageCost" jdbcType="NUMERIC"/>
+        <result column="vehicle_vessel_tax" property="vehicleVesselTax" jdbcType="NUMERIC"/>
+        <result column="other_cost" property="otherCost" jdbcType="NUMERIC"/>
+        <result column="storehouse_id" property="storehouseId" jdbcType="BIGINT"/>
+        <result column="dealer_id" property="dealerId" jdbcType="BIGINT"/>
+        <result column="storehouse_status" property="storehouseStatus" jdbcType="INTEGER"/>
+        <result column="lease_status" property="leaseStatus" jdbcType="INTEGER"/>
+        <result column="is_enable" property="isEnable" jdbcType="BIT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="insurance_status" property="insuranceStatus" jdbcType="BIT"/>
+        <result column="gps_status" property="gpsStatus" jdbcType="BIT"/>
+        <result column="plate_status" property="plateStatus" jdbcType="INTEGER"/>
+        <result column="mortgage_status" property="mortgageStatus" jdbcType="BIT"/>
+        <result column="in_storehouse_time" property="inStorehouseTime" jdbcType="TIMESTAMP"/>
+        <result column="sale_channel_type" property="saleChannelType" jdbcType="INTEGER"/>
+        <result column="sale_channel_id" property="saleChannelId" jdbcType="BIGINT"/>
+        <result column="sale_time" property="saleTime" jdbcType="TIMESTAMP"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="invoicing_tax" property="invoicingTax" jdbcType="NUMERIC"/>
+        <result column="invoiced_car_price" property="invoicedCarPrice" jdbcType="NUMERIC"/>
+        <result column="branch_company_id" property="branchCompanyId" jdbcType="BIGINT"/>
+        <result column="storehouse_type" property="storehouseType" jdbcType="INTEGER"/>
+        <result column="deal_status" property="dealStatus" jdbcType="INTEGER"/>
+        <result column="car_condition" property="carCondition" jdbcType="INTEGER"/>
+
+        <result column="car_buy_financinger_name" property="carBuyFinancingerName" jdbcType="VARCHAR"/>
+        <result column="brands_name" property="brandsName" jdbcType="VARCHAR"/>
+        <result column="series_name" property="seriesName" jdbcType="VARCHAR"/>
+        <result column="business_model_name" property="businessModelName" jdbcType="VARCHAR"/>
+        <result column="complete_model_name" property="completeModelName" jdbcType="VARCHAR"/>
+        <result column="color_name" property="colorName" jdbcType="VARCHAR"/>
+        <result column="mortgage_type_name" property="mortgageTypeName" jdbcType="VARCHAR"/>
+        <result column="buy_card_capital_type_name" property="buyCardCapitalTypeName" jdbcType="VARCHAR"/>
+        <result column="belonger_company_header_name" property="belongerCompanyHeaderName" jdbcType="VARCHAR"/>
+        <result column="beneficiary_company_header_name" property="beneficiaryCompanyHeaderName" jdbcType="VARCHAR"/>
+        <result column="beneficia_financinger_name" property="beneficiaFinancingerName" jdbcType="VARCHAR"/>
+        <result column="gps_supplier_name" property="gpsSupplierName" jdbcType="VARCHAR"/>
+        <result column="storehouse_name" property="storehouseName" jdbcType="VARCHAR"/>
+        <result column="dealer_name" property="dealerName" jdbcType="VARCHAR"/>
+        <result column="branch_company_name" property="branchCompanyName" jdbcType="VARCHAR"/>
+        <result column="car_supplier_name" property="carSupplierName" jdbcType="VARCHAR"/>
+        <result column="market_price" property="marketPrice" jdbcType="NUMERIC"/>
+        <association property="leaseCarOtherCost" javaType="com.hc.lease.supplier.model.LeaseCarOtherCost">
+            <id column="lease_car_other_cost_id" property="leaseCarOtherCostId" jdbcType="BIGINT"/>
+            <result column="tax_free_gps_price" property="taxFreeGpsPrice" jdbcType="NUMERIC"/>
+            <result column="gps_tax" property="gpsTax" jdbcType="NUMERIC"/>
+            <result column="tax_freight_price" property="taxFreightPrice" jdbcType="NUMERIC"/>
+            <result column="tax_free_freight_price" property="taxFreeFreightPrice" jdbcType="NUMERIC"/>
+            <result column="freight_tax" property="freightTax" jdbcType="NUMERIC"/>
+            <result column="purchasing_fee" property="purchasingFee" jdbcType="NUMERIC"/>
+        </association>
+        <association property="leaseCostCheck" javaType="com.hc.lease.supplier.model.LeaseCostCheck">
+            <id column="lease_cost_check_id" property="leaseCostCheckId" jdbcType="BIGINT"/>
+            <result column="car_check_state" property="carCheckState" jdbcType="VARCHAR"/>
+            <result column="insurance_check_state" property="insuranceCheckState" jdbcType="VARCHAR"/>
+            <result column="purchase_tax_check_state" property="purchaseTaxCheckState" jdbcType="VARCHAR"/>
+            <result column="other_cost_state" property="otherCostState" jdbcType="VARCHAR"/>
+        </association>
+        <collection property="leaseCarDictAccessories" column="id"
+                    ofType="com.hc.lease.supplier.model.LeaseCarDictAccessory" javaType="java.util.ArrayList"
+                    select="selectByCarId"/>
+        <collection property="laseCarinsurances" column="id" ofType="com.hc.lease.supplier.model.LeaseCarInsurance"
+                    javaType="java.util.ArrayList"
+                    select="com.hc.lease.supplier.dao.LeaseCarInsuranceMapper.selectByCarId"/>
+    </resultMap>
+
+    <resultMap id="LeaseCarDictAccessoryMap" type="com.hc.lease.supplier.model.LeaseCarDictAccessory">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="dict_id" property="dictId" jdbcType="BIGINT"/>
+        <result column="car_id" property="carId" jdbcType="BIGINT"/>
+        <result column="accessory_name" property="accessoryName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="InsuranceCarExportMap" type="com.hc.lease.supplier.vo.InsuranceCarExportEntity">
+        <id column="carId" property="carId" jdbcType="BIGINT"/>
+        <result column="brandsId" property="carBrandId" jdbcType="BIGINT"/>
+        <result column="brandsName" property="carBrandName" jdbcType="VARCHAR"/>
+        <result column="seriesId" property="carSeriesId" jdbcType="BIGINT"/>
+        <result column="seriesName" property="carSeriesName" jdbcType="VARCHAR"/>
+        <result column="modelId" property="carModelId" jdbcType="BIGINT"/>
+        <result column="complete_model_name" property="carModelName" jdbcType="VARCHAR"/>
+        <result column="engine_number" property="carEngineNum" jdbcType="VARCHAR"/>
+        <result column="card_frame_number" property="carFrameNum" jdbcType="VARCHAR"/>
+        <result column="plate_number" property="carPlateNumber" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <resultMap id="LeaseCarExportMap" type="com.hc.lease.supplier.vo.LeaseCarExport">
+        <result column="purchase_contract_nnumber" property="purchaseContractNnumber" jdbcType="VARCHAR"/>
+        <result column="car_buy_financingerName" property="carBuyFinancingerName" jdbcType="VARCHAR"/>
+        <result column="car_supplier_name" property="carSupplierName" jdbcType="VARCHAR"/>
+        <result column="supplierinternal_number" property="supplierinternalNumber" jdbcType="VARCHAR"/>
+        <result column="company_header_name" property="companyHeaderName" jdbcType="VARCHAR"/>
+        <result column="car_brands_name" property="carBrandsName" jdbcType="VARCHAR"/>
+        <result column="car_series_name" property="carSeriesName" jdbcType="VARCHAR"/>
+        <result column="car_model_name" property="carModelName" jdbcType="VARCHAR"/>
+        <result column="car_color_name" property="carColorName" jdbcType="VARCHAR"/>
+        <result column="engine_number" property="engineNumber" jdbcType="VARCHAR"/>
+        <result column="card_frame_number" property="cardFrameNumber" jdbcType="VARCHAR"/>
+        <result column="branch_company_name" property="branchCompanyName" jdbcType="VARCHAR"/>
+        <result column="manufacture_time" property="manufactureTime" jdbcType="VARCHAR"/>
+        <result column="certificate_number" property="certificateNumber" jdbcType="VARCHAR"/>
+        <result column="plate_number" property="plateNumber" jdbcType="VARCHAR"/>
+        <result column="invoiced_car_price" property="invoicedCarPrice" jdbcType="VARCHAR"/>
+        <result column="market_price" property="marketPrice" jdbcType="VARCHAR"/>
+        <result column="mortgage_type" property="mortgageType" jdbcType="VARCHAR"/>
+        <result column="belonger_company_header_name" property="belongerCompanyHeaderName" jdbcType="VARCHAR"/>
+        <result column="in_storehouse_time" property="inStorehouseTime" jdbcType="VARCHAR"/>
+        <result column="gps_supplier_name" property="gpsSupplierName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+    id, contract_number,contract_id, car_buy_financinger_id, brands_id, series_id, model_id, color_id,
+    card_frame_number, engine_number, manufacture_time, certificate_number, invoice_number, 
+    accessory_id, mortgage_type_id, mortgage_type_name, buy_card_capital_type_id, buy_card_capital_type_name, 
+    belonger_tpye, belonger_company_header_id, insurance_beneficiary_type, beneficiary_company_header_id, 
+    beneficia_financinger_id, plate_number, registration_number, registration_number_img, 
+    gps_supplier_id, price, purchase_tax_rate, purchase_tax, on_plate_cost, gps_cost, 
+    mortgage_cost, vehicle_vessel_tax, other_cost, storehouse_id, dealer_id, storehouse_status,
+    lease_status, is_enable, create_time, update_time, create_by, update_by, sort, insurance_status, 
+    gps_status, plate_status, in_storehouse_time, sale_channel_type, sale_channel_id, 
+    sale_time, remarks,invoicing_tax,invoiced_car_price,branch_company_id,mortgage_status,storehouse_type
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_car
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByCarId" resultMap="LeaseCarDictAccessoryMap" parameterType="java.lang.Long">
+  select
+  cda.car_id as "carId",cda.dict_id as "dictId",d.value as "accessoryName"
+  from lease_car_dict_accessory cda
+  left join lease_dict d on cda.dict_id=d.id
+  where cda.car_id = #{id,jdbcType=BIGINT}
+  </select>
+
+    <select id="findByModelId" resultMap="BaseResultMap">
+        select
+        id
+        from lease_car
+        where model_id in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="findByCarBuyFinancingerId" resultMap="BaseResultMap">
+        select
+        id
+        from lease_car
+        where car_buy_financinger_id in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="findByDealerId" resultMap="BaseResultMap">
+        select
+        id
+        from lease_car
+        where dealer_id in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="findByStorehouseId" resultMap="BaseResultMap">
+        select
+        id
+        from lease_car
+        where storehouse_id in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <select id="findPage" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        c.id,pc.contract_number as "contractNumber", c.contract_id as "contractId" ,c.car_buy_financinger_id as
+        "carBuyFinancingerId",cbf.name as "carBuyFinancingerName" ,c.brands_id as "brandsId", c.series_id as "seriesId",
+        c.model_id as "modelId", c.color_id as "colorId",
+        c.card_frame_number as "cardFrameNumber", c.engine_number as "engineNumber", c.manufacture_time as
+        "manufactureTime", c.certificate_number as "certificateNumber", c.invoice_number as "invoiceNumber",
+        c.accessory_id as "accessoryId", c.mortgage_type_id as "mortgageTypeId", mor.value as "mortgageTypeName",
+        c.buy_card_capital_type_id as "buyCardCapitalTypeId", buy.value as "buyCardCapitalTypeName",
+        c.belonger_tpye as "belongerTpye", c.belonger_company_header_id as "belongerCompanyHeaderId",ch.name as
+        "belongerCompanyHeaderName" ,c.insurance_beneficiary_type as "insuranceBeneficiaryType",
+        c.beneficiary_company_header_id as "beneficiaryCompanyHeaderId",bch.name as "beneficiaryCompanyHeaderName",
+        c.beneficia_financinger_id as "beneficiaFinancingerId",bf.name as "beneficiaFinancingerName" , c.plate_number as
+        "plateNumber", c.registration_number as "registrationNumber", c.registration_number_img as
+        "registrationNumberImg",
+        c.gps_supplier_id as "gpsSupplierId",gps.name as "gpsSupplierName", c.price, c.purchase_tax_rate as
+        "purchaseTaxRate", c.purchase_tax as "purchaseTax", c.on_plate_cost as "onPlateCost", c.gps_cost as "gpsCost",
+        c.mortgage_cost as "mortgageCost", c.vehicle_vessel_tax as "vehicleVesselTax", c.other_cost as "otherCost",
+        c.storehouse_id as "storehouseId",s.name as "storehouseName",c.dealer_id as "dealerId",d.name as
+        "dealerName",c.storehouse_status as "storehouseStatus",
+        c.lease_status as "leaseStatus", c.is_enable as "isEnable", c.create_time as "createTime", c.update_time as
+        "updateTime", c.create_by as "createBy", c.update_by as "updateBy", c.sort, c.insurance_status as
+        "insuranceStatus",
+        c.gps_status as "gpsStatus", c.plate_status as "plateStatus", c.mortgage_status as "mortgageStatus",
+        c.in_storehouse_time as "inStorehouseTime", c.sale_channel_type as "saleChannelType", c.sale_channel_id as
+        "saleChannelId",
+        c.sale_time as "saleTime", c.remarks, cb.name as "brandsName",cs.name as "seriesName",cm.business_model_name as
+        "businessModelName",cc.name as "colorName",csr.name as "carSupplierName",c.invoicing_tax as
+        "invoicingTax",invoiced_car_price as "invoicedCarPrice",
+        c.branch_company_id as "branchCompanyId",bc.name as "branchCompanyName",c.storehouse_type,
+        e.lease_car_other_cost_id, e.tax_free_gps_price, e.gps_tax, e.tax_freight_price, e.tax_free_freight_price,
+        e.freight_tax, e.purchasing_fee,
+        f.lease_cost_check_id, f.car_check_state, f.insurance_check_state, f.purchase_tax_check_state,
+        f.other_cost_state,cm.market_price,cm.complete_model_name "completeModelName"
+        from lease_car c
+        left join lease_car_buy_financinger cbf on c.car_buy_financinger_id=cbf.id
+        left join lease_car_model cm on c.model_id=cm.id
+        left join lease_car_series cs on cm.series_id=cs.id
+        left join lease_car_brands cb on cs.brands_id=cb.id
+        left join lease_car_color cc on c.color_id=cc.id
+        left join lease_company_header ch on c.belonger_company_header_id=ch.id
+        left join lease_company_header bch on c.beneficiary_company_header_id=bch.id
+        left join lease_car_buy_financinger bf on c.beneficia_financinger_id=bf.id
+        left join lease_purchase_contract pc on c.contract_id=pc.id
+        left join lease_gps_supplier gps on c.gps_supplier_id=gps.id
+        left join lease_car_supplier csr on pc.car_supplier_id=csr.id
+        left join lease_branch_company bc on c.branch_company_id =bc.id
+        left join lease_dict buy on c.buy_card_capital_type_id=buy.id
+        left join lease_dict mor on c.mortgage_type_id=mor.id
+        left join lease_storehouse s on c.storehouse_id=s.id
+        left join lease_dealer d on c.dealer_id=d.id
+        LEFT JOIN lease_car_other_cost e ON c.id = e.car_id
+        LEFT JOIN lease_cost_check f ON c.id = f.car_id
+        where 1=1
+        <if test="number != null and number!=''">
+            and (c.plate_number like concat('%',#{number},'%') or c.engine_number like concat('%',#{number},'%') or
+            c.card_frame_number like concat('%',#{number},'%'))
+        </if>
+        <if test="storehouseStatus != null and storehouseStatus!=''">
+            and c.storehouse_status = #{storehouseStatus}
+        </if>
+        <if test="storehouseId != null and storehouseId!=''">
+            and c.storehouse_id = #{storehouseId}
+        </if>
+        <if test="dealerId != null and dealerId!=''">
+            and c.dealer_id = #{dealerId}
+        </if>
+        <if test="leaseStatus != null">
+            and c.lease_status = #{leaseStatus}
+        </if>
+        <if test="mortgageTypeId != null and mortgageTypeId!=''">
+            and c.mortgage_type_id = #{mortgageTypeId}
+        </if>
+        <if test="buyCardCapitalTypeId != null and buyCardCapitalTypeId!=''">
+            and pc.buy_card_capital_type_id = #{buyCardCapitalTypeId}
+        </if>
+        <if test="lnsuranceStatus != null and lnsuranceStatus!=''">
+            and c.insurance_status = #{lnsuranceStatus}
+        </if>
+        <if test="gpsStatus != null and gpsStatus!=''">
+            and c.gps_status = #{gpsStatus}
+        </if>
+        <if test="plateStatus != null and plateStatus!=''">
+            and c.plate_status = #{plateStatus}
+        </if>
+        <if test="mortgageStatus != null and mortgageStatus!=''">
+            and c.mortgage_status = #{mortgageStatus}
+        </if>
+        <if test="carSupplierId != null and carSupplierId!=''">
+            and csr.id = #{carSupplierId}
+        </if>
+        <if test="brandsId != null and brandsId!=''">
+            and c.brands_id = #{brandsId}
+        </if>
+        <if test="seriesId != null and seriesId!=''">
+            and c.series_id = #{seriesId}
+        </if>
+        <if test="modelId != null and modelId!=''">
+            and c.model_id = #{modelId}
+        </if>
+        <if test="colorId != null and colorId!=''">
+            and c.color_id = #{colorId}
+        </if>
+        <if test="branchCompanyId != null and branchCompanyId!=''">
+            and c.branch_company_id = #{branchCompanyId}
+        </if>
+        <if test="carId != null and carId != ''">
+            and c.id = #{carId}
+        </if>
+        ORDER BY c.create_time DESC
+    </select>
+
+    <select id="findCarAndPrice" resultType="java.util.Map" parameterType="java.util.Map">
+        select
+        ca.id,ca.brands_id as "brandsid", ca.series_id as "seriesid", ca.model_id as "modelid", ca.color_id as
+        "colorid",
+        ca.card_frame_number as "cardframenumber", ca.engine_number as "enginenumber",ca.plate_number as "platenumber",
+        cb.name as "brandsname",cs.name as "seriesname",cm.business_model_name as "businessmodelname",cc.name as
+        "colorname",cm.market_price as "price",
+        case
+        when (select count(1) from lease_scheme_order so left join lease_contract lc on so.id=lc.scheme_order_id and lc.status != 2 where so.card_id=ca.id)>0 is not null then true
+        else false
+        end as "used"
+        from lease_car ca
+        join lease_car_model cm on ca.model_id=cm.id
+        join lease_car_series cs on cm.series_id=cs.id
+        join lease_car_brands cb on cs.brands_id=cb.id
+        join lease_car_color cc on ca.color_id=cc.id
+        where 1=1
+        <if test="number != null and number!=''">
+            and (ca.plate_number like concat('%',#{number},'%') or ca.engine_number like concat('%',#{number},'%') or
+            ca.card_frame_number like concat('%',#{number},'%'))
+        </if>
+        <if test="branchCompanyId != null and branchCompanyId!=''">
+            and cmc.branch_company_id = #{branchCompanyId}
+        </if>
+    </select>
+
+    <select id="findByParams" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_car
+        WHERE 1=1
+        <if test="plateNumber != null">
+            and plate_number = #{plateNumber,jdbcType=VARCHAR}
+        </if>
+        <if test="engineNumber != null">
+            and engine_number = #{engineNumber,jdbcType=VARCHAR}
+        </if>
+
+        <if test="cardFrameNumber != null">
+            and card_frame_number = #{cardFrameNumber,jdbcType=VARCHAR}
+        </if>
+
+        <if test="id != null">
+            and id != #{id,jdbcType=BIGINT}
+        </if>
+    </select>
+
+    <select id="findAll" resultMap="BaseResultMap">
+
+        select
+        <include refid="Base_Column_List"/>
+        from lease_car
+
+        ORDER BY create_time DESC
+    </select>
+
+
+    <select id="findLeaseCarExport" resultMap="LeaseCarExportMap">
+
+    select
+    c.id,pc.contract_number as "purchaseContractNnumber",cbf.name as "carBuyFinancingerName"
+    , csr.name as "carSupplierName",csr.internal_number as "supplierinternalNumber"
+    , pch.name "companyHeaderName", cb.name as "carBrandsName",cs.name as "carSeriesName",cm.business_model_name as "carModelName",cc.name as "carColorName"
+    , c.engine_number as "engineNumber", c.card_frame_number as "cardFrameNumber",bc.name as "branchCompanyName", c.manufacture_time as "manufactureTime"
+    , c.certificate_number as "certificateNumber", c.plate_number as "plateNumber", invoiced_car_price as "invoicedCarPrice", mor.value as "mortgageType"
+    ,ch.name as "belongerCompanyHeaderName", c.in_storehouse_time as "inStorehouseTime", gps.name as "gpsSupplierName",
+    cm.market_price as "marketPrice"
+
+    from lease_car c
+    left join lease_car_buy_financinger cbf on c.car_buy_financinger_id=cbf.id
+    left join lease_car_brands cb on c.brands_id=cb.id
+    left join lease_car_series cs on c.series_id=cs.id
+    left join lease_car_model cm on c.model_id=cm.id
+    left join lease_car_color cc on c.color_id=cc.id
+    left join  lease_company_header ch on c.belonger_company_header_id=ch.id
+    left join  lease_company_header bch on c.beneficiary_company_header_id=bch.id
+    left join lease_car_buy_financinger bf on c.beneficia_financinger_id=bf.id
+    left join lease_purchase_contract pc on c.contract_id=pc.id
+    left join  lease_company_header pch on pc.company_header_id=pch.id
+    left join lease_gps_supplier gps on c.gps_supplier_id=gps.id
+    left join lease_car_supplier csr on pc.car_supplier_id=csr.id
+    left join lease_branch_company bc on c.branch_company_id =bc.id
+    left join lease_dict buy on c.buy_card_capital_type_id=buy.id
+    left join lease_dict mor on c.mortgage_type_id=mor.id
+    left join lease_storehouse s on c.storehouse_id=s.id
+    left join lease_dealer d on c.dealer_id=d.id
+    LEFT JOIN lease_car_other_cost e ON c.id = e.car_id
+    LEFT JOIN lease_cost_check f ON c.id = f.car_id
+    where 1=1
+
+    ORDER BY c.create_time DESC
+  </select>
+
+
+    <select id="findByGpsSupplierId" resultMap="BaseResultMap">
+        select
+        id, contract_number
+        from lease_car
+        where gps_supplier_id in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="insertViewParames" resultType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_car
+    </select>
+
+    <delete id="deleteBatchById" parameterType="long">
+        delete from lease_car where id in
+        <foreach item="item" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from lease_car
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.hc.lease.supplier.model.LeaseCar">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_car_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_car (id, contract_number, car_buy_financinger_id,
+        brands_id, series_id, model_id,
+        color_id, card_frame_number, engine_number,
+        manufacture_time, certificate_number, invoice_number,
+        accessory_id, mortgage_type_id, mortgage_type_name,
+        buy_card_capital_type_id, buy_card_capital_type_name,
+        belonger_tpye, belonger_company_header_id, insurance_beneficiary_type,
+        beneficiary_company_header_id, beneficia_financinger_id,
+        plate_number, registration_number, registration_number_img,
+        gps_supplier_id, price, purchase_tax_rate,
+        purchase_tax, on_plate_cost, gps_cost,
+        mortgage_cost, vehicle_vessel_tax, other_cost,
+        storehouse_id, dealer_id, storehouse_status,
+        lease_status, is_enable, create_time,
+        update_time, create_by, update_by,
+        sort, insurance_status, gps_status,
+        plate_status, in_storehouse_time, sale_channel_type,
+        sale_channel_id, sale_time,
+        remarks,contract_id,invoicing_tax,invoiced_car_price,mortgage_status,branch_company_id,storehouse_type
+        , deal_status, car_condition
+        )
+        values (#{id,jdbcType=BIGINT}, #{contractNumber,jdbcType=VARCHAR}, #{carBuyFinancingerId,jdbcType=BIGINT},
+        #{brandsId,jdbcType=BIGINT}, #{seriesId,jdbcType=BIGINT}, #{modelId,jdbcType=BIGINT},
+        #{colorId,jdbcType=BIGINT}, #{cardFrameNumber,jdbcType=VARCHAR}, #{engineNumber,jdbcType=VARCHAR},
+        #{manufactureTime,jdbcType=TIMESTAMP}, #{certificateNumber,jdbcType=VARCHAR}, #{invoiceNumber,jdbcType=VARCHAR},
+        #{accessoryId,jdbcType=BIGINT}, #{mortgageTypeId,jdbcType=BIGINT}, #{mortgageTypeName,jdbcType=VARCHAR},
+        #{buyCardCapitalTypeId,jdbcType=BIGINT}, #{buyCardCapitalTypeName,jdbcType=VARCHAR},
+        #{belongerTpye,jdbcType=INTEGER}, #{belongerCompanyHeaderId,jdbcType=BIGINT},
+        #{insuranceBeneficiaryType,jdbcType=INTEGER},
+        #{beneficiaryCompanyHeaderId,jdbcType=BIGINT}, #{beneficiaFinancingerId,jdbcType=BIGINT},
+        #{plateNumber,jdbcType=VARCHAR}, #{registrationNumber,jdbcType=VARCHAR},
+        #{registrationNumberImg,jdbcType=VARCHAR},
+        #{gpsSupplierId,jdbcType=BIGINT}, #{price,jdbcType=NUMERIC}, #{purchaseTaxRate,jdbcType=NUMERIC},
+        #{purchaseTax,jdbcType=NUMERIC}, #{onPlateCost,jdbcType=NUMERIC}, #{gpsCost,jdbcType=NUMERIC},
+        #{mortgageCost,jdbcType=NUMERIC}, #{vehicleVesselTax,jdbcType=NUMERIC}, #{otherCost,jdbcType=NUMERIC},
+        #{storehouseId,jdbcType=BIGINT}, #{dealerId,jdbcType=BIGINT}, #{storehouseStatus,jdbcType=INTEGER},
+        #{leaseStatus,jdbcType=INTEGER}, #{isEnable,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT},
+        #{sort,jdbcType=INTEGER}, #{insuranceStatus,jdbcType=BIT}, #{gpsStatus,jdbcType=BIT},
+        #{plateStatus,jdbcType=INTEGER}, #{inStorehouseTime,jdbcType=TIMESTAMP}, #{saleChannelType,jdbcType=INTEGER},
+        #{saleChannelId,jdbcType=BIGINT}, #{saleTime,jdbcType=TIMESTAMP},
+        #{remarks,jdbcType=VARCHAR},#{contractId,jdbcType=BIGINT},#{invoicingTax,jdbcType=NUMERIC},#{invoicedCarPrice,jdbcType=NUMERIC},#{mortgageStatus,jdbcType=BIT}
+        ,#{branchCompanyId,jdbcType=BIGINT},#{storehouseType,jdbcType=INTEGER}
+        ,#{dealStatus,jdbcType=INTEGER},#{carCondition,jdbcType=INTEGER}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.hc.lease.supplier.model.LeaseCar">
+
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_car_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_car
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="contractNumber != null">
+                contract_number,
+            </if>
+            <if test="carBuyFinancingerId != null">
+                car_buy_financinger_id,
+            </if>
+            <if test="brandsId != null">
+                brands_id,
+            </if>
+            <if test="seriesId != null">
+                series_id,
+            </if>
+            <if test="modelId != null">
+                model_id,
+            </if>
+            <if test="colorId != null">
+                color_id,
+            </if>
+            <if test="cardFrameNumber != null">
+                card_frame_number,
+            </if>
+            <if test="engineNumber != null">
+                engine_number,
+            </if>
+            <if test="manufactureTime != null">
+                manufacture_time,
+            </if>
+            <if test="certificateNumber != null">
+                certificate_number,
+            </if>
+            <if test="invoiceNumber != null">
+                invoice_number,
+            </if>
+            <if test="accessoryId != null">
+                accessory_id,
+            </if>
+            <if test="mortgageTypeId != null">
+                mortgage_type_id,
+            </if>
+            <if test="mortgageTypeName != null">
+                mortgage_type_name,
+            </if>
+            <if test="buyCardCapitalTypeId != null">
+                buy_card_capital_type_id,
+            </if>
+            <if test="buyCardCapitalTypeName != null">
+                buy_card_capital_type_name,
+            </if>
+            <if test="belongerTpye != null">
+                belonger_tpye,
+            </if>
+            <if test="belongerCompanyHeaderId != null">
+                belonger_company_header_id,
+            </if>
+            <if test="insuranceBeneficiaryType != null">
+                insurance_beneficiary_type,
+            </if>
+            <if test="beneficiaryCompanyHeaderId != null">
+                beneficiary_company_header_id,
+            </if>
+            <if test="beneficiaFinancingerId != null">
+                beneficia_financinger_id,
+            </if>
+            <if test="plateNumber != null">
+                plate_number,
+            </if>
+            <if test="registrationNumber != null">
+                registration_number,
+            </if>
+            <if test="registrationNumberImg != null">
+                registration_number_img,
+            </if>
+            <if test="gpsSupplierId != null">
+                gps_supplier_id,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="purchaseTaxRate != null">
+                purchase_tax_rate,
+            </if>
+            <if test="purchaseTax != null">
+                purchase_tax,
+            </if>
+            <if test="onPlateCost != null">
+                on_plate_cost,
+            </if>
+            <if test="gpsCost != null">
+                gps_cost,
+            </if>
+            <if test="mortgageCost != null">
+                mortgage_cost,
+            </if>
+            <if test="vehicleVesselTax != null">
+                vehicle_vessel_tax,
+            </if>
+            <if test="otherCost != null">
+                other_cost,
+            </if>
+            <if test="storehouseId != null">
+                storehouse_id,
+            </if>
+            <if test="dealerId != null">
+                dealer_id,
+            </if>
+            <if test="storehouseStatus != null">
+                storehouse_status,
+            </if>
+            <if test="leaseStatus != null">
+                lease_status,
+            </if>
+            <if test="isEnable != null">
+                is_enable,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="insuranceStatus != null">
+                insurance_status,
+            </if>
+            <if test="gpsStatus != null">
+                gps_status,
+            </if>
+            <if test="mortgageStatus != null">
+                mortgage_status,
+            </if>
+            <if test="plateStatus != null">
+                plate_status,
+            </if>
+            <if test="inStorehouseTime != null">
+                in_storehouse_time,
+            </if>
+            <if test="saleChannelType != null">
+                sale_channel_type,
+            </if>
+            <if test="saleChannelId != null">
+                sale_channel_id,
+            </if>
+            <if test="saleTime != null">
+                sale_time,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <if test="contractId != null">
+                contract_id,
+            </if>
+            <if test="invoicingTax != null">
+                invoicing_tax,
+            </if>
+            <if test="invoicedCarPrice != null">
+                invoiced_car_price,
+            </if>
+            <if test="branchCompanyId != null">
+                branch_company_id,
+            </if>
+            <if test="storehouseType != null">
+                storehouse_type,
+            </if>
+            <if test="dealStatus != null">
+                deal_status,
+            </if>
+            <if test="carCondition != null">
+                car_condition
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="contractNumber != null">
+                #{contractNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="carBuyFinancingerId != null">
+                #{carBuyFinancingerId,jdbcType=BIGINT},
+            </if>
+            <if test="brandsId != null">
+                #{brandsId,jdbcType=BIGINT},
+            </if>
+            <if test="seriesId != null">
+                #{seriesId,jdbcType=BIGINT},
+            </if>
+            <if test="modelId != null">
+                #{modelId,jdbcType=BIGINT},
+            </if>
+            <if test="colorId != null">
+                #{colorId,jdbcType=BIGINT},
+            </if>
+            <if test="cardFrameNumber != null">
+                #{cardFrameNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="engineNumber != null">
+                #{engineNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="manufactureTime != null">
+                #{manufactureTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="certificateNumber != null">
+                #{certificateNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="invoiceNumber != null">
+                #{invoiceNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="accessoryId != null">
+                #{accessoryId,jdbcType=BIGINT},
+            </if>
+            <if test="mortgageTypeId != null">
+                #{mortgageTypeId,jdbcType=BIGINT},
+            </if>
+            <if test="mortgageTypeName != null">
+                #{mortgageTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="buyCardCapitalTypeId != null">
+                #{buyCardCapitalTypeId,jdbcType=BIGINT},
+            </if>
+            <if test="buyCardCapitalTypeName != null">
+                #{buyCardCapitalTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="belongerTpye != null">
+                #{belongerTpye,jdbcType=INTEGER},
+            </if>
+            <if test="belongerCompanyHeaderId != null">
+                #{belongerCompanyHeaderId,jdbcType=BIGINT},
+            </if>
+            <if test="insuranceBeneficiaryType != null">
+                #{insuranceBeneficiaryType,jdbcType=INTEGER},
+            </if>
+            <if test="beneficiaryCompanyHeaderId != null">
+                #{beneficiaryCompanyHeaderId,jdbcType=BIGINT},
+            </if>
+            <if test="beneficiaFinancingerId != null">
+                #{beneficiaFinancingerId,jdbcType=BIGINT},
+            </if>
+            <if test="plateNumber != null">
+                #{plateNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="registrationNumber != null">
+                #{registrationNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="registrationNumberImg != null">
+                #{registrationNumberImg,jdbcType=VARCHAR},
+            </if>
+            <if test="gpsSupplierId != null">
+                #{gpsSupplierId,jdbcType=BIGINT},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=NUMERIC},
+            </if>
+            <if test="purchaseTaxRate != null">
+                #{purchaseTaxRate,jdbcType=NUMERIC},
+            </if>
+            <if test="purchaseTax != null">
+                #{purchaseTax,jdbcType=NUMERIC},
+            </if>
+            <if test="onPlateCost != null">
+                #{onPlateCost,jdbcType=NUMERIC},
+            </if>
+            <if test="gpsCost != null">
+                #{gpsCost,jdbcType=NUMERIC},
+            </if>
+            <if test="mortgageCost != null">
+                #{mortgageCost,jdbcType=NUMERIC},
+            </if>
+            <if test="vehicleVesselTax != null">
+                #{vehicleVesselTax,jdbcType=NUMERIC},
+            </if>
+            <if test="otherCost != null">
+                #{otherCost,jdbcType=NUMERIC},
+            </if>
+            <if test="storehouseId != null">
+                #{storehouseId,jdbcType=BIGINT},
+            </if>
+            <if test="dealerId != null">
+                #{dealerId,jdbcType=BIGINT},
+            </if>
+            <if test="storehouseStatus != null">
+                #{storehouseStatus,jdbcType=INTEGER},
+            </if>
+            <if test="leaseStatus != null">
+                #{leaseStatus,jdbcType=INTEGER},
+            </if>
+            <if test="isEnable != null">
+                #{isEnable,jdbcType=BIT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="insuranceStatus != null">
+                #{insuranceStatus,jdbcType=BIT},
+            </if>
+            <if test="gpsStatus != null">
+                #{gpsStatus,jdbcType=BIT},
+            </if>
+            <if test="mortgageStatus != null">
+                #{mortgageStatus,jdbcType=BIT},
+            </if>
+            <if test="plateStatus != null">
+                #{plateStatus,jdbcType=INTEGER},
+            </if>
+            <if test="inStorehouseTime != null">
+                #{inStorehouseTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="saleChannelType != null">
+                #{saleChannelType,jdbcType=INTEGER},
+            </if>
+            <if test="saleChannelId != null">
+                #{saleChannelId,jdbcType=BIGINT},
+            </if>
+            <if test="saleTime != null">
+                #{saleTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="contractId != null">
+                #{contractId,jdbcType=BIGINT},
+            </if>
+            <if test="invoicingTax != null">
+                #{invoicingTax,jdbcType=NUMERIC},
+            </if>
+            <if test="invoicedCarPrice != null">
+                #{invoicedCarPrice,jdbcType=NUMERIC},
+            </if>
+            <if test="branchCompanyId != null">
+                #{branchCompanyId,jdbcType=BIGINT},
+            </if>
+            <if test="storehouseType != null">
+                #{storehouseType,jdbcType=INTEGER},
+            </if>
+            <if test="dealStatus != null">
+                #{dealStatus,jdbcType=INTEGER},
+            </if>
+            <if test="carCondition != null">
+                #{carCondition,jdbcType=INTEGER}
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.supplier.model.LeaseCar">
+        update lease_car
+        <set>
+            <if test="contractNumber != null">
+                contract_number = #{contractNumber,jdbcType=VARCHAR},
+            </if>
+            car_buy_financinger_id = #{carBuyFinancingerId,jdbcType=BIGINT},
+            <if test="brandsId != null">
+                brands_id = #{brandsId,jdbcType=BIGINT},
+            </if>
+            <if test="seriesId != null">
+                series_id = #{seriesId,jdbcType=BIGINT},
+            </if>
+            <if test="modelId != null">
+                model_id = #{modelId,jdbcType=BIGINT},
+            </if>
+            <if test="colorId != null">
+                color_id = #{colorId,jdbcType=BIGINT},
+            </if>
+            <if test="cardFrameNumber != null">
+                card_frame_number = #{cardFrameNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="engineNumber != null">
+                engine_number = #{engineNumber,jdbcType=VARCHAR},
+            </if>
+            manufacture_time = #{manufactureTime,jdbcType=TIMESTAMP},
+            certificate_number = #{certificateNumber,jdbcType=VARCHAR},
+            invoice_number = #{invoiceNumber,jdbcType=VARCHAR},
+            <if test="accessoryId != null">
+                accessory_id = #{accessoryId,jdbcType=BIGINT},
+            </if>
+            <if test="mortgageTypeId != null">
+                mortgage_type_id = #{mortgageTypeId,jdbcType=BIGINT},
+            </if>
+            <if test="mortgageTypeName != null">
+                mortgage_type_name = #{mortgageTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="buyCardCapitalTypeId != null">
+                buy_card_capital_type_id = #{buyCardCapitalTypeId,jdbcType=BIGINT},
+            </if>
+            <if test="buyCardCapitalTypeName != null">
+                buy_card_capital_type_name = #{buyCardCapitalTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="belongerTpye != null">
+                belonger_tpye = #{belongerTpye,jdbcType=INTEGER},
+            </if>
+            <if test="belongerCompanyHeaderId != null">
+                belonger_company_header_id = #{belongerCompanyHeaderId,jdbcType=BIGINT},
+            </if>
+            <if test="insuranceBeneficiaryType != null">
+                insurance_beneficiary_type = #{insuranceBeneficiaryType,jdbcType=INTEGER},
+            </if>
+            <if test="beneficiaryCompanyHeaderId != null">
+                beneficiary_company_header_id = #{beneficiaryCompanyHeaderId,jdbcType=BIGINT},
+            </if>
+            <if test="beneficiaFinancingerId != null">
+                beneficia_financinger_id = #{beneficiaFinancingerId,jdbcType=BIGINT},
+            </if>
+            <if test="plateNumber != null">
+                plate_number = #{plateNumber,jdbcType=VARCHAR},
+            </if>
+
+            registration_number = #{registrationNumber,jdbcType=VARCHAR},
+            registration_number_img = #{registrationNumberImg,jdbcType=VARCHAR},
+            <if test="gpsSupplierId != null">
+                gps_supplier_id = #{gpsSupplierId,jdbcType=BIGINT},
+            </if>
+            price = #{price,jdbcType=NUMERIC},
+            purchase_tax_rate = #{purchaseTaxRate,jdbcType=NUMERIC},
+            purchase_tax = #{purchaseTax,jdbcType=NUMERIC},
+            on_plate_cost = #{onPlateCost,jdbcType=NUMERIC},
+            <if test="gpsCost != null">
+                gps_cost = #{gpsCost,jdbcType=NUMERIC},
+            </if>
+            mortgage_cost = #{mortgageCost,jdbcType=NUMERIC},
+            vehicle_vessel_tax = #{vehicleVesselTax,jdbcType=NUMERIC},
+            other_cost = #{otherCost,jdbcType=NUMERIC},
+            <if test="storehouseId != null">
+                storehouse_id = #{storehouseId,jdbcType=BIGINT},
+            </if>
+            <if test="dealerId != null">
+                dealer_id = #{dealerId,jdbcType=BIGINT},
+            </if>
+            <if test="storehouseStatus != null">
+                storehouse_status = #{storehouseStatus,jdbcType=INTEGER},
+            </if>
+            <if test="leaseStatus != null">
+                lease_status = #{leaseStatus,jdbcType=INTEGER},
+            </if>
+            <if test="isEnable != null">
+                is_enable = #{isEnable,jdbcType=BIT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            insurance_status = #{insuranceStatus,jdbcType=BIT},
+            gps_status = #{gpsStatus,jdbcType=BIT},
+            mortgage_status = #{mortgageStatus,jdbcType=BIT},
+            <if test="plateStatus != null">
+                plate_status = #{plateStatus,jdbcType=INTEGER},
+            </if>
+            <if test="inStorehouseTime != null">
+                in_storehouse_time = #{inStorehouseTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="saleChannelType != null">
+                sale_channel_type = #{saleChannelType,jdbcType=INTEGER},
+            </if>
+            <if test="saleChannelId != null">
+                sale_channel_id = #{saleChannelId,jdbcType=BIGINT},
+            </if>
+            <if test="saleTime != null">
+                sale_time = #{saleTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="contractId != null">
+                contract_id= #{contractId,jdbcType=BIGINT},
+            </if>
+            invoicing_tax= #{invoicingTax,jdbcType=NUMERIC},
+            invoiced_car_price=#{invoicedCarPrice,jdbcType=NUMERIC},
+            <if test="branchCompanyId != null">
+                branch_company_id = #{branchCompanyId,jdbcType=BIGINT},
+            </if>
+            <if test="storehouseType != null">
+                storehouse_type = #{storehouseType,jdbcType=INTEGER},
+            </if>
+            <if test="dealStatus != null">
+                deal_status = #{dealStatus,jdbcType=INTEGER},
+            </if>
+            <if test="carCondition != null">
+                car_condition = #{carCondition,jdbcType=INTEGER}
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hc.lease.supplier.model.LeaseCar">
+    update lease_car
+    set contract_number = #{contractNumber,jdbcType=VARCHAR},
+      car_buy_financinger_id = #{carBuyFinancingerId,jdbcType=BIGINT},
+      brands_id = #{brandsId,jdbcType=BIGINT},
+      series_id = #{seriesId,jdbcType=BIGINT},
+      model_id = #{modelId,jdbcType=BIGINT},
+      color_id = #{colorId,jdbcType=BIGINT},
+      card_frame_number = #{cardFrameNumber,jdbcType=VARCHAR},
+      engine_number = #{engineNumber,jdbcType=VARCHAR},
+      manufacture_time = #{manufactureTime,jdbcType=TIMESTAMP},
+      certificate_number = #{certificateNumber,jdbcType=VARCHAR},
+      invoice_number = #{invoiceNumber,jdbcType=VARCHAR},
+      accessory_id = #{accessoryId,jdbcType=BIGINT},
+      mortgage_type_id = #{mortgageTypeId,jdbcType=BIGINT},
+      mortgage_type_name = #{mortgageTypeName,jdbcType=VARCHAR},
+      buy_card_capital_type_id = #{buyCardCapitalTypeId,jdbcType=BIGINT},
+      buy_card_capital_type_name = #{buyCardCapitalTypeName,jdbcType=VARCHAR},
+      belonger_tpye = #{belongerTpye,jdbcType=INTEGER},
+      belonger_company_header_id = #{belongerCompanyHeaderId,jdbcType=BIGINT},
+      insurance_beneficiary_type = #{insuranceBeneficiaryType,jdbcType=INTEGER},
+      beneficiary_company_header_id = #{beneficiaryCompanyHeaderId,jdbcType=BIGINT},
+      beneficia_financinger_id = #{beneficiaFinancingerId,jdbcType=BIGINT},
+      plate_number = #{plateNumber,jdbcType=VARCHAR},
+      registration_number = #{registrationNumber,jdbcType=VARCHAR},
+      registration_number_img = #{registrationNumberImg,jdbcType=VARCHAR},
+      gps_supplier_id = #{gpsSupplierId,jdbcType=BIGINT},
+      price = #{price,jdbcType=NUMERIC},
+      purchase_tax_rate = #{purchaseTaxRate,jdbcType=NUMERIC},
+      purchase_tax = #{purchaseTax,jdbcType=NUMERIC},
+      on_plate_cost = #{onPlateCost,jdbcType=NUMERIC},
+      gps_cost = #{gpsCost,jdbcType=NUMERIC},
+      mortgage_cost = #{mortgageCost,jdbcType=NUMERIC},
+      vehicle_vessel_tax = #{vehicleVesselTax,jdbcType=NUMERIC},
+      other_cost = #{otherCost,jdbcType=NUMERIC},
+      storehouse_id = #{storehouseId,jdbcType=BIGINT},
+      dealer_id = #{dealerId,jdbcType=BIGINT},
+      storehouse_status = #{storehouseStatus,jdbcType=INTEGER},
+      lease_status = #{leaseStatus,jdbcType=INTEGER},
+      is_enable = #{isEnable,jdbcType=BIT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      sort = #{sort,jdbcType=INTEGER},
+      insurance_status = #{insuranceStatus,jdbcType=BIT},
+      gps_status = #{gpsStatus,jdbcType=BIT},
+      plate_status = #{plateStatus,jdbcType=INTEGER},
+      in_storehouse_time = #{inStorehouseTime,jdbcType=TIMESTAMP},
+      sale_channel_type = #{saleChannelType,jdbcType=INTEGER},
+      sale_channel_id = #{saleChannelId,jdbcType=BIGINT},
+      sale_time = #{saleTime,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      contract_id= #{contractId,jdbcType=BIGINT},
+      invoicing_tax= #{invoicingTax,jdbcType=NUMERIC},
+      invoiced_car_price=#{invoicedCarPrice,jdbcType=NUMERIC},
+      branch_company_id = #{branchCompanyId,jdbcType=BIGINT},
+      mortgage_status = #{mortgageStatus,jdbcType=BIT},
+      storehouse_type = #{storehouseType,jdbcType=INTEGER},
+      deal_status = #{dealStatus,jdbcType=INTEGER},
+      car_condition = #{carCondition,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <update id="updateEntityById" parameterType="com.hc.lease.supplier.model.LeaseCar">
+        UPDATE
+        <include refid="table_name"/>
+        <set>
+            <if test="invoicedCarPrice != null">
+                invoiced_car_price = #{invoicedCarPrice,jdbcType=NUMERIC},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=NUMERIC,jdbcType=NUMERIC},
+            </if>
+            <if test="invoicingTax != null">
+                invoicing_tax = #{invoicingTax,jdbcType=NUMERIC},
+            </if>
+            <if test="invoiceNumber != null and invoiceNumber != ''">
+                invoice_number = #{invoiceNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicleVesselTax != null">
+                vehicle_vessel_tax = #{vehicleVesselTax,jdbcType=NUMERIC},
+            </if>
+            <if test="purchaseTax != null">
+                purchase_tax = #{purchaseTax,jdbcType=NUMERIC},
+            </if>
+            <if test="gpsCost != null">
+                gps_cost = #{gpsCost,jdbcType=NUMERIC,jdbcType=NUMERIC},
+            </if>
+            <if test="otherCost != null">
+                other_cost = #{otherCost,jdbcType=NUMERIC}
+            </if>
+        </set>
+        WHERE id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <!-- 修改 车辆贷后的 处理方案为断供， 则把合同状态改为断供 -->
+    <update id="updateDealStatus" parameterType="com.hc.lease.supplier.model.LeaseCar">
+        update lease_car
+        <set>
+            <if test="dealStatus != null">
+                deal_status = #{dealStatus,jdbcType=VARCHAR}
+            </if>
+
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectEntity" parameterType="com.hc.lease.supplier.model.LeaseCar"
+            resultType="com.hc.lease.supplier.model.LeaseCar">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="table_name"/>
+        WHERE 1=1
+        <if test="cardFrameNumber != null">
+            AND card_frame_number = #{cardFrameNumber,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="getCarIdByCardFrameNumber" parameterType="java.lang.String" resultType="java.lang.Long">
+        SELECT id
+        FROM
+        <include refid="table_name"/>
+        WHERE card_frame_number = #{cardFrameNumber,jdbcType=VARCHAR}
+    </select>
+
+    <select id="insuranceCarExportEntityQuery" parameterType="java.lang.Long" resultMap="InsuranceCarExportMap">
+    select car.id carId, car.card_frame_number, car.engine_number, car.plate_number, brands.id brandsId, brands.name brandsName, series.id seriesId, series.name seriesName, model.id modelId, model.complete_model_name
+    from lease_car car
+    left join lease_car_brands brands on car.brands_id = brands.id
+    left join lease_car_series series on car.series_id = series.id
+    left join lease_car_model model on car.model_id = model.id
+    WHERE car.id = #{carId,jdbcType=BIGINT}
+  </select>
+
+    <select id="getAllAscCarIds" resultType="java.lang.Long">
+        select id
+        from lease_car
+        order by id asc
+    </select>
+</mapper>

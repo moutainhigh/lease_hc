@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://code.alibabatech.com/schema/dubbo
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<dubbo:registry address="${dubbo.registry.zookeeper}"/>
+	<!-- 生成远程服务代理，可以像使用本地bean一样使用demoService -->
+
+	<dubbo:reference interface="com.hc.lease.supplier.service.api.LeaseCarService" id="leaseCarService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.supplier.service.api.LeaseStorehouseService" id="leaseStorehouseService" check="false" timeout="1200000" />
+	<dubbo:reference interface="com.hc.lease.supplier.service.api.LeasePurchaseContractService" id="leasePurchaseContractService" check="false" timeout="1200000" />
+
+	<!--用户模块-->
+	<dubbo:reference interface="com.hc.lease.user.service.api.LeaseUserService" id="leaseUserService" check="false" timeout="1200000" />
+
+</beans>

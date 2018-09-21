@@ -1,0 +1,1 @@
+dubboTraceFilter=com.hc.lease.common.core.dubbo.filter.DubboTraceFilter

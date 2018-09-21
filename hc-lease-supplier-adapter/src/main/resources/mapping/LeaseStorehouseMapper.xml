@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.supplier.dao.LeaseStorehouseMapper" >
+  <resultMap id="BaseResultMap" type="com.hc.lease.supplier.model.LeaseStorehouse" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="company_id" property="companyId" jdbcType="BIGINT" />
+    <result column="max_card_sum" property="maxCardSum" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="contacts" property="contacts" jdbcType="VARCHAR" />
+    <result column="contact_phone" property="contactPhone" jdbcType="VARCHAR" />
+    <result column="province_id" property="provinceId" jdbcType="BIGINT" />
+    <result column="province_name" property="provinceName" jdbcType="VARCHAR" />
+    <result column="city_id" property="cityId" jdbcType="BIGINT" />
+    <result column="city_name" property="cityName" jdbcType="VARCHAR" />
+    <result column="area_id" property="areaId" jdbcType="BIGINT" />
+    <result column="area_name" property="areaName" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+    <result column="is_enable" property="isEnable" jdbcType="BIT" />
+    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="belong_type" property="belongType" jdbcType="BIGINT" />
+    <result column="belong_id" property="belongId" jdbcType="BIGINT" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="default_selected" property="defaultSelected" jdbcType="BIT" />
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, number, company_id, max_card_sum, name, contacts, contact_phone, province_id, 
+    province_name, city_id, city_name, area_id, area_name, address, create_time, update_time, 
+    create_by, update_by, is_enable, parent_id, sort,belong_type,belong_id,remarks,default_selected
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from lease_storehouse
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+
+  <select id="findPage" resultType="java.util.Map">
+    select
+    s.id, s.number, s.company_id as "companyId", s.max_card_sum as "maxCardSum", s.name, s.contacts, s.contact_phone as "contactPhone", s.province_id as "provinceId",
+    s.province_name as "provinceName", s.city_id as "cityId", s.city_name as "cityName",s.area_id as "areaId", s.area_name as "areaName", s.address, s.create_time as "createTime", s.update_time as "updateTime",
+    s.create_by as "createBy", s.update_by as "updateBy", s.is_enable as "isEnable", s.parent_id as "parentId", s.sort,s.belong_id as "belongId",s.belong_type as "belongType",
+    s.remarks,s.default_selected as "defaultSelected",bc.name as "companyName",s.sort
+    from lease_storehouse s
+    left join lease_branch_company bc on bc.id=s.company_id
+    where  1=1
+    <if test="name != null" >
+      and  s.name like CONCAT('%',#{name},'%')
+    </if>
+    <if test="number != null" >
+      and  s.number like CONCAT('%',#{number},'%')
+    </if>
+    <if test="id != null"  >
+      and  s.id = #{id}
+    </if>
+    <if test="contactPhone != null"  >
+      and  s.contact_phone like CONCAT('%',#{contactPhone},'%')
+    </if>
+    <if test="companyId != null"  >
+      and  s.company_id = #{companyId}
+    </if>
+    <if test="contacts != null"  >
+      and  s.contacts like CONCAT('%',#{contacts},'%')
+    </if>
+    order by s.sort asc
+  </select>
+
+  <select id="findByBelongIdAndBelongType" resultType="java.util.Map"  parameterType="java.util.Map" >
+ select
+    s.id, s.number, s.company_id as "companyId", s.max_card_sum as "maxCardSum", s.name, s.contacts, s.contact_phone as "contactPhone", s.province_id as "provinceId",
+    s.province_name as "provinceName", s.city_id as "cityId", s.city_name as "cityName",s.area_id as "areaId", s.area_name as "areaName", s.address, s.create_time as "createTime", s.update_time as "updateTime",
+    s.create_by as "createBy", s.update_by as "updateBy", s.is_enable as "isEnable", s.parent_id as "parentId", s.sort,s.belong_id as "belongId",s.belong_type as "belongType",
+    CASE
+    when s.belong_type=0 then bc.name
+    else d.name end  as "belongName",
+    s.remarks,s.default_selected as "defaultSelected"
+    from lease_storehouse s
+    left join lease_branch_company bc on bc.id=s.belong_id
+    left join lease_dealer d on s.belong_id=d.id
+    where 1=1
+    <if test="belongType != null" >
+      and  s.belong_type=#{belongType}
+    </if>
+    <if test="belongId != null" >
+      and  s.belong_id=#{belongId}
+    </if>
+  </select>
+
+
+  <select id="findAll" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List"/>
+    from lease_storehouse
+    where 1=1
+    <if test="companyId != null">
+      and company_id = #{companyId,jdbcType=BIGINT}
+    </if>
+    <if test="belongType != null">
+      and belong_type = #{belongType,jdbcType=INTEGER}
+    </if>
+  order by sort asc
+  </select>
+
+  <select id="findByBranchCompanyId" resultMap="BaseResultMap" >
+    select
+    id, name
+    from lease_storehouse
+    where company_id in
+    <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </select>
+
+  <select id="findByName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from lease_storehouse
+    WHERE 1=1
+    <if test="name != null">
+      and name = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="number != null">
+      and number = #{number,jdbcType=VARCHAR}
+    </if>
+    <if test="id != null">
+      and id != #{id,jdbcType=BIGINT}
+    </if>
+
+  </select>
+
+
+
+
+  <select id="insertViewParames" resultType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from lease_storehouse
+  </select>
+
+  <delete id="deleteBatchById" parameterType="long">
+    delete from lease_storehouse where id in
+    <foreach item="item" collection="list" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lease_storehouse
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <update id="disableByPrimaryKey" parameterType="java.util.Map">
+    update lease_storehouse set is_enable = #{isEnable,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateDefaultSelected" parameterType="java.util.Map">
+    update lease_storehouse set default_selected = #{defaultSelected,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateSort" parameterType="java.util.Map">
+    update lease_storehouse set sort =#{mark}
+    where id=#{id}
+  </update>
+
+
+  <insert id="insert" parameterType="com.hc.lease.supplier.model.LeaseStorehouse" >
+    insert into lease_storehouse (id, number, company_id, 
+      max_card_sum, name, contacts, 
+      contact_phone, province_id, province_name, 
+      city_id, city_name, area_id, 
+      area_name, address, create_time, 
+      update_time, create_by, update_by, 
+      is_enable, parent_id, sort,belong_type,belong_id,remarks,default_selected
+      )
+    values (#{id,jdbcType=BIGINT}, #{number,jdbcType=VARCHAR}, #{companyId,jdbcType=BIGINT},
+      #{maxCardSum,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{contacts,jdbcType=VARCHAR}, 
+      #{contactPhone,jdbcType=VARCHAR}, #{provinceId,jdbcType=BIGINT}, #{provinceName,jdbcType=VARCHAR}, 
+      #{cityId,jdbcType=BIGINT}, #{cityName,jdbcType=VARCHAR}, #{areaId,jdbcType=BIGINT}, 
+      #{areaName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT}, 
+      #{isEnable,jdbcType=BIT}, #{parentId,jdbcType=BIGINT}, #{id,jdbcType=INTEGER},#{belongType,jdbcType=BIGINT},
+      #{belongId,jdbcType=BIGINT},#{remarks,jdbcType=VARCHAR},#{defaultSelected,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hc.lease.supplier.model.LeaseStorehouse" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_storehouse_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_storehouse
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="maxCardSum != null" >
+        max_card_sum,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="contacts != null" >
+        contacts,
+      </if>
+      <if test="contactPhone != null" >
+        contact_phone,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="provinceName != null" >
+        province_name,
+      </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+      <if test="cityName != null" >
+        city_name,
+      </if>
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="areaName != null" >
+        area_name,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="isEnable != null" >
+        is_enable,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="id != null" >
+        sort,
+      </if>
+      <if test="belongType != null" >
+        belong_type,
+      </if>
+      <if test="belongId != null" >
+        belong_id,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="defaultSelected != null" >
+        default_selected
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="maxCardSum != null" >
+        #{maxCardSum,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts != null" >
+        #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="provinceName != null" >
+        #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="cityName != null" >
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=BIGINT},
+      </if>
+      <if test="areaName != null" >
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="belongType != null" >
+        #{belongType,jdbcType=BIGINT},
+      </if>
+      <if test="belongId != null" >
+        #{belongId,jdbcType=BIGINT},
+      </if>
+      <if test="remarks != null" >
+         #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultSelected != null" >
+        #{defaultSelected,jdbcType=BIT}
+      </if>
+
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.supplier.model.LeaseStorehouse" >
+    update lease_storehouse
+    <set >
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="maxCardSum != null" >
+        max_card_sum = #{maxCardSum,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts != null" >
+        contacts = #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        contact_phone = #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="provinceName != null" >
+        province_name = #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="cityName != null" >
+        city_name = #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        area_id = #{areaId,jdbcType=BIGINT},
+      </if>
+      <if test="areaName != null" >
+        area_name = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="isEnable != null" >
+        is_enable = #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="belongType != null" >
+        belong_type=#{belongType,jdbcType=BIGINT},
+      </if>
+      <if test="belongId != null" >
+        belong_id=#{belongId,jdbcType=BIGINT},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultSelected != null" >
+        default_selected = #{defaultSelected,jdbcType=BIT}
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hc.lease.supplier.model.LeaseStorehouse" >
+    update lease_storehouse
+    set number = #{number,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=BIGINT},
+      max_card_sum = #{maxCardSum,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      contacts = #{contacts,jdbcType=VARCHAR},
+      contact_phone = #{contactPhone,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=BIGINT},
+      province_name = #{provinceName,jdbcType=VARCHAR},
+      city_id = #{cityId,jdbcType=BIGINT},
+      city_name = #{cityName,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=BIGINT},
+      area_name = #{areaName,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      is_enable = #{isEnable,jdbcType=BIT},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      sort = #{sort,jdbcType=INTEGER},
+      belong_type=#{belongType,jdbcType=BIGINT},
+      belong_id=#{belongId,jdbcType=BIGINT},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      default_selected = #{defaultSelected,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

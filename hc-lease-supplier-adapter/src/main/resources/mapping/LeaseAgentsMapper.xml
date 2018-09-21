@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.supplier.dao.LeaseAgentsMapper" >
+  <resultMap id="BaseResultMap" type="com.hc.lease.supplier.model.LeaseAgents" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="secondary_id" property="secondaryId" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sales_name" property="salesName" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="stores_level" property="storesLevel" jdbcType="INTEGER" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+    <result column="is_enable" property="isEnable" jdbcType="BIT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="is_contract_award" property="isContractAward" jdbcType="INTEGER" />
+    <result column="cooperation_start_time" property="cooperationStartTime" jdbcType="TIMESTAMP" />
+    <result column="cooperation_year_limit" property="cooperationYearLimit" jdbcType="BIGINT" />
+    <result column="cooperation_end_time" property="cooperationEndTime" jdbcType="TIMESTAMP" />
+    <result column="business_license_img" property="businessLicenseImg" jdbcType="VARCHAR" />
+    <result column="business_license_number" property="businessLicenseNumber" jdbcType="VARCHAR" />
+    <result column="charge_person_name" property="chargePersonName" jdbcType="VARCHAR" />
+    <result column="charge_person_id_card" property="chargePersonIdCard" jdbcType="VARCHAR" />
+    <result column="business_license_adress" property="businessLicenseAdress" jdbcType="VARCHAR" />
+    <result column="guarantee_amount" property="guaranteeAmount" jdbcType="NUMERIC" />
+    <result column="car_number" property="carNumber" jdbcType="INTEGER" />
+    <result column="commission" property="commission" jdbcType="NUMERIC" />
+    <result column="number" property="number" jdbcType="BIGINT" />
+
+    <result column="secondary_name" property="secondaryName" jdbcType="VARCHAR" />
+    <result column="level_name" property="levelName" jdbcType="VARCHAR" />
+    <result column="level_id" property="levelId" jdbcType="VARCHAR" />
+
+  </resultMap>
+
+  <resultMap id="FindPageMap" type="com.hc.lease.supplier.vo.FindPageVo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="secondary_id" property="secondaryId" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sales_name" property="salesName" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="stores_level" property="storesLevel" jdbcType="INTEGER" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="is_enable" property="isEnable" jdbcType="BIT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="secondary_name" property="secondaryName" jdbcType="VARCHAR" />
+    <result column="is_contract_award" property="isContractAward" jdbcType="INTEGER" />
+    <result column="cooperation_start_time" property="cooperationStartTime" jdbcType="VARCHAR" />
+    <result column="cooperation_year_limit" property="cooperationYearLimit" jdbcType="BIGINT" />
+    <result column="cooperation_year_limit_name" property="cooperationYearLimitName" jdbcType="VARCHAR" />
+    <result column="cooperation_end_time" property="cooperationEndTime" jdbcType="VARCHAR" />
+    <result column="business_license_img" property="businessLicenseImg" jdbcType="VARCHAR" />
+    <result column="business_license_number" property="businessLicenseNumber" jdbcType="VARCHAR" />
+    <result column="charge_person_name" property="chargePersonName" jdbcType="VARCHAR" />
+    <result column="charge_person_id_card" property="chargePersonIdCard" jdbcType="VARCHAR" />
+    <result column="business_license_adress" property="businessLicenseAdress" jdbcType="VARCHAR" />
+    <result column="guarantee_amount" property="guaranteeAmount" jdbcType="NUMERIC" />
+    <result column="car_number" property="carNumber" jdbcType="INTEGER" />
+    <result column="commission" property="commission" jdbcType="NUMERIC" />
+    <result column="level_name" property="levelName" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="BIGINT" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, secondary_id, name, type, stores_level, address, img, phone, create_time, update_time,
+    create_by, update_by, is_enable, sort
+    ,is_contract_award,cooperation_start_time,cooperation_year_limit
+    ,cooperation_end_time,business_license_img,business_license_number
+    ,charge_person_name,charge_person_id_card,business_license_adress,guarantee_amount,car_number,commission,number,sales_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from lease_agents
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="findAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select s.id,s.secondary_id,s.name,s.sales_name "salesName",s.type,s.stores_level,s.address,s.img,s.phone,s.is_enable,s.sort,l.name as "secondaryName"
+
+    ,s.is_contract_award,s.cooperation_start_time,s.cooperation_year_limit
+    ,s.cooperation_end_time,s.business_license_img,s.business_license_number
+    ,s.charge_person_name,s.charge_person_id_card,s.business_license_adress
+    ,s.guarantee_amount,s.car_number,s.commission,le.name as "levelName",s.number,l.level_id "levelId"
+
+    from lease_agents s
+    left join lease_agents_secondary l on s.secondary_id=l.id
+    left join lease_agents_level le on l.level_id=le.id
+    order by s.sort asc
+  </select>
+
+  <select id="findAllNoPage" parameterType="java.util.Map" resultMap="FindPageMap">
+    select s.id,s.secondary_id,s.name,s.sales_name "salesName",s.type,s.stores_level,s.address,s.img,s.phone,s.is_enable,s.sort,l.name as "secondaryName"
+
+    ,s.is_contract_award,s.cooperation_start_time,s.cooperation_year_limit
+    ,s.cooperation_end_time,s.business_license_img,s.business_license_number
+    ,s.charge_person_name,s.charge_person_id_card,s.business_license_adress
+    ,s.guarantee_amount,s.car_number,s.commission,le.name as "levelName",s.number
+
+    ,ld.value "cooperationYearLimitName"
+
+    from lease_agents s
+    left join lease_agents_secondary l on s.secondary_id=l.id
+    left join lease_agents_level le on l.level_id=le.id
+    left join lease_dict ld on s.cooperation_year_limit=ld.id and ld.type = 'CooperationYearLimit'
+    order by s.sort asc
+  </select>
+
+  <select id="findPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select s.id,s.secondary_id,s.name,s.sales_name "salesName",s.type,s.stores_level,s.address,s.img,s.phone,s.is_enable,s.sort,l.name as "secondaryName"
+
+    ,s.is_contract_award,s.cooperation_start_time,s.cooperation_year_limit
+    ,s.cooperation_end_time,s.business_license_img,s.business_license_number
+    ,s.charge_person_name,s.charge_person_id_card,s.business_license_adress
+    ,s.guarantee_amount,s.car_number,s.commission,le.name as "levelName",s.number
+
+    from lease_agents s
+    join lease_agents_secondary l on s.secondary_id=l.id
+    join lease_agents_level le on l.level_id=le.id
+    order by s.sort asc
+  </select>
+
+  <select id="findByName" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from lease_agents
+    where name = #{name,jdbcType=VARCHAR}
+    <if test="id != null">
+      and id != #{id,jdbcType=BIGINT}
+    </if>
+    <if test="secondaryId != null">
+      and secondary_id = #{secondaryId,jdbcType=BIGINT}
+    </if>
+    order by sort asc
+  </select>
+
+
+  <!--导入模板需要的数据-->
+  <select id="findExportExcelModel" resultType="java.lang.String">
+    select name from lease_agents
+    ORDER BY sort ASC
+  </select>
+
+  <select id="findMaxNumber" resultType="java.lang.Integer">
+    select max(number)  from lease_agents
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lease_agents
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+
+  <update id="disableByPrimaryKey" parameterType="java.util.Map">
+    update lease_agents set is_enable = #{isEnable,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateSort" parameterType="java.util.Map">
+    update lease_agents set sort =#{mark}
+    where id=#{id}
+  </update>
+
+
+  <delete id="deleteBySecondaryId" parameterType="java.lang.Long" >
+    delete from lease_agents
+    where secondary_id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hc.lease.supplier.model.LeaseAgents" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_agents_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_agents (id, secondary_id, name,
+    type, stores_level, address,
+    img, phone, create_time,
+    update_time, create_by, update_by,
+    is_enable, sort
+
+    ,is_contract_award,cooperation_start_time,cooperation_year_limit
+    ,cooperation_end_time,business_license_img,business_license_number
+    ,charge_person_name,charge_person_id_card,business_license_adress
+    ,guarantee_amount,car_number,commission,number,sales_name
+
+    )
+    values (#{id,jdbcType=BIGINT}, #{secondaryId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR},
+    #{type,jdbcType=INTEGER}, #{storesLevel,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR},
+    #{img,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+    #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT},
+    #{isEnable,jdbcType=BIT}, #{sort,jdbcType=INTEGER}
+
+    , #{isContractAward,jdbcType=INTEGER}, #{cooperationStartTime,jdbcType=TIMESTAMP}, #{cooperationYearLimit,jdbcType=BIGINT}
+    , #{cooperationEndTime,jdbcType=TIMESTAMP}, #{businessLicenseImg,jdbcType=VARCHAR}
+    , #{businessLicenseNumber,jdbcType=VARCHAR}, #{chargePersonName,jdbcType=VARCHAR}
+    , #{chargePersonIdCard,jdbcType=VARCHAR}, #{businessLicenseAdress,jdbcType=VARCHAR}
+    , #{guaranteeAmount,jdbcType=NUMERIC},#{carNumber,jdbcType=INTEGER}
+    ,#{commission,jdbcType=NUMERIC},#{number,jdbcType=BIGINT}, #{salesName,jdbcType=VARCHAR}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hc.lease.supplier.model.LeaseAgents" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_agents_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_agents
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="secondaryId != null" >
+        secondary_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="storesLevel != null" >
+        stores_level,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="img != null" >
+        img,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="isEnable != null" >
+        is_enable,
+      </if>
+      <if test="id != null" >
+        sort,
+      </if>
+      <if test="isContractAward != null" >
+        is_contract_award,
+      </if>
+      <if test="cooperationStartTime != null" >
+        cooperation_start_time,
+      </if>
+      <if test="cooperationYearLimit != null" >
+        cooperation_year_limit,
+      </if>
+      <if test="cooperationEndTime != null" >
+        cooperation_end_time,
+      </if>
+      <if test="businessLicenseImg != null" >
+        business_license_img,
+      </if>
+      <if test="businessLicenseNumber != null" >
+        business_license_number,
+      </if>
+      <if test="chargePersonName != null" >
+        charge_person_name,
+      </if>
+      <if test="chargePersonIdCard != null" >
+        charge_person_id_card,
+      </if>
+      <if test="businessLicenseAdress != null" >
+        business_license_adress,
+      </if>
+      <if test="guaranteeAmount != null" >
+        guarantee_amount,
+      </if>
+      <if test="carNumber != null" >
+        car_number,
+      </if>
+      <if test="commission != null" >
+        commission,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="salesName != null" >
+        sales_name
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="secondaryId != null" >
+        #{secondaryId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="storesLevel != null" >
+        #{storesLevel,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="isContractAward != null" >
+        #{isContractAward,jdbcType=INTEGER},
+      </if>
+      <if test="cooperationStartTime != null" >
+        #{cooperationStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cooperationYearLimit != null" >
+        #{cooperationYearLimit,jdbcType=BIGINT},
+      </if>
+      <if test="cooperationEndTime != null" >
+        #{cooperationEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="businessLicenseImg != null" >
+        #{businessLicenseImg,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLicenseNumber != null" >
+        #{businessLicenseNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="chargePersonName != null" >
+        #{chargePersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="chargePersonIdCard != null" >
+        #{chargePersonIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLicenseAdress != null" >
+        #{businessLicenseAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="guaranteeAmount != null" >
+        #{guaranteeAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="carNumber != null" >
+        #{carNumber,jdbcType=INTEGER},
+      </if>
+      <if test="commission != null" >
+        #{commission,jdbcType=NUMERIC},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=BIGINT},
+      </if>
+      <if test="salesName != null" >
+        #{salesName,jdbcType=VARCHAR}
+      </if>
+
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.supplier.model.LeaseAgents" >
+    update lease_agents
+    <set >
+      <if test="secondaryId != null" >
+        secondary_id = #{secondaryId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      stores_level = #{storesLevel,jdbcType=INTEGER},
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      img = #{img,jdbcType=VARCHAR},
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="isEnable != null" >
+        is_enable = #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="isContractAward != null" >
+        is_contract_award = #{isContractAward,jdbcType=INTEGER},
+      </if>
+      <if test="cooperationStartTime != null" >
+        cooperation_start_time = #{cooperationStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cooperationYearLimit != null" >
+        cooperation_year_limit = #{cooperationYearLimit,jdbcType=BIGINT},
+      </if>
+      <if test="cooperationEndTime != null" >
+        cooperation_end_time = #{cooperationEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="businessLicenseImg != null" >
+        business_license_img = #{businessLicenseImg,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLicenseNumber != null" >
+        business_license_number = #{businessLicenseNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="chargePersonName != null" >
+        charge_person_name = #{chargePersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="chargePersonIdCard != null" >
+        charge_person_id_card = #{chargePersonIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLicenseAdress != null" >
+        business_license_adress = #{businessLicenseAdress,jdbcType=VARCHAR},
+      </if>
+
+      <if test="guaranteeAmount != null" >
+        guarantee_amount= #{guaranteeAmount,jdbcType=NUMERIC},
+      </if>
+      <if test="carNumber != null" >
+        car_number =#{carNumber,jdbcType=INTEGER},
+      </if>
+      <if test="commission != null" >
+        commission =#{commission,jdbcType=NUMERIC},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=BIGINT},
+      </if>
+      <if test="salesName != null" >
+        sales_name = #{salesName,jdbcType=VARCHAR}
+      </if>
+
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hc.lease.supplier.model.LeaseAgents" >
+    update lease_agents
+    set secondary_id = #{secondaryId,jdbcType=BIGINT},
+    name = #{name,jdbcType=VARCHAR},
+    type = #{type,jdbcType=INTEGER},
+    stores_level = #{storesLevel,jdbcType=INTEGER},
+    address = #{address,jdbcType=VARCHAR},
+    img = #{img,jdbcType=VARCHAR},
+    phone = #{phone,jdbcType=VARCHAR},
+    create_time = #{createTime,jdbcType=TIMESTAMP},
+    update_time = #{updateTime,jdbcType=TIMESTAMP},
+    create_by = #{createBy,jdbcType=BIGINT},
+    update_by = #{updateBy,jdbcType=BIGINT},
+    is_enable = #{isEnable,jdbcType=BIT},
+    sort = #{sort,jdbcType=INTEGER},
+    is_contract_award = #{isContractAward,jdbcType=INTEGER},
+    cooperation_start_time = #{cooperationStartTime,jdbcType=TIMESTAMP},
+    cooperation_year_limit = #{cooperationYearLimit,jdbcType=BIGINT},
+    cooperation_end_time = #{cooperationEndTime,jdbcType=TIMESTAMP},
+    business_license_img = #{businessLicenseImg,jdbcType=VARCHAR},
+    business_license_number = #{businessLicenseNumber,jdbcType=VARCHAR},
+    charge_person_name = #{chargePersonName,jdbcType=VARCHAR},
+    charge_person_id_card = #{chargePersonIdCard,jdbcType=VARCHAR},
+    business_license_adress = #{businessLicenseAdress,jdbcType=VARCHAR},
+    guarantee_amount= #{guaranteeAmount,jdbcType=NUMERIC},
+    car_number =#{carNumber,jdbcType=INTEGER},
+    commission =#{commission,jdbcType=NUMERIC},
+    number = #{number,jdbcType=BIGINT},
+    sales_name = #{salesName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

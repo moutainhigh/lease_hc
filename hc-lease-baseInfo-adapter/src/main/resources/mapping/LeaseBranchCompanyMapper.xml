@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.baseInfo.dao.LeaseBranchCompanyMapper" >
+  <resultMap id="BaseResultMap" type="com.hc.lease.baseInfo.model.LeaseBranchCompany" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="province_id" property="provinceId" jdbcType="BIGINT" />
+    <result column="province_name" property="provinceName" jdbcType="VARCHAR" />
+    <result column="city_id" property="cityId" jdbcType="BIGINT" />
+    <result column="city_name" property="cityName" jdbcType="VARCHAR" />
+    <result column="area_id" property="areaId" jdbcType="BIGINT" />
+    <result column="area_name" property="areaName" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+    <result column="is_enable" property="isEnable" jdbcType="BIT" />
+    <result column="contacts" property="contacts" jdbcType="VARCHAR" />
+    <result column="contact_phone" property="contactPhone" jdbcType="VARCHAR" />
+    <result column="company_code" property="companyCode" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="lessor_full_name" property="lessorFullName" jdbcType="VARCHAR" />
+    <result column="lessor_short_name" property="lessorShortName" jdbcType="VARCHAR" />
+
+    <result column="organization_number" property="organizationNumber" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, number, name, province_id, province_name, city_id, city_name, area_id, area_name,
+    address, create_time, update_time, create_by, update_by, is_enable, contacts, contact_phone,
+    company_code, parent_id, sort,lessor_full_name,lessor_short_name,organization_number,phone,remarks
+  </sql>
+
+  <!--导出车辆录入模板需要的数据-->
+  <select id="findExportExcelModel" resultType="java.lang.String">
+    select name from lease_branch_company
+    where is_enable = true
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from lease_branch_company
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="findPage" resultType="java.util.Map">
+    select
+     a.id, a.number, a.name, a.province_id as "provinceId", b.name as "provinceName", a.city_id as "cityId"
+    , c.name as "cityName", a.area_id as "areaId", d.name as "areaName"
+    , a.address, a.create_time as "createTime", a.update_time as "updateTime", a.create_by as "createBy"
+    , a.update_by as "updateBy", a.is_enable as "isEnable", a.contacts, a.contact_phone as "contactPhone"
+    , a.company_code as "companyCode", a.parent_id as "parentId", a.sort,a.lessor_full_name as "lessorFullName",a.lessor_short_name as "lessorShortName",
+    a.organization_number "organizationNumber",a.phone,a.remarks,a.sort
+    from lease_branch_company a
+    left join lease_area b on a.province_id=b.id
+    left join lease_area c on a.city_id=c.id
+    left join lease_area d on a.area_id=d.id
+    where 1=1
+    <if test="name != null" >
+      and  a.name like CONCAT('%',#{name},'%')
+    </if>
+    <if test="isEnable != null"  >
+      and  a.is_enable = #{isEnable}
+    </if>
+    <if test="id != null"  >
+      and  a.id = #{id}
+    </if>
+    <if test="phone != null"  >
+      and  a.phone like CONCAT('%',#{phone},'%')
+    </if>
+    <if test="number != null"  >
+      and  a.number like CONCAT('%',#{number},'%')
+    </if>
+    <if test="contactPhone != null"  >
+      and  a.contact_phone like CONCAT('%',#{contactPhone},'%')
+    </if>
+    <if test="organizationNumber != null"  >
+      and  a.organization_number like CONCAT('%',#{organizationNumber},'%')
+    </if>
+    ORDER BY a.sort asc
+
+  </select>
+
+  <select id="findByName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from lease_branch_company
+    WHERE 1=1
+    <if test="name != null">
+      and name = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="number != null">
+      and number = #{number,jdbcType=VARCHAR}
+    </if>
+    <if test="id != null">
+      and id != #{id,jdbcType=BIGINT}
+    </if>
+  </select>
+
+
+
+  <select id="findAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from lease_branch_company   ORDER BY sort asc
+  </select>
+
+  <select id="insertViewParames" resultType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from lease_branch_company ORDER BY sort asc
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lease_branch_company
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <update id="disableByPrimaryKey" parameterType="java.util.Map">
+    update lease_branch_company set is_enable = #{isEnable,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateSort" parameterType="java.util.Map">
+    update lease_branch_company set sort =#{mark}
+    where id=#{id}
+  </update>
+
+  <delete id="deleteBatchById" parameterType="long">
+    delete from lease_branch_company where id in
+    <foreach item="item" collection="list" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+
+
+  <insert id="insert" parameterType="com.hc.lease.baseInfo.model.LeaseBranchCompany" >
+    insert into lease_branch_company (id, number, name, 
+      province_id, province_name, city_id, 
+      city_name, area_id, area_name, 
+      address, create_time, update_time, 
+      create_by, update_by, is_enable, 
+      contacts, contact_phone, company_code, 
+      parent_id, sort,lessor_full_name,lessor_short_name,organization_number,phone,remarks)
+    values (#{id,jdbcType=BIGINT}, #{number,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{provinceId,jdbcType=BIGINT}, #{provinceName,jdbcType=VARCHAR}, #{cityId,jdbcType=BIGINT}, 
+      #{cityName,jdbcType=VARCHAR}, #{areaId,jdbcType=BIGINT}, #{areaName,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT}, #{isEnable,jdbcType=BIT}, 
+      #{contacts,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, #{companyCode,jdbcType=VARCHAR}, 
+      #{parentId,jdbcType=BIGINT}, #{id,jdbcType=INTEGER},#{lessorFullName,jdbcType=VARCHAR},#{lessorShortName,jdbcType=VARCHAR},#{organizationNumber,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},#{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hc.lease.baseInfo.model.LeaseBranchCompany" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_branch_company_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_branch_company
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="provinceName != null" >
+        province_name,
+      </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+      <if test="cityName != null" >
+        city_name,
+      </if>
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="areaName != null" >
+        area_name,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="isEnable != null" >
+        is_enable,
+      </if>
+      <if test="contacts != null" >
+        contacts,
+      </if>
+      <if test="contactPhone != null" >
+        contact_phone,
+      </if>
+      <if test="companyCode != null" >
+        company_code,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="id != null" >
+        sort,
+      </if>
+      <if test="lessorFullName != null" >
+        lessor_full_name,
+      </if>
+      <if test="lessorShortName != null" >
+        lessor_short_name,
+      </if>
+      <if test="organizationNumber != null" >
+        organization_number,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="remarks != null" >
+        remarks
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="provinceName != null" >
+        #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="cityName != null" >
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=BIGINT},
+      </if>
+      <if test="areaName != null" >
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="contacts != null" >
+        #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null" >
+        #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="lessorFullName != null" >
+        #{lessorFullName,jdbcType=VARCHAR},
+      </if>
+      <if test="lessorShortName != null" >
+        #{lessorShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationNumber != null" >
+        #{organizationNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR}
+      </if>
+
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.baseInfo.model.LeaseBranchCompany" >
+    update lease_branch_company
+    <set >
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="provinceName != null" >
+        province_name = #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="cityName != null" >
+        city_name = #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        area_id = #{areaId,jdbcType=BIGINT},
+      </if>
+      <if test="areaName != null" >
+        area_name = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="isEnable != null" >
+        is_enable = #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="contacts != null" >
+        contacts = #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        contact_phone = #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null" >
+        company_code = #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="lessorFullName != null" >
+        lessor_full_name =#{lessorFullName,jdbcType=VARCHAR},
+      </if>
+      <if test="lessorShortName != null" >
+        lessor_short_name = #{lessorShortName,jdbcType=VARCHAR}
+      </if>
+      <if test="organizationNumber != null" >
+        organization_number = #{organizationNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        remarks= #{remarks,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hc.lease.baseInfo.model.LeaseBranchCompany" >
+    update lease_branch_company
+    set number = #{number,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=BIGINT},
+      province_name = #{provinceName,jdbcType=VARCHAR},
+      city_id = #{cityId,jdbcType=BIGINT},
+      city_name = #{cityName,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=BIGINT},
+      area_name = #{areaName,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      is_enable = #{isEnable,jdbcType=BIT},
+      contacts = #{contacts,jdbcType=VARCHAR},
+      contact_phone = #{contactPhone,jdbcType=VARCHAR},
+      company_code = #{companyCode,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      sort = #{sort,jdbcType=INTEGER},
+      lessor_full_name =#{lessorFullName,jdbcType=VARCHAR},
+      lessor_short_name = #{lessorShortName,jdbcType=VARCHAR},
+      organization_number = #{organizationNumber,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      remarks= #{remarks,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

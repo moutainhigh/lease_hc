@@ -1,0 +1,2461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/../hc-lease-common-core/src/main/java/com/hc/lease/common/core/exception/GMExceptionConstant.java" line="93" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1a427d14-5cf4-4f88-9eb6-db9b0e1150c3" name="Default" comment="贷后合同管理、贷后车辆管理">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_h2database_h2_1_3_176.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_mail_javax_mail_1_5_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_email_1_4.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlgraphics_batik_codec_1_7.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_groovy_groovy_all_2_4_5.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_imgscalr_imgscalr_lib_4_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_crypto_3_2_3_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_orm_4_1_5_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/account/controller/LeaseAccountBankPaySinController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/account/controller/LeaseAccountBankpaysinLogController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/account/controller/LeaseAccountController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/account/controller/LeaseAccountCreditLevelController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/account/controller/LeaseAccountSessionController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/activity/controller/LeaseActivityRecordController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/baseInfo/controller/LeaseArchiveLocationController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/baseInfo/controller/LeaseAreaController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/baseInfo/controller/LeaseBankAllinpayPriceLimitController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/baseInfo/controller/LeaseBankController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/baseInfo/controller/LeaseCarBrandsController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/baseInfo/controller/LeaseCarBuyFinancingerController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/baseInfo/controller/LeaseCarColorController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/baseInfo/controller/LeaseCarMaintainRuleController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/baseInfo/controller/LeaseCarModelColorController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/baseInfo/controller/LeaseCarModelController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/baseInfo/controller/LeaseCarSeriesController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/baseInfo/controller/LeaseCompanyHeaderController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/baseInfo/controller/LeaseContractBaseinfoController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/baseInfo/controller/LeaseDealerController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/baseInfo/controller/LeaseDictController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/baseInfo/controller/LeaseInvoiceHeaderController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/baseInfo/controller/LeaseMaintenancePartnerController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/baseInfo/controller/LeaseOrganizationStructureController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/baseInfo/controller/LeaseRuleController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/common/controller/LeaseExportController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/order/controller/DownLoadContractController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/order/controller/LeaseContractArchiveLocationController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/order/controller/LeaseContractCarCallbackController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/order/controller/LeaseContractCarLoseController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/order/controller/LeaseContractCarScrapController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/order/controller/LeaseContractController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/order/controller/LeaseContractDealEndController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/order/controller/LeaseContractIncomeExpeController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/order/controller/LeaseSchemeOrderAccountController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/order/controller/LeaseSchemeOrderController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/order/controller/LeaseSchemeRepaymentHistoryController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/order/controller/LeaseSchemeRepaymentStatusHController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/order/controller/SmsTemplateController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/postlending/controller/LeaseAllinpaySplitBatchController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/postlending/controller/LeaseAllinpaySplitConnectController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/postlending/controller/LeaseAllinpaySplitController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/postlending/controller/LeaseAllinpaySplitLogController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/postlending/controller/LeaseAllinpaySplitQueryLogController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/postlending/controller/LeaseAllinpaySplitStatusLogController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/postlending/controller/LeaseManualDeductiStatusLogController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/postlending/controller/LeaseManualDeductioQueryLogController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/postlending/controller/LeaseManualDeductionsDataController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/postlending/controller/LeaseManualDeductionsPayLogController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/postlending/controller/LeaseManualDeductionsStatistController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/postlending/controller/MonthlyPaymentController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/postlending/controller/TranxController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseAgentsController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseAgentsLevelController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseAgentsSecondaryController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseBranchCompanyController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseCarController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseCarInsuranceController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseCarInventoryController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseCarSupplierController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseCostCheckController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseGpsSupplierController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseInsuranceCompanyController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseInsuranceTypeController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseInventoryAdjustmentController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseMonthlyCalculatorController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeasePackageController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeasePurchaseContractController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeasePurchasePaymentHistoryController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseSchemeCarController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseSchemeContractController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseSchemeController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseSchemePackageController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseSchemePrice1xController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseSchemePriceAnnualController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseSchemePriceController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseSchemePriceRentController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseSchemePriceStagesController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseStorehouseController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/user/controller/LeaseAuthoRoleController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/user/controller/LeaseAuthoRoleOrganizationController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/user/controller/LeaseAuthoUserOrganizationController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/user/controller/LeaseAuthoUserRoleController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/user/controller/LeaseUserController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/wx/controller/DownLoadCustomerController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/wx/controller/LeaseWxAgentController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/wx/controller/LeaseWxAgentImgController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/wx/controller/LeaseWxBuyDescriptionController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/wx/controller/LeaseWxCarController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/wx/controller/LeaseWxCarSchemeController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/wx/controller/LeaseWxCompanyContactController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/wx/controller/LeaseWxCompanyProfileController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/wx/controller/LeaseWxCustomController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/wx/controller/LeaseWxCustomerController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/wx/controller/LeaseWxDescriptionController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/wx/controller/LeaseWxHomeImgController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/wx/controller/LeaseWxServiceRangeController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/wx/controller/LeaseWxSmsController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/wx/controller/LeaseWxTitleController.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-activity-adapter-api/hc-lease-activity-adapter-api.iml" afterPath="$PROJECT_DIR$/../hc-lease-activity-adapter-api/hc-lease-activity-adapter-api.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-activity-adapter/hc-lease-activity-adapter.iml" afterPath="$PROJECT_DIR$/../hc-lease-activity-adapter/hc-lease-activity-adapter.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-allinpayxsigntool/hc-lease-allinpayxsigntool.iml" afterPath="$PROJECT_DIR$/../hc-lease-allinpayxsigntool/hc-lease-allinpayxsigntool.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-baseInfo-adapter-api/hc-lease-baseInfo-adapter-api.iml" afterPath="$PROJECT_DIR$/../hc-lease-baseInfo-adapter-api/hc-lease-baseInfo-adapter-api.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-baseInfo-adapter/hc-lease-baseInfo-adapter.iml" afterPath="$PROJECT_DIR$/../hc-lease-baseInfo-adapter/hc-lease-baseInfo-adapter.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-common-config/hc-lease-common-config.iml" afterPath="$PROJECT_DIR$/../hc-lease-common-config/hc-lease-common-config.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-common-config/src/main/conf/dev/constant.properties" afterPath="$PROJECT_DIR$/../hc-lease-common-config/src/main/conf/dev/constant.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-common-config/src/main/conf/local/common-constant.properties" afterPath="$PROJECT_DIR$/../hc-lease-common-config/src/main/conf/local/common-constant.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-common-config/src/main/conf/local/constant.properties" afterPath="$PROJECT_DIR$/../hc-lease-common-config/src/main/conf/local/constant.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-common-config/src/main/conf/online/constant.properties" afterPath="$PROJECT_DIR$/../hc-lease-common-config/src/main/conf/online/constant.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-common-config/src/main/conf/test/constant.properties" afterPath="$PROJECT_DIR$/../hc-lease-common-config/src/main/conf/test/constant.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-common-core/hc-lease-common-core.iml" afterPath="$PROJECT_DIR$/../hc-lease-common-core/hc-lease-common-core.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-common-core/src/main/resources/META-INF/spring/ApplicationContext-core.xml" afterPath="$PROJECT_DIR$/../hc-lease-common-core/src/main/resources/META-INF/spring/ApplicationContext-core.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/hc_lease_web_consumer_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/hc_lease_web_consumer_war_exploded.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hc-lease-common-parent.iml" afterPath="$PROJECT_DIR$/hc-lease-common-parent.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-common-thirdparty-plugin/hc-lease-common-thirdparty-plugin.iml" afterPath="$PROJECT_DIR$/../hc-lease-common-thirdparty-plugin/hc-lease-common-thirdparty-plugin.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-common-util/hc-lease-common-util.iml" afterPath="$PROJECT_DIR$/../hc-lease-common-util/hc-lease-common-util.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-order-adapter-api/hc-lease-order-adapter-api.iml" afterPath="$PROJECT_DIR$/../hc-lease-order-adapter-api/hc-lease-order-adapter-api.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-postlending-adapter-api/hc-lease-postlending-adapter-api.iml" afterPath="$PROJECT_DIR$/../hc-lease-postlending-adapter-api/hc-lease-postlending-adapter-api.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-supplier-adapter-api/hc-lease-supplier-adapter-api.iml" afterPath="$PROJECT_DIR$/../hc-lease-supplier-adapter-api/hc-lease-supplier-adapter-api.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-supplier-adapter/hc-lease-supplier-adapter.iml" afterPath="$PROJECT_DIR$/../hc-lease-supplier-adapter/hc-lease-supplier-adapter.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-user-adapter-api/hc-lease-user-adapter-api.iml" afterPath="$PROJECT_DIR$/../hc-lease-user-adapter-api/hc-lease-user-adapter-api.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-user-adapter/hc-lease-user-adapter.iml" afterPath="$PROJECT_DIR$/../hc-lease-user-adapter/hc-lease-user-adapter.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/workflow/act/rest/editor/model/ModelSaveRestResourceController.java" afterPath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/workflow/act/rest/editor/model/ModelSaveRestResourceController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/workflow/act/rest/servlet/JsonpCallbackFilter.java" afterPath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/workflow/act/rest/servlet/JsonpCallbackFilter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/resources/META-INF/spring/ApplicationContext-dubbo-consumer.xml" afterPath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/resources/META-INF/spring/ApplicationContext-dubbo-consumer.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/resources/META-INF/spring/ApplicationContext-mvc.xml" afterPath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/resources/META-INF/spring/ApplicationContext-mvc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/webapp/act/process-editor/editor-app/configuration/toolbar-default-actions.js" afterPath="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/webapp/act/process-editor/editor-app/configuration/toolbar-default-actions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-workflow-adapter-api/src/main/java/com/hc/lease/workflow/vo/ActModelSaveDTO.java" afterPath="$PROJECT_DIR$/../hc-lease-workflow-adapter-api/src/main/java/com/hc/lease/workflow/vo/ActModelSaveDTO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-workflow-adapter/src/main/java/com/hc/lease/workflow/act/rest/editor/model/impl/ActModelSaveRestResourceImpl.java" afterPath="$PROJECT_DIR$/../hc-lease-workflow-adapter/src/main/java/com/hc/lease/workflow/act/rest/editor/model/impl/ActModelSaveRestResourceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-workflow-adapter/src/main/java/com/hc/lease/workflow/service/impl/ActRepositoryServiceImpl.java" afterPath="$PROJECT_DIR$/../hc-lease-workflow-adapter/src/main/java/com/hc/lease/workflow/service/impl/ActRepositoryServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-wx-adapter-api/hc-lease-wx-adapter-api.iml" afterPath="$PROJECT_DIR$/../hc-lease-wx-adapter-api/hc-lease-wx-adapter-api.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../hc-lease-wx-adapter/hc-lease-wx-adapter.iml" afterPath="$PROJECT_DIR$/../hc-lease-wx-adapter/hc-lease-wx-adapter.iml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../hc-lease-workflow-adapter/src/main/resources/logback.xml" afterPath="$PROJECT_DIR$/../hc-lease-workflow-adapter/src/main/resources/config/logback.xml" />
+    </list>
+    <list id="64b5aea5-d72d-4af2-85cc-756986ee12ef" name="nochanged" comment="" />
+    <ignored path="hc-lease-common-parent.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path="$PROJECT_DIR$/../hc-lease-activity-adapter/target/" />
+    <ignored path="$PROJECT_DIR$/../hc-lease-web-consumer/target/" />
+    <ignored path="$PROJECT_DIR$/../hc-lease-common-config/target/" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <ignored path="$PROJECT_DIR$/../hc-lease-supplier-adapter/target/" />
+    <ignored path="$PROJECT_DIR$/../hc-lease-supplier-adapter-api/target/" />
+    <ignored path="$PROJECT_DIR$/../hc-lease-common-thirdparty-plugin/target/" />
+    <ignored path="$PROJECT_DIR$/../hc-lease-activity-adapter-api/target/" />
+    <ignored path="$PROJECT_DIR$/../hc-lease-postlending-adapter-api/target/" />
+    <ignored path="$PROJECT_DIR$/../hc-lease-common-allinpay/target/" />
+    <ignored path="$PROJECT_DIR$/../hc-lease-wx-adapter-api/target/" />
+    <ignored path="$PROJECT_DIR$/../hc-lease-baseInfo-adapter/target/" />
+    <ignored path="$PROJECT_DIR$/../hc-lease-account-adapter-api/target/" />
+    <ignored path="$PROJECT_DIR$/../hc-lease-account-adapter/target/" />
+    <ignored path="$PROJECT_DIR$/../hc-lease-postlending-adapter/target/" />
+    <ignored path="$PROJECT_DIR$/../hc-lease-allinpayxsigntool/target/" />
+    <ignored path="$PROJECT_DIR$/../hc-lease-user-adapter-api/target/" />
+    <ignored path="$PROJECT_DIR$/../hc-lease-common-core/target/" />
+    <ignored path="$PROJECT_DIR$/../hc-lease-wx-adapter/target/" />
+    <ignored path="$PROJECT_DIR$/../hc-lease-common-util/target/" />
+    <ignored path="$PROJECT_DIR$/../hc-lease-order-adapter-api/target/" />
+    <ignored path="$PROJECT_DIR$/../hc-lease-user-adapter/target/" />
+    <ignored path="$PROJECT_DIR$/../hc-lease-allinpayxmlentity/target/" />
+    <ignored path="$PROJECT_DIR$/../hc-lease-order-adapter/target/" />
+    <ignored path="$PROJECT_DIR$/../hc-lease-baseInfo-adapter-api/target/" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <ignored path="$PROJECT_DIR$/../hc-lease-allinpayquick/target/" />
+    <ignored path="$PROJECT_DIR$/../../../../合创租赁融资系统/资料/通联支付/通联协议支付/quickpaydemo/target/" />
+    <ignored path="$PROJECT_DIR$/../hc-lease-workflow-adapter/target/" />
+    <ignored path="$PROJECT_DIR$/../hc-lease-workflow-adapter-api/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="E:\development\hc_lease\hc_lease\hc-lease-common-parent" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_TABLE_DETAILS" value="true" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="hc-lease-common-parent" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="ActModelController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/workflow/controller/ActModelController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="449">
+              <caret line="52" column="41" lean-forward="true" selection-start-line="52" selection-start-column="41" selection-end-line="52" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ActRepositoryServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../hc-lease-workflow-adapter/src/main/java/com/hc/lease/workflow/service/impl/ActRepositoryServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="63" column="12" lean-forward="false" selection-start-line="63" selection-start-column="12" selection-end-line="63" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ModelQuery.class" pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/repository/ModelQuery.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="115">
+              <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="logback.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../hc-lease-workflow-adapter/src/main/resources/config/logback.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="646">
+              <caret line="146" column="48" lean-forward="false" selection-start-line="146" selection-start-column="48" selection-end-line="146" selection-end-column="48" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="spring-context-activiti.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../hc-lease-workflow-adapter/src/main/resources/META-INF/spring/spring-context-activiti.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="138">
+              <caret line="39" column="11" lean-forward="false" selection-start-line="39" selection-start-column="11" selection-end-line="39" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>activiti-standalone-context.xml</find>
+      <find>ProcessEngineFactoryBean</find>
+      <find>TransactionAwareDataSourceProxy</find>
+      <find>SpringProcessEngineConfiguration</find>
+      <find>SimpleDriverDataSource</find>
+      <find>UserBean</find>
+      <find>deploymentResources</find>
+      <find>bpmn20</find>
+      <find>ManagementService</find>
+      <find>dataSource</find>
+      <find>log4j</find>
+      <find>jcl-over-slf4j</find>
+      <find>log4j-over-slf4j</find>
+      <find>logback-classic</find>
+      <find>springframework</find>
+      <find>mybatis</find>
+      <find>PreparedStatement</find>
+      <find>slf4j-log4j12</find>
+      <find>DataSourceTransactionManager</find>
+      <find>StandaloneProcessEngineConfiguration</find>
+      <find>getRepositoryService</find>
+      <find>ProcessEngineConfiguration---------------------本文来自 李阿昀 的CSDN 博客 ，全文地址请点击：https://blog.csdn.net/yerenyuan_pku/article/details/71307305?utm_source=copy</find>
+      <find>ProcessEngines.getDefaultProcessEngine---------------------本文来自 李阿昀 的CSDN 博客 ，全文地址请点击：https://blog.csdn.net/yerenyuan_pku/article/details/71307305?utm_source=copy</find>
+      <find>getDefaultProcessEngine</find>
+      <find>ProcessEngines.getDefaultProcessEngine</find>
+      <find>ProcessEngines</find>
+      <find>ProcessDefinitionQuery---------------------本文来自 李阿昀 的CSDN 博客 ，全文地址请点击：https://blog.csdn.net/yerenyuan_pku/article/details/71307305?utm_source=copy</find>
+      <find>ProcessDefinitionQuery-</find>
+      <find>ProcessDefinitionQuery</find>
+      <find>ActProcessDefinitionQuery</find>
+    </findStrings>
+    <replaceStrings>
+      <replace />
+      <replace>exportExcelCommon</replace>
+      <replace>baseInfo`</replace>
+      <replace>baseInfo</replace>
+      <replace>batchStrategyVo</replace>
+      <replace>批量扣款</replace>
+      <replace>代理商</replace>
+      <replace>findByContractIdAndPeriodVoList</replace>
+      <replace>order</replace>
+      <replace>findByContractIdAndPeriodVo</replace>
+      <replace>lease_contract_income_expe</replace>
+      <replace>ContractEndDealWay</replace>
+      <replace>ScrapDealWay</replace>
+      <replace>LostDealWay</replace>
+      <replace>CallbackWay</replace>
+      <replace>CallbackDealWay</replace>
+      <replace>DealStatus</replace>
+      <replace>DealStatus0-0</replace>
+      <replace>DealStatus_0</replace>
+      <replace>Deal_Status</replace>
+      <replace>Deal_Status-</replace>
+      <replace>_2</replace>
+      <replace>keyParams</replace>
+      <replace>SchemeType</replace>
+      <replace>contractManagerAddLeaseSchemeRepaymentVo</replace>
+      <replace>E:\luomingtong\work\project\hc_lease\hc_lease</replace>
+      <replace>user</replace>
+      <replace>dealStatus</replace>
+      <replace>$PROJECT_DIR$/..</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>E:\luomingtong\work\repository1\org\activiti\activiti-engine\5.22.0\activiti-engine-5.22.0.jar!\org\activiti\engine\repository</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="luomingtong-inteface-optimization" />
+      </map>
+    </option>
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/impl/RepositoryServiceImpl.class" />
+        <option value="$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/impl/ModelQueryImpl.class" />
+        <option value="$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/impl/ServiceImpl.class" />
+        <option value="$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/repository/Model.class" />
+        <option value="$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/impl/interceptor/CommandExecutor.class" />
+        <option value="$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/impl/cfg/CommandExecutorImpl.class" />
+        <option value="$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/impl/interceptor/CommandContextInterceptor.class" />
+        <option value="$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/impl/interceptor/AbstractCommandInterceptor.class" />
+        <option value="$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/impl/interceptor/CommandInterceptor.class" />
+        <option value="$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/impl/interceptor/CommandInvoker.class" />
+        <option value="$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/impl/AbstractVariableQueryImpl.class" />
+        <option value="$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/impl/persistence/entity/ModelEntityManager.class" />
+        <option value="$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/impl/db/DbSqlSession.class" />
+        <option value="$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/impl/db/DbSqlSessionFactory.class" />
+        <option value="$MAVEN_REPOSITORY$/org/activiti/activiti-spring/5.22.0/activiti-spring-5.22.0.jar!/org/activiti/spring/ProcessEngineFactoryBean.class" />
+        <option value="$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/impl/persistence/AbstractManager.class" />
+        <option value="$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/query/Query.class" />
+        <option value="$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/repository/DeploymentQuery.class" />
+        <option value="$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/impl/UserQueryImpl.class" />
+        <option value="$PROJECT_DIR$/../hc-lease-order-adapter/src/main/java/com/hc/lease/order/adapter/impl/LeaseContractAdapterImpl.java" />
+        <option value="$PROJECT_DIR$/../hc-lease-supplier-adapter/src/main/resources/mapping/LeaseCarMapper.xml" />
+        <option value="$PROJECT_DIR$/../hc-lease-common-core/src/main/resources/META-INF/spring/ApplicationContext-core.xml" />
+        <option value="$PROJECT_DIR$/../hc-lease-common-config/src/main/conf/local/common-constant.properties" />
+        <option value="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/resources/META-INF/spring/ApplicationContext-dubbo-consumer.xml" />
+        <option value="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/webapp/WEB-INF/web.xml" />
+        <option value="$PROJECT_DIR$/../hc-lease-common-config/src/main/conf/dev/constant.properties" />
+        <option value="$PROJECT_DIR$/../hc-lease-common-config/src/main/conf/local/constant.properties" />
+        <option value="$PROJECT_DIR$/../hc-lease-common-config/src/main/conf/online/constant.properties" />
+        <option value="$PROJECT_DIR$/../hc-lease-common-config/src/main/conf/test/constant.properties" />
+        <option value="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/resources/META-INF/spring/ApplicationContext-mvc.xml" />
+        <option value="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/resources/stencilset.json" />
+        <option value="$PROJECT_DIR$/../hc-lease-workflow-adapter-api/src/main/java/com/hc/lease/workflow/service/api/ActRepositoryService.java" />
+        <option value="$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/repository/ProcessDefinitionQuery.class" />
+        <option value="$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/impl/jobexecutor/JobExecutor.class" />
+        <option value="$PROJECT_DIR$/../hc-lease-common-config/pom.xml" />
+        <option value="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/common/conf/UrlParam.java" />
+        <option value="$PROJECT_DIR$/../hc-lease-workflow-adapter-api/src/main/java/com/hc/lease/workflow/vo/ActModelSaveDTO.java" />
+        <option value="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/webapp/act/process-editor/editor-app/libs/angular-route_1.2.13/angular-route.js" />
+        <option value="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/workflow/act/rest/editor/model/ModelSaveRestResourceController.java" />
+        <option value="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/webapp/act/process-editor/editor-app/configuration/toolbar-default-actions.js" />
+        <option value="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/workflow/act/rest/servlet/JsonpCallbackFilter.java" />
+        <option value="$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/impl/jobexecutor/AcquireJobsRunnableImpl.class" />
+        <option value="$PROJECT_DIR$/../hc-lease-workflow-adapter/src/main/java/com/hc/lease/workflow/act/rest/editor/model/impl/ActModelSaveRestResourceImpl.java" />
+        <option value="$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/workflow/controller/ActModelController.java" />
+        <option value="$PROJECT_DIR$/../hc-lease-workflow-adapter/src/main/java/com/hc/lease/workflow/service/impl/ActRepositoryServiceImpl.java" />
+        <option value="$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/impl/persistence/entity/AttachmentEntity.class" />
+        <option value="$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/ProcessEngineConfiguration.class" />
+        <option value="$PROJECT_DIR$/../hc-lease-workflow-adapter/src/main/resources/config/spring-mybatis.xml" />
+        <option value="$MAVEN_REPOSITORY$/org/activiti/activiti-spring/5.22.0/activiti-spring-5.22.0.jar!/org/activiti/spring/SpringProcessEngineConfiguration.class" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/../hc-lease-workflow-adapter/src/main/resources/config/logback.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$PROJECT_DIR$/../../../../../softwear/apache-maven-3.3.9" />
+        <option name="userSettingsFile" value="E:\luomingtong\softwear\apache-maven-3.3.9\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="hc-lease-common-parent" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="hc-lease-common-parent" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Lifecycle" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$LifecycleNode" />
+        </PATH_ELEMENT>
+      </PATH>
+    </treeState>
+  </component>
+  <component name="MavenRunner">
+    <option name="jreName" value="1.7" />
+    <option name="skipTests" value="true" />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1924" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>Android &gt; Lint &gt; Correctness</id>
+          </State>
+          <State>
+            <id>Gradle</id>
+          </State>
+          <State>
+            <id>Maven</id>
+          </State>
+          <State>
+            <id>OSGi</id>
+          </State>
+          <State>
+            <id>Probable bugsGradle</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Android</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hc-lease-common-parent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hc-lease-allinpayquick" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../softwear/apache-tomcat-7.0.90/webapps/ROOT" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15123457" />
+    <property name="project.structure.side.proportion" value="0.2857143" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.splitter.proportion" value="0.24975514" />
+    <property name="SearchEverywhereHistoryKey" value="LeaseCarModel&#9;PSI&#9;JAVA://com.hc.lease.baseInfo.adapter.impl.LeaseCarModelAdapterImpl&#10;LeaseWxCarA&#9;PSI&#9;JAVA://com.hc.lease.wx.adapter.impl.LeaseWxCarAdapterImpl&#10;LeaseBran&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-baseInfo-adapter/src/main/resources/mapping/LeaseBranchCompanyMapper.xml&#10;LeaseS&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-supplier-adapter/src/main/resources/mapping/LeaseStorehouseMapper.xml&#10;LeaseEx&#9;PSI&#9;JAVA://com.hc.lease.common.controller.LeaseExportController&#10;LeaseInsurance&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-supplier-adapter/src/main/resources/mapping/LeaseInsuranceTypeMapper.xml&#10;LeaseIn&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-supplier-adapter/src/main/java/com/hc/lease/supplier/adapter/impl/LeaseInsuranceTypeAdapterImpl.java&#10;LeaseArchive&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-web-consumer/src/main/java/com/hc/lease/baseInfo/controller/LeaseArchiveLocationController.java&#10;LeaseCarColo&#9;PSI&#9;JAVA://com.hc.lease.baseInfo.model.LeaseCarColor&#10;LeaseInsuranceType&#9;PSI&#9;JAVA://com.hc.lease.supplier.model.LeaseInsuranceType&#10;LeaseGps&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-supplier-adapter/src/main/resources/mapping/LeaseGpsSupplierMapper.xml&#10;LeaseCarBuy&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-baseInfo-adapter/src/main/resources/mapping/LeaseCarBuyFinancingerMapper.xml&#10;LeaseDict&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-baseInfo-adapter/src/main/resources/mapping/LeaseDictMapper.xml&#10;LeaseCArBuy&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-baseInfo-adapter/src/main/resources/mapping/LeaseCarBuyFinancingerMapper.xml&#10;LeaseIns&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseInsuranceTypeController.java&#10;LeaseSt&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-supplier-adapter/src/main/resources/mapping/LeaseStorehouseMapper.xml&#10;LeaseBranch&#9;PSI&#9;JAVA://com.hc.lease.supplier.controller.LeaseBranchCompanyController&#10;LeaseCAr&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-baseInfo-adapter/src/main/java/com/hc/lease/baseInfo/adapter/impl/LeaseCarColorAdapterImpl.java&#10;LeaseCarColorC&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-web-consumer/src/main/java/com/hc/lease/baseInfo/controller/LeaseCarColorController.java&#10;LeaseCarColor&#9;PSI&#9;JAVA://com.hc.lease.baseInfo.adapter.impl.LeaseCarColorAdapterImpl&#10;Lease&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-web-consumer/src/main/java/com/hc/lease/baseInfo/controller/LeaseDictController.java&#10;LeaseExc&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-common-core/src/main/java/com/hc/lease/common/core/excel/poi/vo/LeaseCarColorExcelBackInfo.java&#10;LeaseE&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-web-consumer/src/main/java/com/hc/lease/common/controller/LeaseExportController.java&#10;LeaseCar&#9;PSI&#9;JAVA://com.hc.lease.supplier.adapter.impl.LeaseCarAdapterImpl&#10;LeaseGpsSupplierM&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-supplier-adapter/src/main/resources/mapping/LeaseGpsSupplierMapper.xml&#10;LeaseGpsSupplier&#9;PSI&#9;JAVA://com.hc.lease.supplier.model.LeaseGpsSupplier&#10;LeaseCArSupplier&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-supplier-adapter/src/main/resources/mapping/LeaseCarSupplierMapper.xml&#10;LeaseGpssupplier&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-supplier-adapter/src/main/resources/mapping/LeaseGpsSupplierMapper.xml&#10;LeaseCarModelMa&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-baseInfo-adapter/src/main/resources/mapping/LeaseCarModelMapper.xml&#10;LeaseBranchCom&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-baseInfo-adapter/src/main/resources/mapping/LeaseBranchCompanyMapper.xml&#10;LeaseStor&#9;PSI&#9;JAVA://com.hc.lease.supplier.model.LeaseStorehouse&#10;LeaseCArModel&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-baseInfo-adapter/src/main/java/com/hc/lease/baseInfo/adapter/impl/LeaseCarModelAdapterImpl.java&#10;LeaseCarSupplier&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-supplier-adapter/src/main/resources/mapping/LeaseCarSupplierMapper.xml&#10;LeasecAR&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-supplier-adapter/src/main/resources/mapping/LeaseCarSupplierMapper.xml&#10;LeaseContractCont&#9;PSI&#9;JAVA://com.hc.lease.order.controller.LeaseContractController&#10;LeaseCarModelC&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-web-consumer/src/main/java/com/hc/lease/baseInfo/controller/LeaseCarModelController.java&#10;LeaseCarSer&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-web-consumer/src/main/java/com/hc/lease/baseInfo/controller/LeaseCarSeriesController.java&#10;LeaseCarMod&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-web-consumer/src/main/java/com/hc/lease/baseInfo/controller/LeaseCarModelController.java&#10;LeaseCarSupplierC&#9;PSI&#9;JAVA://com.hc.lease.supplier.controller.LeaseCarSupplierController&#10;LeaseAgents&#9;PSI&#9;JAVA://com.hc.lease.supplier.model.LeaseAgents&#10;LeaseCarSupplierAdapterImpl&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-supplier-adapter/src/main/java/com/hc/lease/supplier/adapter/impl/LeaseCarSupplierAdapterImpl.java&#10;seCarSuppl&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-web-consumer/src/main/java/com/hc/lease/supplier/controller/LeaseCarSupplierController.java&#10;LeaseSto&#9;PSI&#9;JAVA://com.hc.lease.supplier.model.LeaseStorehouse&#10;Leasebran&#9;FILE&#9;file://E:/development/hc_lease/hc_lease/hc-lease-baseInfo-adapter-api/src/main/java/com/hc/lease/baseInfo/model/LeaseBranchCompany.java&#10;LeaseBr&#9;PSI&#9;JAVA://com.hc.lease.baseInfo.model.LeaseBranchCompany" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.hc.lease.account.vo" />
+      <recent name="com.hc.lease.order.vo" />
+      <recent name="com.hc.lease.user.vo" />
+      <recent name="com.hc.lease.common.core.constant" />
+      <recent name="com.hc.lease.baseInfo.vo" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\luomingtong\work\project\hc_lease\hc_lease\hc-lease-workflow-adapter\src\main\resources\config" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Tomcat Server.hc_controller">
+    <configuration default="false" name="serviceGenerate" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="hc.lease.common.generate.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="hc.lease.common.generate.serviceGenerate" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="hc-lease-common-util" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="adapterGenerate" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="hc.lease.common.generate.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="hc.lease.common.generate.adapterGenerate" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="hc-lease-common-util" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="MyTest (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="common.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="common.test.MyTest" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="hc-lease-postlending-adapter" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="QuickPayHandlerTest.testSearch" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.allinpay.handler.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="quickpaydemo" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.allinpay.handler" />
+      <option name="MAIN_CLASS_NAME" value="com.allinpay.handler.QuickPayHandlerTest" />
+      <option name="METHOD_NAME" value="testSearch" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="DateUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.hc.lease.common.core.excel.easyxls.common.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="com.hc.lease.common.core.excel.easyxls.common.DateUtil" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="hc-lease-common-core" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" ALTERNATIVE_JRE_ENABLED="false">
+      <deployment />
+      <server-settings />
+      <predefined_log_file id="Tomcat" enabled="true" />
+      <predefined_log_file id="Tomcat Catalina" enabled="true" />
+      <predefined_log_file id="Tomcat Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <method />
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android App">
+      <module name="" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
+        <option name="GAPID_ENABLED" value="false" />
+        <option name="GAPID_DISABLE_PCS" value="false" />
+        <option name="SUPPORT_LIB_ENABLED" value="true" />
+        <option name="INSTRUMENTATION_ENABLED" value="true" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="EXTRA_OPTIONS" value="" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="ENABLE_ADVANCED_PROFILING" value="true" />
+        <option name="GAPID_ENABLED" value="false" />
+        <option name="GAPID_DISABLE_PCS" value="false" />
+        <option name="SUPPORT_LIB_ENABLED" value="true" />
+        <option name="INSTRUMENTATION_ENABLED" value="true" />
+      </Profilers>
+      <method>
+        <option name="Make" enabled="true" />
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Cold Fusion runner description" factoryName="Cold Fusion" custom_browser="" web_path="">
+      <method />
+    </configuration>
+    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="myFilePath" />
+      <option name="GLUE" />
+      <option name="myNameFilter" />
+      <option name="myGeneratedName" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
+      <option name="BCName" value="" />
+      <option name="IOSSimulatorSdkPath" value="" />
+      <option name="adlOptions" value="" />
+      <option name="airProgramParameters" value="" />
+      <option name="appDescriptorForEmulator" value="Android" />
+      <option name="debugTransport" value="USB" />
+      <option name="debuggerSdkRaw" value="BC SDK" />
+      <option name="emulator" value="NexusOne" />
+      <option name="emulatorAdlOptions" value="" />
+      <option name="fastPackaging" value="true" />
+      <option name="fullScreenHeight" value="0" />
+      <option name="fullScreenWidth" value="0" />
+      <option name="launchUrl" value="false" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="FlashPlayerDebugger.exe" />
+        </LauncherParameters>
+      </option>
+      <option name="mobileRunTarget" value="Emulator" />
+      <option name="moduleName" value="" />
+      <option name="overriddenMainClass" value="" />
+      <option name="overriddenOutputFileName" value="" />
+      <option name="overrideMainClass" value="false" />
+      <option name="runTrusted" value="true" />
+      <option name="screenDpi" value="0" />
+      <option name="screenHeight" value="0" />
+      <option name="screenWidth" value="0" />
+      <option name="url" value="http://" />
+      <option name="usbDebugPort" value="7936" />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" appDescriptorForEmulator="Android" class_name="" emulatorAdlOptions="" method_name="" package_name="" scope="Class">
+      <option name="BCName" value="" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="FlashPlayerDebugger.exe" />
+        </LauncherParameters>
+      </option>
+      <option name="moduleName" value="" />
+      <option name="trusted" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
+      <setting name="vmparams" value="" />
+      <setting name="cmdLine" value="run-app" />
+      <setting name="passParentEnv" value="true" />
+      <setting name="launchBrowser" value="true" />
+      <setting name="launchBrowserUrl" value="" />
+      <setting name="depsClasspath" value="false" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="JarApplication" factoryName="JAR Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="Java Scratch" factoryName="Java Scratch">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="SCRATCH_FILE_ID" value="0" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
+      <node-interpreter value="project" />
+      <working-dir value="" />
+      <envs />
+      <scope-kind value="ALL" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="hc-lease-account-adapter-api" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list />
+            </option>
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="osgi.bnd.run" factoryName="Run Launcher">
+      <method />
+    </configuration>
+    <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
+      <method />
+    </configuration>
+    <configuration default="false" name="Unnamed" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings">
+          <MavenGeneralSettings>
+            <option name="alwaysUpdateSnapshots" value="false" />
+            <option name="checksumPolicy" value="NOT_SET" />
+            <option name="failureBehavior" value="NOT_SET" />
+            <option name="localRepository" value="E:\development\repository" />
+            <option name="mavenHome" value="$PROJECT_DIR$/../../../maven/maven/apache-maven-3.3.9" />
+            <option name="nonRecursive" value="false" />
+            <option name="outputLevel" value="INFO" />
+            <option name="pluginUpdatePolicy" value="DEFAULT" />
+            <option name="printErrorStackTraces" value="false" />
+            <option name="threads" />
+            <option name="usePluginRegistry" value="false" />
+            <option name="userSettingsFile" value="" />
+            <option name="workOffline" value="false" />
+          </MavenGeneralSettings>
+        </option>
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="mybatis-generator:generate" />
+                <option value="-e" />
+              </list>
+            </option>
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$/../hc-lease-common-util" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method />
+    </configuration>
+    <configuration default="false" name="hc_controller" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 7.0.90" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="1.7">
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="hc-lease-web-consumer:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/hc-lease-web-consumer" />
+          </settings>
+        </artifact>
+        <file path="%IDEA_RUN:TOMCAT_HOME%/webapps/ROOT">
+          <settings>
+            <option name="CONTEXT_PATH" value="/" />
+          </settings>
+        </file>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="Unnamed_hc-lease-common-parent_2" />
+      </server-settings>
+      <predefined_log_file id="Tomcat" enabled="true" />
+      <predefined_log_file id="Tomcat Catalina" enabled="true" />
+      <predefined_log_file id="Tomcat Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="60424" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="JRebel Debug">
+        <option name="DEBUG_PORT" value="60442" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="JRebel Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="JRebel Executor">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method>
+        <option name="Make" enabled="false" />
+      </method>
+    </configuration>
+    <list size="7">
+      <item index="0" class="java.lang.String" itemvalue="Maven.Unnamed" />
+      <item index="1" class="java.lang.String" itemvalue="Tomcat Server.hc_controller" />
+      <item index="2" class="java.lang.String" itemvalue="Application.serviceGenerate" />
+      <item index="3" class="java.lang.String" itemvalue="Application.adapterGenerate" />
+      <item index="4" class="java.lang.String" itemvalue="Application.MyTest (1)" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.QuickPayHandlerTest.testSearch" />
+      <item index="6" class="java.lang.String" itemvalue="Application.DateUtil" />
+    </list>
+    <recent_temporary>
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Application.adapterGenerate" />
+        <item index="1" class="java.lang.String" itemvalue="Application.serviceGenerate" />
+        <item index="2" class="java.lang.String" itemvalue="Application.MyTest (1)" />
+        <item index="3" class="java.lang.String" itemvalue="Application.DateUtil" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.QuickPayHandlerTest.testSearch" />
+      </list>
+    </recent_temporary>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="GAPID_DISABLE_PCS" value="false" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method>
+        <option name="Make" enabled="true" />
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1a427d14-5cf4-4f88-9eb6-db9b0e1150c3" name="Default" comment="修改bug" />
+      <created>1511492185683</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1511492185683</updated>
+      <workItem from="1511492223304" duration="759000" />
+      <workItem from="1511493166411" duration="417000" />
+      <workItem from="1511493650037" duration="3976000" />
+      <workItem from="1511744960698" duration="22672000" />
+      <workItem from="1511831408462" duration="8374000" />
+      <workItem from="1514881640363" duration="3095000" />
+      <workItem from="1514943436548" duration="15791000" />
+      <workItem from="1515029304786" duration="33154000" />
+      <workItem from="1515115817419" duration="29213000" />
+      <workItem from="1515300934543" duration="9218000" />
+      <workItem from="1515374922945" duration="23584000" />
+      <workItem from="1515403391604" duration="6222000" />
+      <workItem from="1515462743293" duration="17150000" />
+      <workItem from="1515547785958" duration="25268000" />
+      <workItem from="1515633246518" duration="36933000" />
+      <workItem from="1515720004564" duration="1598000" />
+      <workItem from="1515724620039" duration="21985000" />
+      <workItem from="1515978803035" duration="17937000" />
+      <workItem from="1516601287675" duration="2445000" />
+      <workItem from="1518142279033" duration="19023000" />
+      <workItem from="1518312077211" duration="21556000" />
+      <workItem from="1518399099540" duration="2027000" />
+      <workItem from="1519434907726" duration="4621000" />
+      <workItem from="1522372142051" duration="12952000" />
+      <workItem from="1522631206336" duration="10443000" />
+      <workItem from="1522718244323" duration="8608000" />
+      <workItem from="1522804137069" duration="10632000" />
+      <workItem from="1523149791054" duration="11520000" />
+      <workItem from="1523235867624" duration="16242000" />
+      <workItem from="1523322617065" duration="13675000" />
+      <workItem from="1523408902178" duration="24339000" />
+      <workItem from="1525915186753" duration="13412000" />
+      <workItem from="1526000155565" duration="24959000" />
+      <workItem from="1526347517812" duration="19414000" />
+      <workItem from="1526433668390" duration="24398000" />
+      <workItem from="1526519281384" duration="26821000" />
+      <workItem from="1526607304996" duration="40613000" />
+      <workItem from="1526696680674" duration="3393000" />
+      <workItem from="1527488175329" duration="817000" />
+      <workItem from="1527489019800" duration="5473000" />
+      <workItem from="1527556692920" duration="22031000" />
+      <workItem from="1527641715650" duration="20877000" />
+      <workItem from="1527728114734" duration="16865000" />
+      <workItem from="1529025482479" duration="9265000" />
+      <workItem from="1529457061960" duration="16584000" />
+      <workItem from="1529543190564" duration="2575000" />
+      <workItem from="1529629894118" duration="19969000" />
+      <workItem from="1529889299554" duration="25649000" />
+      <workItem from="1529975199500" duration="24199000" />
+      <workItem from="1530061584900" duration="15497000" />
+      <workItem from="1531896237254" duration="12023000" />
+      <workItem from="1531962789166" duration="12940000" />
+      <workItem from="1532048629206" duration="12980000" />
+      <workItem from="1532308674939" duration="23344000" />
+      <workItem from="1532394280491" duration="26493000" />
+      <workItem from="1532480719580" duration="22190000" />
+      <workItem from="1532567597393" duration="10906000" />
+      <workItem from="1532653256123" duration="2133000" />
+      <workItem from="1532928333780" duration="3304000" />
+      <workItem from="1532998988257" duration="6922000" />
+      <workItem from="1533085566967" duration="21443000" />
+      <workItem from="1533172298571" duration="4693000" />
+      <workItem from="1533179265845" duration="396000" />
+      <workItem from="1533179683316" duration="16778000" />
+      <workItem from="1533257969692" duration="22669000" />
+      <workItem from="1533518014015" duration="23521000" />
+      <workItem from="1533603828845" duration="26139000" />
+      <workItem from="1533690762282" duration="27484000" />
+      <workItem from="1533777851452" duration="23455000" />
+      <workItem from="1533862658447" duration="24581000" />
+      <workItem from="1534137518444" duration="17182000" />
+      <workItem from="1534208955858" duration="17720000" />
+      <workItem from="1534313360333" duration="13499000" />
+      <workItem from="1534381508318" duration="25622000" />
+      <workItem from="1534467714150" duration="23721000" />
+      <workItem from="1534727457316" duration="21828000" />
+      <workItem from="1534814177149" duration="22822000" />
+      <workItem from="1534900502052" duration="22329000" />
+      <workItem from="1534988580606" duration="13197000" />
+      <workItem from="1535073228625" duration="11283000" />
+      <workItem from="1535333243518" duration="1109000" />
+      <workItem from="1535334809909" duration="23223000" />
+      <workItem from="1535418823888" duration="17532000" />
+      <workItem from="1535591118056" duration="13097000" />
+      <workItem from="1535677684776" duration="4467000" />
+      <workItem from="1535936626893" duration="17996000" />
+      <workItem from="1536022670205" duration="20171000" />
+      <workItem from="1536195941296" duration="9938000" />
+      <workItem from="1536282936328" duration="4355000" />
+      <workItem from="1536541329123" duration="27166000" />
+      <workItem from="1536644752661" duration="10351000" />
+      <workItem from="1536802170142" duration="9654000" />
+      <workItem from="1536887668540" duration="16358000" />
+      <workItem from="1537163751250" duration="4041000" />
+      <workItem from="1537233100283" duration="2274000" />
+      <workItem from="1537254554233" duration="10385000" />
+      <workItem from="1537320314949" duration="24024000" />
+      <workItem from="1537405459227" duration="67000" />
+      <workItem from="1537406029331" duration="763000" />
+      <workItem from="1537414852574" duration="1034000" />
+      <workItem from="1537421885382" duration="3026000" />
+      <workItem from="1537425025805" duration="14645000" />
+      <workItem from="1537492416934" duration="17121000" />
+    </task>
+    <task id="LOCAL-00315" summary="公司参数配置">
+      <created>1535442222811</created>
+      <option name="number" value="00315" />
+      <option name="presentableId" value="LOCAL-00315" />
+      <option name="project" value="LOCAL" />
+      <updated>1535442222811</updated>
+    </task>
+    <task id="LOCAL-00316" summary="公司参数配置">
+      <created>1535443696650</created>
+      <option name="number" value="00316" />
+      <option name="presentableId" value="LOCAL-00316" />
+      <option name="project" value="LOCAL" />
+      <updated>1535443696650</updated>
+    </task>
+    <task id="LOCAL-00317" summary="公司参数配置">
+      <created>1535445464256</created>
+      <option name="number" value="00317" />
+      <option name="presentableId" value="LOCAL-00317" />
+      <option name="project" value="LOCAL" />
+      <updated>1535445464259</updated>
+    </task>
+    <task id="LOCAL-00318" summary="公司参数配置">
+      <created>1535446885372</created>
+      <option name="number" value="00318" />
+      <option name="presentableId" value="LOCAL-00318" />
+      <option name="project" value="LOCAL" />
+      <updated>1535446885372</updated>
+    </task>
+    <task id="LOCAL-00319" summary="公司参数配置">
+      <created>1535448224520</created>
+      <option name="number" value="00319" />
+      <option name="presentableId" value="LOCAL-00319" />
+      <option name="project" value="LOCAL" />
+      <updated>1535448224520</updated>
+    </task>
+    <task id="LOCAL-00320" summary="公司参数配置">
+      <created>1535593260852</created>
+      <option name="number" value="00320" />
+      <option name="presentableId" value="LOCAL-00320" />
+      <option name="project" value="LOCAL" />
+      <updated>1535593260853</updated>
+    </task>
+    <task id="LOCAL-00321" summary="贷后合同管理、贷后车辆管理">
+      <created>1535613482511</created>
+      <option name="number" value="00321" />
+      <option name="presentableId" value="LOCAL-00321" />
+      <option name="project" value="LOCAL" />
+      <updated>1535613482511</updated>
+    </task>
+    <task id="LOCAL-00322" summary="公司参数配置">
+      <created>1535622299211</created>
+      <option name="number" value="00322" />
+      <option name="presentableId" value="LOCAL-00322" />
+      <option name="project" value="LOCAL" />
+      <updated>1535622299211</updated>
+    </task>
+    <task id="LOCAL-00323" summary="贷后合同管理、贷后车辆管理">
+      <created>1535623329275</created>
+      <option name="number" value="00323" />
+      <option name="presentableId" value="LOCAL-00323" />
+      <option name="project" value="LOCAL" />
+      <updated>1535623329275</updated>
+    </task>
+    <task id="LOCAL-00324" summary="手动扣款">
+      <created>1535679412128</created>
+      <option name="number" value="00324" />
+      <option name="presentableId" value="LOCAL-00324" />
+      <option name="project" value="LOCAL" />
+      <updated>1535679412133</updated>
+    </task>
+    <task id="LOCAL-00325" summary="删除日志打印">
+      <created>1535684874912</created>
+      <option name="number" value="00325" />
+      <option name="presentableId" value="LOCAL-00325" />
+      <option name="project" value="LOCAL" />
+      <updated>1535684874912</updated>
+    </task>
+    <task id="LOCAL-00326" summary="贷后合同管理、贷后车辆管理">
+      <created>1535685798384</created>
+      <option name="number" value="00326" />
+      <option name="presentableId" value="LOCAL-00326" />
+      <option name="project" value="LOCAL" />
+      <updated>1535685798384</updated>
+    </task>
+    <task id="LOCAL-00327" summary="日志打印">
+      <created>1535687246940</created>
+      <option name="number" value="00327" />
+      <option name="presentableId" value="LOCAL-00327" />
+      <option name="project" value="LOCAL" />
+      <updated>1535687246940</updated>
+    </task>
+    <task id="LOCAL-00328" summary="日志打印">
+      <created>1535700571565</created>
+      <option name="number" value="00328" />
+      <option name="presentableId" value="LOCAL-00328" />
+      <option name="project" value="LOCAL" />
+      <updated>1535700571565</updated>
+    </task>
+    <task id="LOCAL-00329" summary="录入合同车辆数据查询">
+      <created>1535939247945</created>
+      <option name="number" value="00329" />
+      <option name="presentableId" value="LOCAL-00329" />
+      <option name="project" value="LOCAL" />
+      <updated>1535939247946</updated>
+    </task>
+    <task id="LOCAL-00330" summary="数据查询优化">
+      <created>1535956243354</created>
+      <option name="number" value="00330" />
+      <option name="presentableId" value="LOCAL-00330" />
+      <option name="project" value="LOCAL" />
+      <updated>1535956243354</updated>
+    </task>
+    <task id="LOCAL-00331" summary="数据查询优化">
+      <created>1535968005481</created>
+      <option name="number" value="00331" />
+      <option name="presentableId" value="LOCAL-00331" />
+      <option name="project" value="LOCAL" />
+      <updated>1535968005481</updated>
+    </task>
+    <task id="LOCAL-00332" summary="数据查询优化">
+      <created>1535969697704</created>
+      <option name="number" value="00332" />
+      <option name="presentableId" value="LOCAL-00332" />
+      <option name="project" value="LOCAL" />
+      <updated>1535969697704</updated>
+    </task>
+    <task id="LOCAL-00333" summary="数据查询优化">
+      <created>1536026481294</created>
+      <option name="number" value="00333" />
+      <option name="presentableId" value="LOCAL-00333" />
+      <option name="project" value="LOCAL" />
+      <updated>1536026481295</updated>
+    </task>
+    <task id="LOCAL-00334" summary="数据查询速度优化">
+      <created>1536031414116</created>
+      <option name="number" value="00334" />
+      <option name="presentableId" value="LOCAL-00334" />
+      <option name="project" value="LOCAL" />
+      <updated>1536031414116</updated>
+    </task>
+    <task id="LOCAL-00335" summary="数据查询优化">
+      <created>1536199426608</created>
+      <option name="number" value="00335" />
+      <option name="presentableId" value="LOCAL-00335" />
+      <option name="project" value="LOCAL" />
+      <updated>1536199426609</updated>
+    </task>
+    <task id="LOCAL-00336" summary="通联批量扣款结果显示">
+      <created>1536217269701</created>
+      <option name="number" value="00336" />
+      <option name="presentableId" value="LOCAL-00336" />
+      <option name="project" value="LOCAL" />
+      <updated>1536217269701</updated>
+    </task>
+    <task id="LOCAL-00337" summary="通联批量扣款结果显示">
+      <created>1536218196658</created>
+      <option name="number" value="00337" />
+      <option name="presentableId" value="LOCAL-00337" />
+      <option name="project" value="LOCAL" />
+      <updated>1536218196658</updated>
+    </task>
+    <task id="LOCAL-00338" summary="数据查询速度优化">
+      <created>1536219638649</created>
+      <option name="number" value="00338" />
+      <option name="presentableId" value="LOCAL-00338" />
+      <option name="project" value="LOCAL" />
+      <updated>1536219638649</updated>
+    </task>
+    <task id="LOCAL-00339" summary="数据查询速度优化">
+      <created>1536224271135</created>
+      <option name="number" value="00339" />
+      <option name="presentableId" value="LOCAL-00339" />
+      <option name="project" value="LOCAL" />
+      <updated>1536224271135</updated>
+    </task>
+    <task id="LOCAL-00340" summary="查询数据速度优化">
+      <created>1536226494447</created>
+      <option name="number" value="00340" />
+      <option name="presentableId" value="LOCAL-00340" />
+      <option name="project" value="LOCAL" />
+      <updated>1536226494447</updated>
+    </task>
+    <task id="LOCAL-00341" summary="数据查询速度优化">
+      <created>1536289055849</created>
+      <option name="number" value="00341" />
+      <option name="presentableId" value="LOCAL-00341" />
+      <option name="project" value="LOCAL" />
+      <updated>1536289055850</updated>
+    </task>
+    <task id="LOCAL-00342" summary="数据查询速度优化">
+      <created>1536310685705</created>
+      <option name="number" value="00342" />
+      <option name="presentableId" value="LOCAL-00342" />
+      <option name="project" value="LOCAL" />
+      <updated>1536310685705</updated>
+    </task>
+    <task id="LOCAL-00343" summary="数据查询速度优化">
+      <created>1536312704240</created>
+      <option name="number" value="00343" />
+      <option name="presentableId" value="LOCAL-00343" />
+      <option name="project" value="LOCAL" />
+      <updated>1536312704240</updated>
+    </task>
+    <task id="LOCAL-00344" summary="数据查询速度优化">
+      <created>1536544334980</created>
+      <option name="number" value="00344" />
+      <option name="presentableId" value="LOCAL-00344" />
+      <option name="project" value="LOCAL" />
+      <updated>1536544334980</updated>
+    </task>
+    <task id="LOCAL-00345" summary="合同录入的车辆查询问题">
+      <created>1536545858971</created>
+      <option name="number" value="00345" />
+      <option name="presentableId" value="LOCAL-00345" />
+      <option name="project" value="LOCAL" />
+      <updated>1536545858971</updated>
+    </task>
+    <task id="LOCAL-00346" summary="数据查询速度优化">
+      <created>1536558506833</created>
+      <option name="number" value="00346" />
+      <option name="presentableId" value="LOCAL-00346" />
+      <option name="project" value="LOCAL" />
+      <updated>1536558506833</updated>
+    </task>
+    <task id="LOCAL-00347" summary="数据查询速度优化">
+      <created>1536559829510</created>
+      <option name="number" value="00347" />
+      <option name="presentableId" value="LOCAL-00347" />
+      <option name="project" value="LOCAL" />
+      <updated>1536559829510</updated>
+    </task>
+    <task id="LOCAL-00348" summary="数据查询速度优化">
+      <created>1536564574983</created>
+      <option name="number" value="00348" />
+      <option name="presentableId" value="LOCAL-00348" />
+      <option name="project" value="LOCAL" />
+      <updated>1536564574983</updated>
+    </task>
+    <task id="LOCAL-00349" summary="数据查询速度优化">
+      <created>1536566169674</created>
+      <option name="number" value="00349" />
+      <option name="presentableId" value="LOCAL-00349" />
+      <option name="project" value="LOCAL" />
+      <updated>1536566169674</updated>
+    </task>
+    <task id="LOCAL-00350" summary="数据查询速度优化">
+      <created>1536566686093</created>
+      <option name="number" value="00350" />
+      <option name="presentableId" value="LOCAL-00350" />
+      <option name="project" value="LOCAL" />
+      <updated>1536566686093</updated>
+    </task>
+    <task id="LOCAL-00351" summary="数据查询速度优化">
+      <created>1536567967468</created>
+      <option name="number" value="00351" />
+      <option name="presentableId" value="LOCAL-00351" />
+      <option name="project" value="LOCAL" />
+      <updated>1536567967468</updated>
+    </task>
+    <task id="LOCAL-00352" summary="数据查询优化">
+      <created>1536568138133</created>
+      <option name="number" value="00352" />
+      <option name="presentableId" value="LOCAL-00352" />
+      <option name="project" value="LOCAL" />
+      <updated>1536568138133</updated>
+    </task>
+    <task id="LOCAL-00353" summary="数据查询速度优化">
+      <created>1536571804240</created>
+      <option name="number" value="00353" />
+      <option name="presentableId" value="LOCAL-00353" />
+      <option name="project" value="LOCAL" />
+      <updated>1536571804240</updated>
+    </task>
+    <task id="LOCAL-00354" summary="数据查询速度优化">
+      <created>1536572150375</created>
+      <option name="number" value="00354" />
+      <option name="presentableId" value="LOCAL-00354" />
+      <option name="project" value="LOCAL" />
+      <updated>1536572150375</updated>
+    </task>
+    <task id="LOCAL-00355" summary="数据查询速度优化">
+      <created>1536573717615</created>
+      <option name="number" value="00355" />
+      <option name="presentableId" value="LOCAL-00355" />
+      <option name="project" value="LOCAL" />
+      <updated>1536573717615</updated>
+    </task>
+    <task id="LOCAL-00356" summary="数据查询速度优化">
+      <created>1536651702622</created>
+      <option name="number" value="00356" />
+      <option name="presentableId" value="LOCAL-00356" />
+      <option name="project" value="LOCAL" />
+      <updated>1536651702623</updated>
+    </task>
+    <task id="LOCAL-00357" summary="融租合同录入车辆数据查询">
+      <created>1536654464566</created>
+      <option name="number" value="00357" />
+      <option name="presentableId" value="LOCAL-00357" />
+      <option name="project" value="LOCAL" />
+      <updated>1536654464566</updated>
+    </task>
+    <task id="LOCAL-00358" summary="融租合同录入车辆数据查询">
+      <created>1536655353909</created>
+      <option name="number" value="00358" />
+      <option name="presentableId" value="LOCAL-00358" />
+      <option name="project" value="LOCAL" />
+      <updated>1536655353909</updated>
+    </task>
+    <task id="LOCAL-00359" summary="车辆录入">
+      <created>1536657217739</created>
+      <option name="number" value="00359" />
+      <option name="presentableId" value="LOCAL-00359" />
+      <option name="project" value="LOCAL" />
+      <updated>1536657217739</updated>
+    </task>
+    <task id="LOCAL-00360" summary="数据库换成mysql">
+      <created>1536905349048</created>
+      <option name="number" value="00360" />
+      <option name="presentableId" value="LOCAL-00360" />
+      <option name="project" value="LOCAL" />
+      <updated>1536905349049</updated>
+    </task>
+    <task id="LOCAL-00361" summary="工作流">
+      <created>1536910864221</created>
+      <option name="number" value="00361" />
+      <option name="presentableId" value="LOCAL-00361" />
+      <option name="project" value="LOCAL" />
+      <updated>1536910864221</updated>
+    </task>
+    <task id="LOCAL-00362" summary="工作流">
+      <created>1536913107741</created>
+      <option name="number" value="00362" />
+      <option name="presentableId" value="LOCAL-00362" />
+      <option name="project" value="LOCAL" />
+      <updated>1536913107741</updated>
+    </task>
+    <task id="LOCAL-00363" summary="修改合同录入车辆查询信息">
+      <created>1537240498594</created>
+      <option name="number" value="00363" />
+      <option name="presentableId" value="LOCAL-00363" />
+      <option name="project" value="LOCAL" />
+      <updated>1537240498594</updated>
+    </task>
+    <option name="localTasksCounter" value="364" />
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="QuickPayHandlerTest - 2018.05.31 at 16h 43m 41s.xml">
+      <configuration name="QuickPayHandlerTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="QuickPayHandlerTest_testPay - 2018.05.31 at 16h 44m 30s.xml">
+      <configuration name="QuickPayHandlerTest.testPay" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="QuickPayHandlerTest_testSearch - 2018.07.25 at 17h 40m 13s.xml">
+      <configuration name="QuickPayHandlerTest.testSearch" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="QuickPayHandlerTest_testSearch - 2018.07.25 at 17h 41m 13s.xml">
+      <configuration name="QuickPayHandlerTest.testSearch" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="QuickPayHandlerTest_testSearch - 2018.07.25 at 17h 43m 04s.xml">
+      <configuration name="QuickPayHandlerTest.testSearch" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="QuickPayHandlerTest_testSearch - 2018.07.25 at 17h 48m 19s.xml">
+      <configuration name="QuickPayHandlerTest.testSearch" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="QuickPayHandlerTest_testSearch - 2018.07.25 at 17h 48m 47s.xml">
+      <configuration name="QuickPayHandlerTest.testSearch" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="QuickPayHandlerTest_testSendMessage - 2018.05.31 at 16h 44m 58s.xml">
+      <configuration name="QuickPayHandlerTest.testSendMessage" configurationId="JUnit" />
+    </history-entry>
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="1670141000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1924" height="1056" extended-state="0" />
+    <layout>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14316703" sideWeight="0.12821889" order="13" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32897604" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.07403433" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20932755" sideWeight="0.9168455" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37310195" sideWeight="0.7707889" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36008677" sideWeight="0.9211087" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14316703" sideWeight="0.8717811" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290461" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41323212" sideWeight="0.9211087" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15933476" sideWeight="0.59284496" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22761194" sideWeight="0.40715504" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20715836" sideWeight="0.89324033" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="JRebel Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="true" content_ui="tabs" />
+      <window_info id="JRebel Executor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="JRebel" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="processedProjectFiles" value="true" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="SHOW_DETAILS_IN_CHANGES" value="false" />
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="HIGHLIGHTERS">
+                <map>
+                  <entry key="CURRENT_BRANCH" value="true" />
+                  <entry key="MERGE_COMMITS" value="true" />
+                  <entry key="MY_COMMITS" value="true" />
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="逾期处理bug" />
+    <MESSAGE value="逾期处理优化" />
+    <MESSAGE value="逾期优化" />
+    <MESSAGE value="合同贷后管理、车辆贷后管理" />
+    <MESSAGE value="处理拆分交易的自动扣款" />
+    <MESSAGE value="``" />
+    <MESSAGE value="通联日志状态问题" />
+    <MESSAGE value="手动批扣第二版" />
+    <MESSAGE value="后台用户管理" />
+    <MESSAGE value="公司参数配置" />
+    <MESSAGE value="手动扣款" />
+    <MESSAGE value="删除日志打印" />
+    <MESSAGE value="贷后合同管理、贷后车辆管理" />
+    <MESSAGE value="日志打印" />
+    <MESSAGE value="录入合同车辆数据查询" />
+    <MESSAGE value="通联批量扣款结果显示" />
+    <MESSAGE value="查询数据速度优化" />
+    <MESSAGE value="合同录入的车辆查询问题" />
+    <MESSAGE value="数据查询优化" />
+    <MESSAGE value="数据查询速度优化" />
+    <MESSAGE value="融租合同录入车辆数据查询" />
+    <MESSAGE value="车辆录入" />
+    <MESSAGE value="数据库换成mysql" />
+    <MESSAGE value="工作流" />
+    <MESSAGE value="修改合同录入车辆查询信息" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改合同录入车辆查询信息" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="676" height="617" key="Git.Branch.Popup" />
+    <state width="676" height="617" key="Git.Branch.Popup/0.0.1920.1080" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="15" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/../hc-lease-workflow-adapter-api/src/main/java/com/hc/lease/workflow/act/rest/editor/model/ActModelEditorJsonRestResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/workflow/act/rest/editor/model/ModelEditorJsonRestResourceController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="36" column="17" lean-forward="true" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-web-consumer/src/main/webapp/act/process-editor/editor-app/app-cfg.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-web-consumer/src/main/webapp/act/process-editor/editor-app/libs/angular-route_1.2.13/angular-route.min.js.map">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="6" column="932" lean-forward="false" selection-start-line="6" selection-start-column="932" selection-end-line="6" selection-end-column="932" />
+        </state>
+      </provider>
+      <provider editor-type-id="sourcemapFileViewerProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-web-consumer/src/main/webapp/act/process-editor/editor-app/editor/oryx.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="29" column="263140" lean-forward="false" selection-start-line="29" selection-start-column="263140" selection-end-line="29" selection-end-column="263140" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-web-consumer/src/main/webapp/act/process-editor/editor-app/plugins.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="21" column="35" lean-forward="false" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-web-consumer/src/main/webapp/act/process-editor/editor-app/configuration/url-config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-web-consumer/src/main/webapp/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="45" column="10" lean-forward="true" selection-start-line="45" selection-start-column="10" selection-end-line="45" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-web-consumer/src/main/webapp/act/process-editor/editor-app/libs/angular-route_1.2.13/angular-route.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1618">
+          <caret line="235" column="16" lean-forward="false" selection-start-line="235" selection-start-column="16" selection-end-line="235" selection-end-column="16" />
+          <folding>
+            <marker date="1537240823162" expanded="true" signature="10815:11515" ph="..." />
+            <marker date="1537240823162" expanded="true" signature="11975:12673" ph="{...}" />
+            <marker date="1537240823162" expanded="true" signature="12025:12392" ph="{&quot;templateUrl&quot;: 'book.html'...}" />
+            <marker date="1537240823162" expanded="true" signature="12123:12379" ph="{...}" />
+            <marker date="1537240823162" expanded="true" signature="12218:12364" ph="{...}" />
+            <marker date="1537240823162" expanded="true" signature="12457:12550" ph="{&quot;templateUrl&quot;: 'chapter.html'...}" />
+            <marker date="1537240823162" expanded="true" signature="12745:12880" ph="{...}" />
+            <marker date="1537240823162" expanded="true" signature="12931:13021" ph="{...}" />
+            <marker date="1537240823162" expanded="true" signature="13075:13168" ph="{...}" />
+            <marker date="1537240823162" expanded="true" signature="13291:13870" ph="{...}" />
+            <marker date="1537240823162" expanded="true" signature="24788:25586" ph="..." />
+            <marker date="1537240823162" expanded="true" signature="25113:25183" ph="..." />
+            <marker date="1537240823162" expanded="true" signature="25645:25750" ph="..." />
+            <marker date="1537240823162" expanded="true" signature="25812:25974" ph="..." />
+            <marker date="1537240823162" expanded="true" signature="26058:26273" ph="{...}" />
+            <marker date="1537240823162" expanded="true" signature="26297:26332" ph="{...}" />
+            <marker date="1537240823162" expanded="true" signature="26389:26767" ph="{...}" />
+            <marker date="1537240823162" expanded="true" signature="26800:26832" ph="{...}" />
+            <marker date="1537240823162" expanded="true" signature="26880:26909" ph="{...}" />
+            <marker date="1537240823162" expanded="true" signature="26957:26990" ph="{...}" />
+            <marker date="1537240823162" expanded="true" signature="27156:27658" ph="{...}" />
+            <marker date="1537240823162" expanded="true" signature="27207:27333" ph="{&quot;templateUrl&quot;: 'book.html'...}" />
+            <marker date="1537240823162" expanded="true" signature="27399:27534" ph="{&quot;templateUrl&quot;: 'chapter.html'...}" />
+            <marker date="1537240823162" expanded="true" signature="27721:27846" ph="{...}" />
+            <marker date="1537240823162" expanded="true" signature="27888:27971" ph="{...}" />
+            <marker date="1537240823162" expanded="true" signature="28016:28102" ph="{...}" />
+            <marker date="1537240823162" expanded="true" signature="28222:28791" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-web-consumer/src/main/webapp/act/process-editor/editor-app/stencil-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3074">
+          <caret line="64" column="12" lean-forward="false" selection-start-line="64" selection-start-column="12" selection-end-line="64" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-web-consumer/src/main/webapp/act/process-editor/editor-app/libs/angular-resource_1.2.13/angular-resource.min.js.map">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="6" column="193" lean-forward="false" selection-start-line="6" selection-start-column="193" selection-end-line="6" selection-end-column="193" />
+        </state>
+      </provider>
+      <provider editor-type-id="sourcemapFileViewerProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-web-consumer/src/main/webapp/act/process-editor/editor-app/libs/angular-strap_2.0.5/angular-strap.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="8" column="17750" lean-forward="false" selection-start-line="8" selection-start-column="17750" selection-end-line="8" selection-end-column="17750" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/4.3.6.RELEASE/spring-context-4.3.6.RELEASE.jar!/org/springframework/format/support/FormattingConversionServiceFactoryBean.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-web-consumer/src/main/webapp/act/process-editor/editor-app/configuration/toolbar-default-actions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="382" column="14" lean-forward="false" selection-start-line="382" selection-start-column="14" selection-end-line="382" selection-end-column="14" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/xmlgraphics/batik-transcoder/1.7/batik-transcoder-1.7.jar!/org/apache/batik/transcoder/print/PrintTranscoder.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="77" column="16" lean-forward="false" selection-start-line="77" selection-start-column="16" selection-end-line="77" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-web-consumer/src/main/webapp/act/process-editor/editor-app/popups/save-model.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="40" column="6" lean-forward="false" selection-start-line="40" selection-start-column="6" selection-end-line="40" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/4.3.6.RELEASE/spring-web-4.3.6.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="126" column="57" lean-forward="true" selection-start-line="126" selection-start-column="57" selection-end-line="126" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-tx/4.3.6.RELEASE/spring-tx-4.3.6.RELEASE.jar!/org/springframework/transaction/interceptor/TransactionInterceptor.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/xmlgraphics/batik-transcoder/1.7/batik-transcoder-1.7.jar!/org/apache/batik/transcoder/image/PNGTranscoder.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="5" column="25" lean-forward="false" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/impl/jobexecutor/AcquireJobsRunnableImpl.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="18" column="53" lean-forward="true" selection-start-line="18" selection-start-column="53" selection-end-line="18" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#4742#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/workflow/act/rest/editor/model/ModelSaveRestResourceController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="3" column="48" lean-forward="false" selection-start-line="3" selection-start-column="48" selection-end-line="3" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/xmlgraphics/batik-transcoder/1.7/batik-transcoder-1.7.jar!/org/apache/batik/transcoder/image/ImageTranscoder.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-20">
+          <caret line="70" column="0" lean-forward="true" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/xmlgraphics/batik-transcoder/1.7/batik-transcoder-1.7.jar!/org/apache/batik/transcoder/SVGAbstractTranscoder.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="537">
+          <caret line="109" column="9" lean-forward="true" selection-start-line="109" selection-start-column="9" selection-end-line="109" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/xmlgraphics/batik-transcoder/1.7/batik-transcoder-1.7.jar!/org/apache/batik/transcoder/XMLAbstractTranscoder.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="70" column="40" lean-forward="true" selection-start-line="70" selection-start-column="40" selection-end-line="70" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-workflow-adapter/src/main/java/com/hc/lease/workflow/act/rest/editor/model/impl/ActModelSaveRestResourceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="26" column="70" lean-forward="false" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-web-consumer/src/main/webapp/act/process-editor/editor-app/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="366">
+          <caret line="401" column="56" lean-forward="false" selection-start-line="401" selection-start-column="56" selection-end-line="401" selection-end-column="56" />
+          <folding>
+            <marker date="1537240823063" expanded="true" signature="1444:1450" ph="&amp;nbsp;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/impl/persistence/entity/AttachmentEntity.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-63">
+          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/workflow/controller/ActProcessController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="39" column="7" lean-forward="false" selection-start-line="39" selection-start-column="7" selection-end-line="39" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-common-core/src/main/java/com/hc/lease/common/core/dubbo/filter/DubboTraceFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="32" column="66" lean-forward="false" selection-start-line="32" selection-start-column="66" selection-end-line="32" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-workflow-adapter/src/main/resources/act/build.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/ProcessEngineConfiguration.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="303" column="38" lean-forward="false" selection-start-line="303" selection-start-column="38" selection-end-line="303" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-jdbc/4.3.6.RELEASE/spring-jdbc-4.3.6.RELEASE.jar!/org/springframework/jdbc/datasource/TransactionAwareDataSourceProxy.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-53">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#5411#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/activiti/activiti-common-rest/5.22.0/activiti-common-rest-5.22.0.jar!/org/activiti/rest/common/application/DefaultContentTypeResolver.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-web-consumer/src/main/resources/META-INF/spring/ApplicationContext-mvc.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-428">
+          <caret line="51" column="94" lean-forward="false" selection-start-line="51" selection-start-column="94" selection-end-line="51" selection-end-column="94" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/activiti/activiti-spring/5.22.0/activiti-spring-5.22.0.jar!/org/activiti/spring/SpringProcessEngineConfiguration.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="65">
+          <caret line="31" column="13" lean-forward="false" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-account-adapter/src/main/resources/config/spring-mybatis.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="18" column="11" lean-forward="true" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-allinpayquick/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="65" column="36" lean-forward="true" selection-start-line="65" selection-start-column="36" selection-end-line="65" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="334" column="0" lean-forward="true" selection-start-line="334" selection-start-column="0" selection-end-line="334" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-workflow-adapter/src/main/resources/config/spring-mybatis.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="13" column="78" lean-forward="true" selection-start-line="13" selection-start-column="78" selection-end-line="13" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-workflow-adapter/src/main/resources/config/mybatis-config.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="3" column="15" lean-forward="true" selection-start-line="3" selection-start-column="15" selection-end-line="3" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/workflow/act/rest/servlet/JsonpCallbackFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="46" column="62" lean-forward="true" selection-start-line="46" selection-start-column="62" selection-end-line="46" selection-end-column="62" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-workflow-adapter/src/main/java/com/hc/lease/workflow/service/impl/ActRepositoryServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="63" column="12" lean-forward="false" selection-start-line="63" selection-start-column="12" selection-end-line="63" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-common-core/src/main/resources/META-INF/spring/ApplicationContext-core.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="11" column="103" lean-forward="true" selection-start-line="11" selection-start-column="103" selection-end-line="11" selection-end-column="103" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-workflow-adapter/src/main/resources/META-INF/spring/ApplicationContext.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-workflow-adapter/src/main/resources/config/logback.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="146" column="48" lean-forward="false" selection-start-line="146" selection-start-column="48" selection-end-line="146" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-workflow-adapter/src/main/resources/META-INF/spring/spring-context-activiti.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="39" column="11" lean-forward="false" selection-start-line="39" selection-start-column="11" selection-end-line="39" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/RepositoryService.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="30" column="46" lean-forward="true" selection-start-line="30" selection-start-column="46" selection-end-line="30" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-workflow-adapter/src/main/java/com/hc/lease/workflow/service/impl/ActProcessServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="75" column="68" lean-forward="true" selection-start-line="75" selection-start-column="68" selection-end-line="75" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-workflow-adapter-api/src/main/java/com/hc/lease/workflow/vo/ActProcessDefinitionQuery.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="12" column="38" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/activiti/activiti-engine/5.22.0/activiti-engine-5.22.0.jar!/org/activiti/engine/repository/ModelQuery.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../hc-lease-web-consumer/src/main/java/com/hc/lease/workflow/controller/ActModelController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="449">
+          <caret line="52" column="41" lean-forward="true" selection-start-line="52" selection-start-column="41" selection-end-line="52" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <last-edited>hc-lease-web-consumer:war exploded</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2857143" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Web (hc-lease-web-consumer)|Web</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2857143" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.224" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>hc-lease-common-parent</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2857143" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: org.apache.ant:ant:1.8.2</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2857143" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.224" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

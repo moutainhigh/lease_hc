@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.supplier.dao.LeaseCarSupplierMapper" >
+  <resultMap id="BaseResultMap" type="com.hc.lease.supplier.model.LeaseCarSupplier" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="internal_number" property="internalNumber" jdbcType="VARCHAR" />
+    <result column="advantage" property="advantage" jdbcType="VARCHAR" />
+    <result column="contacts" property="contacts" jdbcType="VARCHAR" />
+    <result column="contact_phone" property="contactPhone" jdbcType="VARCHAR" />
+    <result column="recommender" property="recommender" jdbcType="VARCHAR" />
+    <result column="recommender_phone" property="recommenderPhone" jdbcType="VARCHAR" />
+    <result column="cooperate_time" property="cooperateTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="province_id" property="provinceId" jdbcType="BIGINT" />
+    <result column="province_name" property="provinceName" jdbcType="VARCHAR" />
+    <result column="city_id" property="cityId" jdbcType="BIGINT" />
+    <result column="city_name" property="cityName" jdbcType="VARCHAR" />
+    <result column="area_id" property="areaId" jdbcType="BIGINT" />
+    <result column="area_name" property="areaName" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="is_enable" property="isEnable" jdbcType="BIT" />
+    <result column="account_name" property="accountName" jdbcType="VARCHAR" />
+    <result column="bank_id" property="bankId" jdbcType="BIGINT" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="bank_name" property="bankName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, internal_number, advantage, contacts, contact_phone, recommender, recommender_phone, 
+    cooperate_time, create_time, update_time, create_by, update_by, sort, province_id, 
+    province_name, city_id, city_name, area_id, area_name, address, is_enable, account_name, 
+    bank_id, account
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+     cs.id, cs.name, cs.internal_number, cs.advantage, cs.contacts, cs.contact_phone, cs.recommender, cs.recommender_phone,
+    cs.cooperate_time, cs.create_time, cs.update_time, cs.create_by, cs.update_by, cs.sort, cs.province_id,
+    cs.province_name, cs.city_id, cs.city_name, cs.area_id, cs.area_name, cs.address, cs.is_enable, cs.account_name,
+    cs.bank_id, cs.account,b.name as "bankName"
+    from lease_car_supplier cs
+    join  lease_bank b on cs.bank_id=b.id
+    where cs.id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="findPage" resultType="java.util.Map"  parameterType="java.util.Map">
+    select
+   cs.id, cs.name, cs.internal_number as "internalNumber", cs.advantage, cs.contacts, cs.contact_phone as "contactPhone", cs.recommender, cs.recommender_phone as "recommenderPhone",
+    cs.cooperate_time as "cooperateTime", cs.create_time as "createTime", cs.update_time as "updateTime", cs.create_by as "createBy", cs.update_by as "updateBy", cs.sort, cs.province_id as "provinceId",
+    cs.province_name as "provinceName", cs.city_id as "cityId", cs.city_name as "cityName", cs.area_id as "areaId", cs.area_name as "areaName", cs.address, cs.is_enable as "isEnable", cs.account_name as "accountName",
+    cs.bank_id as "bankId", cs.account,b.name as "bankName"
+    from lease_car_supplier cs
+    join  lease_bank b on cs.bank_id=b.id
+    where 1=1
+    <if test="name != null" >
+      and  cs.name like CONCAT('%',#{name},'%')
+    </if>
+     ORDER BY cs.create_time DESC
+  </select>
+
+    <select id="findByName" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List"/>
+      from lease_car_supplier
+      WHERE name = #{name,jdbcType=VARCHAR}
+      <if test="id != null">
+        and id != #{id,jdbcType=BIGINT}
+      </if>
+    </select>
+
+
+
+
+
+
+
+
+  <select id="findAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from lease_car_supplier ORDER BY create_time DESC
+  </select>
+
+  <select id="insertViewParames" resultType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from lease_car_supplier ORDER BY create_time DESC
+  </select>
+
+  <delete id="deleteBatchById" parameterType="long">
+    delete from lease_car_supplier where id in
+    <foreach item="item" collection="list" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lease_car_supplier
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hc.lease.supplier.model.LeaseCarSupplier" >
+    insert into lease_car_supplier (id, name, internal_number, 
+      advantage, contacts, contact_phone, 
+      recommender, recommender_phone, cooperate_time, 
+      create_time, update_time, create_by, 
+      update_by, sort, province_id, 
+      province_name, city_id, city_name, 
+      area_id, area_name, address, 
+      is_enable, account_name, bank_id, 
+      account)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{internalNumber,jdbcType=VARCHAR}, 
+      #{advantage,jdbcType=VARCHAR}, #{contacts,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, 
+      #{recommender,jdbcType=VARCHAR}, #{recommenderPhone,jdbcType=VARCHAR}, #{cooperateTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, 
+      #{updateBy,jdbcType=BIGINT}, #{sort,jdbcType=INTEGER}, #{provinceId,jdbcType=BIGINT}, 
+      #{provinceName,jdbcType=VARCHAR}, #{cityId,jdbcType=BIGINT}, #{cityName,jdbcType=VARCHAR}, 
+      #{areaId,jdbcType=BIGINT}, #{areaName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{isEnable,jdbcType=BIT}, #{accountName,jdbcType=VARCHAR}, #{bankId,jdbcType=BIGINT}, 
+      #{account,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hc.lease.supplier.model.LeaseCarSupplier" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_car_supplier_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_car_supplier
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="internalNumber != null" >
+        internal_number,
+      </if>
+      <if test="advantage != null" >
+        advantage,
+      </if>
+      <if test="contacts != null" >
+        contacts,
+      </if>
+      <if test="contactPhone != null" >
+        contact_phone,
+      </if>
+      <if test="recommender != null" >
+        recommender,
+      </if>
+      <if test="recommenderPhone != null" >
+        recommender_phone,
+      </if>
+      <if test="cooperateTime != null" >
+        cooperate_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="provinceName != null" >
+        province_name,
+      </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+      <if test="cityName != null" >
+        city_name,
+      </if>
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="areaName != null" >
+        area_name,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="isEnable != null" >
+        is_enable,
+      </if>
+      <if test="accountName != null" >
+        account_name,
+      </if>
+      <if test="bankId != null" >
+        bank_id,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="internalNumber != null" >
+        #{internalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="advantage != null" >
+        #{advantage,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts != null" >
+        #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="recommender != null" >
+        #{recommender,jdbcType=VARCHAR},
+      </if>
+      <if test="recommenderPhone != null" >
+        #{recommenderPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="cooperateTime != null" >
+        #{cooperateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="provinceName != null" >
+        #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="cityName != null" >
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=BIGINT},
+      </if>
+      <if test="areaName != null" >
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="accountName != null" >
+        #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankId != null" >
+        #{bankId,jdbcType=BIGINT},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.supplier.model.LeaseCarSupplier" >
+    update lease_car_supplier
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="internalNumber != null" >
+        internal_number = #{internalNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="advantage != null" >
+        advantage = #{advantage,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts != null" >
+        contacts = #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        contact_phone = #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="recommender != null" >
+        recommender = #{recommender,jdbcType=VARCHAR},
+      </if>
+      <if test="recommenderPhone != null" >
+        recommender_phone = #{recommenderPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="cooperateTime != null" >
+        cooperate_time = #{cooperateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="provinceName != null" >
+        province_name = #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="cityName != null" >
+        city_name = #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        area_id = #{areaId,jdbcType=BIGINT},
+      </if>
+      <if test="areaName != null" >
+        area_name = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnable != null" >
+        is_enable = #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="accountName != null" >
+        account_name = #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankId != null" >
+        bank_id = #{bankId,jdbcType=BIGINT},
+      </if>
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hc.lease.supplier.model.LeaseCarSupplier" >
+    update lease_car_supplier
+    set name = #{name,jdbcType=VARCHAR},
+      internal_number = #{internalNumber,jdbcType=VARCHAR},
+      advantage = #{advantage,jdbcType=VARCHAR},
+      contacts = #{contacts,jdbcType=VARCHAR},
+      contact_phone = #{contactPhone,jdbcType=VARCHAR},
+      recommender = #{recommender,jdbcType=VARCHAR},
+      recommender_phone = #{recommenderPhone,jdbcType=VARCHAR},
+      cooperate_time = #{cooperateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      sort = #{sort,jdbcType=INTEGER},
+      province_id = #{provinceId,jdbcType=BIGINT},
+      province_name = #{provinceName,jdbcType=VARCHAR},
+      city_id = #{cityId,jdbcType=BIGINT},
+      city_name = #{cityName,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=BIGINT},
+      area_name = #{areaName,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      is_enable = #{isEnable,jdbcType=BIT},
+      account_name = #{accountName,jdbcType=VARCHAR},
+      bank_id = #{bankId,jdbcType=BIGINT},
+      account = #{account,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.supplier.dao.LeasePurchaseContractMapper">
+    <resultMap id="BaseResultMap" type="com.hc.lease.supplier.model.LeasePurchaseContract">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="buy_card_capital_type_id" property="buyCardCapitalTypeId" jdbcType="BIGINT"/>
+        <result column="buy_card_capital_type_name" property="buyCardCapitalTypeName" jdbcType="VARCHAR"/>
+        <result column="contract_number" property="contractNumber" jdbcType="VARCHAR"/>
+        <result column="car_buy_financinger_id" property="carBuyFinancingerId" jdbcType="BIGINT"/>
+        <result column="company_header_id" property="companyHeaderId" jdbcType="BIGINT"/>
+        <result column="effective_time" property="effectiveTime" jdbcType="TIMESTAMP"/>
+        <result column="car_supplier_id" property="carSupplierId" jdbcType="BIGINT"/>
+        <result column="brands_id" property="brandsId" jdbcType="BIGINT"/>
+        <result column="series_id" property="seriesId" jdbcType="BIGINT"/>
+        <result column="model_id" property="modelId" jdbcType="BIGINT"/>
+        <result column="totle_amount" property="totleAmount" jdbcType="INTEGER"/>
+        <result column="unit_price" property="unitPrice" jdbcType="NUMERIC"/>
+        <result column="subscription_price" property="subscriptionPrice" jdbcType="NUMERIC"/>
+        <result column="totle_price" property="totlePrice" jdbcType="NUMERIC"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="scanner_img" property="scannerImg" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <result column="is_enable" property="isEnable" jdbcType="BIT"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="car_buy_financinger_name" property="carBuyFinancingerName" jdbcType="VARCHAR"/>
+        <result column="company_header_name" property="companyHeaderName" jdbcType="VARCHAR"/>
+        <result column="brands_name" property="brandsName" jdbcType="VARCHAR"/>
+        <result column="series_name" property="seriesName" jdbcType="VARCHAR"/>
+        <result column="complete_model_name" property="completeModelName" jdbcType="VARCHAR"/>
+        <result column="car_supplier_name" property="carSupplierName" jdbcType="VARCHAR"/>
+        <result column="model_name" property="modelName" jdbcType="VARCHAR"/>
+
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, buy_card_capital_type_id, buy_card_capital_type_name, contract_number, car_buy_financinger_id, 
+    company_header_id, effective_time, car_supplier_id, brands_id, series_id, model_id, 
+    totle_amount, unit_price, subscription_price, totle_price, remarks, scanner_img, 
+    create_time, update_time, create_by, update_by, is_enable, sort
+  </sql>
+
+    <!--根据采购合同编号查询-->
+    <select id="selectByContractNumber" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_purchase_contract
+        where contract_number = #{contractNumber}
+    </select>
+
+    <!--导出车辆录入模板需要的数据-->
+    <select id="findExportExcelModel" resultType="java.lang.String">
+    select contract_number "contractNumber" from lease_purchase_contract
+  </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_purchase_contract
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="findByParams" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_purchase_contract
+        WHERE 1=1
+
+        <if test="contractNumber != null">
+            and contract_number = #{contractNumber,jdbcType=VARCHAR}
+        </if>
+
+        <if test="id != null">
+            and id != #{id,jdbcType=BIGINT}
+        </if>
+    </select>
+
+    <select id="selectByLeaseCar" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        pc.id, pc.buy_card_capital_type_id as "buyCardCapitalTypeId", pc.buy_card_capital_type_name as
+        "buyCardCapitalTypeName", pc.contract_number as "contractNumber", pc.car_buy_financinger_id as
+        "carBuyFinancingerId",
+        pc.company_header_id as "companyHeaderId", pc.effective_time as "effectiveTime", pc.car_supplier_id as
+        "carSupplierId", pc.brands_id as "brandsId", pc.series_id as "seriesId", pc.model_id as "modelId",
+        pc.totle_amount as "totleAmount", pc.unit_price as "unitPrice", pc.subscription_price as "subscriptionPrice",
+        pc.totle_price as "totlePrice", pc.remarks, pc.scanner_img as "scannerImg",
+        pc.create_time as "createTime", pc.update_time as "updateTime", pc.create_by as "createBy", pc.update_by as
+        "updateBy", pc.is_enable as "isEnable", pc.sort,
+        cbf.name as "carBuyFinancingerName",ch.name as "companyHeaderName",cb.name as "brandsName",css.name as
+        "seriesName",cm.complete_model_name as "completeModelName",cs.name as "carSupplierName",cm.business_model_name
+        as "modelName"
+        from lease_purchase_contract pc
+        left join lease_car_buy_financinger cbf on pc.car_buy_financinger_id=cbf.id
+        left join lease_company_header ch on pc.company_header_id=ch.id
+        left join lease_car_supplier cs on pc.car_supplier_id=cs.id
+        left join lease_car_brands cb on pc.brands_id=cb.id
+        left join lease_car_series css on pc.series_id=css.id
+        left join lease_car_model cm on pc.model_id=cm.id
+        where 1=1
+        <if test="dictId != null and dictId!=''">
+            and pc.buy_card_capital_type_id = #{dictId}
+        </if>
+
+        ORDER BY pc.create_time DESC
+
+    </select>
+    <select id="selectByCarBuyFinancingerId" resultMap="BaseResultMap">
+        select
+        id
+        from lease_purchase_contract
+        where car_buy_financinger_id in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+
+    <select id="findByCarSupplierId" resultMap="BaseResultMap">
+        select
+        id, contract_number
+        from lease_purchase_contract
+        where car_supplier_id in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="findPage" resultType="java.util.Map" parameterType="java.util.Map">
+
+        select
+        table_1.id, table_1.buycardcapitaltypeid "buyCardCapitalTypeId", table_1.buycardcapitaltypename
+        "buyCardCapitalTypeName"
+        , table_1.contractnumber "contractNumber", table_1.carbuyfinancingerid "carBuyFinancingerId"
+        , table_1.companyheaderid "companyHeaderId", table_1.effectivetime "effectiveTime"
+        , table_1.carsupplierid "carSupplierId", table_1.brandsid "brandsId"
+        , table_1.seriesid "seriesId", table_1.modelid "modelId"
+        , table_1.totleamount "totleAmount", table_1.unitprice "unitPrice", table_1.subscriptionprice
+        "subscriptionPrice"
+        , table_1.totleprice "totlePrice", table_1.remarks, table_1.scannerimgs "scannerImgs"
+        , table_1.createtime "createTime", table_1.updatetime "updateTime", table_1.createby "createBy"
+        , table_1.updateby "updateBy", table_1.isenable "isEnable", table_1.sort
+        , table_1.carbuyfinancingername "carBuyFinancingerName",table_1.companyheadername
+        "companyHeaderName",table_1.carsuppliername "carSupplierName",table_1.brandsname "brandsName"
+        , table_1.seriesname "seriesName",table_1.completemodelname "completeModelName",table_1.businessmodelname
+        "businessModelName"
+        , (case when table_2.id is not null then true else false end) as "used"
+        from
+        (
+        select
+        pc.id, pc.buy_card_capital_type_id as "buycardcapitaltypeid", d.value as "buycardcapitaltypename"
+        , pc.contract_number as "contractnumber", pc.car_buy_financinger_id as "carbuyfinancingerid",
+        pc.company_header_id as "companyheaderid", pc.effective_time as "effectivetime"
+        , pc.car_supplier_id as "carsupplierid", pc.brands_id as "brandsid"
+        , pc.series_id as "seriesid", pc.model_id as "modelid",
+        pc.totle_amount as "totleamount", pc.unit_price as "unitprice", pc.subscription_price as "subscriptionprice"
+        , pc.totle_price as "totleprice", pc.remarks, pc.scanner_img as "scannerimgs",
+        pc.create_time as "createtime", pc.update_time as "updatetime", pc.create_by as "createby"
+        , pc.update_by as "updateby", pc.is_enable as "isenable", pc.sort,
+        cbf.name as "carbuyfinancingername",ch.name as "companyheadername",cs.name as "carsuppliername",cb.name as
+        "brandsname"
+        ,css.name as "seriesname",cm.complete_model_name as "completemodelname",cm.business_model_name as
+        "businessmodelname"
+        from lease_purchase_contract pc
+        left join lease_car_buy_financinger cbf on pc.car_buy_financinger_id=cbf.id
+        left join lease_company_header ch on pc.company_header_id=ch.id
+        left join lease_car_supplier cs on pc.car_supplier_id=cs.id
+        left join lease_car_brands cb on pc.brands_id=cb.id
+        left join lease_car_series css on pc.series_id=css.id
+        left join lease_car_model cm on pc.model_id=cm.id
+        left join lease_dict d on pc.buy_card_capital_type_id=d.id
+
+        where 1=1
+        <if test="contractNumber != null and contractNumber!=''">
+            and pc.contract_number like concat('%',#{contractNumber},'%')
+        </if>
+        <if test="carSupplierId != null and  carSupplierId !=''">
+            and pc.car_supplier_id = #{carSupplierId}
+        </if>
+        <if test="brandsId != null and brandsId !='' ">
+            and pc.brands_id = #{brandsId}
+        </if>
+        <if test="seriesId != null and  seriesId !=''">
+            and pc.series_id = #{seriesId}
+        </if>
+        <if test="modelId != null and  modelId !='' ">
+            and pc.model_id = #{modelId}
+        </if>
+        <if test="effectiveTimeFrom != null and effectiveTimeFrom!='' and effectiveTimeTo != null and effectiveTimeTo !=''">
+            and pc.effective_time BETWEEN to_timestamp(#{effectiveTimeFrom},'YYYY-MM-DD HH24:MI:SS') and
+            to_timestamp(#{effectiveTimeTo},'YYYY-MM-DD HH24:MI:SS')
+        </if>
+        )table_1
+        left join (select uu.id,uu.used_id from lease_use_used uu where uu.used_type='leasePurchaseContract') table_2 on table_1.id = table_2.used_id
+        ORDER BY table_1.createtime DESC
+
+    </select>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_purchase_contract ORDER BY create_time DESC
+    </select>
+
+    <select id="insertViewParames" resultType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_purchase_contract ORDER BY create_time DESC
+    </select>
+
+    <delete id="deleteBatchById" parameterType="long">
+        delete from lease_purchase_contract where id in
+        <foreach item="item" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from lease_purchase_contract
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.hc.lease.supplier.model.LeasePurchaseContract">
+    insert into lease_purchase_contract (id, buy_card_capital_type_id, buy_card_capital_type_name, 
+      contract_number, car_buy_financinger_id, company_header_id, 
+      effective_time, car_supplier_id, brands_id, 
+      series_id, model_id, totle_amount, 
+      unit_price, subscription_price, totle_price, 
+      remarks, scanner_img, create_time, 
+      update_time, create_by, update_by, 
+      is_enable, sort)
+    values (#{id,jdbcType=BIGINT}, #{buyCardCapitalTypeId,jdbcType=BIGINT}, #{buyCardCapitalTypeName,jdbcType=VARCHAR}, 
+      #{contractNumber,jdbcType=VARCHAR}, #{carBuyFinancingerId,jdbcType=BIGINT}, #{companyHeaderId,jdbcType=BIGINT}, 
+      #{effectiveTime,jdbcType=TIMESTAMP}, #{carSupplierId,jdbcType=BIGINT}, #{brandsId,jdbcType=BIGINT}, 
+      #{seriesId,jdbcType=BIGINT}, #{modelId,jdbcType=BIGINT}, #{totleAmount,jdbcType=INTEGER}, 
+      #{unitPrice,jdbcType=NUMERIC}, #{subscriptionPrice,jdbcType=NUMERIC}, #{totlePrice,jdbcType=NUMERIC}, 
+      #{remarks,jdbcType=VARCHAR}, #{scannerImg,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT}, 
+      #{isEnable,jdbcType=BIT}, #{sort,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.hc.lease.supplier.model.LeasePurchaseContract">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_purchase_contract_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_purchase_contract
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="buyCardCapitalTypeId != null">
+                buy_card_capital_type_id,
+            </if>
+            <if test="buyCardCapitalTypeName != null">
+                buy_card_capital_type_name,
+            </if>
+            <if test="contractNumber != null">
+                contract_number,
+            </if>
+            <if test="carBuyFinancingerId != null">
+                car_buy_financinger_id,
+            </if>
+            <if test="companyHeaderId != null">
+                company_header_id,
+            </if>
+            <if test="effectiveTime != null">
+                effective_time,
+            </if>
+            <if test="carSupplierId != null">
+                car_supplier_id,
+            </if>
+            <if test="brandsId != null">
+                brands_id,
+            </if>
+            <if test="seriesId != null">
+                series_id,
+            </if>
+            <if test="modelId != null">
+                model_id,
+            </if>
+            <if test="totleAmount != null">
+                totle_amount,
+            </if>
+            <if test="unitPrice != null">
+                unit_price,
+            </if>
+            <if test="subscriptionPrice != null">
+                subscription_price,
+            </if>
+            <if test="totlePrice != null">
+                totle_price,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <if test="scannerImg != null">
+                scanner_img,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="isEnable != null">
+                is_enable,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="buyCardCapitalTypeId != null">
+                #{buyCardCapitalTypeId,jdbcType=BIGINT},
+            </if>
+            <if test="buyCardCapitalTypeName != null">
+                #{buyCardCapitalTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="contractNumber != null">
+                #{contractNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="carBuyFinancingerId != null">
+                #{carBuyFinancingerId,jdbcType=BIGINT},
+            </if>
+            <if test="companyHeaderId != null">
+                #{companyHeaderId,jdbcType=BIGINT},
+            </if>
+            <if test="effectiveTime != null">
+                #{effectiveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="carSupplierId != null">
+                #{carSupplierId,jdbcType=BIGINT},
+            </if>
+            <if test="brandsId != null">
+                #{brandsId,jdbcType=BIGINT},
+            </if>
+            <if test="seriesId != null">
+                #{seriesId,jdbcType=BIGINT},
+            </if>
+            <if test="modelId != null">
+                #{modelId,jdbcType=BIGINT},
+            </if>
+            <if test="totleAmount != null">
+                #{totleAmount,jdbcType=INTEGER},
+            </if>
+            <if test="unitPrice != null">
+                #{unitPrice,jdbcType=NUMERIC},
+            </if>
+            <if test="subscriptionPrice != null">
+                #{subscriptionPrice,jdbcType=NUMERIC},
+            </if>
+            <if test="totlePrice != null">
+                #{totlePrice,jdbcType=NUMERIC},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="scannerImg != null">
+                #{scannerImg,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="isEnable != null">
+                #{isEnable,jdbcType=BIT},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.supplier.model.LeasePurchaseContract">
+        update lease_purchase_contract
+        <set>
+            <if test="buyCardCapitalTypeId != null">
+                buy_card_capital_type_id = #{buyCardCapitalTypeId,jdbcType=BIGINT},
+            </if>
+            <if test="buyCardCapitalTypeName != null">
+                buy_card_capital_type_name = #{buyCardCapitalTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="contractNumber != null">
+                contract_number = #{contractNumber,jdbcType=VARCHAR},
+            </if>
+            car_buy_financinger_id = #{carBuyFinancingerId,jdbcType=BIGINT},
+            <if test="companyHeaderId != null">
+                company_header_id = #{companyHeaderId,jdbcType=BIGINT},
+            </if>
+            <if test="effectiveTime != null">
+                effective_time = #{effectiveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="carSupplierId != null">
+                car_supplier_id = #{carSupplierId,jdbcType=BIGINT},
+            </if>
+            <if test="brandsId != null">
+                brands_id = #{brandsId,jdbcType=BIGINT},
+            </if>
+            <if test="seriesId != null">
+                series_id = #{seriesId,jdbcType=BIGINT},
+            </if>
+            <if test="modelId != null">
+                model_id = #{modelId,jdbcType=BIGINT},
+            </if>
+            <if test="totleAmount != null">
+                totle_amount = #{totleAmount,jdbcType=INTEGER},
+            </if>
+            <if test="unitPrice != null">
+                unit_price = #{unitPrice,jdbcType=NUMERIC},
+            </if>
+            <if test="subscriptionPrice != null">
+                subscription_price = #{subscriptionPrice,jdbcType=NUMERIC},
+            </if>
+            <if test="totlePrice != null">
+                totle_price = #{totlePrice,jdbcType=NUMERIC},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="scannerImg != null">
+                scanner_img = #{scannerImg,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="isEnable != null">
+                is_enable = #{isEnable,jdbcType=BIT},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.hc.lease.supplier.model.LeasePurchaseContract">
+    update lease_purchase_contract
+    set buy_card_capital_type_id = #{buyCardCapitalTypeId,jdbcType=BIGINT},
+      buy_card_capital_type_name = #{buyCardCapitalTypeName,jdbcType=VARCHAR},
+      contract_number = #{contractNumber,jdbcType=VARCHAR},
+      car_buy_financinger_id = #{carBuyFinancingerId,jdbcType=BIGINT},
+      company_header_id = #{companyHeaderId,jdbcType=BIGINT},
+      effective_time = #{effectiveTime,jdbcType=TIMESTAMP},
+      car_supplier_id = #{carSupplierId,jdbcType=BIGINT},
+      brands_id = #{brandsId,jdbcType=BIGINT},
+      series_id = #{seriesId,jdbcType=BIGINT},
+      model_id = #{modelId,jdbcType=BIGINT},
+      totle_amount = #{totleAmount,jdbcType=INTEGER},
+      unit_price = #{unitPrice,jdbcType=NUMERIC},
+      subscription_price = #{subscriptionPrice,jdbcType=NUMERIC},
+      totle_price = #{totlePrice,jdbcType=NUMERIC},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      scanner_img = #{scannerImg,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      is_enable = #{isEnable,jdbcType=BIT},
+      sort = #{sort,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

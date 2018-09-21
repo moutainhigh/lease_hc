@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.baseInfo.dao.LeaseInvoiceHeaderMapper">
+    <!--发票抬头信息-->
+    <resultMap id="BaseResultMap" type="com.hc.lease.baseInfo.model.LeaseInvoiceHeader">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="account_name" property="accountName" jdbcType="VARCHAR"/>
+        <result column="bank_id" property="bankId" jdbcType="BIGINT"/>
+        <result column="account" property="account" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="is_enable" property="isEnable" jdbcType="BIT"/>
+        <result column="personal_id" property="personalId" jdbcType="BIGINT"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, account_name, bank_id, account, create_time, update_time, create_by, update_by,
+    sort, is_enable, personal_id
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_invoice_header
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByCarSupplierIdAndType" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_invoice_header
+        where personal_id = #{id,jdbcType=BIGINT}
+        and type="CarSupplier"
+    </select>
+
+    <select id="findPage" resultType="java.util.Map">
+        select
+        id, account_name "accountName", bank_id "bankId", account, create_time "createTime"
+        , update_time "updateTime", create_by "createBy", update_by "updateBy"
+        , sort, is_enable "isEnable", personal_id "personalId"
+        from lease_invoice_header ORDER BY create_time DESC
+    </select>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_invoice_header ORDER BY create_time DESC
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from lease_invoice_header
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+    <!-- 批量删除 -->
+    <delete id="deleteBatchById" parameterType="long">
+        delete from lease_invoice_header where id in
+        <foreach item="idItem" collection="list" open="(" separator="," close=")">
+            #{idItem}
+        </foreach>
+    </delete>
+
+    <insert id="insert" parameterType="com.hc.lease.baseInfo.model.LeaseInvoiceHeader">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_invoice_header_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_invoice_header (id, account_name, bank_id,
+        account, create_time, update_time,
+        create_by, update_by, sort,
+        is_enable, personal_id,type)
+        values (#{id,jdbcType=BIGINT}, #{accountName,jdbcType=VARCHAR}, #{bankId,jdbcType=BIGINT},
+        #{account,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+        #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT}, #{sort,jdbcType=INTEGER},
+        #{isEnable,jdbcType=BIT}, #{personalId,jdbcType=BIGINT},#{type,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.hc.lease.baseInfo.model.LeaseInvoiceHeader">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_invoice_header_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_invoice_header
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="accountName != null">
+                account_name,
+            </if>
+            <if test="bankId != null">
+                bank_id,
+            </if>
+            <if test="account != null">
+                account,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="isEnable != null">
+                is_enable,
+            </if>
+            <if test="personalId != null">
+                personal_id,
+            </if>
+            <if test="type != null">
+                  type
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="accountName != null">
+                #{accountName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankId != null">
+                #{bankId,jdbcType=BIGINT},
+            </if>
+            <if test="account != null">
+                #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="isEnable != null">
+                #{isEnable,jdbcType=BIT},
+            </if>
+            <if test="personalId != null">
+                #{personalId,jdbcType=BIGINT},
+            </if>
+            <if test="type!=null">
+                #{type,jdbcType=VARCHAR}
+            </if>
+
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.baseInfo.model.LeaseInvoiceHeader">
+        update lease_invoice_header
+        <set>
+            <if test="accountName != null">
+                account_name = #{accountName,jdbcType=VARCHAR},
+            </if>
+            <if test="bankId != null">
+                bank_id = #{bankId,jdbcType=BIGINT},
+            </if>
+            <if test="account != null">
+                account = #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="isEnable != null">
+                is_enable = #{isEnable,jdbcType=BIT},
+            </if>
+            <if test="personalId != null">
+                personal_id = #{personalId,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hc.lease.baseInfo.model.LeaseInvoiceHeader">
+    update lease_invoice_header
+    set account_name = #{accountName,jdbcType=VARCHAR},
+      bank_id = #{bankId,jdbcType=BIGINT},
+      account = #{account,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      sort = #{sort,jdbcType=INTEGER},
+      is_enable = #{isEnable,jdbcType=BIT},
+      personal_id = #{personalId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

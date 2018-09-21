@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.user.dao.LeaseUserSessionMapper" >
+  <resultMap id="BaseResultMap" type="com.hc.lease.user.model.LeaseUserSession" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="device_id" property="deviceId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="session_current" property="sessionCurrent" jdbcType="VARCHAR" />
+    <result column="session_code" property="sessionCode" jdbcType="VARCHAR" />
+    <result column="session_login_time" property="sessionLoginTime" jdbcType="TIMESTAMP" />
+    <result column="session_limit_time" property="sessionLimitTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, device_id, user_id, phone, real_name, session_current, session_code, session_login_time, 
+    session_limit_time
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from lease_user_session
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectByDeviceId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from lease_user_session
+    where device_id = #{deviceId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from lease_user_session
+  </select>
+
+  <select id="findPage" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from lease_user_session
+  </select>
+
+  <delete id="deleteByDeviceIdAndPhone">
+
+    delete from lease_user_session
+    where 1=1
+
+    <if test="phone != null" >
+      and phone = #{phone,jdbcType=VARCHAR}
+    </if>
+    <if test="deviceId != null" >
+      and device_id = #{deviceId,jdbcType=VARCHAR}
+    </if>
+
+  </delete>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lease_user_session
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.hc.lease.user.model.LeaseUserSession" >
+    insert into lease_user_session (id, device_id, user_id, 
+      phone, real_name, session_current, 
+      session_code, session_login_time, session_limit_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{deviceId,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
+      #{phone,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{sessionCurrent,jdbcType=VARCHAR}, 
+      #{sessionCode,jdbcType=VARCHAR}, #{sessionLoginTime,jdbcType=TIMESTAMP}, #{sessionLimitTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hc.lease.user.model.LeaseUserSession" >
+    insert into lease_user_session
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="deviceId != null" >
+        device_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="realName != null" >
+        real_name,
+      </if>
+      <if test="sessionCurrent != null" >
+        session_current,
+      </if>
+      <if test="sessionCode != null" >
+        session_code,
+      </if>
+      <if test="sessionLoginTime != null" >
+        session_login_time,
+      </if>
+      <if test="sessionLimitTime != null" >
+        session_limit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionCurrent != null" >
+        #{sessionCurrent,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionCode != null" >
+        #{sessionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionLoginTime != null" >
+        #{sessionLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sessionLimitTime != null" >
+        #{sessionLimitTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.user.model.LeaseUserSession" >
+    update lease_user_session
+    <set >
+      <if test="deviceId != null" >
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null" >
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionCurrent != null" >
+        session_current = #{sessionCurrent,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionCode != null" >
+        session_code = #{sessionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionLoginTime != null" >
+        session_login_time = #{sessionLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sessionLimitTime != null" >
+        session_limit_time = #{sessionLimitTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hc.lease.user.model.LeaseUserSession" >
+    update lease_user_session
+    set device_id = #{deviceId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      phone = #{phone,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      session_current = #{sessionCurrent,jdbcType=VARCHAR},
+      session_code = #{sessionCode,jdbcType=VARCHAR},
+      session_login_time = #{sessionLoginTime,jdbcType=TIMESTAMP},
+      session_limit_time = #{sessionLimitTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

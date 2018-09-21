@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.user.dao.LeaseAuthoRoleOrganizationMapper" >
+  <!-- 角色-公司、部门、组中间表。用于控制角色查看指定公司、部门的数据 -->
+  <resultMap id="BaseResultMap" type="com.hc.lease.user.model.LeaseAuthoRoleOrganization" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="role_id" property="roleId" jdbcType="BIGINT" />
+    <result column="organization_structure_id" property="organizationStructureId" jdbcType="BIGINT" />
+    <result column="organization_structure_type" property="organizationStructureType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, role_id, organization_structure_id, organization_structure_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from lease_autho_role_organization
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lease_autho_role_organization
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hc.lease.user.model.LeaseAuthoRoleOrganization" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_autho_role_organization_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_autho_role_organization (id, role_id, organization_structure_id, 
+      organization_structure_type)
+    values (#{id,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{organizationStructureId,jdbcType=BIGINT}, 
+      #{organizationStructureType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hc.lease.user.model.LeaseAuthoRoleOrganization" >
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_autho_role_organization_id_seq'::regclass) as id
+    </selectKey>
+    insert into lease_autho_role_organization
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="organizationStructureId != null" >
+        organization_structure_id,
+      </if>
+      <if test="organizationStructureType != null" >
+        organization_structure_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="organizationStructureId != null" >
+        #{organizationStructureId,jdbcType=BIGINT},
+      </if>
+      <if test="organizationStructureType != null" >
+        #{organizationStructureType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.user.model.LeaseAuthoRoleOrganization" >
+    update lease_autho_role_organization
+    <set >
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="organizationStructureId != null" >
+        organization_structure_id = #{organizationStructureId,jdbcType=BIGINT},
+      </if>
+      <if test="organizationStructureType != null" >
+        organization_structure_type = #{organizationStructureType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hc.lease.user.model.LeaseAuthoRoleOrganization" >
+    update lease_autho_role_organization
+    set role_id = #{roleId,jdbcType=BIGINT},
+      organization_structure_id = #{organizationStructureId,jdbcType=BIGINT},
+      organization_structure_type = #{organizationStructureType,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

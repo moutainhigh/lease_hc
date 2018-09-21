@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.postlending.dao.LeaseOverdueLogMapper">
+    <!--逾期记录-->
+    <resultMap id="BaseResultMap" type="com.hc.lease.postlending.model.LeaseOverdueLog">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="account_id" property="accountId" jdbcType="BIGINT"/>
+        <result column="repayment_id" property="repaymentId" jdbcType="BIGINT"/>
+        <result column="price" property="price" jdbcType="NUMERIC"/>
+        <result column="overdue_day" property="overdueDay" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="is_pay" property="isPay" jdbcType="BIT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, contract_id, account_id, repayment_id, price, overdue_day, create_time, update_time, 
+    is_pay
+  </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_overdue_log
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByContractIdRepaymentId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_overdue_log
+        where
+        contract_id = #{contractId,jdbcType=BIGINT}
+        and repayment_id = #{repaymentId,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from lease_overdue_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+    <!--批量添加-->
+    <insert id="insertBatch">
+
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            insert into lease_overdue_log(contract_id, account_id, repayment_id, price, overdue_day, create_time,
+            update_time, is_pay)
+            values
+            (
+            #{item.contractId},#{item.accountId},#{item.repaymentId},#{item.price},#{item.overdueDay},#{item.createTime},#{item.updateTime},#{item.isPay}
+            )
+        </foreach>
+
+    </insert>
+
+    <insert id="insert" parameterType="com.hc.lease.postlending.model.LeaseOverdueLog">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_overdue_log_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_overdue_log (id, contract_id, account_id,
+        repayment_id, price, overdue_day,
+        create_time, update_time, is_pay
+        )
+        values (#{id,jdbcType=BIGINT}, #{contractId,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT},
+        #{repaymentId,jdbcType=BIGINT}, #{price,jdbcType=NUMERIC}, #{overdueDay,jdbcType=INTEGER},
+        #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isPay,jdbcType=BIT}
+        )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.hc.lease.postlending.model.LeaseOverdueLog">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_overdue_log_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_overdue_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="contractId != null">
+                contract_id,
+            </if>
+            <if test="accountId != null">
+                account_id,
+            </if>
+            <if test="repaymentId != null">
+                repayment_id,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="overdueDay != null">
+                overdue_day,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="isPay != null">
+                is_pay,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="contractId != null">
+                #{contractId,jdbcType=BIGINT},
+            </if>
+            <if test="accountId != null">
+                #{accountId,jdbcType=BIGINT},
+            </if>
+            <if test="repaymentId != null">
+                #{repaymentId,jdbcType=BIGINT},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=NUMERIC},
+            </if>
+            <if test="overdueDay != null">
+                #{overdueDay,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isPay != null">
+                #{isPay,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.postlending.model.LeaseOverdueLog">
+        update lease_overdue_log
+        <set>
+            <if test="contractId != null">
+                contract_id = #{contractId,jdbcType=BIGINT},
+            </if>
+            <if test="accountId != null">
+                account_id = #{accountId,jdbcType=BIGINT},
+            </if>
+            <if test="repaymentId != null">
+                repayment_id = #{repaymentId,jdbcType=BIGINT},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=NUMERIC},
+            </if>
+            <if test="overdueDay != null">
+                overdue_day = #{overdueDay,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isPay != null">
+                is_pay = #{isPay,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.hc.lease.postlending.model.LeaseOverdueLog">
+    update lease_overdue_log
+    set contract_id = #{contractId,jdbcType=BIGINT},
+      account_id = #{accountId,jdbcType=BIGINT},
+      repayment_id = #{repaymentId,jdbcType=BIGINT},
+      price = #{price,jdbcType=NUMERIC},
+      overdue_day = #{overdueDay,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_pay = #{isPay,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <update id="updateByContractIdRepaymentId" parameterType="com.hc.lease.postlending.model.LeaseOverdueLog">
+    update lease_overdue_log
+    set
+    overdue_day = #{overdueDay,jdbcType=INTEGER}
+
+    where
+    contract_id = #{contractId,jdbcType=BIGINT}
+    and repayment_id = #{repaymentId,jdbcType=BIGINT}
+  </update>
+
+    <!--批量更新-->
+    <update id="updateBatch" parameterType="java.util.List">
+
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update lease_overdue_log
+            <set>
+                overdue_day = #{item.overdueDay},
+                update_time = #{item.updateTime},
+                is_pay = #{item.isPay}
+            </set>
+            where
+            contract_id = #{item.contractId}
+            and repayment_id = #{item.repaymentId}
+        </foreach>
+
+    </update>
+
+    <!--更新支付状态-->
+    <update id="updateIsPay" parameterType="com.hc.lease.postlending.model.LeaseOverdueLog">
+
+        update lease_overdue_log
+        <set>
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            is_pay = #{isPay,jdbcType=BIT}
+        </set>
+        where repayment_id = #{repaymentId,jdbcType=BIGINT}
+
+    </update>
+
+</mapper>

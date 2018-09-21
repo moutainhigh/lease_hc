@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="dfq:war">
+    <output-path>$PROJECT_DIR$/../../../dfq/target</output-path>
+    <root id="archive" name="dfq.war">
+      <element id="artifact" artifact-name="dfq:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.postlending.dao.LeaseManualDeductionsPayLogMapper" >
+  <resultMap id="BaseResultMap" type="com.hc.lease.postlending.model.LeaseManualDeductionsPayLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="data_id" property="dataId" jdbcType="BIGINT" />
+    <result column="total_price" property="totalPrice" jdbcType="NUMERIC" />
+    <result column="pay_way" property="payWay" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="ret_code" property="retCode" jdbcType="VARCHAR" />
+    <result column="err_msg" property="errMsg" jdbcType="VARCHAR" />
+    <result column="back_time" property="backTime" jdbcType="TIMESTAMP" />
+    <result column="req_sn" property="reqSn" jdbcType="VARCHAR" />
+    <result column="sn" property="sn" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="BIGINT" />
+    <result column="update_by" property="updateBy" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, data_id, total_price, pay_way, status, ret_code, err_msg, back_time, req_sn, 
+    sn, create_time, update_time, create_by, update_by
+  </sql>
+
+  <!--  -->
+  <select id="findByReqSn" resultMap="BaseResultMap">
+    select
+    a.id, a.total_price "totlePrice"
+    from lease_manual_deductions_pay_log a
+    where
+    a.req_sn = #{reqSn,jdbcType=VARCHAR}
+    and a.data_id = #{dataId,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from lease_manual_deductions_pay_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lease_manual_deductions_pay_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hc.lease.postlending.model.LeaseManualDeductionsPayLog" >
+
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_manual_deductions_pay_log_id_seq'::regclass) as id
+    </selectKey>
+
+    insert into lease_manual_deductions_pay_log (id, data_id, total_price, 
+      pay_way, status, ret_code, 
+      err_msg, back_time, req_sn, 
+      sn, create_time, update_time, 
+      create_by, update_by)
+    values (#{id,jdbcType=BIGINT}, #{dataId,jdbcType=BIGINT}, #{totalPrice,jdbcType=NUMERIC}, 
+      #{payWay,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{retCode,jdbcType=VARCHAR}, 
+      #{errMsg,jdbcType=VARCHAR}, #{backTime,jdbcType=TIMESTAMP}, #{reqSn,jdbcType=VARCHAR}, 
+      #{sn,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hc.lease.postlending.model.LeaseManualDeductionsPayLog" >
+
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_manual_deductions_pay_log_id_seq'::regclass) as id
+    </selectKey>
+
+    insert into lease_manual_deductions_pay_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dataId != null" >
+        data_id,
+      </if>
+      <if test="totalPrice != null" >
+        total_price,
+      </if>
+      <if test="payWay != null" >
+        pay_way,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="retCode != null" >
+        ret_code,
+      </if>
+      <if test="errMsg != null" >
+        err_msg,
+      </if>
+      <if test="backTime != null" >
+        back_time,
+      </if>
+      <if test="reqSn != null" >
+        req_sn,
+      </if>
+      <if test="sn != null" >
+        sn,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="dataId != null" >
+        #{dataId,jdbcType=BIGINT},
+      </if>
+      <if test="totalPrice != null" >
+        #{totalPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="payWay != null" >
+        #{payWay,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="retCode != null" >
+        #{retCode,jdbcType=VARCHAR},
+      </if>
+      <if test="errMsg != null" >
+        #{errMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="backTime != null" >
+        #{backTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reqSn != null" >
+        #{reqSn,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.postlending.model.LeaseManualDeductionsPayLog" >
+    update lease_manual_deductions_pay_log
+    <set >
+      <if test="dataId != null" >
+        data_id = #{dataId,jdbcType=BIGINT},
+      </if>
+      <if test="totalPrice != null" >
+        total_price = #{totalPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="payWay != null" >
+        pay_way = #{payWay,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="retCode != null" >
+        ret_code = #{retCode,jdbcType=VARCHAR},
+      </if>
+      <if test="errMsg != null" >
+        err_msg = #{errMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="backTime != null" >
+        back_time = #{backTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reqSn != null" >
+        req_sn = #{reqSn,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        sn = #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hc.lease.postlending.model.LeaseManualDeductionsPayLog" >
+    update lease_manual_deductions_pay_log
+    set data_id = #{dataId,jdbcType=BIGINT},
+      total_price = #{totalPrice,jdbcType=NUMERIC},
+      pay_way = #{payWay,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      ret_code = #{retCode,jdbcType=VARCHAR},
+      err_msg = #{errMsg,jdbcType=VARCHAR},
+      back_time = #{backTime,jdbcType=TIMESTAMP},
+      req_sn = #{reqSn,jdbcType=VARCHAR},
+      sn = #{sn,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.order.dao.LeaseSchemeRepaymentStatusHMapper">
+    <resultMap id="BaseResultMap" type="com.hc.lease.order.model.LeaseSchemeRepaymentStatusH">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="history_repayment_status_id" property="historyRepaymentStatusId" jdbcType="BIGINT"/>
+        <result column="repayment_id" property="repaymentId" jdbcType="BIGINT"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="totle_price" property="totlePrice" jdbcType="NUMERIC"/>
+        <result column="pay_way" property="payWay" jdbcType="INTEGER"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="payment_result" property="paymentResult" jdbcType="INTEGER"/>
+        <result column="payment_result_msg" property="paymentResultMsg" jdbcType="VARCHAR"/>
+        <result column="req_sn" property="reqSn" jdbcType="VARCHAR"/>
+        <result column="sn" property="sn" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="DATE"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <result column="history_create_time" property="historyCreateTime" jdbcType="DATE"/>
+        <result column="history_create_by" property="historyCreateBy" jdbcType="BIGINT"/>
+        <result column="history_update_time" property="historyUpdateTime" jdbcType="TIMESTAMP"/>
+        <result column="history_update_by" property="historyUpdateBy" jdbcType="BIGINT"/>
+        <result column="vsersion_number" property="vsersionNumber" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap id="FindByContractIdAndPeriodMap" type="com.hc.lease.order.vo.FindByContractIdAndPeriodVo">
+        <result column="history_repayment_status_id" property="historyRepaymentStatusId" jdbcType="BIGINT"/>
+        <result column="repayment_id" property="repaymentId" jdbcType="BIGINT"/>
+        <result column="contract_id" property="contractId" jdbcType="BIGINT"/>
+        <result column="totle_price" property="totlePrice" jdbcType="NUMERIC"/>
+        <result column="history_id" property="historyId" jdbcType="BIGINT"/>
+        <result column="pay_way" property="payWay" jdbcType="INTEGER"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="payment_result" property="paymentResult" jdbcType="INTEGER"/>
+        <result column="payment_result_msg" property="paymentResultMsg" jdbcType="VARCHAR"/>
+        <result column="req_sn" property="reqSn" jdbcType="VARCHAR"/>
+        <result column="sn" property="sn" jdbcType="VARCHAR"/>
+        <result column="history_create_time" property="historyCreateTime" jdbcType="DATE"/>
+        <result column="history_create_by" property="historyCreateBy" jdbcType="BIGINT"/>
+        <result column="history_update_time" property="historyUpdateTime" jdbcType="TIMESTAMP"/>
+        <result column="history_update_by" property="historyUpdateBy" jdbcType="BIGINT"/>
+        <result column="vsersion_number" property="vsersionNumber" jdbcType="INTEGER"/>
+        <result column="period" property="period" jdbcType="INTEGER"/>
+        <result column="overdue" property="overdue" jdbcType="INTEGER"/>
+        <result column="overdue_day" property="overdueDay" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, history_repayment_status_id, repayment_id, contract_id, totle_price, pay_way, 
+    type, payment_result, payment_result_msg, req_sn, sn, create_time, create_by, update_time, 
+    update_by, history_create_time, history_create_by, history_update_time, history_update_by, 
+    vsersion_number
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_scheme_repayment_status_h
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <!-- 合同修改时 查询合同原还款历史的还款状态 -->
+    <select id="findByContractIdAndPeriod" resultMap="FindByContractIdAndPeriodMap">
+        select DISTINCT
+        a.history_repayment_status_id, a.repayment_id, b.history_id "historyId", a.contract_id
+        , a.totle_price "totlePrice"
+        , a.pay_way , a.type, a.payment_result, a.payment_result_msg, a.req_sn, a.sn
+        , a.history_create_time, a.history_create_by, a.history_update_time, a.history_update_by
+        , b.overdue, b.overdue_day "overdueDay"
+        , b.period
+        from lease_scheme_repayment_status_h a
+        inner join lease_scheme_repayment_history b on a.repayment_id = b.history_id
+        where 1=1
+        <if test="contractId != null">
+            and a.contract_id = #{contractId,jdbcType=BIGINT}
+        </if>
+        <if test="period != null">
+            and b.period = #{period,jdbcType=INTEGER}
+        </if>
+        and a.vsersion_number = (
+        select max(aa.vsersion_number)
+        from lease_scheme_repayment_status_h aa
+        inner join lease_scheme_repayment_history bb on aa.repayment_id = bb.history_id
+        where 1=1
+        <if test="contractId != null">
+            and aa.contract_id = #{contractId,jdbcType=BIGINT}
+        </if>
+        <if test="period != null">
+            and bb.period = #{period,jdbcType=INTEGER}
+        </if>
+        )
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from lease_scheme_repayment_status_h
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.hc.lease.order.model.LeaseSchemeRepaymentStatusH">
+    insert into lease_scheme_repayment_status_h (id, history_repayment_status_id, repayment_id, 
+      contract_id, totle_price, pay_way, 
+      type, payment_result, payment_result_msg, 
+      req_sn, sn, create_time, 
+      create_by, update_time, update_by, 
+      history_create_time, history_create_by, history_update_time, 
+      history_update_by, vsersion_number)
+    values (#{id,jdbcType=BIGINT}, #{historyRepaymentStatusId,jdbcType=BIGINT}, #{repaymentId,jdbcType=BIGINT}, 
+      #{contractId,jdbcType=BIGINT}, #{totlePrice,jdbcType=NUMERIC}, #{payWay,jdbcType=INTEGER}, 
+      #{type,jdbcType=INTEGER}, #{paymentResult,jdbcType=INTEGER}, #{paymentResultMsg,jdbcType=VARCHAR}, 
+      #{reqSn,jdbcType=VARCHAR}, #{sn,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, 
+      #{createBy,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=BIGINT}, 
+      #{historyCreateTime,jdbcType=DATE}, #{historyCreateBy,jdbcType=BIGINT}, #{historyUpdateTime,jdbcType=TIMESTAMP}, 
+      #{historyUpdateBy,jdbcType=BIGINT}, #{vsersionNumber,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.hc.lease.order.model.LeaseSchemeRepaymentStatusH">
+        insert into lease_scheme_repayment_status_h
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="historyRepaymentStatusId != null">
+                history_repayment_status_id,
+            </if>
+            <if test="repaymentId != null">
+                repayment_id,
+            </if>
+            <if test="contractId != null">
+                contract_id,
+            </if>
+            <if test="totlePrice != null">
+                totle_price,
+            </if>
+            <if test="payWay != null">
+                pay_way,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="paymentResult != null">
+                payment_result,
+            </if>
+            <if test="paymentResultMsg != null">
+                payment_result_msg,
+            </if>
+            <if test="reqSn != null">
+                req_sn,
+            </if>
+            <if test="sn != null">
+                sn,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="historyCreateTime != null">
+                history_create_time,
+            </if>
+            <if test="historyCreateBy != null">
+                history_create_by,
+            </if>
+            <if test="historyUpdateTime != null">
+                history_update_time,
+            </if>
+            <if test="historyUpdateBy != null">
+                history_update_by,
+            </if>
+            <if test="vsersionNumber != null">
+                vsersion_number,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="historyRepaymentStatusId != null">
+                #{historyRepaymentStatusId,jdbcType=BIGINT},
+            </if>
+            <if test="repaymentId != null">
+                #{repaymentId,jdbcType=BIGINT},
+            </if>
+            <if test="contractId != null">
+                #{contractId,jdbcType=BIGINT},
+            </if>
+            <if test="totlePrice != null">
+                #{totlePrice,jdbcType=NUMERIC},
+            </if>
+            <if test="payWay != null">
+                #{payWay,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="paymentResult != null">
+                #{paymentResult,jdbcType=INTEGER},
+            </if>
+            <if test="paymentResultMsg != null">
+                #{paymentResultMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="reqSn != null">
+                #{reqSn,jdbcType=VARCHAR},
+            </if>
+            <if test="sn != null">
+                #{sn,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=DATE},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="historyCreateTime != null">
+                #{historyCreateTime,jdbcType=DATE},
+            </if>
+            <if test="historyCreateBy != null">
+                #{historyCreateBy,jdbcType=BIGINT},
+            </if>
+            <if test="historyUpdateTime != null">
+                #{historyUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="historyUpdateBy != null">
+                #{historyUpdateBy,jdbcType=BIGINT},
+            </if>
+            <if test="vsersionNumber != null">
+                #{vsersionNumber,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.order.model.LeaseSchemeRepaymentStatusH">
+        update lease_scheme_repayment_status_h
+        <set>
+            <if test="historyRepaymentStatusId != null">
+                history_repayment_status_id = #{historyRepaymentStatusId,jdbcType=BIGINT},
+            </if>
+            <if test="repaymentId != null">
+                repayment_id = #{repaymentId,jdbcType=BIGINT},
+            </if>
+            <if test="contractId != null">
+                contract_id = #{contractId,jdbcType=BIGINT},
+            </if>
+            <if test="totlePrice != null">
+                totle_price = #{totlePrice,jdbcType=NUMERIC},
+            </if>
+            <if test="payWay != null">
+                pay_way = #{payWay,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="paymentResult != null">
+                payment_result = #{paymentResult,jdbcType=INTEGER},
+            </if>
+            <if test="paymentResultMsg != null">
+                payment_result_msg = #{paymentResultMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="reqSn != null">
+                req_sn = #{reqSn,jdbcType=VARCHAR},
+            </if>
+            <if test="sn != null">
+                sn = #{sn,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=DATE},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="historyCreateTime != null">
+                history_create_time = #{historyCreateTime,jdbcType=DATE},
+            </if>
+            <if test="historyCreateBy != null">
+                history_create_by = #{historyCreateBy,jdbcType=BIGINT},
+            </if>
+            <if test="historyUpdateTime != null">
+                history_update_time = #{historyUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="historyUpdateBy != null">
+                history_update_by = #{historyUpdateBy,jdbcType=BIGINT},
+            </if>
+            <if test="vsersionNumber != null">
+                vsersion_number = #{vsersionNumber,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hc.lease.order.model.LeaseSchemeRepaymentStatusH">
+    update lease_scheme_repayment_status_h
+    set history_repayment_status_id = #{historyRepaymentStatusId,jdbcType=BIGINT},
+      repayment_id = #{repaymentId,jdbcType=BIGINT},
+      contract_id = #{contractId,jdbcType=BIGINT},
+      totle_price = #{totlePrice,jdbcType=NUMERIC},
+      pay_way = #{payWay,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      payment_result = #{paymentResult,jdbcType=INTEGER},
+      payment_result_msg = #{paymentResultMsg,jdbcType=VARCHAR},
+      req_sn = #{reqSn,jdbcType=VARCHAR},
+      sn = #{sn,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=DATE},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      history_create_time = #{historyCreateTime,jdbcType=DATE},
+      history_create_by = #{historyCreateBy,jdbcType=BIGINT},
+      history_update_time = #{historyUpdateTime,jdbcType=TIMESTAMP},
+      history_update_by = #{historyUpdateBy,jdbcType=BIGINT},
+      vsersion_number = #{vsersionNumber,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

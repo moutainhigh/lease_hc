@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<excel name="成本核对">
+    <sheet name="成本核对信息">
+        <colgroup>
+            <col width="17em" />
+            <col width="17em" />
+            <col width="17em" />
+            <col width="17em" />
+            <col width="17em" />
+        </colgroup>
+        <thead>
+            <tr height="16px">
+                <th value="车架号(必填)" />
+                <th value="含税车价(必填)" />
+                <th value="购置税(必填)" />
+                <th value="车发票号(选填)" />
+                <th value="导入结果(非填项)" />
+            </tr>
+        </thead>
+        <tbody>
+            <tr height="16px" repeat="0">
+                <td type="string" isnullable="false" /><!-- 车架号 -->
+                <td type="numeric" format="" /><!-- 含税车价 -->
+                <td type="numeric" format="" /><!-- 购置税 -->
+                <td type="string" /><!-- 车发票号 -->
+                <td type="string" format="" /><!-- 导入结果 -->
+            </tr>
+        </tbody>
+    </sheet>
+</excel>

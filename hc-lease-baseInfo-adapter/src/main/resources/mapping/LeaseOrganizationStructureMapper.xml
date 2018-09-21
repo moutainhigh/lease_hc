@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.baseInfo.dao.LeaseOrganizationStructureMapper">
+    <!-- 组织结构 -->
+    <resultMap id="BaseResultMap" type="com.hc.lease.baseInfo.model.LeaseOrganizationStructure">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="number" property="number" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="BIGINT"/>
+        <result column="leader_id" property="leaderId" jdbcType="BIGINT"/>
+        <result column="leader_name" property="leaderName" jdbcType="VARCHAR"/>
+        <result column="leader_phone" property="leaderPhone" jdbcType="VARCHAR"/>
+        <result column="assistant_id" property="assistantId" jdbcType="BIGINT"/>
+        <result column="assistant_name" property="assistantName" jdbcType="VARCHAR"/>
+        <result column="assistant_phone" property="assistantPhone" jdbcType="VARCHAR"/>
+        <result column="parent_leader_id" property="parentLeaderId" jdbcType="BIGINT"/>
+        <result column="parent_leader_name" property="parentLeaderName" jdbcType="VARCHAR"/>
+        <result column="parent_leader_phone" property="parentLeaderPhone" jdbcType="VARCHAR"/>
+        <result column="deputy_leade_id" property="deputyLeadeId" jdbcType="BIGINT"/>
+        <result column="deputy_leader_name" property="deputyLeaderName" jdbcType="VARCHAR"/>
+        <result column="deputy_leader_phone" property="deputyLeaderPhone" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <result column="is_enable" property="isEnable" jdbcType="INTEGER"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="lft" property="lft" jdbcType="INTEGER"/>
+        <result column="rgt" property="rgt" jdbcType="INTEGER"/>
+        <result column="level" property="level" jdbcType="INTEGER"/>
+        <result column="is_default" property="isDefault" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!-- 新增或者修改需要的上级单位的数据 -->
+    <resultMap id="findParentTree" type="com.hc.lease.baseInfo.vo.FindParentTreeVo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="BIGINT"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="level" property="level" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!-- 用类型查询 -->
+    <resultMap id="SelectByTypeMap" type="com.hc.lease.baseInfo.vo.OrganizationStructureSelectByTypeVo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="BIGINT"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="level" property="level" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, number, name, parent_id, leader_id, leader_name, leader_phone, assistant_id,
+        assistant_name, assistant_phone, parent_leader_id, parent_leader_name, parent_leader_phone,
+        deputy_leade_id, deputy_leader_name, deputy_leader_phone, create_time, update_time,
+        create_by, update_by, is_enable, sort, remark, type, lft, rgt, level, is_default
+    </sql>
+
+    <!-- 用类型查询 -->
+    <select id="selectByType" resultMap="SelectByTypeMap">
+        select
+        id, name, parent_id, type, level
+        from lease_organization_structure
+        where type in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_organization_structure
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_organization_structure
+        order by level desc
+    </select>
+
+    <!-- 新增或者修改需要的上级单位的数据 -->
+    <select id="findParentTree" resultMap="findParentTree" parameterType="java.util.Map">
+        select
+        id, name, parent_id, type, level
+        from lease_organization_structure
+        where 1=1
+        order by level asc
+    </select>
+
+    <!-- 检测是否有下级 -->
+    <select id="checkHaveChild" parameterType="java.lang.Long" resultType="java.lang.Boolean">
+        select (CASE WHEN count(1)>0 then TRUE ELSE FALSE END ) isHaveChild
+        from lease_organization_structure
+        where parent_id = #{parentId,jdbcType=BIGINT}
+    </select>
+
+    <!-- 检测是否默认/默认的数据不可删除 -->
+    <select id="checkIsDefault" parameterType="java.lang.Long" resultType="java.lang.Boolean">
+        select (CASE WHEN is_default = 1 then TRUE ELSE FALSE END ) isDefault
+        from lease_organization_structure
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <!-- 根据父级查询数据 -->
+    <select id="selectByParentId" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from lease_organization_structure
+        where parent_id = #{parentId,jdbcType=BIGINT}
+    </select>
+
+    <!-- 查找同一子级的排序是否被使用 -->
+    <select id="checkSameLevelSort" resultType="java.lang.Boolean" parameterType="java.util.Map">
+        select (CASE WHEN count(1)>0 THEN TRUE ELSE FALSE END ) isUsed
+        from lease_organization_structure
+        where 1=1
+        and level = #{level,jdbcType=INTEGER}
+        and parent_id = #{parentId,jdbcType=BIGINT}
+        and sort = #{sort,jdbcType=INTEGER}
+        <if test="id != null">
+            and id != #{id,jdbcType=BIGINT}
+        </if>
+    </select>
+
+    <!-- 查找同一子级的最大排序 -->
+    <select id="selectSameLevelMaxSort" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select MAX(sort)
+        from lease_organization_structure
+        where 1=1
+        and level = #{level,jdbcType=INTEGER}
+        and parent_id = #{parentId,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from lease_organization_structure
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+    <insert id="insert" parameterType="com.hc.lease.baseInfo.model.LeaseOrganizationStructure">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_organization_structure_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_organization_structure (id, number, name,
+        parent_id, leader_id, leader_name,
+        leader_phone, assistant_id, assistant_name,
+        assistant_phone, parent_leader_id, parent_leader_name,
+        parent_leader_phone, deputy_leade_id, deputy_leader_name,
+        deputy_leader_phone, create_time, update_time,
+        create_by, update_by, is_enable,
+        sort, remark, type,
+        lft, rgt, level, is_default
+        )
+        values (#{id,jdbcType=BIGINT}, #{number,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+        #{parentId,jdbcType=BIGINT}, #{leaderId,jdbcType=BIGINT}, #{leaderName,jdbcType=VARCHAR},
+        #{leaderPhone,jdbcType=VARCHAR}, #{assistantId,jdbcType=BIGINT}, #{assistantName,jdbcType=VARCHAR},
+        #{assistantPhone,jdbcType=VARCHAR}, #{parentLeaderId,jdbcType=BIGINT}, #{parentLeaderName,jdbcType=VARCHAR},
+        #{parentLeaderPhone,jdbcType=VARCHAR}, #{deputyLeadeId,jdbcType=BIGINT}, #{deputyLeaderName,jdbcType=VARCHAR},
+        #{deputyLeaderPhone,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+        #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT}, #{isEnable,jdbcType=INTEGER},
+        #{sort,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR},
+        #{lft,jdbcType=INTEGER}, #{rgt,jdbcType=INTEGER}, #{level,jdbcType=INTEGER}, #{isDefault,jdbcType=INTEGER}
+        )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.hc.lease.baseInfo.model.LeaseOrganizationStructure">
+        <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+            SELECT nextval('lease_organization_structure_id_seq'::regclass) as id
+        </selectKey>
+        insert into lease_organization_structure
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="number != null">
+                number,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="leaderId != null">
+                leader_id,
+            </if>
+            <if test="leaderName != null">
+                leader_name,
+            </if>
+            <if test="leaderPhone != null">
+                leader_phone,
+            </if>
+            <if test="assistantId != null">
+                assistant_id,
+            </if>
+            <if test="assistantName != null">
+                assistant_name,
+            </if>
+            <if test="assistantPhone != null">
+                assistant_phone,
+            </if>
+            <if test="parentLeaderId != null">
+                parent_leader_id,
+            </if>
+            <if test="parentLeaderName != null">
+                parent_leader_name,
+            </if>
+            <if test="parentLeaderPhone != null">
+                parent_leader_phone,
+            </if>
+            <if test="deputyLeadeId != null">
+                deputy_leade_id,
+            </if>
+            <if test="deputyLeaderName != null">
+                deputy_leader_name,
+            </if>
+            <if test="deputyLeaderPhone != null">
+                deputy_leader_phone,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="isEnable != null">
+                is_enable,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="lft != null">
+                lft,
+            </if>
+            <if test="rgt != null">
+                rgt,
+            </if>
+            <if test="level != null">
+                level,
+            </if>
+            <if test="isDefault != null">
+                is_default,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="number != null">
+                #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="leaderId != null">
+                #{leaderId,jdbcType=BIGINT},
+            </if>
+            <if test="leaderName != null">
+                #{leaderName,jdbcType=VARCHAR},
+            </if>
+            <if test="leaderPhone != null">
+                #{leaderPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="assistantId != null">
+                #{assistantId,jdbcType=BIGINT},
+            </if>
+            <if test="assistantName != null">
+                #{assistantName,jdbcType=VARCHAR},
+            </if>
+            <if test="assistantPhone != null">
+                #{assistantPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="parentLeaderId != null">
+                #{parentLeaderId,jdbcType=BIGINT},
+            </if>
+            <if test="parentLeaderName != null">
+                #{parentLeaderName,jdbcType=VARCHAR},
+            </if>
+            <if test="parentLeaderPhone != null">
+                #{parentLeaderPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="deputyLeadeId != null">
+                #{deputyLeadeId,jdbcType=BIGINT},
+            </if>
+            <if test="deputyLeaderName != null">
+                #{deputyLeaderName,jdbcType=VARCHAR},
+            </if>
+            <if test="deputyLeaderPhone != null">
+                #{deputyLeaderPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="isEnable != null">
+                #{isEnable,jdbcType=INTEGER},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="lft != null">
+                #{lft,jdbcType=INTEGER},
+            </if>
+            <if test="rgt != null">
+                #{rgt,jdbcType=INTEGER},
+            </if>
+            <if test="level != null">
+                #{level,jdbcType=INTEGER},
+            </if>
+            <if test="isDefault != null">
+                #{isDefault,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.baseInfo.model.LeaseOrganizationStructure">
+        update lease_organization_structure
+        <set>
+            <if test="number != null">
+                number = #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=BIGINT},
+            </if>
+            <if test="leaderId != null">
+                leader_id = #{leaderId,jdbcType=BIGINT},
+            </if>
+            <if test="leaderName != null">
+                leader_name = #{leaderName,jdbcType=VARCHAR},
+            </if>
+            <if test="leaderPhone != null">
+                leader_phone = #{leaderPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="assistantId != null">
+                assistant_id = #{assistantId,jdbcType=BIGINT},
+            </if>
+            <if test="assistantName != null">
+                assistant_name = #{assistantName,jdbcType=VARCHAR},
+            </if>
+            <if test="assistantPhone != null">
+                assistant_phone = #{assistantPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="parentLeaderId != null">
+                parent_leader_id = #{parentLeaderId,jdbcType=BIGINT},
+            </if>
+            <if test="parentLeaderName != null">
+                parent_leader_name = #{parentLeaderName,jdbcType=VARCHAR},
+            </if>
+            <if test="parentLeaderPhone != null">
+                parent_leader_phone = #{parentLeaderPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="deputyLeadeId != null">
+                deputy_leade_id = #{deputyLeadeId,jdbcType=BIGINT},
+            </if>
+            <if test="deputyLeaderName != null">
+                deputy_leader_name = #{deputyLeaderName,jdbcType=VARCHAR},
+            </if>
+            <if test="deputyLeaderPhone != null">
+                deputy_leader_phone = #{deputyLeaderPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+            <if test="isEnable != null">
+                is_enable = #{isEnable,jdbcType=INTEGER},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="lft != null">
+                lft = #{lft,jdbcType=INTEGER},
+            </if>
+            <if test="rgt != null">
+                rgt = #{rgt,jdbcType=INTEGER},
+            </if>
+            <if test="level != null">
+                level = #{level,jdbcType=INTEGER},
+            </if>
+            <if test="isDefault != null">
+                is_default = #{isDefault,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.hc.lease.baseInfo.model.LeaseOrganizationStructure">
+        update lease_organization_structure
+        set number = #{number,jdbcType=VARCHAR},
+        name = #{name,jdbcType=VARCHAR},
+        parent_id = #{parentId,jdbcType=BIGINT},
+        leader_id = #{leaderId,jdbcType=BIGINT},
+        leader_name = #{leaderName,jdbcType=VARCHAR},
+        leader_phone = #{leaderPhone,jdbcType=VARCHAR},
+        assistant_id = #{assistantId,jdbcType=BIGINT},
+        assistant_name = #{assistantName,jdbcType=VARCHAR},
+        assistant_phone = #{assistantPhone,jdbcType=VARCHAR},
+        parent_leader_id = #{parentLeaderId,jdbcType=BIGINT},
+        parent_leader_name = #{parentLeaderName,jdbcType=VARCHAR},
+        parent_leader_phone = #{parentLeaderPhone,jdbcType=VARCHAR},
+        deputy_leade_id = #{deputyLeadeId,jdbcType=BIGINT},
+        deputy_leader_name = #{deputyLeaderName,jdbcType=VARCHAR},
+        deputy_leader_phone = #{deputyLeaderPhone,jdbcType=VARCHAR},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        create_by = #{createBy,jdbcType=BIGINT},
+        update_by = #{updateBy,jdbcType=BIGINT},
+        is_enable = #{isEnable,jdbcType=INTEGER},
+        sort = #{sort,jdbcType=INTEGER},
+        remark = #{remark,jdbcType=VARCHAR},
+        type = #{type,jdbcType=VARCHAR},
+        lft = #{lft,jdbcType=INTEGER},
+        rgt = #{rgt,jdbcType=INTEGER},
+        level = #{level,jdbcType=INTEGER},
+        is_default = #{isDefault,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <!-- 修改所有子级状态 -->
+    <update id="updateChildsStatus" parameterType="java.util.Map">
+        update lease_organization_structure
+        set is_enable= #{isEnable}
+        where id in
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </update>
+
+</mapper>

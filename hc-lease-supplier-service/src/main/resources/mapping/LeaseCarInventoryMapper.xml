@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hc.lease.supplier.dao.LeaseCarInventoryMapper" >
+  <resultMap id="BaseResultMap" type="com.hc.lease.supplier.model.LeaseCarInventory" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="brands_id" property="brandsId" jdbcType="BIGINT" />
+    <result column="series_id" property="seriesId" jdbcType="BIGINT" />
+    <result column="model_id" property="modelId" jdbcType="BIGINT" />
+    <result column="storehouse_id" property="storehouseId" jdbcType="BIGINT" />
+    <result column="current_inventory_number" property="currentInventoryNumber" jdbcType="INTEGER" />
+    <result column="lease_number" property="leaseNumber" jdbcType="INTEGER" />
+    <result column="transfer_storehouse_number" property="transferStorehouseNumber" jdbcType="INTEGER" />
+    <result column="in_storehouse_operator_id" property="inStorehouseOperatorId" jdbcType="BIGINT" />
+    <result column="in_storehouse_operator_name" property="inStorehouseOperatorName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, brands_id, series_id, model_id, storehouse_id, current_inventory_number, lease_number, 
+    transfer_storehouse_number, in_storehouse_operator_id, in_storehouse_operator_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List"/>
+    from lease_car_inventory
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="findPage" resultType="java.util.Map">
+    select
+   id, brands_id as "brandsId", series_id as "seriesId", model_id as "modelId", storehouse_id as "storehouseId", current_inventory_number as "currentInventoryNumber", lease_number as "leaseNumber",
+    transfer_storehouse_number as "transferStorehouseNumber", in_storehouse_operator_id as "inStorehouseOperatorId", in_storehouse_operator_name as "inStorehouseOperatorName"
+    from lease_car_inventory
+  </select>
+
+  <select id="findAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from lease_car_inventory
+  </select>
+
+  <select id="insertViewParames" resultType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from lease_car_inventory
+  </select>
+
+
+  <delete id="deleteBatchById" parameterType="long">
+    delete from lease_car_inventory where id in
+    <foreach item="item" collection="list" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from lease_car_inventory
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hc.lease.supplier.model.LeaseCarInventory" >
+    insert into lease_car_inventory (id, brands_id, series_id, 
+      model_id, storehouse_id, current_inventory_number, 
+      lease_number, transfer_storehouse_number, 
+      in_storehouse_operator_id, in_storehouse_operator_name
+      )
+    values (#{id,jdbcType=BIGINT}, #{brandsId,jdbcType=BIGINT}, #{seriesId,jdbcType=BIGINT}, 
+      #{modelId,jdbcType=BIGINT}, #{storehouseId,jdbcType=BIGINT}, #{currentInventoryNumber,jdbcType=INTEGER}, 
+      #{leaseNumber,jdbcType=INTEGER}, #{transferStorehouseNumber,jdbcType=INTEGER}, 
+      #{inStorehouseOperatorId,jdbcType=BIGINT}, #{inStorehouseOperatorName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hc.lease.supplier.model.LeaseCarInventory" >
+
+    <selectKey keyProperty="id" resultType="Long" order="BEFORE">
+      SELECT nextval('lease_car_inventory_id_seq'::regclass) as id
+    </selectKey>
+
+    insert into lease_car_inventory
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="brandsId != null" >
+        brands_id,
+      </if>
+      <if test="seriesId != null" >
+        series_id,
+      </if>
+      <if test="modelId != null" >
+        model_id,
+      </if>
+      <if test="storehouseId != null" >
+        storehouse_id,
+      </if>
+      <if test="currentInventoryNumber != null" >
+        current_inventory_number,
+      </if>
+      <if test="leaseNumber != null" >
+        lease_number,
+      </if>
+      <if test="transferStorehouseNumber != null" >
+        transfer_storehouse_number,
+      </if>
+      <if test="inStorehouseOperatorId != null" >
+        in_storehouse_operator_id,
+      </if>
+      <if test="inStorehouseOperatorName != null" >
+        in_storehouse_operator_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="brandsId != null" >
+        #{brandsId,jdbcType=BIGINT},
+      </if>
+      <if test="seriesId != null" >
+        #{seriesId,jdbcType=BIGINT},
+      </if>
+      <if test="modelId != null" >
+        #{modelId,jdbcType=BIGINT},
+      </if>
+      <if test="storehouseId != null" >
+        #{storehouseId,jdbcType=BIGINT},
+      </if>
+      <if test="currentInventoryNumber != null" >
+        #{currentInventoryNumber,jdbcType=INTEGER},
+      </if>
+      <if test="leaseNumber != null" >
+        #{leaseNumber,jdbcType=INTEGER},
+      </if>
+      <if test="transferStorehouseNumber != null" >
+        #{transferStorehouseNumber,jdbcType=INTEGER},
+      </if>
+      <if test="inStorehouseOperatorId != null" >
+        #{inStorehouseOperatorId,jdbcType=BIGINT},
+      </if>
+      <if test="inStorehouseOperatorName != null" >
+        #{inStorehouseOperatorName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hc.lease.supplier.model.LeaseCarInventory" >
+    update lease_car_inventory
+    <set >
+      <if test="brandsId != null" >
+        brands_id = #{brandsId,jdbcType=BIGINT},
+      </if>
+      <if test="seriesId != null" >
+        series_id = #{seriesId,jdbcType=BIGINT},
+      </if>
+      <if test="modelId != null" >
+        model_id = #{modelId,jdbcType=BIGINT},
+      </if>
+      <if test="storehouseId != null" >
+        storehouse_id = #{storehouseId,jdbcType=BIGINT},
+      </if>
+      <if test="currentInventoryNumber != null" >
+        current_inventory_number = #{currentInventoryNumber,jdbcType=INTEGER},
+      </if>
+      <if test="leaseNumber != null" >
+        lease_number = #{leaseNumber,jdbcType=INTEGER},
+      </if>
+      <if test="transferStorehouseNumber != null" >
+        transfer_storehouse_number = #{transferStorehouseNumber,jdbcType=INTEGER},
+      </if>
+      <if test="inStorehouseOperatorId != null" >
+        in_storehouse_operator_id = #{inStorehouseOperatorId,jdbcType=BIGINT},
+      </if>
+      <if test="inStorehouseOperatorName != null" >
+        in_storehouse_operator_name = #{inStorehouseOperatorName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hc.lease.supplier.model.LeaseCarInventory" >
+    update lease_car_inventory
+    set brands_id = #{brandsId,jdbcType=BIGINT},
+      series_id = #{seriesId,jdbcType=BIGINT},
+      model_id = #{modelId,jdbcType=BIGINT},
+      storehouse_id = #{storehouseId,jdbcType=BIGINT},
+      current_inventory_number = #{currentInventoryNumber,jdbcType=INTEGER},
+      lease_number = #{leaseNumber,jdbcType=INTEGER},
+      transfer_storehouse_number = #{transferStorehouseNumber,jdbcType=INTEGER},
+      in_storehouse_operator_id = #{inStorehouseOperatorId,jdbcType=BIGINT},
+      in_storehouse_operator_name = #{inStorehouseOperatorName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
